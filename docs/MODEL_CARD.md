@@ -91,7 +91,7 @@ made.
 
 ## Release State
 
-- Code: `https://github.com/mentat-asi/mentat-sys1-v0.1`, tag `v0.1.0`
+- Code: `https://github.com/mentat-asi/mentat-sys1-v0.1`, tag `v0.1.1`
 - Model: `https://huggingface.co/yunqu/mentat-sys1-v0.1`, tag `v0.1.0`
 
 ## License

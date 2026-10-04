@@ -20,7 +20,7 @@ def _subcommands(parser: argparse.ArgumentParser) -> dict[str, argparse.Argument
 
 
 def test_public_identity_is_lowercase_sys1_v01() -> None:
-    assert mentat_sys1.__version__ == "0.1.0"
+    assert mentat_sys1.__version__ == "0.1.1"
     assert mentat_sys1.MODEL_ID == "mentat-sys1-v0.1"
 
 
@@ -68,6 +68,11 @@ def test_public_package_and_command_use_v01_identity() -> None:
     payload = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
     assert payload["project"]["name"] == "mentat-sys1-v0.1"
+    assert payload["project"]["version"] == "0.1.1"
+    assert (
+        "torchvision==0.23.0"
+        in payload["project"]["optional-dependencies"]["serve"]
+    )
     assert payload["project"]["scripts"] == {
         "mentat-sys1": "mentat_sys1.cli:main",
     }
@@ -100,6 +105,33 @@ def test_public_documents_use_approved_hugging_face_repository() -> None:
     assert "hf download yunqu/mentat-sys1-v0.1" in text
     assert "huggingface.co/mentat-asi/mentat-sys1-v0.1" not in text
     assert "hf download mentat-asi/mentat-sys1-v0.1" not in text
+
+
+def test_public_documents_pin_code_patch_separately_from_model() -> None:
+    submission = (ROOT / "docs/JEVBENCH_SUBMISSION.md").read_text(encoding="utf-8")
+    model_card = (ROOT / "docs/MODEL_CARD.md").read_text(encoding="utf-8")
+    reproducibility = (ROOT / "docs/REPRODUCIBILITY.md").read_text(
+        encoding="utf-8"
+    )
+
+    assert (
+        "bound to the code `v0.1.1` and model `v0.1.0` release tags"
+        in submission
+    )
+    assert "- Code revision: `v0.1.1`" in submission
+    assert "- Model revision: `v0.1.0`" in submission
+    assert "git checkout v0.1.1" in submission
+    assert "git checkout v0.1.1" in reproducibility
+    assert (
+        "- Code: `https://github.com/mentat-asi/mentat-sys1-v0.1`, "
+        "tag `v0.1.1`"
+        in model_card
+    )
+    assert (
+        "- Model: `https://huggingface.co/yunqu/mentat-sys1-v0.1`, "
+        "tag `v0.1.0`"
+        in model_card
+    )
 
 
 def test_public_surface_omits_private_recipe_and_plans() -> None:

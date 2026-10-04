@@ -1,6 +1,6 @@
 # JevBench Bench Request Draft
 
-This request is bound to the `v0.1.0` code and model release tags.
+This request is bound to the code `v0.1.1` and model `v0.1.0` release tags.
 
 ## Issue Title
 
@@ -21,7 +21,7 @@ issue #80. Please track it as a separate bench request.
 - Model package: `https://huggingface.co/yunqu/mentat-sys1-v0.1`
 - Model revision: `v0.1.0`
 - Serving code: `https://github.com/mentat-asi/mentat-sys1-v0.1`
-- Code revision: `v0.1.0`
+- Code revision: `v0.1.1`
 - Base model: `Qwen/Qwen3.5-4B`
 - Base revision: `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`
 - Adapter SHA-256:
@@ -42,7 +42,7 @@ weights are downloaded separately.
 ```bash
 git clone https://github.com/mentat-asi/mentat-sys1-v0.1.git
 cd mentat-sys1-v0.1
-git checkout v0.1.0
+git checkout v0.1.1
 uv sync --frozen --extra serve
 
 hf download yunqu/mentat-sys1-v0.1 \

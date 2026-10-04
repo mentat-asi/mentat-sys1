@@ -23,7 +23,7 @@ complete.
 ```bash
 git clone https://github.com/mentat-asi/mentat-sys1-v0.1.git
 cd mentat-sys1-v0.1
-git checkout v0.1.0
+git checkout v0.1.1
 uv sync --frozen --extra serve
 uv run pytest -q
 uv run ruff check .
