@@ -1,0 +1,24 @@
+mentat-sys1-v0.1
+Copyright 2026 mentat-sys1-v0.1 contributors
+
+This product includes software adapted from:
+  Imajev, https://github.com/mohit67890/imajev.git
+  revision 8d4554e18b621fd2c144098876c3cee623ef28f3
+  licensed under the Apache License, Version 2.0.
+
+Substantially adapted source files:
+  src/vision_decision/contracts.py
+    -> src/mentat_sys1/inference/contracts.py
+  src/vision_decision/scoring.py
+    -> src/mentat_sys1/inference/scoring.py
+  src/vision_decision/jev_api.py
+    -> src/mentat_sys1/inference/scoring.py
+  scripts/torch_decision.py
+    -> src/mentat_sys1/inference/backend.py
+  scripts/playground/server.py
+    -> src/mentat_sys1/inference/api.py
+    -> src/mentat_sys1/inference/backend.py
+
+The adaptations rename the package, remove repository-relative runtime
+imports, add immutable provenance and release gates, and expose standalone
+serving and release interfaces.

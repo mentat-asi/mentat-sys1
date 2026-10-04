@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "dataset_id": "mentat-sys1-v0.1-data",
+  "complete": false,
+  "sources": [],
+  "fixture": {
+    "path": "fixtures/sample.jsonl",
+    "rows": 1,
+    "sha256": "2a5053fd53a391aa49ecdf965eae91a877df1ee1fb5beb1db608a6d48c914add",
+    "license": "LicenseRef-generated"
+  }
+}

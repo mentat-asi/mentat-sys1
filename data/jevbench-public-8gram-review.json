@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "ngram_size": 8,
+  "train": {
+    "rows": 87386,
+    "sha256": "50795aace3c26c65ed6229f0a18bc9bb2cff76af1e68efac21e203d78114519d"
+  },
+  "benchmark": {
+    "revision": "2fa63fa3226cb369795525ed011800f57dcbd894",
+    "rows": 231,
+    "splits": {
+      "easy": "231df3c2c8e88a1a8c137ebe85de96ba70fabd330849098ac7b3c52c70b7172b",
+      "hard": "89e9e6becb33ed88c1de7d42dcc87531b2fb64cfaef4e1986faf7c37b3f80ebb",
+      "original": "5c2414edb3006b8bfcb70fda433f0f9ca015759433849f8d3104328a1f7c4180"
+    }
+  },
+  "adjudication": {
+    "detected_occurrences": 182,
+    "unique_hashes": 24,
+    "maximum_contiguous_overlap_words": 9,
+    "overlap_10gram_count": 0,
+    "basis": "Manual pairwise review found only generic question templates, document headings, standard definitions, or common policy wording. No overlap includes instance-specific entities, answer values, or a complete rule."
+  },
+  "reviewed": [
+    {
+      "ngram_sha256": "0e46e073195dbdb1192ea19c960ba1ebbcd753c1ab3e79f19fc53dfb429983cc",
+      "classification": "common_policy_wording"
+    },
+    {
+      "ngram_sha256": "149099fe9606eb8e499bd90101197d20e5e0bda5336441efe1b11c440ab68ef8",
+      "classification": "standard_legal_definition"
+    },
+    {
+      "ngram_sha256": "1650332c2f6abb78c5454f2f46285d2aba7ffcbb12d8035f9d186387a497619e",
+      "classification": "common_policy_wording"
+    },
+    {
+      "ngram_sha256": "1723bdcf34e5727a517b595557d282e92ce7e4db5e3bb211a4b03bd1dedc5d5e",
+      "classification": "generic_document_heading"
+    },
+    {
+      "ngram_sha256": "2db25113329c43bc84a8ed468b51b3e0d09eb33f1a9fff33ef8e2babcdbf3d97",
+      "classification": "common_policy_wording"
+    },
+    {
+      "ngram_sha256": "30b2f3604953f26e72f46e03fc29d2317aa0944d749455ceae7f241c9caa14af",
+      "classification": "standard_legal_definition"
+    },
+    {
+      "ngram_sha256": "33ec424e80c2b4b75734d3e4c7978deb5c3e3c8cbdf99df573369c627825cbf7",
+      "classification": "common_policy_wording"
+    },
+    {
+      "ngram_sha256": "429f1cc1a8cb5f3599671742d73ecb0594034b09d4fdd0ab8bb0c8838c9215e6",
+      "classification": "standard_decimal_instruction"
+    },
+    {
+      "ngram_sha256": "462151da2e68ca923b50870d4d7f9a1454a8996719c1a71324f7d49d0a48e72f",
+      "classification": "standard_business_day_definition"
+    },
+    {
+      "ngram_sha256": "4cd5f7715aa8e2482a7857921f2ba271b1dccbdb03ca190699730b960ea097b7",
+      "classification": "generic_condition_wording"
+    },
+    {
+      "ngram_sha256": "636a076b510c24ddd312a23e445ed3badbd76e2b9afd8d147d23bf11ef74c69a",
+      "classification": "standard_business_day_definition"
+    },
+    {
+      "ngram_sha256": "63ae70eb2c418c7cf5fa777bf7356cb0f758a4ec3894a962a80c459cd3cb8d2b",
+      "classification": "generic_eligibility_wording"
+    },
+    {
+      "ngram_sha256": "6591ce9ec359c534ff24f0fc67e5c70109d30c052a24401b6fa320f035e5f20c",
+      "classification": "generic_no_show_definition"
+    },
+    {
+      "ngram_sha256": "68ea3f202a92c4269c6807bf69ef7c244f0a2073597f98bb9a7b4fbcc4428c95",
+      "classification": "common_policy_wording"
+    },
+    {
+      "ngram_sha256": "75046431627892d9f3fdac0909250ca9cb116af648087391d33b271b51745053",
+      "classification": "generic_precedence_wording"
+    },
+    {
+      "ngram_sha256": "766620f66e4822a0c3df74daa0d94b887ccbb28cb928b7236b2a6f05ad101e2f",
+      "classification": "standard_business_day_definition"
+    },
+    {
+      "ngram_sha256": "76d70570646568c59cb16593f0287a083aa735a843bcc380b32a164db7ec007d",
+      "classification": "generic_precedence_wording"
+    },
+    {
+      "ngram_sha256": "8b94f9b7440d5285194a62c7712208e745eba52b276e656a27900b0da2feba13",
+      "classification": "standard_week_definition"
+    },
+    {
+      "ngram_sha256": "8d55548de4d714f1ab882f657d8cf89fa29670173c7f901ee8979989b23a1802",
+      "classification": "generic_condition_wording"
+    },
+    {
+      "ngram_sha256": "a72ca8a2b1b49da1c618f6b349f9fe5d27cf9bc5ab74d7437fdd8a3e779752df",
+      "classification": "generic_question_template"
+    },
+    {
+      "ngram_sha256": "c7a39b93318b4e147396553cdb08b6a4ac8f2c2d7d04b4aef6996f4817b040c7",
+      "classification": "generic_invoice_wording"
+    },
+    {
+      "ngram_sha256": "ef004f1a834fe1f799ccf064fb14fc7dad87974bd16d5f50482c6f2411460265",
+      "classification": "standard_travel_delay_term"
+    },
+    {
+      "ngram_sha256": "fa914bcc7ae015b6d794ce5cf7d540dde0a9c47e99aba06d366f135698b9d9af",
+      "classification": "generic_document_heading"
+    },
+    {
+      "ngram_sha256": "fe0012bce6063d2aafd1d093639e2af15bba24a38688c34dd2b5b59af9dd1fd2",
+      "classification": "generic_no_show_definition"
+    }
+  ]
+}

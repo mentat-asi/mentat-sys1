@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mentat-sys1-v0.1"
+version = "0.1.0"
+description = "Independent Qwen3.5-4B decision model runtime and release tooling"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy==2.2.6",
+  "pydantic==2.12.5",
+]
+
+[project.optional-dependencies]
+serve = [
+  "fastapi==0.124.0",
+  "peft==0.21.0",
+  "pillow==12.0.0",
+  "safetensors==0.8.0",
+  "torch==2.8.0",
+  "transformers==5.17.0",
+  "uvicorn==0.38.0",
+]
+
+[dependency-groups]
+dev = [
+  "httpx>=0.28,<1",
+  "mypy>=1.18,<2",
+  "pytest>=8,<10",
+  "ruff>=0.13,<1",
+]
+
+[project.scripts]
+mentat-sys1 = "mentat_sys1.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["mentat_sys1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mentat_sys1 = ["py.typed"]

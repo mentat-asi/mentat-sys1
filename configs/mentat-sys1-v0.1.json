@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "project_id": "mentat-sys1-v0.1",
+  "base_model": {
+    "repository": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a"
+  },
+  "paths": {
+    "data": "data",
+    "model": "model",
+    "evidence": "evidence"
+  },
+  "runtime": {
+    "readout_codes": 256,
+    "max_length": 16384
+  },
+  "release": {
+    "adapter_sha256": "c72687243aaa8c38f984091247619c242f3f3443a1f3d35c9c3526c4dfde2d83",
+    "readout_sha256": "c2c5b2130fcb6604ab7bb7048464fb7c01281a929df767525525870b67ea7d7d",
+    "legacy_public_correct": 200,
+    "legacy_public_total": 231,
+    "legacy_public_easy_correct": 48,
+    "maximum_invalid": 0,
+    "maximum_severe_failures": 0
+  }
+}

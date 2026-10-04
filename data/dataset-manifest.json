@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "dataset_id": "mentat-sys1-v0.1-data",
+  "materialized_data_committed": false,
+  "splits": {
+    "train": {
+      "path": "train.jsonl",
+      "rows": 87386,
+      "sha256": "50795aace3c26c65ed6229f0a18bc9bb2cff76af1e68efac21e203d78114519d"
+    },
+    "dev-general": {
+      "path": "dev-general.jsonl",
+      "rows": 400,
+      "sha256": "1b06fd95b0012110762c5883e108638d6e36b2035d9f60402e5307dc6061cde6"
+    },
+    "dev-hard": {
+      "path": "dev-hard.jsonl",
+      "rows": 400,
+      "sha256": "45c2bbbd30ad88d4122d5cd7a81077905cb63a78c1f6061370d3d126fea0d91c"
+    },
+    "calibration": {
+      "path": "calibration.jsonl",
+      "rows": 1120,
+      "sha256": "a116f4d228e25bac5df61b9e52191adfe4181a0852f6050d9040cee7f35b0a02"
+    }
+  },
+  "trainer_compatibility": {
+    "train_with_dev_general_rows": 87786,
+    "train_with_dev_general_sha256": "a347988e17ec03c4529de49c8419fb5a89a50409ef9b937d7307d627b6bf1e30"
+  }
+}

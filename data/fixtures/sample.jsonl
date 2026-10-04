@@ -1,0 +1,1 @@
+{"family":"logic","field":{"options":[{"key":"a","text":"A"},{"key":"b","text":"B"}],"question":"Which item comes first?","type":"choice"},"gold":"a","id":"fixture-1","pool":{"group":"fixture-group-1"},"provenance":{"license":"LicenseRef-generated"},"source":"fixture","state":"A precedes B."}
