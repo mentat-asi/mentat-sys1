@@ -1,6 +1,6 @@
 # mentat-sys1-v0.1
 
-**200/231 (86.58%) on the legacy JevBench Public-231 set.** A one-pass,
+**200/231 (86.58%) on the JevBench Public-231 set.** A one-pass,
 open-weights decision model built on Qwen3.5-4B, with native option
 probabilities and zero generated answer tokens.
 
