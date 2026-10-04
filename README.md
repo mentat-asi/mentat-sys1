@@ -19,61 +19,47 @@ Two fresh A800 server processes produced the same prediction digest, with zero
 invalid responses and zero severe failures. Public-set ECE was `0.05835`;
 serial p50 latency was `0.090-0.091 s` and p95 was `0.332-0.336 s`.
 
-## Public-231 context
+## Official JevBench context
 
-The table below uses the same 231 public items: 48 Easy, 72 Original, and 111
-Hard. It covers source-linked, open-weight, approximately 4B text-capable
-submissions whose public issue reports exact tier counts as of 2026-10-04.
-Where a family has several releases, the latest release with a complete tier
-split is shown; materially different deployments remain separate.
+All comparator data below comes from JevBench-published result artifacts, not
+submission reports.
 
-These are submitter-reported public-set results, not an official leaderboard
-or a substitute for JevBench's current evaluator-controlled open and sealed
-suites. The current 534/904-item results are intentionally not mixed into this
-legacy Public-231 comparison.
+### Current composite leaderboard
 
-| Model | All | Easy | Original | Hard | Source |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Loupe 1.1 | 207 | 48 | 72 | 87 | [#161](https://github.com/fstandhartinger/jevbench/issues/161) |
-| Plumb-4B | 207 | 48 | 70 | 89 | [#84](https://github.com/fstandhartinger/jevbench/issues/84) |
-| H2O-Lightning-4B v1.0 | 205 | 48 | 71 | 86 | [#181](https://github.com/fstandhartinger/jevbench/issues/181) |
-| OpenJev-4B | 204 | 48 | 72 | 84 | [#159](https://github.com/fstandhartinger/jevbench/issues/159) |
-| Decision 4B v1.2 | 203 | 48 | 69 | 86 | [#86](https://github.com/fstandhartinger/jevbench/issues/86) |
-| deck-4B v1.0 | 203 | 48 | 68 | 87 | [#100](https://github.com/fstandhartinger/jevbench/issues/100) |
-| JevK5 v0.3 | 203 | 48 | 68 | 87 | [#31](https://github.com/fstandhartinger/jevbench/issues/31#issuecomment-5827758155) |
-| JPT-4B | 203 | 48 | 68 | 87 | [#78](https://github.com/fstandhartinger/jevbench/issues/78) |
-| Intern-Decision-4B | 201 | 48 | 71 | 82 | [#158](https://github.com/fstandhartinger/jevbench/issues/158) |
-| mentat-sys1-v0.1 | **200** | 48 | 66 | 86 | [#186](https://github.com/fstandhartinger/jevbench/issues/186) |
-| blink-4b | 199 | 48 | 71 | 80 | [#81](https://github.com/fstandhartinger/jevbench/issues/81) |
-| Imajev-4B | 197 | 48 | 71 | 78 | [#80](https://github.com/fstandhartinger/jevbench/issues/80) |
-| Tura-S1-4B | 197 | 48 | 70 | 79 | [#139](https://github.com/fstandhartinger/jevbench/issues/139) |
-| decider-4b v2 | 193 | 48 | 71 | 74 | [#79](https://github.com/fstandhartinger/jevbench/issues/79) |
-| DeskMind Brain 4B | 193 | 48 | 69 | 76 | [#173](https://github.com/fstandhartinger/jevbench/issues/173) |
-| Hopper | 192 | 48 | 68 | 76 | [#14](https://github.com/fstandhartinger/jevbench/issues/14) |
-| Mica v0.1 4B | 192 | 48 | 72 | 72 | [#91](https://github.com/fstandhartinger/jevbench/issues/91) |
-| reflex 4B, two orders | 190 | 48 | 66 | 76 | [#5](https://github.com/fstandhartinger/jevbench/issues/5) |
-| typecastlm 1.3.0 | 187 | 47 | 67 | 73 | [#168](https://github.com/fstandhartinger/jevbench/issues/168) |
-| Jobe | 186 | 48 | 71 | 67 | [#28](https://github.com/fstandhartinger/jevbench/issues/28) |
-| local-jev | 186 | 48 | 69 | 69 | [#15](https://github.com/fstandhartinger/jevbench/issues/15) |
-| Quire | 186 | 48 | 65 | 73 | [#45](https://github.com/fstandhartinger/jevbench/issues/45) |
-| RYOTIDE-Qwen | 184 | 48 | 63 | 73 | [#82](https://github.com/fstandhartinger/jevbench/issues/82) |
-| tde-qwen3.5-4b-v0.1 | 184 | 48 | 70 | 66 | [#99](https://github.com/fstandhartinger/jevbench/issues/99) |
-| Rev Qwen3.5-4B | 181 | 48 | 67 | 66 | [#52](https://github.com/fstandhartinger/jevbench/issues/52) |
-| Compass 0.2.0 | 178 | 48 | 63 | 67 | [#53](https://github.com/fstandhartinger/jevbench/issues/53) |
-| kapteeni-v1.1c | 177 | 48 | 67 | 62 | [#178](https://github.com/fstandhartinger/jevbench/issues/178) |
-| Noma | 176 | 48 | 71 | 57 | [#172](https://github.com/fstandhartinger/jevbench/issues/172) |
-| Malkuth-4B | 173 | 48 | 69 | 56 | [#77](https://github.com/fstandhartinger/jevbench/issues/77) |
-| kapteeni-v1-intuit | 165 | 48 | 65 | 52 | [#102](https://github.com/fstandhartinger/jevbench/issues/102) |
-| kapteeni-v1-meticulous | 164 | 48 | 64 | 52 | [#102](https://github.com/fstandhartinger/jevbench/issues/102) |
+The current
+[v1.4.2.2 aggregate results](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.4.2.2/jevbench-v1.4.2.2-results.json)
+cover 95 systems and rank 91. The JevBench Score combines Intelligence,
+Calibration, Speed, and Cost, including evaluator-controlled sealed tasks.
 
-Mentat's `86/111` Hard result is competitive with the strongest systems in
-this cohort. Its main gap is the Original tier at `66/72`, which is why the
-full total trails the leading 4B releases despite the strong Hard score.
-Plumb's source reports `89/111` in its primary table and `90/111` in a second
-run; the table uses the conservative primary result.
+| Rank | System | JevBench Score |
+| ---: | --- | ---: |
+| 1 | Imajev-4B | 67.37 |
+| 2 | Plumb-4B | 65.84 |
+| 3 | decider-4b v2 | 64.13 |
+| 4 | Jev 1.13.0 | 63.29 |
+| 5 | JevK5 v0.2.0 | 62.04 |
 
-Loupe 1.0 reported the same `207/231` split as 1.1; its archived source is
-[issue #119](https://github.com/fstandhartinger/jevbench/issues/119).
+### Public-231
+
+JevBench's official
+[v1.2 per-task results](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.2/jevbench-v1.2-per-task.json)
+provide evaluator-produced counts on the same 231 public items: 48 Easy, 72
+Original (`standard` in the artifact), and 111 Hard.
+
+| System | All | Easy | Original | Hard |
+| --- | ---: | ---: | ---: | ---: |
+| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** |
+| Jev 1.13.0 | 200 | 48 | 71 | 81 |
+| SemIf (Qwen3.5-4B) | 187 | 48 | 71 | 68 |
+| reflex 4B | 183 | 48 | 68 | 67 |
+| open-alternative-jev (Qwen3.5-4B) | 171 | 48 | 60 | 63 |
+| Qwen3-Reranker-4B | 157 | 48 | 54 | 55 |
+| kev 4B | 153 | 48 | 64 | 41 |
+
+Mentat matches Jev 1.13.0's Public-231 total with a different tier profile:
+`86/111` versus `81/111` on Hard and `66/72` versus `71/72` on Original.
+Public-231 counts and the current v1.4.2.2 composite score are separate
+protocols.
 
 ## Run the frozen release
 

@@ -1,5 +1,6 @@
 import argparse
 import json
+import re
 import tomllib
 from pathlib import Path
 
@@ -141,14 +142,11 @@ def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
         "https://github.com/mentat-asi/mentat-sys1-v0.1",
         "https://huggingface.co/yunqu/mentat-sys1-v0.1",
         "https://github.com/fstandhartinger/jevbench/issues/186",
-        "## Public-231 context",
-        "same 231 public items",
-        "submitter-reported",
-        "not an official leaderboard",
-        "| mentat-sys1-v0.1 | **200** | 48 | 66 | 86 |",
-        "https://github.com/fstandhartinger/jevbench/issues/84",
-        "https://github.com/fstandhartinger/jevbench/issues/119",
-        "https://github.com/fstandhartinger/jevbench/issues/159",
+        "## Official JevBench context",
+        "results/v1.4.2.2/jevbench-v1.4.2.2-results.json",
+        "results/v1.2/jevbench-v1.2-per-task.json",
+        "Public-231",
+        "| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** |",
         "git checkout v0.1.1",
         "hf download yunqu/mentat-sys1-v0.1",
         "--revision v0.1.0",
@@ -157,6 +155,19 @@ def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
 
     for marker in required_markers:
         assert marker in readme
+
+    forbidden_markers = (
+        "submitter-reported",
+    )
+
+    for marker in forbidden_markers:
+        assert marker not in readme
+
+    issue_ids = re.findall(
+        r"github\.com/fstandhartinger/jevbench/issues/(\d+)",
+        readme,
+    )
+    assert set(issue_ids) == {"186"}
 
 
 def test_model_card_links_code_and_explains_the_two_downloads() -> None:
@@ -170,11 +181,27 @@ def test_model_card_links_code_and_explains_the_two_downloads() -> None:
         "--revision v0.1.0",
         "hf download Qwen/Qwen3.5-4B",
         "does not download the Qwen base weights",
-        "## Public-231 context",
+        "## Official JevBench Context",
+        "results/v1.4.2.2/jevbench-v1.4.2.2-results.json",
+        "results/v1.2/jevbench-v1.2-per-task.json",
+        "| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** |",
     )
 
     for marker in required_markers:
         assert marker in model_card
+
+    forbidden_markers = (
+        "submitter-reported",
+    )
+
+    for marker in forbidden_markers:
+        assert marker not in model_card
+
+    issue_ids = re.findall(
+        r"github\.com/fstandhartinger/jevbench/issues/(\d+)",
+        model_card,
+    )
+    assert set(issue_ids) == {"186"}
 
 
 def test_public_surface_omits_private_recipe_and_plans() -> None:

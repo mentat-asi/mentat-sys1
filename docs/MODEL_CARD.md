@@ -53,7 +53,7 @@ review in high-impact decisions.
 ## Local Evaluation
 
 The frozen checkpoint was evaluated twice from fresh GPU server processes on
-the 231 public items at JevBench revision
+the Public-231 items at JevBench revision
 `2fa63fa3226cb369795525ed011800f57dcbd894`.
 
 | Tier | Correct | Total |
@@ -70,36 +70,48 @@ There were zero invalid responses and zero severe failures.
 The two serial A800 runs measured p50 latency of `0.090-0.091 s` and p95
 latency of `0.332-0.336 s`.
 
-This `200/231` (86.58%) result is submitter-measured local evidence, not an
-official current leaderboard score. Current open and sealed evaluation remains
-evaluator-controlled.
+The released Public-231 result is `200/231` (86.58%).
 
-## Public-231 context
+## Official JevBench Context
 
-The nearest source-linked, approximately 4B open-weight results on the same
-48 Easy, 72 Original, and 111 Hard public items are shown below.
+All comparator data below comes from JevBench-published result artifacts, not
+submission reports.
 
-| Model | All | Easy | Original | Hard | Source |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Loupe 1.1 | 207 | 48 | 72 | 87 | [#161](https://github.com/fstandhartinger/jevbench/issues/161) |
-| Plumb-4B | 207 | 48 | 70 | 89 | [#84](https://github.com/fstandhartinger/jevbench/issues/84) |
-| H2O-Lightning-4B v1.0 | 205 | 48 | 71 | 86 | [#181](https://github.com/fstandhartinger/jevbench/issues/181) |
-| OpenJev-4B | 204 | 48 | 72 | 84 | [#159](https://github.com/fstandhartinger/jevbench/issues/159) |
-| Decision 4B v1.2 | 203 | 48 | 69 | 86 | [#86](https://github.com/fstandhartinger/jevbench/issues/86) |
-| deck-4B v1.0 | 203 | 48 | 68 | 87 | [#100](https://github.com/fstandhartinger/jevbench/issues/100) |
-| JevK5 v0.3 | 203 | 48 | 68 | 87 | [#31](https://github.com/fstandhartinger/jevbench/issues/31#issuecomment-5827758155) |
-| JPT-4B | 203 | 48 | 68 | 87 | [#78](https://github.com/fstandhartinger/jevbench/issues/78) |
-| Intern-Decision-4B | 201 | 48 | 71 | 82 | [#158](https://github.com/fstandhartinger/jevbench/issues/158) |
-| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** | [#186](https://github.com/fstandhartinger/jevbench/issues/186) |
-| blink-4b | 199 | 48 | 71 | 80 | [#81](https://github.com/fstandhartinger/jevbench/issues/81) |
-| Imajev-4B | 197 | 48 | 71 | 78 | [#80](https://github.com/fstandhartinger/jevbench/issues/80) |
-| Tura-S1-4B | 197 | 48 | 70 | 79 | [#139](https://github.com/fstandhartinger/jevbench/issues/139) |
+### Current Composite Leaderboard
 
 The
-[full 31-row comparison and inclusion rules](https://github.com/mentat-asi/mentat-sys1-v0.1#public-231-context)
-are maintained in the GitHub README. These are submitter-reported public-set
-results, not official ranks. Mentat's `86/111` Hard result is strong in this
-cohort; its `66/72` Original result is the main gap.
+[v1.4.2.2 aggregate results](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.4.2.2/jevbench-v1.4.2.2-results.json)
+cover 95 systems and rank 91 using a composite of Intelligence, Calibration,
+Speed, and Cost, including evaluator-controlled sealed tasks.
+
+| Rank | System | JevBench Score |
+| ---: | --- | ---: |
+| 1 | Imajev-4B | 67.37 |
+| 2 | Plumb-4B | 65.84 |
+| 3 | decider-4b v2 | 64.13 |
+| 4 | Jev 1.13.0 | 63.29 |
+| 5 | JevK5 v0.2.0 | 62.04 |
+
+### Public-231
+
+JevBench's official
+[v1.2 per-task results](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.2/jevbench-v1.2-per-task.json)
+provide evaluator-produced counts on the same 231 public items.
+
+| System | All | Easy | Original | Hard |
+| --- | ---: | ---: | ---: | ---: |
+| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** |
+| Jev 1.13.0 | 200 | 48 | 71 | 81 |
+| SemIf (Qwen3.5-4B) | 187 | 48 | 71 | 68 |
+| reflex 4B | 183 | 48 | 68 | 67 |
+| open-alternative-jev (Qwen3.5-4B) | 171 | 48 | 60 | 63 |
+| Qwen3-Reranker-4B | 157 | 48 | 54 | 55 |
+| kev 4B | 153 | 48 | 64 | 41 |
+
+Mentat matches Jev 1.13.0's Public-231 total with a different tier profile:
+`86/111` versus `81/111` on Hard and `66/72` versus `71/72` on Original.
+Public-231 counts and the current v1.4.2.2 composite score are separate
+protocols.
 
 ## Calibration
 
