@@ -134,6 +134,49 @@ def test_public_documents_pin_code_patch_separately_from_model() -> None:
     )
 
 
+def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+    required_markers = (
+        "https://github.com/mentat-asi/mentat-sys1-v0.1",
+        "https://huggingface.co/yunqu/mentat-sys1-v0.1",
+        "https://github.com/fstandhartinger/jevbench/issues/186",
+        "## Public-231 context",
+        "same 231 public items",
+        "submitter-reported",
+        "not an official leaderboard",
+        "| mentat-sys1-v0.1 | **200** | 48 | 66 | 86 |",
+        "https://github.com/fstandhartinger/jevbench/issues/84",
+        "https://github.com/fstandhartinger/jevbench/issues/119",
+        "https://github.com/fstandhartinger/jevbench/issues/159",
+        "git checkout v0.1.1",
+        "hf download yunqu/mentat-sys1-v0.1",
+        "--revision v0.1.0",
+        "hf download Qwen/Qwen3.5-4B",
+    )
+
+    for marker in required_markers:
+        assert marker in readme
+
+
+def test_model_card_links_code_and_explains_the_two_downloads() -> None:
+    model_card = (ROOT / "docs/MODEL_CARD.md").read_text(encoding="utf-8")
+
+    required_markers = (
+        "https://github.com/mentat-asi/mentat-sys1-v0.1/tree/v0.1.1",
+        "https://huggingface.co/yunqu/mentat-sys1-v0.1/tree/v0.1.0",
+        "https://github.com/fstandhartinger/jevbench/issues/186",
+        "hf download yunqu/mentat-sys1-v0.1",
+        "--revision v0.1.0",
+        "hf download Qwen/Qwen3.5-4B",
+        "does not download the Qwen base weights",
+        "## Public-231 context",
+    )
+
+    for marker in required_markers:
+        assert marker in model_card
+
+
 def test_public_surface_omits_private_recipe_and_plans() -> None:
     paths = [
         ROOT / "README.md",

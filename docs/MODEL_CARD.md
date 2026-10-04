@@ -1,5 +1,9 @@
 # mentat-sys1-v0.1 Model Card
 
+[Serving code v0.1.1](https://github.com/mentat-asi/mentat-sys1-v0.1/tree/v0.1.1)
+| [Frozen model package v0.1.0](https://huggingface.co/yunqu/mentat-sys1-v0.1/tree/v0.1.0)
+| [JevBench request #186](https://github.com/fstandhartinger/jevbench/issues/186)
+
 ## Identity
 
 - Model: `mentat-sys1-v0.1`
@@ -15,6 +19,26 @@
 
 This is an independently trained model. It was not initialized from or resumed
 from another decision-model adapter.
+
+## Download and Package Boundaries
+
+```bash
+hf download yunqu/mentat-sys1-v0.1 \
+  --revision v0.1.0 \
+  --local-dir MODEL_PACKAGE_DIR
+hf download Qwen/Qwen3.5-4B \
+  --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a \
+  --local-dir QWEN_BASE_DIR
+```
+
+The first command downloads the frozen model-specific package into a local
+directory you choose: the LoRA adapter, decision readout, calibration,
+manifests, checksums, and aggregate audit evidence.
+It does not download the Qwen base weights. The second command downloads the
+separately licensed, pinned base revision needed to serve the model.
+
+Installation and serving commands are in the
+[GitHub README](https://github.com/mentat-asi/mentat-sys1-v0.1#run-the-frozen-release).
 
 ## Intended Use
 
@@ -49,6 +73,33 @@ latency of `0.332-0.336 s`.
 This `200/231` (86.58%) result is submitter-measured local evidence, not an
 official current leaderboard score. Current open and sealed evaluation remains
 evaluator-controlled.
+
+## Public-231 context
+
+The nearest source-linked, approximately 4B open-weight results on the same
+48 Easy, 72 Original, and 111 Hard public items are shown below.
+
+| Model | All | Easy | Original | Hard | Source |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Loupe 1.1 | 207 | 48 | 72 | 87 | [#161](https://github.com/fstandhartinger/jevbench/issues/161) |
+| Plumb-4B | 207 | 48 | 70 | 89 | [#84](https://github.com/fstandhartinger/jevbench/issues/84) |
+| H2O-Lightning-4B v1.0 | 205 | 48 | 71 | 86 | [#181](https://github.com/fstandhartinger/jevbench/issues/181) |
+| OpenJev-4B | 204 | 48 | 72 | 84 | [#159](https://github.com/fstandhartinger/jevbench/issues/159) |
+| Decision 4B v1.2 | 203 | 48 | 69 | 86 | [#86](https://github.com/fstandhartinger/jevbench/issues/86) |
+| deck-4B v1.0 | 203 | 48 | 68 | 87 | [#100](https://github.com/fstandhartinger/jevbench/issues/100) |
+| JevK5 v0.3 | 203 | 48 | 68 | 87 | [#31](https://github.com/fstandhartinger/jevbench/issues/31#issuecomment-5827758155) |
+| JPT-4B | 203 | 48 | 68 | 87 | [#78](https://github.com/fstandhartinger/jevbench/issues/78) |
+| Intern-Decision-4B | 201 | 48 | 71 | 82 | [#158](https://github.com/fstandhartinger/jevbench/issues/158) |
+| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** | [#186](https://github.com/fstandhartinger/jevbench/issues/186) |
+| blink-4b | 199 | 48 | 71 | 80 | [#81](https://github.com/fstandhartinger/jevbench/issues/81) |
+| Imajev-4B | 197 | 48 | 71 | 78 | [#80](https://github.com/fstandhartinger/jevbench/issues/80) |
+| Tura-S1-4B | 197 | 48 | 70 | 79 | [#139](https://github.com/fstandhartinger/jevbench/issues/139) |
+
+The
+[full 31-row comparison and inclusion rules](https://github.com/mentat-asi/mentat-sys1-v0.1#public-231-context)
+are maintained in the GitHub README. These are submitter-reported public-set
+results, not official ranks. Mentat's `86/111` Hard result is strong in this
+cohort; its `66/72` Original result is the main gap.
 
 ## Calibration
 
