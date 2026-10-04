@@ -19,47 +19,37 @@ Two fresh A800 server processes produced the same prediction digest, with zero
 invalid responses and zero severe failures. Public-set ECE was `0.05835`;
 serial p50 latency was `0.090-0.091 s` and p95 was `0.332-0.336 s`.
 
-## Official JevBench context
+## JevBench Public-231 leaderboard
 
-All comparator data below comes from JevBench-published result artifacts, not
-submission reports.
+Comparator values come from the `public_accuracy` field in JevBench's official
+[v1.4.2.2 aggregate results](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.4.2.2/jevbench-v1.4.2.2-results.json).
+The table includes the official 4B and 4B-derived cohort, Jev 1.13.0 as the
+closed reference, and this release's Mentat result. It is sorted by correct
+answers; equal totals share a rank.
 
-### Current composite leaderboard
-
-The current
-[v1.4.2.2 aggregate results](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.4.2.2/jevbench-v1.4.2.2-results.json)
-cover 95 systems and rank 91. The JevBench Score combines Intelligence,
-Calibration, Speed, and Cost, including evaluator-controlled sealed tasks.
-
-| Rank | System | JevBench Score |
-| ---: | --- | ---: |
-| 1 | Imajev-4B | 67.37 |
-| 2 | Plumb-4B | 65.84 |
-| 3 | decider-4b v2 | 64.13 |
-| 4 | Jev 1.13.0 | 63.29 |
-| 5 | JevK5 v0.2.0 | 62.04 |
-
-### Public-231
-
-JevBench's official
-[v1.2 per-task results](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.2/jevbench-v1.2-per-task.json)
-provide evaluator-produced counts on the same 231 public items: 48 Easy, 72
-Original (`standard` in the artifact), and 111 Hard.
-
-| System | All | Easy | Original | Hard |
-| --- | ---: | ---: | ---: | ---: |
-| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** |
-| Jev 1.13.0 | 200 | 48 | 71 | 81 |
-| SemIf (Qwen3.5-4B) | 187 | 48 | 71 | 68 |
-| reflex 4B | 183 | 48 | 68 | 67 |
-| open-alternative-jev (Qwen3.5-4B) | 171 | 48 | 60 | 63 |
-| Qwen3-Reranker-4B | 157 | 48 | 54 | 55 |
-| kev 4B | 153 | 48 | 64 | 41 |
-
-Mentat matches Jev 1.13.0's Public-231 total with a different tier profile:
-`86/111` versus `81/111` on Hard and `66/72` versus `71/72` on Original.
-Public-231 counts and the current v1.4.2.2 composite score are separate
-protocols.
+| Rank | Model | Public-231 | Accuracy |
+| ---: | --- | ---: | ---: |
+| 1 | Plumb-4B | 207 | 89.61% |
+| **2** | **mentat-sys1-v0.1** | **200** | **86.58%** |
+| 2 | Jev 1.13.0 | 200 | 86.58% |
+| 4 | Imajev-4B | 199 | 86.15% |
+| 5 | JevK5 v0.2.0 | 197 | 85.28% |
+| 6 | decider-4b v2 | 193 | 83.55% |
+| 7 | Hopper | 190 | 82.25% |
+| 8 | SemIf (Qwen3.5-4B) | 187 | 80.95% |
+| 8 | Jobe Qwen3.5-4B | 187 | 80.95% |
+| 10 | local-jev Qwen3.5-4B | 186 | 80.52% |
+| 11 | metask-jev-4b | 184 | 79.65% |
+| 12 | reflex 4B | 183 | 79.22% |
+| 12 | spark-s1-4b-v6 | 183 | 79.22% |
+| 14 | OpenSourceJev (Qwen3.5-4B) | 181 | 78.35% |
+| 15 | typecastlm (Qwen3.5-4B) | 180 | 77.92% |
+| 16 | Malkuth-4B | 173 | 74.89% |
+| 17 | open-alternative-jev (Qwen3.5-4B) | 171 | 74.03% |
+| 18 | ZeroEntropy zerank-2 | 162 | 70.13% |
+| 19 | Raw Qwen3 4B Instruct 2507 | 161 | 69.70% |
+| 20 | Qwen3-Reranker-4B | 157 | 67.97% |
+| 21 | kev 4B | 153 | 66.23% |
 
 ## Run the frozen release
 

@@ -142,11 +142,14 @@ def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
         "https://github.com/mentat-asi/mentat-sys1-v0.1",
         "https://huggingface.co/yunqu/mentat-sys1-v0.1",
         "https://github.com/fstandhartinger/jevbench/issues/186",
-        "## Official JevBench context",
+        "## JevBench Public-231 leaderboard",
         "results/v1.4.2.2/jevbench-v1.4.2.2-results.json",
-        "results/v1.2/jevbench-v1.2-per-task.json",
-        "Public-231",
-        "| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** |",
+        "| 1 | Plumb-4B | 207 | 89.61% |",
+        "| **2** | **mentat-sys1-v0.1** | **200** | **86.58%** |",
+        "| 2 | Jev 1.13.0 | 200 | 86.58% |",
+        "| 4 | Imajev-4B | 199 | 86.15% |",
+        "| 5 | JevK5 v0.2.0 | 197 | 85.28% |",
+        "| 18 | ZeroEntropy zerank-2 | 162 | 70.13% |",
         "git checkout v0.1.1",
         "hf download yunqu/mentat-sys1-v0.1",
         "--revision v0.1.0",
@@ -158,6 +161,10 @@ def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
 
     forbidden_markers = (
         "submitter-reported",
+        "Current composite leaderboard",
+        "Current Composite Leaderboard",
+        "JevBench Score",
+        "results/v1.2/jevbench-v1.2-per-task.json",
     )
 
     for marker in forbidden_markers:
@@ -181,10 +188,14 @@ def test_model_card_links_code_and_explains_the_two_downloads() -> None:
         "--revision v0.1.0",
         "hf download Qwen/Qwen3.5-4B",
         "does not download the Qwen base weights",
-        "## Official JevBench Context",
+        "## JevBench Public-231 Leaderboard",
         "results/v1.4.2.2/jevbench-v1.4.2.2-results.json",
-        "results/v1.2/jevbench-v1.2-per-task.json",
-        "| **mentat-sys1-v0.1** | **200** | **48** | **66** | **86** |",
+        "| 1 | Plumb-4B | 207 | 89.61% |",
+        "| **2** | **mentat-sys1-v0.1** | **200** | **86.58%** |",
+        "| 2 | Jev 1.13.0 | 200 | 86.58% |",
+        "| 4 | Imajev-4B | 199 | 86.15% |",
+        "| 5 | JevK5 v0.2.0 | 197 | 85.28% |",
+        "| 18 | ZeroEntropy zerank-2 | 162 | 70.13% |",
     )
 
     for marker in required_markers:
@@ -192,6 +203,10 @@ def test_model_card_links_code_and_explains_the_two_downloads() -> None:
 
     forbidden_markers = (
         "submitter-reported",
+        "Current composite leaderboard",
+        "Current Composite Leaderboard",
+        "JevBench Score",
+        "results/v1.2/jevbench-v1.2-per-task.json",
     )
 
     for marker in forbidden_markers:
