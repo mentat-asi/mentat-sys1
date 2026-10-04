@@ -219,6 +219,34 @@ def test_model_card_links_code_and_explains_the_two_downloads() -> None:
     assert set(issue_ids) == {"186"}
 
 
+def test_public_docs_show_a_runnable_jev_compatible_request() -> None:
+    documents = (
+        (ROOT / "README.md").read_text(encoding="utf-8"),
+        (ROOT / "docs/MODEL_CARD.md").read_text(encoding="utf-8"),
+    )
+    required_markers = (
+        "## Use the model",
+        "same TypeSafe wire format as Jev",
+        "https://docs.typesafe.ai/api",
+        "Self-hosted Mentat does not require an API key.",
+        "curl --fail --request POST",
+        '"model": "mentat-sys1-v0.1"',
+        '"type": "choice"',
+        '"choice": "shirt"',
+        '"probabilities"',
+        '"unknown_probability"',
+        '"abstained": false',
+        "`noul`",
+        "`score`",
+        "Mentat adds diagnostic fields",
+    )
+
+    for document in documents:
+        normalized = " ".join(document.split())
+        for marker in required_markers:
+            assert marker in normalized
+
+
 def test_public_surface_omits_private_recipe_and_plans() -> None:
     paths = [
         ROOT / "README.md",

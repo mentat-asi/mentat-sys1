@@ -85,6 +85,59 @@ The server exposes a TypeSafe-compatible `POST /v1/systemone` endpoint. It
 answers bounded `noul`, `choice`, and `score` decisions in one model pass with
 a 16,384-token input limit.
 
+## Use the model
+
+Mentat uses the same TypeSafe wire format as Jev for the core
+[`POST /v1/systemone` contract](https://docs.typesafe.ai/api).
+Self-hosted Mentat does not require an API key.
+
+```bash
+export ENDPOINT_URL="http://127.0.0.1:8765"
+curl --fail --request POST "$ENDPOINT_URL/v1/systemone" \
+  --header "Content-Type: application/json" \
+  --data @- <<'JSON'
+{
+  "model": "mentat-sys1-v0.1",
+  "state": {"listing": {"color": "blue", "kind": "shirt"}},
+  "questions": {
+    "category": {
+      "type": "choice",
+      "instructions": "Which category best describes the listing?",
+      "criteria": {
+        "shirt": "A garment worn on the upper body.",
+        "shoe": "Footwear."
+      }
+    }
+  }
+}
+JSON
+```
+
+The response follows the Jev-compatible answer shape. Values below are
+illustrative:
+
+```json
+{
+  "model": "mentat-sys1-v0.1",
+  "answers": {
+    "category": {
+      "type": "choice",
+      "choice": "shirt",
+      "probabilities": {"shirt": 0.87, "shoe": 0.13},
+      "confidence": 0.71,
+      "unknown_probability": 0.03,
+      "abstained": false
+    }
+  },
+  "usage": {"input_tokens": 128, "rotations": 1, "images": 0}
+}
+```
+
+Use `noul` for a true/false decision, `choice` for named alternatives, and
+`score` for an ordered scale. Mentat adds diagnostic fields such as
+`unknown_probability`, `abstained`, calibration identity, and local runtime
+usage; Jev-compatible clients can ignore these additive fields.
+
 ## Evidence and scope
 
 - Model package: LoRA adapter, native decision readout, scalar calibration,
