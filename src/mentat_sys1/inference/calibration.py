@@ -4,10 +4,10 @@ from __future__ import annotations
 
 import json
 import math
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any, Protocol, TypeAlias
+from typing import Any, Literal, Protocol, TypeAlias
 
 import numpy as np
 
@@ -27,6 +27,8 @@ CALIBRATION_ROWS = 1120
 CALIBRATION_SHA256 = (
     "a116f4d228e25bac5df61b9e52191adfe4181a0852f6050d9040cee7f35b0a02"
 )
+CalibrationType: TypeAlias = Literal["choice", "noul", "score"]  # noqa: UP040
+CALIBRATION_TYPES: tuple[CalibrationType, ...] = ("choice", "noul", "score")
 
 
 class CalibrationBackend(Protocol):
@@ -49,6 +51,13 @@ class TemperatureFit:
     temperature: float
     before: CalibrationMetrics
     after: CalibrationMetrics
+
+
+@dataclass(frozen=True)
+class CalibrationParameters:
+    pooled_temperature: float
+    temperature_by_type: dict[CalibrationType, float]
+    version: str
 
 
 def _validated_rows(
@@ -187,6 +196,58 @@ def fit_temperature(
         temperature=candidate,
         before=before,
         after=after,
+    )
+
+
+def _validated_temperature(value: object, *, name: str) -> float:
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not math.isfinite(float(value))
+        or float(value) <= 0
+    ):
+        raise ValueError(f"{name} must be finite and positive")
+    return float(value)
+
+
+def load_temperature_calibration(
+    payload: Mapping[str, object],
+    *,
+    digest: str,
+) -> CalibrationParameters:
+    method = payload.get("method")
+    schema_version = payload.get("schema_version")
+    if schema_version == 1 and method == "scalar_temperature":
+        temperature = _validated_temperature(
+            payload.get("temperature"),
+            name="calibration temperature",
+        )
+        return CalibrationParameters(
+            pooled_temperature=temperature,
+            temperature_by_type={kind: temperature for kind in CALIBRATION_TYPES},
+            version=f"scalar_temperature-v1:{digest[:12]}",
+        )
+    if schema_version != 2 or method != "temperature_by_type":
+        raise ValueError("unsupported calibration schema")
+    pooled = _validated_temperature(
+        payload.get("pooled_temperature"),
+        name="pooled calibration temperature",
+    )
+    raw_temperatures = payload.get("temperature_by_type")
+    if not isinstance(raw_temperatures, dict) or set(raw_temperatures) != set(
+        CALIBRATION_TYPES
+    ):
+        raise ValueError("calibration temperatures must cover choice, noul, score")
+    temperatures: dict[CalibrationType, float] = {}
+    for kind in CALIBRATION_TYPES:
+        temperatures[kind] = _validated_temperature(
+            raw_temperatures[kind],
+            name=f"{kind} calibration temperature",
+        )
+    return CalibrationParameters(
+        pooled_temperature=pooled,
+        temperature_by_type=temperatures,
+        version=f"temperature_by_type-v2:{digest[:12]}",
     )
 
 
