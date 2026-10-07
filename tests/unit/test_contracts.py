@@ -57,3 +57,31 @@ def test_project_config_is_frozen() -> None:
 
     with pytest.raises(ValidationError):
         config.project_id = "changed"
+
+
+@pytest.mark.parametrize(
+    ("filename", "model_id", "correct"),
+    [
+        ("mentat-sys1-v0.1.json", "mentat-sys1-v0.1", 200),
+        ("mentat-sys1-v0.2.json", "mentat-sys1-v0.2", 206),
+    ],
+)
+def test_registered_release_configs_load(
+    filename: str,
+    model_id: str,
+    correct: int,
+) -> None:
+    config = load_config(ROOT / "configs" / filename)
+
+    assert config.project_id == model_id
+    assert config.release.legacy_public_correct == correct
+    assert config.release.legacy_public_total == 231
+    assert config.release.legacy_public_easy_correct == 48
+
+
+def test_project_config_rejects_unregistered_model_id() -> None:
+    payload = _raw_config()
+    payload["project_id"] = "mentat-sys1-v9"
+
+    with pytest.raises(ValidationError):
+        ProjectConfig.model_validate(payload)

@@ -5,11 +5,15 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 SHA256_PATTERN = re.compile(r"[0-9a-f]{64}")
+ModelId = Literal["mentat-sys1-v0.1", "mentat-sys1-v0.2"]
+SUPPORTED_MODEL_IDS: frozenset[str] = frozenset(
+    {"mentat-sys1-v0.1", "mentat-sys1-v0.2"}
+)
 
 
 class FrozenModel(BaseModel):
@@ -44,9 +48,9 @@ class RuntimeConfig(FrozenModel):
 class ReleaseGate(FrozenModel):
     adapter_sha256: str
     readout_sha256: str
-    legacy_public_correct: Literal[200]
+    legacy_public_correct: Annotated[int, Field(ge=0, le=231)]
     legacy_public_total: Literal[231]
-    legacy_public_easy_correct: Literal[48]
+    legacy_public_easy_correct: Annotated[int, Field(ge=0, le=48)]
     maximum_invalid: Literal[0]
     maximum_severe_failures: Literal[0]
 
@@ -60,7 +64,7 @@ class ReleaseGate(FrozenModel):
 
 class ProjectConfig(FrozenModel):
     schema_version: Literal[1]
-    project_id: Literal["mentat-sys1-v0.1"]
+    project_id: ModelId
     base_model: BaseModelIdentity
     paths: RelativePaths
     runtime: RuntimeConfig

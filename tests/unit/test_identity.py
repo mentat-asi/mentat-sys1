@@ -23,6 +23,10 @@ def _subcommands(parser: argparse.ArgumentParser) -> dict[str, argparse.Argument
 def test_public_identity_is_lowercase_sys1_v01() -> None:
     assert mentat_sys1.__version__ == "0.1.1"
     assert mentat_sys1.MODEL_ID == "mentat-sys1-v0.1"
+    assert mentat_sys1.SUPPORTED_MODEL_IDS == {
+        "mentat-sys1-v0.1",
+        "mentat-sys1-v0.2",
+    }
 
 
 def test_public_cli_omits_training_commands() -> None:
