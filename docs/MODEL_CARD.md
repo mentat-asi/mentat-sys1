@@ -1,4 +1,26 @@
-# mentat-sys1-v0.1 Model Card
+# Mentat Sys1 Model Card
+
+## Current Release: v0.2
+
+[Serving code v0.2.0](https://github.com/mentat-asi/mentat-sys1/tree/v0.2.0)
+| [Frozen model package v0.2.0](https://huggingface.co/yunqu/mentat-sys1-v0.2/tree/v0.2.0)
+
+- Model: `mentat-sys1-v0.2`
+- Base: `Qwen/Qwen3.5-4B`
+- Base revision: `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`
+- Adapter SHA-256:
+  `cd27395b11dccbe4ed69c9d09ca7ceb64b24afafb2fb98db78510077d04ef228`
+- Readout SHA-256:
+  `ae953826fea781c6b73741b14170bc550b0e3f62b7a127f7eb9af3b700e70eb9`
+- Calibration SHA-256:
+  `5023c1bb9c2a3cc0d5607096c414257d455d47238e7d85033057b4acb9df6245`
+- Local JevBench Public-231: `206/231` (89.18%)
+
+v0.2 uses frozen per-type temperatures for `choice`, `noul`, and `score`.
+Its public result is directly comparable with official Public-231 accuracy,
+but it is not an official composite leaderboard score.
+
+## Frozen v0.1 Record
 
 [Serving code v0.1.1](https://github.com/mentat-asi/mentat-sys1-v0.1/tree/v0.1.1)
 | [Frozen model package v0.1.0](https://huggingface.co/yunqu/mentat-sys1-v0.1/tree/v0.1.0)

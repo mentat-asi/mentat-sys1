@@ -1,5 +1,10 @@
 # JevBench Bench Request Draft
 
+This file preserves the submitted v0.1 request. The current v0.2 release and
+its local `206/231` Public-231 result are documented in
+[`releases/v0.2.md`](releases/v0.2.md); no official composite result is
+claimed for v0.2.
+
 This request is bound to the code `v0.1.1` and model `v0.1.0` release tags.
 
 ## Issue Title

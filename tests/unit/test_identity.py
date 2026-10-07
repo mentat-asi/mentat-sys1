@@ -20,13 +20,13 @@ def _subcommands(parser: argparse.ArgumentParser) -> dict[str, argparse.Argument
     return actions[0].choices
 
 
-def test_public_identity_is_lowercase_sys1_v01() -> None:
-    assert mentat_sys1.__version__ == "0.1.1"
+def test_public_identity_registers_current_and_legacy_releases() -> None:
+    assert mentat_sys1.__version__ == "0.2.0"
     assert mentat_sys1.MODEL_ID == "mentat-sys1-v0.1"
-    assert mentat_sys1.SUPPORTED_MODEL_IDS == {
+    assert {
         "mentat-sys1-v0.1",
         "mentat-sys1-v0.2",
-    }
+    } == mentat_sys1.SUPPORTED_MODEL_IDS
 
 
 def test_public_cli_omits_training_commands() -> None:
@@ -69,11 +69,11 @@ def test_public_config_filename_matches_identity() -> None:
     assert not (ROOT / "configs" / ("mentat-" + "jev-v1.json")).exists()
 
 
-def test_public_package_and_command_use_v01_identity() -> None:
+def test_public_package_and_command_use_version_neutral_identity() -> None:
     payload = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
-    assert payload["project"]["name"] == "mentat-sys1-v0.1"
-    assert payload["project"]["version"] == "0.1.1"
+    assert payload["project"]["name"] == "mentat-sys1"
+    assert payload["project"]["version"] == "0.2.0"
     assert (
         "torchvision==0.23.0"
         in payload["project"]["optional-dependencies"]["serve"]
@@ -81,6 +81,23 @@ def test_public_package_and_command_use_v01_identity() -> None:
     assert payload["project"]["scripts"] == {
         "mentat-sys1": "mentat_sys1.cli:main",
     }
+
+
+def test_readme_documents_current_and_legacy_releases() -> None:
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    reproducibility = (ROOT / "docs/REPRODUCIBILITY.md").read_text(
+        encoding="utf-8"
+    )
+
+    for marker in (
+        "https://github.com/mentat-asi/mentat-sys1",
+        "https://huggingface.co/yunqu/mentat-sys1-v0.1",
+        "https://huggingface.co/yunqu/mentat-sys1-v0.2",
+        "206/231",
+        "configs/mentat-sys1-v0.2.json",
+    ):
+        assert marker in readme
+    assert "temperature_by_type-v2" in reproducibility
 
 
 def test_public_documents_do_not_advertise_v1_identity() -> None:

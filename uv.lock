@@ -282,8 +282,8 @@ wheels = [
 ]
 
 [[package]]
-name = "mentat-sys1-v0-1"
-version = "0.1.1"
+name = "mentat-sys1"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "numpy" },

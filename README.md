@@ -1,4 +1,55 @@
-# mentat-sys1-v0.1
+# mentat-sys1
+
+One version-neutral runtime for the frozen Mentat Sys1 model releases.
+
+**Current release: v0.2, with 206/231 (89.18%) on JevBench Public-231.**
+Mentat v0.2 answers 19 more public questions correctly than the
+Qwen3.5-4B-based SemIF baseline and improves by six correct answers over v0.1.
+This is a local evaluation on the exact public set, not an official composite
+JevBench ranking.
+
+[Code v0.2.0](https://github.com/mentat-asi/mentat-sys1/tree/v0.2.0)
+| [Model v0.2.0](https://huggingface.co/yunqu/mentat-sys1-v0.2/tree/v0.2.0)
+| [Model v0.1.0](https://huggingface.co/yunqu/mentat-sys1-v0.1/tree/v0.1.0)
+
+| Release | Model package | Calibration | Public-231 |
+| --- | --- | --- | ---: |
+| v0.2 | `yunqu/mentat-sys1-v0.2@v0.2.0` | per-type v2 | 206/231 |
+| v0.1 | `yunqu/mentat-sys1-v0.1@v0.1.0` | scalar v1 | 200/231 |
+
+## Run v0.2
+
+```bash
+git clone https://github.com/mentat-asi/mentat-sys1.git
+cd mentat-sys1
+git checkout v0.2.0
+uv sync --frozen --extra serve
+
+hf download yunqu/mentat-sys1-v0.2 \
+  --revision v0.2.0 \
+  --local-dir MODEL_PACKAGE_DIR
+hf download Qwen/Qwen3.5-4B \
+  --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a \
+  --local-dir QWEN_BASE_DIR
+
+uv run mentat-sys1 serve \
+  --config configs/mentat-sys1-v0.2.json \
+  --artifact-root RUNTIME_DIR \
+  --base-model-path QWEN_BASE_DIR \
+  --model-dir MODEL_PACKAGE_DIR/model \
+  --device cuda \
+  --host 127.0.0.1 \
+  --port 8765
+```
+
+The runtime validates the v0.2 manifest, adapter and readout hashes, and
+`temperature_by_type-v2` calibration before loading model weights. Requests
+must use `"model": "mentat-sys1-v0.2"`.
+
+See [v0.2 release details](docs/releases/v0.2.md) and the
+[reproducibility guide](docs/REPRODUCIBILITY.md).
+
+## v0.1 Release Record
 
 **200/231 (86.58%) on the JevBench Public-231 set.** A one-pass,
 open-weights decision model built on Qwen3.5-4B, with native option

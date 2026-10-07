@@ -3,8 +3,8 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mentat-sys1-v0.1"
-version = "0.1.1"
+name = "mentat-sys1"
+version = "0.2.0"
 description = "Independent Qwen3.5-4B decision model runtime and release tooling"
 readme = "README.md"
 license = "Apache-2.0"
