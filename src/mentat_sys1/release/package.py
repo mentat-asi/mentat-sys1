@@ -224,6 +224,7 @@ def assemble_calibrated_model(
         config=config,
         calibration_path=report_path,
     )
+    calibration_payload = _load_json_object(report_path)
 
     model_dir = Path(artifact_root) / config.paths.model
     evidence_dir = Path(artifact_root) / config.paths.evidence
@@ -237,16 +238,26 @@ def assemble_calibrated_model(
 
     source_manifest = _load_json_object(source / "model-manifest.json")
     runtime_files = (*SOURCE_MODEL_FILES, "calibration.json")
+    calibration_manifest = {
+        "method": calibration_payload["method"],
+        "calibration_sha256": calibration["calibration_sha256"],
+        "calibration_version": calibration["calibration_version"],
+    }
+    if calibration_payload["schema_version"] == 1:
+        calibration_manifest["temperature"] = calibration["temperature"]
+    else:
+        calibration_manifest["schema_version"] = 2
+        calibration_manifest["pooled_temperature"] = calibration["temperature"]
+        calibration_manifest["temperature_by_type"] = calibration[
+            "temperature_by_type"
+        ]
     manifest = {
         "schema_version": 1,
         "model_id": config.project_id,
         "base_model": config.base_model.model_dump(mode="json"),
         "adapter_config": source_manifest["adapter_config"],
         "readout": source_manifest["readout"],
-        "calibration": {
-            "method": "scalar_temperature",
-            **calibration,
-        },
+        "calibration": calibration_manifest,
         "files": {name: _file_record(model_dir / name) for name in runtime_files},
     }
     write_immutable_json(model_dir / "model-manifest.json", manifest)
@@ -274,6 +285,8 @@ def assemble_calibrated_model(
         "temperature": calibration["temperature"],
         "model": verified,
     }
+    if "temperature_by_type" in calibration:
+        receipt["temperature_by_type"] = calibration["temperature_by_type"]
     write_immutable_json(
         evidence_dir / "calibrated-model-receipt.json",
         receipt,

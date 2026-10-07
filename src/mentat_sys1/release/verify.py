@@ -12,6 +12,10 @@ from typing import Any
 
 from mentat_sys1.audit.provenance import sha256_file
 from mentat_sys1.contracts import ProjectConfig
+from mentat_sys1.inference.calibration import (
+    CALIBRATION_TYPES,
+    load_temperature_calibration,
+)
 
 BASE_MODEL_FILES = (
     "adapter_config.json",
@@ -183,22 +187,28 @@ def validate_calibration(
     calibration_path: Path,
 ) -> dict[str, object]:
     payload = _load_json_object(calibration_path)
-    if (
-        payload.get("schema_version") != 1
-        or payload.get("method") != "scalar_temperature"
-    ):
-        raise ValueError("unsupported calibration schema")
-    temperature = _finite_number(
-        payload.get("temperature"),
-        name="temperature",
+    digest = sha256_file(calibration_path)
+    parameters = load_temperature_calibration(payload, digest=digest)
+    scalar = (
+        payload.get("schema_version") == 1
+        and payload.get("method") == "scalar_temperature"
     )
-    if temperature <= 0:
-        raise ValueError("calibration temperature must be positive")
     split = payload.get("split")
-    if not isinstance(split, dict) or split != {
-        "rows": CALIBRATION_ROWS,
-        "sha256": CALIBRATION_SHA256,
-    }:
+    if not isinstance(split, dict):
+        raise ValueError("calibration split identity differs")
+    if scalar:
+        if split != {
+            "rows": CALIBRATION_ROWS,
+            "sha256": CALIBRATION_SHA256,
+        }:
+            raise ValueError("calibration split identity differs")
+    elif (
+        isinstance(split.get("rows"), bool)
+        or not isinstance(split.get("rows"), int)
+        or split["rows"] < 1
+        or not isinstance(split.get("sha256"), str)
+        or SHA256_PATTERN.fullmatch(split["sha256"]) is None
+    ):
         raise ValueError("calibration split identity differs")
     model = payload.get("model")
     if not isinstance(model, dict) or model != {
@@ -216,12 +226,49 @@ def validate_calibration(
     after_nll = _finite_number(after.get("nll"), name="after NLL")
     if after_nll > before_nll + 1e-12:
         raise ValueError("calibration regressed NLL")
-    digest = sha256_file(calibration_path)
-    return {
-        "temperature": temperature,
+    result: dict[str, object] = {
+        "temperature": parameters.pooled_temperature,
         "calibration_sha256": digest,
-        "calibration_version": f"scalar_temperature-v1:{digest[:12]}",
+        "calibration_version": parameters.version,
     }
+    if not scalar:
+        type_fits = payload.get("type_fits")
+        if not isinstance(type_fits, dict) or set(type_fits) != set(
+            CALIBRATION_TYPES
+        ):
+            raise ValueError("per-type calibration fits are missing")
+        fitted_rows = 0
+        for kind in CALIBRATION_TYPES:
+            record = type_fits[kind]
+            if not isinstance(record, dict):
+                raise ValueError("per-type calibration fit is invalid")
+            rows = record.get("rows")
+            source = record.get("source")
+            if (
+                isinstance(rows, bool)
+                or not isinstance(rows, int)
+                or rows < 0
+                or source not in {"type", "pooled", "shrinkage"}
+                or _finite_number(
+                    record.get("temperature"),
+                    name=f"{kind} temperature",
+                )
+                != parameters.temperature_by_type[kind]
+            ):
+                raise ValueError("per-type calibration fit is invalid")
+            fitted_rows += rows
+        if fitted_rows != split["rows"]:
+            raise ValueError("per-type calibration row counts differ")
+        prediction_digest = payload.get("prediction_digest")
+        if (
+            not isinstance(prediction_digest, dict)
+            or prediction_digest.get("before") != prediction_digest.get("after")
+            or not isinstance(prediction_digest.get("before"), str)
+            or SHA256_PATTERN.fullmatch(prediction_digest["before"]) is None
+        ):
+            raise ValueError("per-type calibration changed predictions")
+        result["temperature_by_type"] = parameters.temperature_by_type
+    return result
 
 
 def verify_migrated_model(
@@ -274,14 +321,31 @@ def verify_migrated_model(
         raise ValueError("registered adapter identity differs")
     if readout_sha != config.release.readout_sha256:
         raise ValueError("registered readout identity differs")
-    calibration = (
-        validate_calibration(
+    calibration: dict[str, object] = {}
+    if require_calibration:
+        calibration_path = root / "calibration.json"
+        calibration_payload = _load_json_object(calibration_path)
+        calibration = validate_calibration(
             config=config,
-            calibration_path=root / "calibration.json",
+            calibration_path=calibration_path,
         )
-        if require_calibration
-        else {}
-    )
+        expected_calibration_manifest = {
+            "method": calibration_payload["method"],
+            "calibration_sha256": calibration["calibration_sha256"],
+            "calibration_version": calibration["calibration_version"],
+        }
+        if calibration_payload["schema_version"] == 1:
+            expected_calibration_manifest["temperature"] = calibration["temperature"]
+        else:
+            expected_calibration_manifest["schema_version"] = 2
+            expected_calibration_manifest["pooled_temperature"] = calibration[
+                "temperature"
+            ]
+            expected_calibration_manifest["temperature_by_type"] = calibration[
+                "temperature_by_type"
+            ]
+        if manifest.get("calibration") != expected_calibration_manifest:
+            raise ValueError("model manifest calibration differs")
     scan_public_tree(root)
     return {
         "schema_version": 1,
@@ -413,6 +477,10 @@ def verify_publication_evidence(
         "temperature": calibration["temperature"],
         "model": model,
     }
+    if "temperature_by_type" in calibration:
+        expected_receipt["temperature_by_type"] = calibration[
+            "temperature_by_type"
+        ]
     for key, expected in expected_receipt.items():
         if receipt.get(key) != expected:
             raise ValueError(f"calibrated model receipt differs: {key}")

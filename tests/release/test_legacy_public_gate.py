@@ -47,6 +47,24 @@ def test_legacy_public_gate_fails_closed_on_score_drift() -> None:
         )
 
 
+def test_v02_public_gate_requires_its_registered_result() -> None:
+    assessment = assess_legacy_public(
+        config=load_config(ROOT / "configs/mentat-sys1-v0.2.json"),
+        tiers={
+            "easy": {"correct": 48, "total": 48},
+            "original": {"correct": 71, "total": 72},
+            "hard": {"correct": 87, "total": 111},
+        },
+        invalid=0,
+        severe_failures=0,
+        second_process_match=True,
+    )
+
+    assert assessment["correct"] == 206
+    assert assessment["total"] == 231
+    assert assessment["passed"] is True
+
+
 def test_prediction_digest_ignores_timing_but_detects_probability_drift() -> None:
     records = [
         {
