@@ -156,24 +156,28 @@ def test_public_documents_pin_code_patch_separately_from_model() -> None:
     )
 
 
-def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
+def test_readme_exposes_current_release_and_reproducibility() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
     required_markers = (
-        "https://github.com/mentat-asi/mentat-sys1-v0.1",
-        "https://huggingface.co/yunqu/mentat-sys1-v0.1",
-        "https://github.com/fstandhartinger/jevbench/issues/186",
-        "## JevBench Public-231 leaderboard",
+        "SemIF 187/231",
+        "Mentat v0.1 200/231",
+        "Mentat v0.2 206/231",
+        "git clone https://github.com/mentat-asi/mentat-sys1.git",
+        "hf download yunqu/mentat-sys1-v0.2",
+        '"model": "mentat-sys1-v0.2"',
+        "231/231 valid",
+        "zero prediction differences",
         "results/v1.4.2.2/jevbench-v1.4.2.2-results.json",
         "| 1 | Plumb-4B | 207 | 89.61% |",
-        "| **2** | **mentat-sys1-v0.1** | **200** | **86.58%** |",
-        "| 2 | Jev 1.13.0 | 200 | 86.58% |",
+        "| **2** | **Mentat v0.2** | **206** | **89.18%** |",
+        "| 3 | Mentat v0.1 | 200 | 86.58% |",
+        "| 3 | Jev 1.13.0 | 200 | 86.58% |",
         "| 4 | Imajev-4B | 199 | 86.15% |",
         "| 5 | JevK5 v0.2.0 | 197 | 85.28% |",
-        "| 18 | ZeroEntropy zerank-2 | 162 | 70.13% |",
-        "git checkout v0.1.1",
-        "hf download yunqu/mentat-sys1-v0.1",
-        "--revision v0.1.0",
+        "| 6 | SemIF | 187 | 80.95% |",
+        "git checkout v0.2.0",
+        "--revision v0.2.0",
         "hf download Qwen/Qwen3.5-4B",
     )
 
@@ -181,6 +185,7 @@ def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
         assert marker in readme
 
     forbidden_markers = (
+        "git clone https://github.com/mentat-asi/mentat-sys1-v0.1.git",
         "submitter-reported",
         "Current composite leaderboard",
         "Current Composite Leaderboard",
@@ -191,11 +196,9 @@ def test_readme_exposes_results_context_and_frozen_release_commands() -> None:
     for marker in forbidden_markers:
         assert marker not in readme
 
-    issue_ids = re.findall(
-        r"github\.com/fstandhartinger/jevbench/issues/(\d+)",
-        readme,
-    )
-    assert set(issue_ids) == {"186"}
+    api_section = readme.split("## Call the API", maxsplit=1)[1]
+    api_section = api_section.split("\n## ", maxsplit=1)[0]
+    assert '"model": "mentat-sys1-v0.1"' not in api_section
 
 
 def test_model_card_links_code_and_explains_the_two_downloads() -> None:
@@ -241,17 +244,13 @@ def test_model_card_links_code_and_explains_the_two_downloads() -> None:
 
 
 def test_public_docs_show_a_runnable_jev_compatible_request() -> None:
-    documents = (
-        (ROOT / "README.md").read_text(encoding="utf-8"),
-        (ROOT / "docs/MODEL_CARD.md").read_text(encoding="utf-8"),
-    )
-    required_markers = (
-        "## Use the model",
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    model_card = (ROOT / "docs/MODEL_CARD.md").read_text(encoding="utf-8")
+    common_markers = (
         "same TypeSafe wire format as Jev",
         "https://docs.typesafe.ai/api",
         "Self-hosted Mentat does not require an API key.",
         "curl --fail --request POST",
-        '"model": "mentat-sys1-v0.1"',
         '"type": "choice"',
         '"choice": "shirt"',
         '"probabilities"',
@@ -262,10 +261,15 @@ def test_public_docs_show_a_runnable_jev_compatible_request() -> None:
         "Mentat adds diagnostic fields",
     )
 
-    for document in documents:
+    for document in (readme, model_card):
         normalized = " ".join(document.split())
-        for marker in required_markers:
+        for marker in common_markers:
             assert marker in normalized
+
+    assert "## Call the API" in readme
+    assert '"model": "mentat-sys1-v0.2"' in readme
+    assert "## Use the model" in model_card
+    assert '"model": "mentat-sys1-v0.1"' in model_card
 
 
 def test_public_surface_omits_private_recipe_and_plans() -> None:
