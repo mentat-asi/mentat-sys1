@@ -53,9 +53,17 @@ class FakeBackend:
         }
 
 
-def _request() -> dict[str, object]:
+class V02FakeBackend(FakeBackend):
+    model_id = "mentat-sys1-v0.2"
+    identity = {
+        **FakeBackend.identity,
+        "name": "mentat-sys1-v0.2",
+    }
+
+
+def _request(model: str = "mentat-sys1-v0.1") -> dict[str, object]:
     return {
-        "model": "mentat-sys1-v0.1",
+        "model": model,
         "state": "A precedes B.",
         "questions": {
             "q": {
@@ -84,6 +92,23 @@ def test_service_identity_and_choice_contract() -> None:
     assert response.json()["answers"]["q"]["choice"] == "a"
     assert response.json()["usage"]["rotations"] == 4
     assert len(backend.requests) == 1
+
+
+def test_v02_service_uses_version_neutral_api_identity() -> None:
+    backend = V02FakeBackend()
+    app = create_app(backend)
+    client = TestClient(app)
+
+    response = client.post(
+        "/v1/systemone",
+        json=_request("mentat-sys1-v0.2"),
+    )
+    mismatch = client.post("/v1/systemone", json=_request())
+
+    assert app.title == "mentat-sys1"
+    assert response.status_code == 200
+    assert response.json()["model"] == "mentat-sys1-v0.2"
+    assert mismatch.status_code == 422
 
 
 def test_oversized_or_malformed_request_is_typed_4xx() -> None:

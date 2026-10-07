@@ -165,7 +165,7 @@ def create_app(
         raise ValueError("backend identity name differs from model ID")
 
     app = FastAPI(
-        title="mentat-sys1-v0.1",
+        title="mentat-sys1",
         docs_url=None,
         redoc_url=None,
         openapi_url=None,

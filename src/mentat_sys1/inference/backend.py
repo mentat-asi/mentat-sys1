@@ -10,14 +10,18 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from time import perf_counter
 from typing import Any, Protocol, cast
 
-from mentat_sys1 import MODEL_ID
 from mentat_sys1.audit.provenance import sha256_file
-from mentat_sys1.contracts import ProjectConfig
+from mentat_sys1.contracts import SUPPORTED_MODEL_IDS, ProjectConfig
+from mentat_sys1.inference.calibration import (
+    CALIBRATION_TYPES,
+    CalibrationType,
+    load_temperature_calibration,
+)
 from mentat_sys1.inference.contracts import DecisionRequest, DecisionResult
 from mentat_sys1.inference.scoring import (
     combine_rotations,
@@ -122,28 +126,23 @@ def verify_model_directory(
             model_dir=root,
             require_calibration=require_calibration,
         )
-    if manifest.get("model_id") != MODEL_ID:
+    model_id = manifest.get("model_id")
+    if not isinstance(model_id, str) or model_id not in SUPPORTED_MODEL_IDS:
         raise ValueError("model manifest identity differs")
     calibration: dict[str, object] = {}
     if require_calibration:
         payload = _load_json_object(root / "calibration.json")
-        temperature = payload.get("temperature")
-        if (
-            isinstance(temperature, bool)
-            or not isinstance(temperature, (int, float))
-            or not math.isfinite(float(temperature))
-            or float(temperature) <= 0
-        ):
-            raise ValueError("calibration temperature must be finite and positive")
         digest = sha256_file(root / "calibration.json")
+        parameters = load_temperature_calibration(payload, digest=digest)
         calibration = {
-            "temperature": float(temperature),
+            "temperature": parameters.pooled_temperature,
+            "temperature_by_type": parameters.temperature_by_type,
             "calibration_sha256": digest,
-            "calibration_version": f"scalar_temperature-v1:{digest[:12]}",
+            "calibration_version": parameters.version,
         }
     return {
         "schema_version": 1,
-        "model_id": MODEL_ID,
+        "model_id": model_id,
         "base_model": manifest.get("base_model"),
         **calibration,
     }
@@ -413,8 +412,6 @@ class TorchDecisionEngine:
 
 
 class PortableBackend:
-    model_id = MODEL_ID
-
     def __init__(
         self,
         *,
@@ -422,9 +419,11 @@ class PortableBackend:
         identity: dict[str, object],
         rotations: int = DEFAULT_ROTATIONS,
         temperature: float = 1.0,
+        temperature_by_type: Mapping[str, float] | None = None,
         calibration_version: str | None = None,
     ) -> None:
-        if identity.get("name") != self.model_id:
+        model_id = identity.get("name")
+        if not isinstance(model_id, str) or model_id not in SUPPORTED_MODEL_IDS:
             raise ValueError("backend identity name differs from model ID")
         if rotations < 1:
             raise ValueError("rotations must be positive")
@@ -432,10 +431,33 @@ class PortableBackend:
             raise ValueError("temperature must be finite and positive")
         if calibration_version is None and temperature != 1.0:
             raise ValueError("non-unit temperature requires a calibration version")
+        typed_temperatures: dict[CalibrationType, float]
+        if temperature_by_type is None:
+            typed_temperatures = {kind: temperature for kind in CALIBRATION_TYPES}
+        else:
+            if set(temperature_by_type) != set(CALIBRATION_TYPES):
+                raise ValueError("typed temperatures must cover choice, noul, score")
+            typed_temperatures = {}
+            for kind in CALIBRATION_TYPES:
+                value = temperature_by_type[kind]
+                if (
+                    isinstance(value, bool)
+                    or not isinstance(value, (int, float))
+                    or not math.isfinite(float(value))
+                    or float(value) <= 0
+                ):
+                    raise ValueError(
+                        "typed temperatures must be finite and positive"
+                    )
+                typed_temperatures[kind] = float(value)
+            if calibration_version is None:
+                raise ValueError("typed temperatures require a calibration version")
+        self.model_id = model_id
         self.engine = engine
         self.identity = dict(identity)
         self.rotations = rotations
         self.temperature = temperature
+        self.temperature_by_type = typed_temperatures
         self.calibration_version = calibration_version
 
     @classmethod
@@ -463,6 +485,12 @@ class PortableBackend:
         temperature = verified.get("temperature", 1.0)
         if not isinstance(temperature, float):
             raise ValueError("verified calibration temperature is missing")
+        raw_temperatures = verified.get("temperature_by_type")
+        if raw_temperatures is not None and not isinstance(
+            raw_temperatures,
+            Mapping,
+        ):
+            raise ValueError("verified typed temperatures are invalid")
         if calibration_version is not None and not isinstance(
             calibration_version,
             str,
@@ -486,6 +514,10 @@ class PortableBackend:
             identity=identity,
             rotations=DEFAULT_ROTATIONS,
             temperature=temperature,
+            temperature_by_type=cast(
+                Mapping[str, float] | None,
+                raw_temperatures,
+            ),
             calibration_version=calibration_version,
         )
 
@@ -512,6 +544,12 @@ class PortableBackend:
         input_tokens = 0
         model_passes = 0
         for field in request.fields:
+            runtime_types: dict[str, CalibrationType] = {
+                "choice": "choice",
+                "boolean": "noul",
+                "ordinal": "score",
+            }
+            temperature = self.temperature_by_type[runtime_types[field.type]]
             header, choices, texts = compile_question(field, request.state)
             labels = self.engine.labels(len(choices), len(images))
             passes: list[tuple[int, Sequence[float], Sequence[int] | None]] = []
@@ -553,7 +591,7 @@ class PortableBackend:
                         choices,
                         single_logits,
                         token_ids=single_token_ids,
-                        temperature=self.temperature,
+                        temperature=temperature,
                         calibration_version=self.calibration_version,
                     )
                 )
@@ -562,7 +600,7 @@ class PortableBackend:
                     combine_rotations(
                         choices,
                         [(offset, logits) for offset, logits, _ in passes],
-                        temperature=self.temperature,
+                        temperature=temperature,
                         calibration_version=self.calibration_version,
                     )
                 )

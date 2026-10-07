@@ -44,6 +44,24 @@ class FakeEngine:
         }
 
 
+class TypedEngine:
+    load_seconds = 0.0
+
+    def labels(self, count: int, n_images: int) -> list[str]:
+        assert count == 3
+        assert n_images == 0
+        return ["A", "B", "C"]
+
+    def score_prompt(
+        self,
+        images: list[object],
+        prompt: str,
+        labels: list[str],
+    ) -> tuple[list[float], dict[str, object]]:
+        del images, prompt, labels
+        return [3.0, 1.0, 0.0], {"input_tokens": 8}
+
+
 def test_model_directory_requires_every_bound_file(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="missing model file"):
         verify_model_directory(tmp_path)
@@ -145,6 +163,56 @@ def test_portable_backend_applies_frozen_temperature_to_rot4_scores() -> None:
     assert max(results[0].scores.values()) < 0.8
 
 
+def test_backend_uses_configured_identity_and_routes_typed_temperature() -> None:
+    backend = PortableBackend(
+        engine=TypedEngine(),
+        identity={"name": "mentat-sys1-v0.2"},
+        temperature_by_type={
+            "choice": 0.5,
+            "noul": 2.0,
+            "score": 4.0,
+        },
+        calibration_version="temperature_by_type-v2:abc123",
+    )
+    request = DecisionRequest.model_validate(
+        {
+            "request_id": "typed-calibration",
+            "state": {},
+            "fields": [
+                {
+                    "id": "choice",
+                    "type": "choice",
+                    "question": "Pick one.",
+                    "options": [{"value": "a"}, {"value": "b"}],
+                },
+                {
+                    "id": "boolean",
+                    "type": "boolean",
+                    "question": "Is this true?",
+                },
+                {
+                    "id": "ordinal",
+                    "type": "ordinal",
+                    "question": "How much?",
+                    "levels": [
+                        {"value": 1, "description": "low"},
+                        {"value": 2, "description": "high"},
+                    ],
+                },
+            ],
+        }
+    )
+
+    results, _ = backend.score([], request)
+
+    confidences = [max(result.scores.values()) for result in results]
+    assert backend.model_id == "mentat-sys1-v0.2"
+    assert confidences[0] > confidences[1] > confidences[2]
+    assert {result.calibration_version for result in results} == {
+        "temperature_by_type-v2:abc123"
+    }
+
+
 def test_backend_load_requires_calibration_by_default(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
@@ -164,6 +232,11 @@ def test_backend_load_requires_calibration_by_default(
             "readout_sha256": "b" * 64,
             "readout_codes": 256,
             "temperature": 0.97,
+            "temperature_by_type": {
+                "choice": 0.97,
+                "noul": 0.97,
+                "score": 0.97,
+            },
             "calibration_sha256": "c" * 64,
             "calibration_version": "scalar_temperature-v1:cccccccccccc",
         }
