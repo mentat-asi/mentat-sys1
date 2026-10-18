@@ -5,7 +5,7 @@ A 4B model for choosing actions, using tools and making structured decisions. Gi
 
 Qwen3.5-4B · Text / JSON · 16K context · LoRA adapter + decision readout
 
-[Team · THU-IDM](https://www.thuidm.com) · [Code](https://github.com/mentat-asi/mentat-sys1) · [Demos](#see-it-in-action) · [Model](https://huggingface.co/yunqu/mentat-sys1-v0.3) · [Quick start](#quick-start) · [Results](#results) · [Inference guide](docs/inference-v0.3.md)
+[Hugging Face · Model weights](https://huggingface.co/yunqu/mentat-sys1-v0.3) · [Team · THU-IDM](https://www.thuidm.com) · [Demos](#see-it-in-action) · [Quick start](#quick-start) · [Results](#results) · [Inference guide](docs/inference-v0.3.md)
 
 ## See it in action
 
