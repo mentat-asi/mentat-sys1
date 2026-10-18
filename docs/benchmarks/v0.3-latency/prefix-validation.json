@@ -1,0 +1,715 @@
+{
+  "status": "complete",
+  "request_isolation_A_B_A_exact": true,
+  "different_state_changes_output": true,
+  "cases": [
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-long_policy-01",
+      "cut": 3968,
+      "fields": 3,
+      "max_q_delta": 0.012335240840911865,
+      "mean_q_delta": 0.004568154302736123,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-long_policy-04",
+      "cut": 2688,
+      "fields": 3,
+      "max_q_delta": 0.007159769535064697,
+      "mean_q_delta": 0.0025136341961721578,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-long_policy-08",
+      "cut": 2432,
+      "fields": 3,
+      "max_q_delta": 0.005842328071594238,
+      "mean_q_delta": 0.0026226326823234557,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-long_policy-09",
+      "cut": 2560,
+      "fields": 3,
+      "max_q_delta": 0.002647995948791504,
+      "mean_q_delta": 0.0011008739471435546,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-long_policy-11",
+      "cut": 2368,
+      "fields": 3,
+      "max_q_delta": 0.002454698085784912,
+      "mean_q_delta": 0.001636443038781484,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-long_policy-13",
+      "cut": 2496,
+      "fields": 3,
+      "max_q_delta": 0.0015465766191482544,
+      "mean_q_delta": 0.0010310361782709758,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-long_policy-19",
+      "cut": 2368,
+      "fields": 3,
+      "max_q_delta": 0.0023952126502990723,
+      "mean_q_delta": 0.0015968096752961476,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-probability-03",
+      "cut": 448,
+      "fields": 3,
+      "max_q_delta": 0.0005965828895568848,
+      "mean_q_delta": 0.0003977169593175252,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-probability-04",
+      "cut": 1152,
+      "fields": 3,
+      "max_q_delta": 0.0048885345458984375,
+      "mean_q_delta": 0.0024442635476589203,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-probability-07",
+      "cut": 1216,
+      "fields": 3,
+      "max_q_delta": 0.0008407235145568848,
+      "mean_q_delta": 0.0007323995232582092,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-probability-08",
+      "cut": 384,
+      "fields": 3,
+      "max_q_delta": 0.00274604931473732,
+      "mean_q_delta": 0.001830688367287318,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-temporal_numeric-03",
+      "cut": 512,
+      "fields": 3,
+      "max_q_delta": 0.0008692741394042969,
+      "mean_q_delta": 0.0005795235435167948,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-temporal_numeric-06",
+      "cut": 576,
+      "fields": 3,
+      "max_q_delta": 0.0012258291244506836,
+      "mean_q_delta": 0.0008172218998273214,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-temporal_numeric-07",
+      "cut": 1344,
+      "fields": 3,
+      "max_q_delta": 0.005086630582809448,
+      "mean_q_delta": 0.0027138243118921914,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-a-temporal_numeric-12",
+      "cut": 640,
+      "fields": 3,
+      "max_q_delta": 0.002315342426300049,
+      "mean_q_delta": 0.001319696754217148,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-b-ambiguous-02",
+      "cut": 576,
+      "fields": 3,
+      "max_q_delta": 0.0017043352127075195,
+      "mean_q_delta": 0.001347668468952179,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-b-ambiguous-03",
+      "cut": 512,
+      "fields": 3,
+      "max_q_delta": 0.0033490359783172607,
+      "mean_q_delta": 0.0016745217144489288,
+      "winner_flips": 0
+    },
+    {
+      "suite": "jevbench-hard",
+      "id": "hard-opus-b-ambiguous-07",
+      "cut": 512,
+      "fields": 3,
+      "max_q_delta": 0.002178564667701721,
+      "mean_q_delta": 0.001717178151011467,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "d3c7d5cdcb7f681c62014f97",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.005263686180114746,
+      "mean_q_delta": 0.002054395225758736,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "34f59cdb5e2c9d172621b738",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0018667280673980713,
+      "mean_q_delta": 0.0006291263450223666,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "eabe5ea8278da46b1863dced",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.004210561513900757,
+      "mean_q_delta": 0.0017002426589337678,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "006a83d8733efac6ecac4ee0",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0026608705520629883,
+      "mean_q_delta": 0.0006761518307030201,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "db3fd9ce05c14106947920e9",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.006327331066131592,
+      "mean_q_delta": 0.0016510776387384306,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "dbdf1bd4003c7428cc43b50e",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.003517836332321167,
+      "mean_q_delta": 0.0009860965924767347,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "25c18b3bd3a09f57d2ace790",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0023374557495117188,
+      "mean_q_delta": 0.0009041881332030663,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "e2936be992060f429fc2845e",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0027400553226470947,
+      "mean_q_delta": 0.0009248017763289121,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "e50511fd5f79f391aaadcb5a",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0038762688636779785,
+      "mean_q_delta": 0.0015221637888596607,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "456ee054e13f347979556fda",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0039229616522789,
+      "mean_q_delta": 0.0016858216661673326,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "13c8b92e4d2a46841dd55710",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.004878520965576172,
+      "mean_q_delta": 0.0020138278173712585,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "903b91e19a775e81f9317972",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0038004517555236816,
+      "mean_q_delta": 0.001450252253562212,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "175f6bd7b1e60dc8b55d32fa",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.006309181451797485,
+      "mean_q_delta": 0.0020964001663602316,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "5ae0c4a7140aa33265d67b24",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0031243860721588135,
+      "mean_q_delta": 0.0010176458969139135,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "0f636e44f8cf834d8898a8dc",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.004508793354034424,
+      "mean_q_delta": 0.0016622814851311536,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "06b87c98db1eca28ce5915d4",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.004554152488708496,
+      "mean_q_delta": 0.0013782743078011733,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "82323f8f9f23e443cd6bee56",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0038148313760757446,
+      "mean_q_delta": 0.001681264489889145,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "43294d4c894e8b1bfd2cb981",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0055991411209106445,
+      "mean_q_delta": 0.002285413802243196,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "af058871eac1848711ccb706",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.010865896940231323,
+      "mean_q_delta": 0.003002914313513499,
+      "winner_flips": 0
+    },
+    {
+      "suite": "typed_decisions-test",
+      "id": "0c6bd2bbd75ad858f884c3ad",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.007195174694061279,
+      "mean_q_delta": 0.0030203537943844613,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "2f475fdd0aece50459e2bd29",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.0009662508964538574,
+      "mean_q_delta": 0.0004831051919609308,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "0c66f4bc6a0db92c8a743452",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.004068493843078613,
+      "mean_q_delta": 0.002034222357906401,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "018d21800c36ceee8490cc06",
+      "cut": 384,
+      "fields": 3,
+      "max_q_delta": 0.0005502998828887939,
+      "mean_q_delta": 0.0002534216535942895,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "390c68f5c621917b5dcf7f5d",
+      "cut": 384,
+      "fields": 3,
+      "max_q_delta": 0.005188941955566406,
+      "mean_q_delta": 0.0015225444388176715,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "82bc24e68a26c18ee5f90cf2",
+      "cut": 448,
+      "fields": 3,
+      "max_q_delta": 0.0007609128952026367,
+      "mean_q_delta": 0.0002739426147724901,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "2ed2d6c0c95530278f7721ba",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.0007378458976745605,
+      "mean_q_delta": 0.0002459421909103791,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "cee1290ea7c1bb5927abc486",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.0018613338470458984,
+      "mean_q_delta": 0.0009307023137807846,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "60ed2d45521e02385809b667",
+      "cut": 448,
+      "fields": 3,
+      "max_q_delta": 0.002194344997406006,
+      "mean_q_delta": 0.0006269431739513363,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "d097f2360952b287e48481fd",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.00021517276763916016,
+      "mean_q_delta": 9.184656664729118e-05,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "f6fab49ccc48cf7e2431f383",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.007090717554092407,
+      "mean_q_delta": 0.0031383147463202475,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "a570fc8eef4c9147f44d5fd2",
+      "cut": 384,
+      "fields": 3,
+      "max_q_delta": 0.0009902119636535645,
+      "mean_q_delta": 0.0002829328046313354,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "ae47fa77cac09174fc4e5a27",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.001085229218006134,
+      "mean_q_delta": 0.0006065265042707324,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "12e9740b053e07e72e7b0ec7",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.0010752081871032715,
+      "mean_q_delta": 0.0003583785146474838,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "7bd2ba4df26fd282225ffb0b",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 9.695487096905708e-05,
+      "mean_q_delta": 4.640586363772551e-05,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "8dd26033c42bd2d1a5ea4c03",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.0005543231964111328,
+      "mean_q_delta": 0.00022174520418047906,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "63a7292182a4c7f82e2ae78d",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.0007508993148803711,
+      "mean_q_delta": 0.00038094352930784225,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "eeeb4aae0d24f8687bd860da",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.0008409079164266586,
+      "mean_q_delta": 0.00034250859171152114,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "f30fb608748abff1155cca14",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.001889646053314209,
+      "mean_q_delta": 0.0007558498997241259,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "955fd8451fab15d24026b65b",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.0008608363568782806,
+      "mean_q_delta": 0.0005121105350553989,
+      "winner_flips": 0
+    },
+    {
+      "suite": "toolace-test",
+      "id": "eec43141c63c77498c7aa026",
+      "cut": 192,
+      "fields": 3,
+      "max_q_delta": 0.0025491714477539062,
+      "mean_q_delta": 0.0012746071442961693,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "0e933dda160ad4111d12d408",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.005673646926879883,
+      "mean_q_delta": 0.0037824312845865884,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "acc6da84dcd1d5197be3702f",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.0008933916687965393,
+      "mean_q_delta": 0.0005955770611763,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "325c117e1d85dffeadaf1bfc",
+      "cut": 192,
+      "fields": 3,
+      "max_q_delta": 0.00040924549102783203,
+      "mean_q_delta": 0.00027282536029815674,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "bade92500502f757bd1df915",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.0026931166648864746,
+      "mean_q_delta": 0.0017954135934511821,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "51a8ddf0e3e17f35f65d68fe",
+      "cut": 192,
+      "fields": 3,
+      "max_q_delta": 0.0035829544067382812,
+      "mean_q_delta": 0.002388636271158854,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "2f221445dd171a1cc3e4c71f",
+      "cut": 192,
+      "fields": 3,
+      "max_q_delta": 0.0015692710876464844,
+      "mean_q_delta": 0.0010461906592051189,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "500effa3975b03c3cefcf940",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.0012813806533813477,
+      "mean_q_delta": 0.0008542612195014954,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "466b152a262173b8022a989c",
+      "cut": 192,
+      "fields": 3,
+      "max_q_delta": 0.0017389655113220215,
+      "mean_q_delta": 0.001159300406773885,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "370648cad597aef88f343e1c",
+      "cut": 704,
+      "fields": 3,
+      "max_q_delta": 0.004917621612548828,
+      "mean_q_delta": 0.00327835480372111,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "196da684cb0b1f0f362b8333",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.0021256357431411743,
+      "mean_q_delta": 0.0014170780777931213,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "d2aea9f3b5fa1b7e5f3dfc89",
+      "cut": 384,
+      "fields": 3,
+      "max_q_delta": 0.0015731453895568848,
+      "mean_q_delta": 0.0010487486918767293,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "1076c0d423bbc5687981e177",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0011571496725082397,
+      "mean_q_delta": 0.0007714554667472839,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "c3194aa9b7778eb23ef6e3cf",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.005225181579589844,
+      "mean_q_delta": 0.0034834444522857666,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "aafa8723ed6a4a22a9a4eb99",
+      "cut": 384,
+      "fields": 3,
+      "max_q_delta": 0.002770647406578064,
+      "mean_q_delta": 0.001847115655740102,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "3a87ddcac71ebf15d76652bb",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.0014094933867454529,
+      "mean_q_delta": 0.0009396672248840332,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "3ca7b39b1e14d9f3bd18a3d3",
+      "cut": 256,
+      "fields": 3,
+      "max_q_delta": 0.007367253303527832,
+      "mean_q_delta": 0.004911502202351888,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "14d872ae88a56e28243c1d5b",
+      "cut": 192,
+      "fields": 3,
+      "max_q_delta": 0.0024107694625854492,
+      "mean_q_delta": 0.0016071622570355733,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "1767fbed66435fecdeab2d0e",
+      "cut": 128,
+      "fields": 3,
+      "max_q_delta": 0.0015105605125427246,
+      "mean_q_delta": 0.001007017989953359,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "b19719eb21954ed7647047ab",
+      "cut": 192,
+      "fields": 3,
+      "max_q_delta": 0.005242705345153809,
+      "mean_q_delta": 0.0034951393802960715,
+      "winner_flips": 0
+    },
+    {
+      "suite": "wildjailbreak-test",
+      "id": "ff1849bd1d43c9fa57b2a5e9",
+      "cut": 320,
+      "fields": 3,
+      "max_q_delta": 0.0014838576316833496,
+      "mean_q_delta": 0.000989253322283427,
+      "winner_flips": 0
+    }
+  ],
+  "fields": 234,
+  "winner_flips": 0,
+  "max_q_delta": 0.012335240840911865,
+  "scope": "80 generated multi-field requests attempted;78 had an eligible shared prefix.234 fields compared against full batched inference under the fused BF16 runtime. Numerical validation, not task accuracy.",
+  "eligible_cases": 78,
+  "generated_cases_attempted": 80
+}

@@ -1,0 +1,24 @@
+{
+  "source_measurements": {
+    "native_SHA256": "8ffecfbcf0700e4d9258a1d7467b0c71d54ee670dfc56c0450e52ac101563f31",
+    "batched_SHA256": "99c2fecfe6097f70a90c229cf783653f8a5c9f3d6387b6e8822e7f13be3010da",
+    "prefix_fused_SHA256": "f46e693899c81902d42c5d7ee3d5fa9f620c3d2193ded407f9f3bf10c6e6c604",
+    "quality_six_suites_SHA256": "c42d8b1ca7a31bbba601aa5e479878db5834231c03851a2e8302e297446f18d1",
+    "quality_AGNews_SHA256": "1004f56591367842e1b197eb50389a206ed11380e1198aedf8fe4296a22b52f2",
+    "original_analysis_SHA256": "cb1697d051da5d118017f549241259fb7037366c699bfbf7b19fc6d3f9025f37",
+    "request_file_SHA256": "fef4426c443d01929183da4c5d23d42ef7d5f81996028c41d60c090eb9fd285f"
+  },
+  "files": {
+    "prefix-validation.json": "cd8aceb34281f46f7b3a89cbf46aabd15081e577aa2f076d099080487eb28de9",
+    "raw-batched.json": "874f9c63b268852fc3940dfeaced53c77f0286c88b422c5a416c7d3ce3d9c375",
+    "raw-native.json": "9e62f9f55e1859ae1853bc0edb7186f6f18c0a2259a00214167290bc31702b76",
+    "raw-prefix-fused.json": "a0517df72f4d95e74ac83efca0087f7f31864e7cc7c1125037b6f4c5a390c1f1",
+    "summary.json": "0f6efaf49513fddb1cf016bf3123e4aba8b9fea9efd5e5d5d32033303bd1ec6c"
+  },
+  "request_attribution": {
+    "source": "https://github.com/StartLuxLabs/StartLux-Decision/blob/a9101e918e097b26fea5ead9ed893b823e875e46/eval/latency.py",
+    "license": "Apache-2.0",
+    "changes": "State/questions retained; model ID replaced with mentat-sys1-v0.3."
+  },
+  "sanitization": "Raw request bodies, absolute local paths, process identities and private artifact locations omitted. Synthetic benchmark source is linked. Individual measured timing arrays, final ticket decision probabilities, quality totals and model hashes retained."
+}
