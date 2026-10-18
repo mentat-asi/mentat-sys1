@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mentat-sys1"
-version = "0.2.0"
+version = "0.3.0"
 description = "Independent Qwen3.5-4B decision model runtime and release tooling"
 readme = "README.md"
 license = "Apache-2.0"
@@ -15,6 +15,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+accelerate = [
+  "mentat-sys1[serve]",
+  "huggingface-hub>=1.0,<2",
+  "flash-linear-attention==0.5.2",
+  "triton==3.4.0; sys_platform == 'linux'",
+]
 serve = [
   "fastapi==0.124.0",
   "peft==0.21.0",
@@ -36,6 +42,7 @@ dev = [
 
 [project.scripts]
 mentat-sys1 = "mentat_sys1.cli:main"
+mentat-sys1-v03 = "mentat_sys1.v03.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

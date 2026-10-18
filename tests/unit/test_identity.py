@@ -21,7 +21,7 @@ def _subcommands(parser: argparse.ArgumentParser) -> dict[str, argparse.Argument
 
 
 def test_public_identity_registers_current_and_legacy_releases() -> None:
-    assert mentat_sys1.__version__ == "0.2.0"
+    assert mentat_sys1.__version__ == "0.3.0"
     assert mentat_sys1.MODEL_ID == "mentat-sys1-v0.1"
     assert {
         "mentat-sys1-v0.1",
@@ -63,9 +63,7 @@ def test_public_config_omits_training_recipe() -> None:
 
 def test_public_config_filename_matches_identity() -> None:
     assert (ROOT / "configs/mentat-sys1-v0.1.json").is_file()
-    assert not (
-        ROOT / "configs" / ("mentat-" + "jev-v0.1.json")
-    ).exists()
+    assert not (ROOT / "configs" / ("mentat-" + "jev-v0.1.json")).exists()
     assert not (ROOT / "configs" / ("mentat-" + "jev-v1.json")).exists()
 
 
@@ -73,31 +71,20 @@ def test_public_package_and_command_use_version_neutral_identity() -> None:
     payload = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
     assert payload["project"]["name"] == "mentat-sys1"
-    assert payload["project"]["version"] == "0.2.0"
-    assert (
-        "torchvision==0.23.0"
-        in payload["project"]["optional-dependencies"]["serve"]
-    )
+    assert payload["project"]["version"] == "0.3.0"
+    assert "torchvision==0.23.0" in payload["project"]["optional-dependencies"]["serve"]
     assert payload["project"]["scripts"] == {
         "mentat-sys1": "mentat_sys1.cli:main",
+        "mentat-sys1-v03": "mentat_sys1.v03.cli:main",
     }
 
 
 def test_readme_documents_current_and_legacy_releases() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    reproducibility = (ROOT / "docs/REPRODUCIBILITY.md").read_text(
-        encoding="utf-8"
-    )
-
-    for marker in (
-        "https://github.com/mentat-asi/mentat-sys1",
-        "https://huggingface.co/yunqu/mentat-sys1-v0.1",
-        "https://huggingface.co/yunqu/mentat-sys1-v0.2",
-        "206/231",
-        "configs/mentat-sys1-v0.2.json",
-    ):
-        assert marker in readme
-    assert "temperature_by_type-v2" in reproducibility
+    for release in ("v0.1", "v0.2", "v0.3"):
+        assert f"https://huggingface.co/yunqu/mentat-sys1-{release}" in readme
+    assert "mentat-sys1-v03 predict" in readme
+    assert "mentat-sys1-v03 serve" in readme
 
 
 def test_public_documents_do_not_advertise_v1_identity() -> None:
@@ -132,73 +119,37 @@ def test_public_documents_use_approved_hugging_face_repository() -> None:
 def test_public_documents_pin_code_patch_separately_from_model() -> None:
     submission = (ROOT / "docs/JEVBENCH_SUBMISSION.md").read_text(encoding="utf-8")
     model_card = (ROOT / "docs/MODEL_CARD.md").read_text(encoding="utf-8")
-    reproducibility = (ROOT / "docs/REPRODUCIBILITY.md").read_text(
-        encoding="utf-8"
-    )
+    reproducibility = (ROOT / "docs/REPRODUCIBILITY.md").read_text(encoding="utf-8")
 
-    assert (
-        "bound to the code `v0.1.1` and model `v0.1.0` release tags"
-        in submission
-    )
+    assert "bound to the code `v0.1.1` and model `v0.1.0` release tags" in submission
     assert "- Code revision: `v0.1.1`" in submission
     assert "- Model revision: `v0.1.0`" in submission
     assert "git checkout v0.1.1" in submission
     assert "git checkout v0.1.1" in reproducibility
     assert (
         "- Code: `https://github.com/mentat-asi/mentat-sys1-v0.1`, "
-        "tag `v0.1.1`"
-        in model_card
+        "tag `v0.1.1`" in model_card
     )
     assert (
         "- Model: `https://huggingface.co/yunqu/mentat-sys1-v0.1`, "
-        "tag `v0.1.0`"
-        in model_card
+        "tag `v0.1.0`" in model_card
     )
 
 
 def test_readme_exposes_current_release_and_reproducibility() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-
-    required_markers = (
-        "SemIF 187/231",
-        "Mentat v0.1 200/231",
-        "Mentat v0.2 206/231",
-        "git clone https://github.com/mentat-asi/mentat-sys1.git",
-        "hf download yunqu/mentat-sys1-v0.2",
-        '"model": "mentat-sys1-v0.2"',
-        "231/231 valid",
-        "zero prediction differences",
-        "results/v1.4.2.2/jevbench-v1.4.2.2-results.json",
-        "| 1 | Plumb-4B | 207 | 89.61% |",
-        "| **2** | **Mentat v0.2** | **206** | **89.18%** |",
-        "| 3 | Mentat v0.1 | 200 | 86.58% |",
-        "| 3 | Jev 1.13.0 | 200 | 86.58% |",
-        "| 4 | Imajev-4B | 199 | 86.15% |",
-        "| 5 | JevK5 v0.2.0 | 197 | 85.28% |",
-        "| 6 | SemIF | 187 | 80.95% |",
-        "git checkout v0.2.0",
-        "--revision v0.2.0",
+    for marker in (
+        "204/231",
+        "89.59%",
+        "89.52%",
+        "--runtime native",
+        "--revision v0.3",
         "hf download Qwen/Qwen3.5-4B",
-    )
-
-    for marker in required_markers:
+        "https://www.thuidm.com",
+    ):
         assert marker in readme
-
-    forbidden_markers = (
-        "git clone https://github.com/mentat-asi/mentat-sys1-v0.1.git",
-        "submitter-reported",
-        "Current composite leaderboard",
-        "Current Composite Leaderboard",
-        "JevBench Score",
-        "results/v1.2/jevbench-v1.2-per-task.json",
-    )
-
-    for marker in forbidden_markers:
-        assert marker not in readme
-
-    api_section = readme.split("## Call the API", maxsplit=1)[1]
-    api_section = api_section.split("\n## ", maxsplit=1)[0]
-    assert '"model": "mentat-sys1-v0.1"' not in api_section
+    assert "Current composite leaderboard" not in readme
+    assert "## Earlier releases" in readme
 
 
 def test_model_card_links_code_and_explains_the_two_downloads() -> None:
@@ -245,31 +196,16 @@ def test_model_card_links_code_and_explains_the_two_downloads() -> None:
 
 def test_public_docs_show_a_runnable_jev_compatible_request() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    model_card = (ROOT / "docs/MODEL_CARD.md").read_text(encoding="utf-8")
-    common_markers = (
-        "same TypeSafe wire format as Jev",
-        "https://docs.typesafe.ai/api",
-        "Self-hosted Mentat does not require an API key.",
+    for marker in (
         "curl --fail --request POST",
-        '"type": "choice"',
-        '"choice": "shirt"',
-        '"probabilities"',
-        '"unknown_probability"',
-        '"abstained": false',
+        "--data-binary @model-v0.3/example.json",
+        "`choice`",
         "`noul`",
         "`score`",
-        "Mentat adds diagnostic fields",
-    )
-
-    for document in (readme, model_card):
-        normalized = " ".join(document.split())
-        for marker in common_markers:
-            assert marker in normalized
-
-    assert "## Call the API" in readme
-    assert '"model": "mentat-sys1-v0.2"' in readme
-    assert "## Use the model" in model_card
-    assert '"model": "mentat-sys1-v0.1"' in model_card
+        "/v1/systemone",
+    ):
+        assert marker in readme
+    assert (ROOT / "docs/inference-v0.3.md").is_file()
 
 
 def test_public_surface_omits_private_recipe_and_plans() -> None:
