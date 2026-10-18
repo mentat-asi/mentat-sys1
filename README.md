@@ -1,203 +1,102 @@
-# mentat-sys1
+<h1 align="center">mentat-sys1-v0.3</h1>
+<p align="center"><strong>Decisions with probabilities.</strong><br>THU-IDM · Tsinghua University</p>
 
-An open-weights System One model for fast, calibrated decisions over bounded
-options.
+A 4B model for choosing actions, using tools and making structured decisions. Give it a state and typed questions; it returns answer probabilities in one forward pass per question, without generating answer text.
 
-**Current release: Mentat v0.2, with 206/231 (89.18%) on JevBench
-Public-231.**
+Qwen3.5-4B · Text / JSON · 16K context · LoRA adapter + decision readout
 
-[Code v0.2.0](https://github.com/mentat-asi/mentat-sys1/tree/v0.2.0)
-| [Model v0.2.0](https://huggingface.co/yunqu/mentat-sys1-v0.2/tree/v0.2.0)
-| [Release notes](docs/releases/v0.2.md)
+[Team · THU-IDM](https://www.thuidm.com) · [Code](https://github.com/mentat-asi/mentat-sys1) · [Demos](#see-it-in-action) · [Model](https://huggingface.co/yunqu/mentat-sys1-v0.3) · [Quick start](#quick-start) · [Results](#results) · [Inference guide](docs/inference-v0.3.md)
+
+## See it in action
+
+Recorded games and completed workflows. Click a demo to watch the enlarged replay.
+
+<table class="demo-grid">
+<tr>
+<td width="33%" valign="top"><strong>Mario</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/mario.gif"><img src="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/mario.gif" alt="Mario: actual recorded environment frames" width="100%"></a><br>Jump over obstacles and reach the goal.</td>
+<td width="33%" valign="top"><strong>Football</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/football.gif"><img src="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/football.gif" alt="Football: actual recorded environment frames" width="100%"></a><br>Play against JevBall’s built-in AI team.</td>
+<td width="33%" valign="top"><strong>Doom</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/doom.gif"><img src="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/doom.gif" alt="Doom: actual recorded environment frames" width="100%"></a><br>Battle seven built-in Doom bots.</td>
+</tr>
+<tr>
+<td width="33%" valign="top"><strong>Shopping</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/store.gif"><img src="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/store.gif" alt="Shopping: actual recorded environment frames" width="100%"></a><br>Compare prices and delivery options, then place an order.</td>
+<td width="33%" valign="top"><strong>Workspace</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/workspace.gif"><img src="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/workspace.gif" alt="Workspace: actual recorded environment frames" width="100%"></a><br>Invite a teammate with the requested permissions.</td>
+<td width="33%" valign="top"><strong>Chess</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/chess.gif"><img src="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/chess.gif" alt="Chess: actual recorded environment frames" width="100%"></a><br>Play against a greedy chess bot.</td>
+</tr>
+</table>
+
+The model receives structured **text/JSON** states and selects actions.
+
+<sub>Controllers provide Mario lookahead, Doom aiming/navigation, football physics/off-ball AI, and chess legal/tactical facts. Shopping and Workspace use local mock sites. Game clips show selected highlights.</sub>
 
 ## Results
 
-`SemIF 187/231` -> `Mentat v0.1 200/231` -> `Mentat v0.2 206/231`
+| Measurement | mentat-sys1-v0.3 | Jev, reported |
+|---|---:|---:|
+| Intern-Decision — average accuracy (%) ↑ | **89.59%** | 88.74% |
+| JevBench — correct answers (public set) ↑ | **204/231** | 199/231 |
+| Typed Decisions — Brier score ↓ | **0.05403** | 0.148 |
+| Decision Index 0.2.1 ↑ | 52.07* | **57.91** |
+| Latency (ms) ↓ | **21.47 ms** | 150 ms† |
 
-Mentat v0.2 answers 19 more public questions correctly than the
-Qwen3.5-4B-based SemIF baseline and six more than Mentat v0.1.
+<sub>Jev benchmark results: [StartLux results](https://github.com/StartLuxLabs/StartLux-Decision/blob/a9101e918e097b26fea5ead9ed893b823e875e46/docs/results.md).</sub>
 
-| Release | Public-231 | Accuracy | Change from SemIF |
-| --- | ---: | ---: | ---: |
-| SemIF | 187/231 | 80.95% | - |
-| Mentat v0.1 | 200/231 | 86.58% | +13 |
-| **Mentat v0.2** | **206/231** | **89.18%** | **+19** |
+<sub>\* DI: 149,816 requests, 37 tasks; HLE unmeasured (zero contribution, original weights); abstentions count as wrong.</sub>
 
-Selected 4B and 4B-derived results:
+<sub>† mentat: one question, accelerated runtime, warm A800, 600 localhost HTTP requests. Jev: [TypeSafe’s official 150 ms reference](https://docs.typesafe.ai/concepts/use-case-map#real-time-applications), question count unspecified.</sub>
 
-| Rank | Model | Public-231 | Accuracy |
-| ---: | --- | ---: | ---: |
-| 1 | Plumb-4B | 207 | 89.61% |
-| **2** | **Mentat v0.2** | **206** | **89.18%** |
-| 3 | Mentat v0.1 | 200 | 86.58% |
-| 3 | Jev 1.13.0 | 200 | 86.58% |
-| 4 | Imajev-4B | 199 | 86.15% |
-| 5 | JevK5 v0.2.0 | 197 | 85.28% |
-| 6 | SemIF | 187 | 80.95% |
+## Quick start
 
-Comparator values are the `public_accuracy` results in JevBench's official
-[v1.4.2.2 aggregate](https://github.com/fstandhartinger/jevbench/blob/main/results/v1.4.2.2/jevbench-v1.4.2.2-results.json).
-Mentat values are local evaluations on the exact Public-231 set. The rank
-shown is the dense order within this selected public-results table; it is not
-an official composite JevBench rank. Sealed accuracy, official speed, and
-official cost were not measured for v0.2.
-
-## Experimental v0.3 inference preview
-
-A separate v0.3 runtime experiment measured **21.47 ms for one field** and
-**40.66 ms for three fields** over localhost HTTP on one A800 80GB PCIe.
-Compared with the earlier batched v0.3 candidate, three-field latency fell
-**36%**. The single-field mean is about one seventh of TypeSafe's
-[official 150 ms latency reference](https://docs.typesafe.ai/concepts/use-case-map),
-under different deployment and measurement conditions. Each scenario includes
-20 warmups per trial and three trials of 200 requests; startup, compilation and graph capture are excluded.
-
-The candidate combines request-local shared-prefix computation, fused
-pointwise operators, BF16 LoRA merging, fast linear-attention kernels and
-CUDA Graphs. Its seven-suite ID mean is **89.52%**, versus **89.59%** for the
-native v0.3 runtime, with 99.76% decision agreement across 12,351 fields.
-These measurements describe the experimental v0.3 candidate; the current
-v0.2 release and CLI remain the released interface.
-
-[Acceleration methods, raw timing data and Jev comparison](docs/benchmarks/v0.3-latency.md).
-
-## What it does
-
-Mentat answers bounded decisions through a TypeSafe-compatible
-`POST /v1/systemone` endpoint:
-
-- `noul` for true/false decisions
-- `choice` for named alternatives
-- `score` for ordered scales
-
-It returns native option probabilities in one model pass with zero generated
-answer tokens. v0.2 uses frozen per-type calibration and accepts up to 16,384
-input tokens. It is a decision model, not a general chat assistant.
-
-## Run v0.2
-
-Python 3.12, `uv`, and a CUDA GPU are required.
+Python 3.12 · Linux · NVIDIA CUDA GPU. Download the adapter package and Qwen base separately:
 
 ```bash
 git clone https://github.com/mentat-asi/mentat-sys1.git
 cd mentat-sys1
-git checkout v0.2.0
-uv sync --frozen --extra serve
+pip install -e ".[accelerate]"
 
-hf download yunqu/mentat-sys1-v0.2 \
-  --revision v0.2.0 \
-  --local-dir MODEL_PACKAGE_DIR
+hf download yunqu/mentat-sys1-v0.3 --revision v0.3 --local-dir model-v0.3
 hf download Qwen/Qwen3.5-4B \
   --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a \
-  --local-dir QWEN_BASE_DIR
+  --local-dir qwen-base
 
-uv run mentat-sys1 serve \
-  --config configs/mentat-sys1-v0.2.json \
-  --artifact-root RUNTIME_DIR \
-  --base-model-path QWEN_BASE_DIR \
-  --model-dir MODEL_PACKAGE_DIR/model \
-  --device cuda \
-  --host 127.0.0.1 \
-  --port 8765
+mentat-sys1-v03 predict --model-package model-v0.3 --base-model qwen-base \
+  --input model-v0.3/example.json
 ```
 
-`MODEL_PACKAGE_DIR`, `QWEN_BASE_DIR`, and `RUNTIME_DIR` are local paths you
-choose. The Mentat package contains the LoRA adapter, native decision readout,
-calibration, manifests, and checksums. The pinned Qwen base is downloaded
-separately.
+The accelerated runtime is enabled by default. For the original probability computation, select `--runtime native` and install with `pip install -e ".[serve]"`. Run the two modes in separate processes. [Inference guide](docs/inference-v0.3.md).
 
-Before loading weights, the runtime verifies the v0.2 identity, adapter and
-readout hashes, and `temperature_by_type-v2` calibration binding.
-
-## Call the API
-
-Mentat uses the same TypeSafe wire format as Jev for the core
-[`POST /v1/systemone` contract](https://docs.typesafe.ai/api). Self-hosted
-Mentat does not require an API key.
+## Serve the model
 
 ```bash
-export ENDPOINT_URL="http://127.0.0.1:8765"
-curl --fail --request POST "$ENDPOINT_URL/v1/systemone" \
-  --header "Content-Type: application/json" \
-  --data @- <<'JSON'
-{
-  "model": "mentat-sys1-v0.2",
-  "state": {"listing": {"color": "blue", "kind": "shirt"}},
-  "questions": {
-    "category": {
-      "type": "choice",
-      "instructions": "Which category best describes the listing?",
-      "criteria": {
-        "shirt": "A garment worn on the upper body.",
-        "shoe": "Footwear."
-      }
-    }
-  }
-}
-JSON
+mentat-sys1-v03 serve --model-package model-v0.3 --base-model qwen-base \
+  --warmup-request model-v0.3/example.json --host 127.0.0.1 --port 8765
+
+curl --fail --request POST http://127.0.0.1:8765/v1/systemone \
+  --header 'Content-Type: application/json' \
+  --data-binary @model-v0.3/example.json
 ```
 
-The response follows the Jev-compatible answer shape. Values below are
-illustrative:
+Supports named choices (`choice`), yes/no (`noul`) and ordered scales (`score`). The API returns probabilities, confidence and abstention diagnostics, with zero generated answer tokens.
 
-```json
-{
-  "model": "mentat-sys1-v0.2",
-  "answers": {
-    "category": {
-      "type": "choice",
-      "choice": "shirt",
-      "probabilities": {"shirt": 0.87, "shoe": 0.13},
-      "confidence": 0.71,
-      "unknown_probability": 0.03,
-      "abstained": false
-    }
-  },
-  "usage": {"input_tokens": 128, "rotations": 1, "images": 0}
-}
-```
+## Acceleration included
 
-Mentat adds diagnostic fields such as `unknown_probability`, `abstained`,
-calibration identity, and local runtime usage; Jev-compatible clients can
-ignore these additive fields.
+All six optimizations are available through the CLI and Python API: in-memory LoRA merging, batched questions, request-local shared prefixes, FLA Triton kernels, pointwise fusion and CUDA Graphs.
 
-## Reproducibility
+| Runtime | One question · HTTP mean | Three questions · HTTP mean | Intern-Decision |
+|---|---:|---:|---:|
+| Native v0.3 | 83.60 ms | 249.86 ms | 89.59% |
+| Accelerated v0.3 | **21.47 ms** | **40.66 ms** | 89.52% |
 
-Both releases were rerun from repository commit `7c74c92` against JevBench
-revision `2fa63fa3226cb369795525ed011800f57dcbd894` on an NVIDIA A800 80GB:
+Warm A800 measurements, 600 requests per scenario; loading, compilation and graph capture excluded. Accelerated JevBench is also **204/231**; accelerated DI is unmeasured. Shapes are captured on first use within configurable memory limits; other shapes run eagerly. [Runtime options](docs/inference-v0.3.md#runtime-options).
 
-| Release | Easy | Original | Hard | Total |
-| --- | ---: | ---: | ---: | ---: |
-| v0.1 | 48/48 | 66/72 | 86/111 | 200/231 |
-| **v0.2** | **48/48** | **71/72** | **87/111** | **206/231** |
+## Earlier releases
 
-Each run returned 231/231 valid responses, zero errors, and zero renormalized
-responses. Comparing every rerun with its historical release output found
-zero prediction differences.
+The original `mentat-sys1` CLI continues to support v0.1 and v0.2. Their frozen configurations and documentation remain available.
 
-See the [reproducibility guide](docs/REPRODUCIBILITY.md) for pinned
-environments and artifact hashes.
-
-## Releases
-
-| Release | Code | Model package | Calibration |
-| --- | --- | --- | --- |
-| v0.2 | [`v0.2.0`](https://github.com/mentat-asi/mentat-sys1/tree/v0.2.0) | [`yunqu/mentat-sys1-v0.2@v0.2.0`](https://huggingface.co/yunqu/mentat-sys1-v0.2/tree/v0.2.0) | per-type v2 |
-| v0.1 | [`v0.1.1`](https://github.com/mentat-asi/mentat-sys1/tree/v0.1.1) | [`yunqu/mentat-sys1-v0.1@v0.1.0`](https://huggingface.co/yunqu/mentat-sys1-v0.1/tree/v0.1.0) | scalar v1 |
-
-The current runtime supports both model IDs. Use the matching config and model
-package for each frozen release.
-
-## Documentation
-
-- [Model card](docs/MODEL_CARD.md)
-- [Reproducibility](docs/REPRODUCIBILITY.md)
-- [v0.2 release](docs/releases/v0.2.md)
-- [v0.1 release](docs/releases/v0.1.md)
-- [Data card](docs/DATA_CARD.md)
+| Model | Weights | Code |
+|---|---|---|
+| v0.2 | [mentat-sys1-v0.2](https://huggingface.co/yunqu/mentat-sys1-v0.2/tree/v0.2.0) | [v0.2.0](https://github.com/mentat-asi/mentat-sys1/tree/v0.2.0) |
+| v0.1 | [mentat-sys1-v0.1](https://huggingface.co/yunqu/mentat-sys1-v0.1/tree/v0.1.0) | [v0.1.1](https://github.com/mentat-asi/mentat-sys1/tree/v0.1.1) |
 
 ## License
 
-The project and model-specific files are licensed under
-[Apache License 2.0](LICENSE). The unchanged Qwen base retains its upstream
-license.
+Adapter and bundled code: Apache-2.0. The separately downloaded Qwen base retains its upstream license. [NOTICE](NOTICE).
