@@ -1,0 +1,430 @@
+{
+  "status": "complete",
+  "completed_at": "2026-10-18T06:57:03.792686+00:00",
+  "model": "mentat-sys1-v0.3",
+  "latency": {
+    "one_field": {
+      "native": {
+        "HTTP": {
+          "n": 600,
+          "mean_ms": 83.60211714030204,
+          "p50_ms": 83.54455599328503,
+          "p95_ms": 85.30306399916299
+        },
+        "server": {
+          "n": 600,
+          "mean_ms": 82.21054126416372,
+          "p50_ms": 82.15064799878746,
+          "p95_ms": 83.86364500620402
+        },
+        "per_trial_HTTP_mean_ms": [
+          84.12869596490054,
+          83.81895421800436,
+          82.85870123800123
+        ]
+      },
+      "previous_accelerated": {
+        "HTTP": {
+          "n": 600,
+          "mean_ms": 25.697859846938325,
+          "p50_ms": 25.6945829896722,
+          "p95_ms": 26.18596699903719
+        },
+        "server": {
+          "n": 600,
+          "mean_ms": 24.532607259461656,
+          "p50_ms": 24.49561099638231,
+          "p95_ms": 24.97152899741195
+        },
+        "per_trial_HTTP_mean_ms": [
+          25.55087020067731,
+          25.6465629550803,
+          25.896146385057364
+        ]
+      },
+      "prefix_fused": {
+        "HTTP": {
+          "n": 600,
+          "mean_ms": 21.473867458262248,
+          "p50_ms": 21.492669999133795,
+          "p95_ms": 21.84579602908343
+        },
+        "server": {
+          "n": 600,
+          "mean_ms": 20.29604492112412,
+          "p50_ms": 20.31632899888791,
+          "p95_ms": 20.612441992852837
+        },
+        "per_trial_HTTP_mean_ms": [
+          21.40152044055867,
+          21.3828532336629,
+          21.637228700565174
+        ]
+      },
+      "HTTP_latency_reduction_fraction": 0.16437136842659406,
+      "HTTP_speedup": 1.1967038493129407
+    },
+    "three_fields": {
+      "native": {
+        "HTTP": {
+          "n": 600,
+          "mean_ms": 249.8623892648417,
+          "p50_ms": 249.6623820043169,
+          "p95_ms": 255.23933197837323
+        },
+        "server": {
+          "n": 600,
+          "mean_ms": 248.26915265958328,
+          "p50_ms": 248.0725389905274,
+          "p95_ms": 253.73995600966737
+        },
+        "per_trial_HTTP_mean_ms": [
+          252.5892158849456,
+          249.53420374949928,
+          247.46374816008029
+        ]
+      },
+      "previous_accelerated": {
+        "HTTP": {
+          "n": 600,
+          "mean_ms": 63.375991309634024,
+          "p50_ms": 63.35640398901887,
+          "p95_ms": 64.15816000662744
+        },
+        "server": {
+          "n": 600,
+          "mean_ms": 62.00198422806958,
+          "p50_ms": 61.98556799790822,
+          "p95_ms": 62.742849986534566
+        },
+        "per_trial_HTTP_mean_ms": [
+          62.96662477936479,
+          63.44106884411303,
+          63.72028030542424
+        ]
+      },
+      "prefix_fused": {
+        "HTTP": {
+          "n": 600,
+          "mean_ms": 40.66276301149628,
+          "p50_ms": 40.664368018042296,
+          "p95_ms": 41.27813401282765
+        },
+        "server": {
+          "n": 600,
+          "mean_ms": 39.3256099432377,
+          "p50_ms": 39.311484986683354,
+          "p95_ms": 39.75450701545924
+        },
+        "per_trial_HTTP_mean_ms": [
+          40.56136918530683,
+          40.851888894394506,
+          40.57503095478751
+        ]
+      },
+      "HTTP_latency_reduction_fraction": 0.3583885289804535,
+      "HTTP_speedup": 1.5585756258549426
+    }
+  },
+  "quality": {
+    "fields": 12351,
+    "winner_flips": 30,
+    "winner_agreement": 0.9975710468787953,
+    "ID_average": 89.52090911159122,
+    "native_ID_average": 89.59420602340806,
+    "previous_accelerated_ID_average": 89.5318113672303,
+    "delta_vs_native_pp": -0.07329691181683984,
+    "suite_scores": {
+      "jevbench-easy": {
+        "total": 48,
+        "correct": 48,
+        "accuracy": 1.0,
+        "brier": 0.0065791777174753025,
+        "ece": 0.05870043906351852,
+        "invalid": 0,
+        "missing_rows": 0
+      },
+      "jevbench-original": {
+        "total": 72,
+        "correct": 72,
+        "accuracy": 1.0,
+        "brier": 0.07014858689702849,
+        "ece": 0.1837273449713464,
+        "invalid": 0,
+        "missing_rows": 0
+      },
+      "jevbench-hard": {
+        "total": 111,
+        "correct": 84,
+        "accuracy": 0.7567567567567568,
+        "brier": 0.3450520171852088,
+        "ece": 0.11097307584815853,
+        "invalid": 0,
+        "missing_rows": 0
+      },
+      "typed_decisions-test": {
+        "total": 2000,
+        "correct": 1530,
+        "accuracy": 0.765,
+        "brier": 0.36434367069861934,
+        "ece": 0.16470963976073505,
+        "invalid": 0,
+        "missing_rows": 0
+      },
+      "toolace-test": {
+        "total": 310,
+        "correct": 274,
+        "accuracy": 0.8838709677419355,
+        "brier": 0.16422284905631346,
+        "ece": 0.03807461136351459,
+        "invalid": 0,
+        "missing_rows": 0
+      },
+      "agnews-test": {
+        "total": 7600,
+        "correct": 6900,
+        "accuracy": 0.9078947368421053,
+        "brier": 0.15191866852215008,
+        "ece": 0.06905424746489265,
+        "invalid": 0,
+        "missing_rows": 0
+      },
+      "wildjailbreak-test": {
+        "total": 2210,
+        "correct": 2106,
+        "accuracy": 0.9529411764705882,
+        "brier": 0.09208991698130649,
+        "ece": 0.09195315697816282,
+        "invalid": 0,
+        "missing_rows": 0
+      }
+    },
+    "native_suite_scores": {
+      "jevbench-easy": {
+        "accuracy": 1.0,
+        "brier": 0.006563920581868293,
+        "correct": 48,
+        "ece": 0.0585592192973069,
+        "invalid": 0,
+        "missing_rows": 0,
+        "total": 48
+      },
+      "jevbench-original": {
+        "accuracy": 1.0,
+        "brier": 0.0704853023555119,
+        "correct": 72,
+        "ece": 0.183659937869821,
+        "invalid": 0,
+        "missing_rows": 0,
+        "total": 72
+      },
+      "jevbench-hard": {
+        "accuracy": 0.7567567567567568,
+        "brier": 0.34423606837753223,
+        "correct": 84,
+        "ece": 0.0913266901190839,
+        "invalid": 0,
+        "missing_rows": 0,
+        "total": 111
+      },
+      "typed_decisions-test": {
+        "accuracy": 0.766,
+        "brier": 0.3638671920801036,
+        "correct": 1532,
+        "ece": 0.16524541685299657,
+        "invalid": 0,
+        "missing_rows": 0,
+        "total": 2000
+      },
+      "toolace-test": {
+        "accuracy": 0.8870967741935484,
+        "brier": 0.16399917017166785,
+        "correct": 275,
+        "ece": 0.045185308936447864,
+        "invalid": 0,
+        "missing_rows": 0,
+        "total": 310
+      },
+      "wildjailbreak-test": {
+        "accuracy": 0.9538461538461539,
+        "brier": 0.09155693182374014,
+        "correct": 2108,
+        "ece": 0.09233091189105339,
+        "invalid": 0,
+        "missing_rows": 0,
+        "total": 2210
+      },
+      "agnews-test": {
+        "accuracy": 0.9078947368421053,
+        "brier": 0.15199475391345146,
+        "correct": 6900,
+        "ece": 0.06926745224491732,
+        "invalid": 0,
+        "missing_rows": 0,
+        "total": 7600
+      }
+    },
+    "comparisons": {
+      "jevbench-easy": {
+        "fields": 48,
+        "winner_flips": 0,
+        "winner_agreement": 1.0,
+        "max_probability_difference": 0.0020381682547578883,
+        "mean_absolute_probability_difference": 0.0004437740171119968
+      },
+      "jevbench-original": {
+        "fields": 72,
+        "winner_flips": 0,
+        "winner_agreement": 1.0,
+        "max_probability_difference": 0.015631970878643986,
+        "mean_absolute_probability_difference": 0.0016102485471241098
+      },
+      "jevbench-hard": {
+        "fields": 111,
+        "winner_flips": 0,
+        "winner_agreement": 1.0,
+        "max_probability_difference": 0.024296377779798373,
+        "mean_absolute_probability_difference": 0.003199804896445792
+      },
+      "typed_decisions-test": {
+        "fields": 2000,
+        "winner_flips": 12,
+        "winner_agreement": 0.994,
+        "max_probability_difference": 0.029866986920751737,
+        "mean_absolute_probability_difference": 0.0027438847124622405
+      },
+      "toolace-test": {
+        "fields": 310,
+        "winner_flips": 1,
+        "winner_agreement": 0.9967741935483871,
+        "max_probability_difference": 0.021015051635447368,
+        "mean_absolute_probability_difference": 0.0015336243364555873
+      },
+      "wildjailbreak-test": {
+        "fields": 2210,
+        "winner_flips": 6,
+        "winner_agreement": 0.9972850678733032,
+        "max_probability_difference": 0.030610851869630085,
+        "mean_absolute_probability_difference": 0.0025866954135663504
+      },
+      "agnews-test": {
+        "fields": 7600,
+        "winner_flips": 11,
+        "winner_agreement": 0.9985526315789474,
+        "max_probability_difference": 0.02592839499632721,
+        "mean_absolute_probability_difference": 0.0010830144951265827
+      }
+    },
+    "typed_soft": {
+      "acc": 0.765,
+      "soft": 0.6031752189999999,
+      "kl": 0.10180612624365479,
+      "tv": 0.15541338505908853,
+      "brier": 0.05432814859540029,
+      "mae": 0.22869092627180987,
+      "w1": 0.98,
+      "mf1": 0.6602105889326918,
+      "ece": 0.1644109678326976,
+      "ms": 0.0,
+      "n": 2000,
+      "missing_cases": 0
+    },
+    "native_typed_soft": {
+      "acc": 0.766,
+      "brier": 0.054030015517296685,
+      "ece": 0.1652454168529963,
+      "kl": 0.10135599160981432,
+      "mae": 0.22796733800399052,
+      "mf1": 0.6631442464947145,
+      "missing_cases": 0,
+      "ms": 0.0,
+      "n": 2000,
+      "soft": 0.6037235515,
+      "tv": 0.15499459000005106,
+      "w1": 0.97875
+    },
+    "previous_accelerated_typed_soft": {
+      "acc": 0.7655,
+      "soft": 0.6032885525,
+      "kl": 0.10164369719831993,
+      "tv": 0.15523082192632603,
+      "brier": 0.05425406700398934,
+      "mae": 0.22827045575552707,
+      "w1": 0.98,
+      "mf1": 0.6590995619444078,
+      "ece": 0.16473389201368158,
+      "ms": 0.0,
+      "n": 2000,
+      "missing_cases": 0
+    }
+  },
+  "changing_state_sanity": {
+    "n": 40,
+    "HTTP": {
+      "mean_ms": 40.34352924791165,
+      "p50_ms": 40.46805499820039,
+      "p95_ms": 40.89518601540476,
+      "min_ms": 39.79832600452937,
+      "max_ms": 41.159843996865675
+    },
+    "all_model_forwards_executed": true
+  },
+  "model_identity": {
+    "base_model": "Qwen/Qwen3.5-4B",
+    "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "adapter_sha256": "a42f0690754634a0cb796fe5e82b87d6f55eede438a4409d9d3af3b2bc8d75c4",
+    "readout_sha256": "057da9f1ef8f5e57be9710b8fbfb3c541152f93f310cbdcc08fe6b778f3e90be"
+  },
+  "previous_accelerated_quality": {
+    "ID_average": 89.5318113672303,
+    "typed_soft": {
+      "acc": 0.7655,
+      "soft": 0.6032885525,
+      "kl": 0.10164369719831993,
+      "tv": 0.15523082192632603,
+      "brier": 0.05425406700398934,
+      "mae": 0.22827045575552707,
+      "w1": 0.98,
+      "mf1": 0.6590995619444078,
+      "ece": 0.16473389201368158,
+      "ms": 0.0,
+      "n": 2000,
+      "missing_cases": 0
+    }
+  },
+  "scope": [
+    "Same A800 physical GPU1, same support-ticket request and localhost HTTP protocol as v1. Each scenario20 warmup and3x200 timed requests; all retained. Baseline numbers are earlier same-day runs, not interleaved.",
+    "Prefix sharing only removes repeated computation on identical token prefixes within a request; every call computes a fresh prefix and independent suffixes. No cross-request KV or answer cache.",
+    "This request shares256tokens and reduces993 actual field input tokens to481 computed tokens before padding. Gains depend on common prefix size and field lengths.",
+    "Pointwise norm/gate fusion with precision casts preserved is numerically different. Complete public ID numerical audit is reported; no exact-equivalence or DI-score claim.",
+    "Warm graph shapes exclude startup/compile/capture; unseen shapes use eager fallback, and broader serving workloads are not timed here.",
+    "The original frozen release package is verified unchanged; accelerated implementation is a separate runnable candidate. No publication or release switch."
+  ],
+  "release_status": "Experimental v0.3 runtime preview. The published CLI and current v0.2 release are unchanged.",
+  "Jev_reference": {
+    "model": "Jev1.13",
+    "measurement_date": "2026-09-29",
+    "requests_per_scenario": 100,
+    "server_mean_ms": {
+      "one_field": 63.5,
+      "three_fields": 64.0
+    },
+    "ID_seven_suite_mean_percent": 88.74,
+    "DI_0_2_1": 57.91,
+    "source": "https://github.com/StartLuxLabs/StartLux-Decision/blob/a9101e918e097b26fea5ead9ed893b823e875e46/docs/inference.md",
+    "hardware": "unspecified deployment",
+    "fresh_matched_run": false
+  },
+  "Jev_official_latency_reference": {
+    "latency_ms": 150,
+    "source": "https://docs.typesafe.ai/concepts/use-case-map",
+    "context": "Real-time applications; no request, hardware, sample count or percentile specified.",
+    "official_end_to_end_range_ms": [
+      70,
+      500
+    ],
+    "range_source": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+    "single_field_localhost_HTTP_reference_ratio": 6.98523450848097,
+    "matched_run": false
+  }
+}

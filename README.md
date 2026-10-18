@@ -42,6 +42,25 @@ shown is the dense order within this selected public-results table; it is not
 an official composite JevBench rank. Sealed accuracy, official speed, and
 official cost were not measured for v0.2.
 
+## Experimental v0.3 inference preview
+
+A separate v0.3 runtime experiment measured **21.47 ms for one field** and
+**40.66 ms for three fields** over localhost HTTP on one A800 80GB PCIe.
+Compared with the earlier batched v0.3 candidate, three-field latency fell
+**36%**. The single-field mean is about one seventh of TypeSafe's
+[official 150 ms latency reference](https://docs.typesafe.ai/concepts/use-case-map),
+under different deployment and measurement conditions. Each scenario includes
+20 warmups per trial and three trials of 200 requests; startup, compilation and graph capture are excluded.
+
+The candidate combines request-local shared-prefix computation, fused
+pointwise operators, BF16 LoRA merging, fast linear-attention kernels and
+CUDA Graphs. Its seven-suite ID mean is **89.52%**, versus **89.59%** for the
+native v0.3 runtime, with 99.76% decision agreement across 12,351 fields.
+These measurements describe the experimental v0.3 candidate; the current
+v0.2 release and CLI remain the released interface.
+
+[Acceleration methods, raw timing data and Jev comparison](docs/benchmarks/v0.3-latency.md).
+
 ## What it does
 
 Mentat answers bounded decisions through a TypeSafe-compatible
