@@ -22,3 +22,5 @@ Substantially adapted source files:
 The adaptations rename the package, remove repository-relative runtime
 imports, add immutable provenance and release gates, and expose standalone
 serving and release interfaces.
+
+The mentat_spice inference namespace includes typed-contract code adapted from Imajev revision 8d4554e18b621fd2c144098876c3cee623ef28f3; see source headers.

@@ -1,3 +1,26 @@
+<h1 align="center">mentat-sys1</h1>
+<p align="center"><strong>Text and images in. Decision probabilities out.</strong></p>
+<p align="center"><a href="https://www.thuidm.com">THU-IDM</a> · <a href="https://huggingface.co/yunqu/mentat-Spice-4B">mentat-Spice-4B model</a> · <a href="docs/inference-spice.md">Spice inference guide</a></p>
+
+## mentat-Spice-4B
+
+The new runtime accepts a state and named questions, returning choice, Boolean and ordinal probabilities without generating explanations. It supports text and images, the original LM projection and eight bidirectional full-attention layers. Model weights are currently private.
+
+Install with `pip install -e ".[accelerate]"`, download the adapter and pinned backbone, then select native, accelerated or Turbo inference. The [complete guide](docs/inference-spice.md) includes download commands, Python, image input, an HTTP service, workflow reruns and latency measurement.
+
+```bash
+mentat-spice predict --runtime turbo --base-model ./qwen-base \
+  --model-package ./model-spice --input configs/spice-example.json
+```
+
+Turbo provides fused operators and guarded CUDA Graphs with native fallback. A warm A800 short-text probe measured **21.9 ms median** per question (Python calls, 100 samples); see the [measurement scope](docs/inference-spice.md#runtime-selection). This runtime does not replace the older model interfaces.
+
+---
+
+## v0.3 release archive
+
+The results, demos and commands below refer to **mentat-sys1-v0.3**.
+
 <h1 align="center">mentat-sys1-v0.3</h1>
 <p align="center"><strong>Decisions with probabilities.</strong><br>THU-IDM · Tsinghua University</p>
 
