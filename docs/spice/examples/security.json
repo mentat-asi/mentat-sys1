@@ -1,0 +1,225 @@
+{
+  "benchmark": "Typed Decisions",
+  "case_id": "security_incidents_000084",
+  "request": {
+    "state": {
+      "alert": {
+        "description": "audit logging was turned off on a host",
+        "evidence": "Audit logging was disabled on host workstation-v04 by an unprivileged employee account using MFA-authenticated credentials rotated 14 days ago. The request originated from allowlisted IP address 10.0.4.15 at 14:22 UTC. No scheduled change window was active for this host during the event.",
+        "rule": "disabled_logging"
+      },
+      "context": {
+        "asset_criticality": "medium",
+        "change_window_active": false,
+        "source_on_allowlist": true
+      },
+      "history": {
+        "credential_rotation_days_ago": 14,
+        "distinct_countries_30d": 3,
+        "logins_30d": 1596,
+        "prior_alerts_90d": 0
+      },
+      "principal": {
+        "mfa_enrolled": true,
+        "name": "svc-infra-559",
+        "privileges": [
+          "repo:read"
+        ],
+        "type": "employee"
+      }
+    },
+    "questions": {
+      "credential_compromise": {
+        "instructions": "The evidence indicates a credential or account has been compromised.",
+        "type": "noul"
+      },
+      "disposition": {
+        "criteria": {
+          "close_benign": "Expected, explainable activity; close without analyst time.",
+          "contain": "Contain the host or account immediately; do not wait for triage.",
+          "investigate": "Warrants an analyst opening an investigation.",
+          "monitor": "Not clearly malicious, but worth watching for recurrence."
+        },
+        "instructions": "How should this security alert be dispositioned?",
+        "type": "choice"
+      },
+      "severity": {
+        "criteria": [
+          "Negligible: no access to anything sensitive.",
+          "Low: limited access, easily reversed.",
+          "Moderate: access to internal systems or non-public data.",
+          "High: access to production, secrets or customer data.",
+          "Critical: active compromise of crown-jewel systems."
+        ],
+        "instructions": "How severe is the potential impact if this alert is real?",
+        "type": "score"
+      },
+      "true_positive": {
+        "criteria": {
+          "false": "Benign activity, a misconfiguration, or a known false positive.",
+          "true": "The underlying behaviour is malicious or unauthorised."
+        },
+        "instructions": "This alert reflects genuinely malicious or unauthorised activity.",
+        "type": "noul"
+      },
+      "urgency": {
+        "criteria": [
+          "No time pressure; can wait indefinitely.",
+          "Routine; handle within the normal queue.",
+          "Elevated; should be handled within the same week.",
+          "Critical; requires action within the same day."
+        ],
+        "instructions": "How quickly must a responder act on this alert?",
+        "type": "score"
+      }
+    }
+  },
+  "response": {
+    "model": "mentat-Spice-4B",
+    "answers": {
+      "credential_compromise": {
+        "type": "noul",
+        "noul": 0.4358495766196562,
+        "unknown_probability": 0.00044754487245069044,
+        "abstained": false
+      },
+      "disposition": {
+        "type": "choice",
+        "choice": "investigate",
+        "probabilities": {
+          "close_benign": 0.036107437600391014,
+          "contain": 0.1997640496003042,
+          "investigate": 0.624455907772613,
+          "monitor": 0.1396726050266918
+        },
+        "confidence": 0.49922324304709664,
+        "unknown_probability": 0.00010275038126468184,
+        "abstained": false
+      },
+      "severity": {
+        "type": "score",
+        "score": 2.033941919276506,
+        "legend": {
+          "0": "Negligible: no access to anything sensitive.",
+          "1": "Low: limited access, easily reversed.",
+          "2": "Moderate: access to internal systems or non-public data.",
+          "3": "High: access to production, secrets or customer data.",
+          "4": "Critical: active compromise of crown-jewel systems."
+        },
+        "probabilities": {
+          "0": 0.055247541585920705,
+          "1": 0.1602670591390381,
+          "2": 0.5212429449977822,
+          "3": 0.22178084696713243,
+          "4": 0.041461607310126485
+        },
+        "confidence": 0.40148727843106863,
+        "unknown_probability": 0.00016536473019722456,
+        "abstained": false
+      },
+      "true_positive": {
+        "type": "noul",
+        "noul": 0.6494914074224962,
+        "unknown_probability": 0.00044959120823246057,
+        "abstained": false
+      },
+      "urgency": {
+        "type": "score",
+        "score": 2.1990374672708843,
+        "legend": {
+          "0": "No time pressure; can wait indefinitely.",
+          "1": "Routine; handle within the normal queue.",
+          "2": "Elevated; should be handled within the same week.",
+          "3": "Critical; requires action within the same day."
+        },
+        "probabilities": {
+          "0": 0.02459747075469124,
+          "1": 0.17577888584295123,
+          "2": 0.37561234877913935,
+          "3": 0.4240112946232182
+        },
+        "confidence": 0.23197710139360428,
+        "unknown_probability": 0.00016360189766199067,
+        "abstained": false
+      }
+    },
+    "native_answers": {
+      "credential_compromise": {
+        "type": "noul",
+        "noul": 0.4358495766196562,
+        "unknown_probability": 0.00044754487245069044,
+        "abstained": false
+      },
+      "disposition": {
+        "type": "choice",
+        "choice": "investigate",
+        "probabilities": {
+          "close_benign": 0.036107437600391014,
+          "contain": 0.1997640496003042,
+          "investigate": 0.624455907772613,
+          "monitor": 0.1396726050266918
+        },
+        "confidence": 0.49922324304709664,
+        "unknown_probability": 0.00010275038126468184,
+        "abstained": false
+      },
+      "severity": {
+        "type": "score",
+        "score": 2.033941919276506,
+        "legend": {
+          "0": "Negligible: no access to anything sensitive.",
+          "1": "Low: limited access, easily reversed.",
+          "2": "Moderate: access to internal systems or non-public data.",
+          "3": "High: access to production, secrets or customer data.",
+          "4": "Critical: active compromise of crown-jewel systems."
+        },
+        "probabilities": {
+          "0": 0.055247541585920705,
+          "1": 0.1602670591390381,
+          "2": 0.5212429449977822,
+          "3": 0.22178084696713243,
+          "4": 0.041461607310126485
+        },
+        "confidence": 0.40148727843106863,
+        "unknown_probability": 0.00016536473019722456,
+        "abstained": false
+      },
+      "true_positive": {
+        "type": "noul",
+        "noul": 0.6494914074224962,
+        "unknown_probability": 0.00044959120823246057,
+        "abstained": false
+      },
+      "urgency": {
+        "type": "score",
+        "score": 2.1990374672708843,
+        "legend": {
+          "0": "No time pressure; can wait indefinitely.",
+          "1": "Routine; handle within the normal queue.",
+          "2": "Elevated; should be handled within the same week.",
+          "3": "Critical; requires action within the same day."
+        },
+        "probabilities": {
+          "0": 0.02459747075469124,
+          "1": 0.17577888584295123,
+          "2": 0.37561234877913935,
+          "3": 0.4240112946232182
+        },
+        "confidence": 0.23197710139360428,
+        "unknown_probability": 0.00016360189766199067,
+        "abstained": false
+      }
+    },
+    "usage": {
+      "preprocess_ms": 23.409,
+      "questions_ms": 575.993,
+      "input_tokens": 384,
+      "rotations": 1,
+      "language_model_passes": 5,
+      "images": 0,
+      "generated_answer_tokens": 0
+    }
+  },
+  "selected_successful_example": true,
+  "presentation": "No identity contradiction between evidence and principal metadata; disposition is an investigation recommendation, not confirmed compromise."
+}

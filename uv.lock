@@ -317,7 +317,7 @@ wheels = [
 
 [[package]]
 name = "mentat-sys1"
-version = "0.3.0"
+version = "0.4.0"
 source = { editable = "." }
 dependencies = [
     { name = "numpy" },
@@ -340,6 +340,7 @@ accelerate = [
 ]
 serve = [
     { name = "fastapi" },
+    { name = "huggingface-hub" },
     { name = "peft" },
     { name = "pillow" },
     { name = "safetensors" },
@@ -362,6 +363,7 @@ requires-dist = [
     { name = "fastapi", marker = "extra == 'serve'", specifier = "==0.124.0" },
     { name = "flash-linear-attention", marker = "extra == 'accelerate'", specifier = "==0.5.2" },
     { name = "huggingface-hub", marker = "extra == 'accelerate'", specifier = ">=1.0,<2" },
+    { name = "huggingface-hub", marker = "extra == 'serve'", specifier = ">=1.0,<2" },
     { name = "mentat-sys1", extras = ["serve"], marker = "extra == 'accelerate'" },
     { name = "numpy", specifier = "==2.2.6" },
     { name = "peft", marker = "extra == 'serve'", specifier = "==0.21.0" },

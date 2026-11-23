@@ -1,0 +1,738 @@
+{
+  "model": "mentat-Spice-4B",
+  "adapter_sha256": "2d7eb50280a28bb3462a7090317edde6d4724fef3da5d8de39b4cb3b747379d2",
+  "comparison_snapshot": {
+    "exported_at": "2026-11-10T05:40:45.024567+00:00",
+    "last_run_at": "2026-11-09T08:28:14.740208+00:00",
+    "source_commit": "c61a32ee7aedfe0404edc5c09e658dc879c92838",
+    "source_url": "https://github.com/Valen-Team/JevalKit/tree/c61a32ee7aedfe0404edc5c09e658dc879c92838",
+    "counts": {
+      "model_families": 24,
+      "evaluated_families": 23,
+      "model_configurations": 38,
+      "benchmark_families": 8,
+      "eligible_scores": 301,
+      "retained_runs": 369,
+      "fully_unsupported": 17
+    }
+  },
+  "reference_source": "https://valen-team-jevalkit-leaderboard.static.hf.space/",
+  "our_results": [
+    {
+      "benchmark": "JevBench",
+      "value": 90.04329004329004,
+      "unit": "percent_accuracy"
+    },
+    {
+      "benchmark": "TypedDecisions",
+      "value": 81.10000000000001,
+      "unit": "percent_accuracy"
+    },
+    {
+      "benchmark": "DecisionBench",
+      "value": 82.02092050209205,
+      "unit": "percent_accuracy"
+    },
+    {
+      "benchmark": "ProceduralTypedDecisions",
+      "value": 93.05069292487235,
+      "unit": "percent_accuracy"
+    },
+    {
+      "benchmark": "JevAltBench",
+      "value": 91.99668010433957,
+      "unit": "percent_accuracy"
+    },
+    {
+      "benchmark": "ZhDecisionBench",
+      "value": 92.71948608137045,
+      "unit": "percent_accuracy"
+    },
+    {
+      "benchmark": "VisualDecisionBench_Image",
+      "value": 87.94117647058823,
+      "unit": "percent_accuracy"
+    },
+    {
+      "benchmark": "DecisionIndex_Vision",
+      "value": 73.08524791959098,
+      "unit": "index"
+    }
+  ],
+  "Typed_official_soft_mode": {
+    "accuracy": 0.8075,
+    "KL": 0.07304600380540888,
+    "Brier": 0.040299341188580265,
+    "high_confidence_errors_ge_0_8": 3,
+    "errors_gold_margin_le_0_05": 89,
+    "errors_gold_margin_gt_0_2": 135
+  },
+  "DI_Text_frozen_original_public": {
+    "value": 72.83495710772297,
+    "requests": 139677,
+    "fields": 311819,
+    "HLE": "unmeasured; original weights retained",
+    "same_public_panel_and_scoring_as_DI_Text_0_4_1": true
+  },
+  "reference_runs": [
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "benchmark": "JevBench",
+      "protocol": "public-231",
+      "dataset_sha256": "ca68a699a439c8be56a7fc02be718585482bea6ccf1d08a761cc57bd3b6d578c",
+      "accuracy": 0.8874458874458875,
+      "public_decision_index": null,
+      "metrics_sha256": "2415dc6aa1e24210127855a257f79d2c9a8706df5003aebd763cb0985b40bb35",
+      "created_utc": "2026-10-19T14:11:56.288388+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "benchmark": "JevBench",
+      "protocol": "public-231",
+      "dataset_sha256": "ca68a699a439c8be56a7fc02be718585482bea6ccf1d08a761cc57bd3b6d578c",
+      "accuracy": 0.8658008658008658,
+      "public_decision_index": null,
+      "metrics_sha256": "758dadc5c02aefb082fae33063552f19625bf1338a2f87f6b951ca7d169365c2",
+      "created_utc": "2026-10-19T04:42:28.307748+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "JevK5",
+      "benchmark": "JevBench",
+      "protocol": "public-231",
+      "dataset_sha256": "ca68a699a439c8be56a7fc02be718585482bea6ccf1d08a761cc57bd3b6d578c",
+      "accuracy": 0.8874458874458875,
+      "public_decision_index": null,
+      "metrics_sha256": "44672d3cb49080c9586aa933cbacbdde7c74a8537b40a80cfbe4e6cf5c6a7d0c",
+      "created_utc": "2026-10-16T18:30:09.354766+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Jev",
+      "benchmark": "JevBench",
+      "protocol": "public-231",
+      "dataset_sha256": "ca68a699a439c8be56a7fc02be718585482bea6ccf1d08a761cc57bd3b6d578c",
+      "accuracy": 0.8744588744588745,
+      "public_decision_index": null,
+      "metrics_sha256": "749d527ea1b00c64d3e496cdeef295edb609f9a4f42cf8dae45395554fd6adbd",
+      "created_utc": "2026-10-23T10:54:56.812469+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Liquid-d1-3B",
+      "benchmark": "JevBench",
+      "protocol": "public-231",
+      "dataset_sha256": "ca68a699a439c8be56a7fc02be718585482bea6ccf1d08a761cc57bd3b6d578c",
+      "accuracy": 0.7489177489177489,
+      "public_decision_index": null,
+      "metrics_sha256": "e6c3e3e96f4d3bc3712598f8977672b852cc54e30e48ac3fa982f577f5ce2250",
+      "created_utc": "2026-10-16T18:08:30.728495+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Clef-Flash",
+      "benchmark": "JevBench",
+      "protocol": "public-231",
+      "dataset_sha256": "ca68a699a439c8be56a7fc02be718585482bea6ccf1d08a761cc57bd3b6d578c",
+      "accuracy": 0.8268398268398268,
+      "public_decision_index": null,
+      "metrics_sha256": "4abe59d02e6e5bc2f5917b17297aa56c83b60db4de0034bbc3ae55ae41eb5eda",
+      "created_utc": "2026-10-16T19:20:57.652806+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "benchmark": "TypedDecisions",
+      "protocol": "test-400-shared-state-soft-gold-v1",
+      "dataset_sha256": "043b3089dac5ab2045e717d3899afe7bfc073e30e66da3cb47b8ebca17277cfe",
+      "accuracy": 0.788,
+      "public_decision_index": null,
+      "metrics_sha256": "33c5c6f298ede4604dd09d7506daf132054fcfeed357893c28f10f8268a84125",
+      "created_utc": "2026-10-19T14:12:02.334482+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "benchmark": "TypedDecisions",
+      "protocol": "test-400-shared-state-soft-gold-v1",
+      "dataset_sha256": "043b3089dac5ab2045e717d3899afe7bfc073e30e66da3cb47b8ebca17277cfe",
+      "accuracy": 0.805,
+      "public_decision_index": null,
+      "metrics_sha256": "01bc11b1128f9eef9415838cb6536cd99f0548fef7b53cb8a568398c5bb02404",
+      "created_utc": "2026-10-18T07:28:07.841193+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "JevK5",
+      "benchmark": "TypedDecisions",
+      "protocol": "test-400-shared-state-soft-gold-v1",
+      "dataset_sha256": "043b3089dac5ab2045e717d3899afe7bfc073e30e66da3cb47b8ebca17277cfe",
+      "accuracy": 0.6285,
+      "public_decision_index": null,
+      "metrics_sha256": "13ded5fbca3ff0f69c1c10a553a7f01691902aa603da3358ce358690d1f3cdec",
+      "created_utc": "2026-10-18T07:33:15.539655+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Jev",
+      "benchmark": "TypedDecisions",
+      "protocol": "test-400-shared-state-soft-gold-v1",
+      "dataset_sha256": "043b3089dac5ab2045e717d3899afe7bfc073e30e66da3cb47b8ebca17277cfe",
+      "accuracy": 0.746,
+      "public_decision_index": null,
+      "metrics_sha256": "0769312b015502ec9fcebd30fa0d02813c474d506980be11d609d234e6bf1437",
+      "created_utc": "2026-10-23T10:55:19.961298+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Liquid-d1-3B",
+      "benchmark": "TypedDecisions",
+      "protocol": "test-400-shared-state-soft-gold-v1",
+      "dataset_sha256": "043b3089dac5ab2045e717d3899afe7bfc073e30e66da3cb47b8ebca17277cfe",
+      "accuracy": 0.654,
+      "public_decision_index": null,
+      "metrics_sha256": "28b506e0395db2165f74c11bf4e853cb85231567d73c01431e28a28d1ddc938b",
+      "created_utc": "2026-10-18T07:28:49.550253+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Clef-Flash",
+      "benchmark": "TypedDecisions",
+      "protocol": "test-400-shared-state-soft-gold-v1",
+      "dataset_sha256": "043b3089dac5ab2045e717d3899afe7bfc073e30e66da3cb47b8ebca17277cfe",
+      "accuracy": 0.702,
+      "public_decision_index": null,
+      "metrics_sha256": "e09e68582597b0297197a0ad5c66f06690cc8d306c8b11595a7fec0ed6a4fa2a",
+      "created_utc": "2026-10-18T07:29:54.482007+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "benchmark": "DecisionBench",
+      "protocol": "standard-eval-systemone-native-v1",
+      "dataset_sha256": "c99000b66862ef3781aa65f1d4edf267c605a519e619b9975a1509de428fefec",
+      "accuracy": 0.8112133891213389,
+      "public_decision_index": null,
+      "metrics_sha256": "cc84a469ba33c94d65ef776d7fb22a9a143cd7fa4849834997c1f5005ba49bf9",
+      "created_utc": "2026-10-19T14:15:49.895470+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "benchmark": "DecisionBench",
+      "protocol": "standard-eval-systemone-native-v1",
+      "dataset_sha256": "c99000b66862ef3781aa65f1d4edf267c605a519e619b9975a1509de428fefec",
+      "accuracy": 0.6052719665271966,
+      "public_decision_index": null,
+      "metrics_sha256": "caa90ce011805d6ffeaecebd8589cfe006ca4677f66bfd8b9ec8df57fabc1389",
+      "created_utc": "2026-10-18T12:26:55.414451+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "JevK5",
+      "benchmark": "DecisionBench",
+      "protocol": "standard-eval-systemone-native-v1",
+      "dataset_sha256": "c99000b66862ef3781aa65f1d4edf267c605a519e619b9975a1509de428fefec",
+      "accuracy": 0.7605857740585774,
+      "public_decision_index": null,
+      "metrics_sha256": "cf5219f952144dc34e77d4ebe412e2702f6211fdcf0d523e3b66c31d39dbd5af",
+      "created_utc": "2026-10-18T14:14:30.928890+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Jev",
+      "benchmark": "DecisionBench",
+      "protocol": "standard-eval-systemone-native-v1",
+      "dataset_sha256": "c99000b66862ef3781aa65f1d4edf267c605a519e619b9975a1509de428fefec",
+      "accuracy": 0.7365690376569037,
+      "public_decision_index": null,
+      "metrics_sha256": "cfe725598b920b128f75c71ed56ecfef1ab8d4b8b71da5a00e3f59b83c5dabaf",
+      "created_utc": "2026-10-23T11:02:30.146886+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Liquid-d1-3B",
+      "benchmark": "DecisionBench",
+      "protocol": "standard-eval-systemone-native-v1",
+      "dataset_sha256": "c99000b66862ef3781aa65f1d4edf267c605a519e619b9975a1509de428fefec",
+      "accuracy": 0.729163179916318,
+      "public_decision_index": null,
+      "metrics_sha256": "9812a37023967eb66b447dc070acffd20221c80c6cf7071c7ea5d062b1414441",
+      "created_utc": "2026-10-18T12:40:55.195792+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Clef-Flash",
+      "benchmark": "DecisionBench",
+      "protocol": "standard-eval-systemone-native-v1",
+      "dataset_sha256": "c99000b66862ef3781aa65f1d4edf267c605a519e619b9975a1509de428fefec",
+      "accuracy": 0.7847280334728034,
+      "public_decision_index": null,
+      "metrics_sha256": "4690e82ed0f39838abe51c39c3e75696820d8d4ead818af313257b278368bb05",
+      "created_utc": "2026-10-18T12:54:14.325888+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "benchmark": "ProceduralTypedDecisions",
+      "protocol": "18-tasks-test-native-probability-v1",
+      "dataset_sha256": "4809d20dc7aa54a6d15d7edf352044e658898e46232cb42bba9acb15f1fd8faf",
+      "accuracy": 0.874690007293946,
+      "public_decision_index": null,
+      "metrics_sha256": "9f154031752715339a7ea5912f276beb9751a530728693f9bd0d110b093723de",
+      "created_utc": "2026-10-19T14:17:51.602761+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "benchmark": "ProceduralTypedDecisions",
+      "protocol": "18-tasks-test-native-probability-v1",
+      "dataset_sha256": "4809d20dc7aa54a6d15d7edf352044e658898e46232cb42bba9acb15f1fd8faf",
+      "accuracy": 0.6097556528081692,
+      "public_decision_index": null,
+      "metrics_sha256": "99173ab3106f3923335441322acf739eb069a8bf7fb1a7b1aa512efbc7a8bc8f",
+      "created_utc": "2026-10-18T21:02:04.832406+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "JevK5",
+      "benchmark": "ProceduralTypedDecisions",
+      "protocol": "18-tasks-test-native-probability-v1",
+      "dataset_sha256": "4809d20dc7aa54a6d15d7edf352044e658898e46232cb42bba9acb15f1fd8faf",
+      "accuracy": 0.6150984682713347,
+      "public_decision_index": null,
+      "metrics_sha256": "7c31e9550d935d7c15155bd0d31343e7a8bc1a8da9a1abe172bb108b5bb264e5",
+      "created_utc": "2026-10-18T23:14:30.588877+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Jev",
+      "benchmark": "ProceduralTypedDecisions",
+      "protocol": "18-tasks-test-native-probability-v1",
+      "dataset_sha256": "4809d20dc7aa54a6d15d7edf352044e658898e46232cb42bba9acb15f1fd8faf",
+      "accuracy": 0.8293946024799417,
+      "public_decision_index": null,
+      "metrics_sha256": "583c407f1a4bc83d88cb4dc17274ec6250315dee634dd27b9dc4eb1679b1f013",
+      "created_utc": "2026-10-23T11:21:24.156753+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Liquid-d1-3B",
+      "benchmark": "ProceduralTypedDecisions",
+      "protocol": "18-tasks-test-native-probability-v1",
+      "dataset_sha256": "4809d20dc7aa54a6d15d7edf352044e658898e46232cb42bba9acb15f1fd8faf",
+      "accuracy": 0.6508205689277899,
+      "public_decision_index": null,
+      "metrics_sha256": "c72d70c83bc820e994c038fa8bb271c870ab3b59c018f169cbaa705d380fbe6a",
+      "created_utc": "2026-10-18T21:20:49.557042+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Clef-Flash",
+      "benchmark": "ProceduralTypedDecisions",
+      "protocol": "18-tasks-test-native-probability-v1",
+      "dataset_sha256": "4809d20dc7aa54a6d15d7edf352044e658898e46232cb42bba9acb15f1fd8faf",
+      "accuracy": 0.6793581327498176,
+      "public_decision_index": null,
+      "metrics_sha256": "28d33edd4a5afb413a0f9daec8fbf2aecc17000fdb2e922413c6aa7c63e5b9ac",
+      "created_utc": "2026-10-18T21:38:52.235090+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "benchmark": "JevAltBench",
+      "protocol": "test-en-tr-de-explicit-unknown-v1",
+      "dataset_sha256": "58cd34780da758315050609a716ea22e53519122513343327614d956ed08c49a",
+      "accuracy": 0.9280294047901352,
+      "public_decision_index": null,
+      "metrics_sha256": "2a13ced95039e03796220be691c3d4bec5940f3add86357545b668af12af0bfd",
+      "created_utc": "2026-10-19T14:12:30.309927+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "benchmark": "JevAltBench",
+      "protocol": "test-en-tr-de-explicit-unknown-v1",
+      "dataset_sha256": "58cd34780da758315050609a716ea22e53519122513343327614d956ed08c49a",
+      "accuracy": 0.8897320369931231,
+      "public_decision_index": null,
+      "metrics_sha256": "583ca3ef2cd23ecd2ef556ca314906dc39fb8c71785f484d0ed52082d321cb8a",
+      "created_utc": "2026-10-19T03:08:05.564991+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "JevK5",
+      "benchmark": "JevAltBench",
+      "protocol": "test-en-tr-de-explicit-unknown-v1",
+      "dataset_sha256": "58cd34780da758315050609a716ea22e53519122513343327614d956ed08c49a",
+      "accuracy": 0.8696940953284326,
+      "public_decision_index": null,
+      "metrics_sha256": "26da826df5bc44c6243d28b2faadf605414873a87b9cb48183b349dc05afb99c",
+      "created_utc": "2026-10-19T03:08:28.757688+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Jev",
+      "benchmark": "JevAltBench",
+      "protocol": "test-en-tr-de-explicit-unknown-v1",
+      "dataset_sha256": "58cd34780da758315050609a716ea22e53519122513343327614d956ed08c49a",
+      "accuracy": 0.9047901351671804,
+      "public_decision_index": null,
+      "metrics_sha256": "f7d1e1522178153235486be35132cdb5f18946559f2ede8267842e7aeab97299",
+      "created_utc": "2026-10-23T10:56:07.713659+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Liquid-d1-3B",
+      "benchmark": "JevAltBench",
+      "protocol": "test-en-tr-de-explicit-unknown-v1",
+      "dataset_sha256": "58cd34780da758315050609a716ea22e53519122513343327614d956ed08c49a",
+      "accuracy": 0.8488261797486365,
+      "public_decision_index": null,
+      "metrics_sha256": "11968012dcde274de051582ffc18799af24c176dfc65febbba93f2c2c0777f2d",
+      "created_utc": "2026-10-19T03:08:34.010039+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Clef-Flash",
+      "benchmark": "JevAltBench",
+      "protocol": "test-en-tr-de-explicit-unknown-v1",
+      "dataset_sha256": "58cd34780da758315050609a716ea22e53519122513343327614d956ed08c49a",
+      "accuracy": 0.9011145364002846,
+      "public_decision_index": null,
+      "metrics_sha256": "345286ec1ff9e22f5a3e162cb005564f8df0f9a3b60d35eaafb12b168dcca5ee",
+      "created_utc": "2026-10-19T03:08:40.500516+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "benchmark": "ZhDecisionBench",
+      "protocol": "v0.2-validation-378-native-v1",
+      "dataset_sha256": "d99704fc055c8f767813786ce6184089a5ebc8aa4f88a5cc21075108bafbe099",
+      "accuracy": 0.8907922912205567,
+      "public_decision_index": null,
+      "metrics_sha256": "9418df7e84805b63b6d7bfd863743888b7c3b7927a2f08c81d8210b45fdda904",
+      "created_utc": "2026-10-19T14:12:05.839406+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "benchmark": "ZhDecisionBench",
+      "protocol": "v0.2-validation-378-native-v1",
+      "dataset_sha256": "d99704fc055c8f767813786ce6184089a5ebc8aa4f88a5cc21075108bafbe099",
+      "accuracy": 0.9164882226980728,
+      "public_decision_index": null,
+      "metrics_sha256": "79e8b0c7d7dadede3d2698a58419d0d0677b1a228e12e378fcb91398c3ed2e68",
+      "created_utc": "2026-10-18T07:04:53.971667+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "JevK5",
+      "benchmark": "ZhDecisionBench",
+      "protocol": "v0.2-validation-378-native-v1",
+      "dataset_sha256": "d99704fc055c8f767813786ce6184089a5ebc8aa4f88a5cc21075108bafbe099",
+      "accuracy": 0.8736616702355461,
+      "public_decision_index": null,
+      "metrics_sha256": "16289f7b5735108d082c9e0dfac8bf7e81466d02b5c83f3d8a2d00807384bba0",
+      "created_utc": "2026-10-18T07:10:43.350905+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Jev",
+      "benchmark": "ZhDecisionBench",
+      "protocol": "v0.2-validation-378-native-v1",
+      "dataset_sha256": "d99704fc055c8f767813786ce6184089a5ebc8aa4f88a5cc21075108bafbe099",
+      "accuracy": 0.8843683083511777,
+      "public_decision_index": null,
+      "metrics_sha256": "756e2740ac79457e5f02fa08ea9fc55cbac411882e2a6e3f46005875321ac938",
+      "created_utc": "2026-10-23T10:55:42.873027+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Liquid-d1-3B",
+      "benchmark": "ZhDecisionBench",
+      "protocol": "v0.2-validation-378-native-v1",
+      "dataset_sha256": "d99704fc055c8f767813786ce6184089a5ebc8aa4f88a5cc21075108bafbe099",
+      "accuracy": 0.8201284796573876,
+      "public_decision_index": null,
+      "metrics_sha256": "14cc2ad5c31a5d6894818445c0cb5292424cf70f4b0e9b5edcfca33e5fb9c255",
+      "created_utc": "2026-10-18T07:06:10.807615+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Clef-Flash",
+      "benchmark": "ZhDecisionBench",
+      "protocol": "v0.2-validation-378-native-v1",
+      "dataset_sha256": "d99704fc055c8f767813786ce6184089a5ebc8aa4f88a5cc21075108bafbe099",
+      "accuracy": 0.9079229122055674,
+      "public_decision_index": null,
+      "metrics_sha256": "d208979786e9dfcfb4dad5d005826f10f0b3058c6f1bac00659009764f496b8e",
+      "created_utc": "2026-10-18T07:07:19.746783+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "benchmark": "VisualDecisionBench_Image",
+      "protocol": "native-shared-state",
+      "dataset_sha256": "4db5a36bb084f5143d537a107e1685a2d01a3cbd7bf7c8717dd414d91e9aa67a",
+      "accuracy": 0.8305882352941176,
+      "public_decision_index": null,
+      "metrics_sha256": "bdc6893564e00da5c40368ae4c14b948f087b6c5ff87ba39ae7b816aaba16e42",
+      "created_utc": "2026-10-19T14:12:42.936607+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "benchmark": "VisualDecisionBench_Image",
+      "protocol": "native-shared-state",
+      "dataset_sha256": "4db5a36bb084f5143d537a107e1685a2d01a3cbd7bf7c8717dd414d91e9aa67a",
+      "accuracy": 0.7794117647058824,
+      "public_decision_index": null,
+      "metrics_sha256": "68a61c1a08cbe7bc3c18e7e10d6345162a2ac7ca71e182256011dd8129a201c6",
+      "created_utc": "2026-10-19T04:42:22.213880+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Jev",
+      "benchmark": "VisualDecisionBench_Image",
+      "protocol": "native-shared-state",
+      "dataset_sha256": "4db5a36bb084f5143d537a107e1685a2d01a3cbd7bf7c8717dd414d91e9aa67a",
+      "accuracy": 0.8505882352941176,
+      "public_decision_index": null,
+      "metrics_sha256": "b6c1a1a993299eca88cfc3fb9dd12edf46e4c58ffde5b4f4913406d664766985",
+      "created_utc": "2026-10-23T11:08:26.890386+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Liquid-d1-3B",
+      "benchmark": "VisualDecisionBench_Image",
+      "protocol": "native-shared-state",
+      "dataset_sha256": "4db5a36bb084f5143d537a107e1685a2d01a3cbd7bf7c8717dd414d91e9aa67a",
+      "accuracy": 0.8182352941176471,
+      "public_decision_index": null,
+      "metrics_sha256": "14c9fe97933e13f144ada40c14e233da6ae96e8b1cf68f89292082dd49713d9f",
+      "created_utc": "2026-10-16T18:08:43.347531+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Clef-Flash",
+      "benchmark": "VisualDecisionBench_Image",
+      "protocol": "native-shared-state",
+      "dataset_sha256": "4db5a36bb084f5143d537a107e1685a2d01a3cbd7bf7c8717dd414d91e9aa67a",
+      "accuracy": 0.8223529411764706,
+      "public_decision_index": null,
+      "metrics_sha256": "9684ceccea62d41b93bbab7267396c55a3d6075dfd6b12f94cfd35b344b59300",
+      "created_utc": "2026-10-16T19:21:42.351424+00:00",
+      "origin": "jevalkit-inference"
+    },
+    {
+      "model": "Qwen3.5-397B-A17B",
+      "official_name": "Qwen3.5-397B (VLM)",
+      "publisher": "Alibaba / Qwen",
+      "size": "397B-A17B",
+      "parameters_total": 397000000000.0,
+      "public_decision_index": 68.52,
+      "evaluation_mode": "Stock VLM; API answer-letter readout",
+      "source_model_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?mode=vision&model=ref-qwen35-397b",
+      "source_snapshot_utc": "2026-11-19T14:43:01Z",
+      "benchmark": "DecisionIndex_Vision",
+      "protocol": "Official public Vision index; same 11 task weights and 12,210 question counts",
+      "origin": "official-decision-index-board"
+    },
+    {
+      "model": "Cloudflare-clef-omni",
+      "official_name": "Cloudflare clef-omni (30B-A3B)",
+      "publisher": "Cloudflare",
+      "size": "30B-A3B",
+      "parameters_total": 31830000000.0,
+      "public_decision_index": 63.68,
+      "evaluation_mode": "Decision model",
+      "source_model_url": "https://huggingface.co/Cloudflare/clef-omni",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?mode=vision&model=clef-omni",
+      "source_snapshot_utc": "2026-11-19T14:43:01Z",
+      "benchmark": "DecisionIndex_Vision",
+      "protocol": "Official public Vision index; same 11 task weights and 12,210 question counts",
+      "origin": "official-decision-index-board"
+    },
+    {
+      "model": "MetaEncoder-v1",
+      "official_name": "MetaEncoder v1",
+      "publisher": "Meta",
+      "size": "28.4B",
+      "parameters_total": 28431795200.0,
+      "public_decision_index": 61.36,
+      "evaluation_mode": "Multimodal encoder with decision interface",
+      "source_model_url": "https://huggingface.co/facebook/meta-encoder-v1",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?mode=vision&model=meta-encoder-v1",
+      "source_snapshot_utc": "2026-11-19T14:43:01Z",
+      "benchmark": "DecisionIndex_Vision",
+      "protocol": "Official public Vision index; same 11 task weights and 12,210 question counts",
+      "origin": "official-decision-index-board"
+    },
+    {
+      "model": "Perplexity-Decider-Flash-v1.3",
+      "official_name": "Perplexity Decider Flash v1.3 (4B)",
+      "publisher": "Perplexity",
+      "size": "4B",
+      "parameters_total": 4539265536.0,
+      "public_decision_index": 71.5,
+      "evaluation_mode": "Decision model",
+      "source_model_url": null,
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?mode=vision&model=pplx-decider-flash-v1.3",
+      "source_snapshot_utc": "2026-11-19T14:43:01Z",
+      "benchmark": "DecisionIndex_Vision",
+      "protocol": "Official public Vision index; same 11 task weights and 12,210 question counts",
+      "origin": "official-decision-index-board"
+    },
+    {
+      "model": "vLLM-SR-d3-mini",
+      "official_name": "vLLM-SR d3-mini (4B)",
+      "publisher": "vLLM Semantic Router",
+      "size": "4B",
+      "parameters_total": 4539265536.0,
+      "public_decision_index": 67.67,
+      "evaluation_mode": "Decision model",
+      "source_model_url": "https://huggingface.co/vllm-sr/d3-mini",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?mode=vision&model=vllm-sr-d3-mini",
+      "source_snapshot_utc": "2026-11-19T14:43:01Z",
+      "benchmark": "DecisionIndex_Vision",
+      "protocol": "Official public Vision index; same 11 task weights and 12,210 question counts",
+      "origin": "official-decision-index-board"
+    },
+    {
+      "model": "Intern-Decision-4B",
+      "official_name": "Intern-Decision-4B",
+      "publisher": "InternLM",
+      "size": "4B",
+      "parameters_total": 4659865088,
+      "public_decision_index": 61.69,
+      "evaluation_mode": "Decision model",
+      "source_model_url": "https://huggingface.co/internlm/Intern-Decision-4B",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?mode=vision&model=intern-decision-4b",
+      "source_snapshot_utc": "2026-11-19T14:43:01Z",
+      "benchmark": "DecisionIndex_Vision",
+      "protocol": "Official public Vision index; same 11 task weights and 12,210 question counts",
+      "origin": "official-decision-index-board"
+    },
+    {
+      "model": "vLLM-SR-d3-turbo-v1.1",
+      "official_name": "vLLM-SR d3-turbo v1.1 (27B)",
+      "publisher": "vLLM Semantic Router",
+      "size": "27B",
+      "public_decision_index": 71.62,
+      "benchmark": "DecisionIndex_Text",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?model=vllm-sr-d3-turbo-v11",
+      "source_snapshot_utc": "2026-11-19T14:42:56Z",
+      "score_field": "scores.public_skill",
+      "source_data_url": "https://multimodalart-jev-decision-index.static.hf.space/data/index.json",
+      "origin": "official-decision-index-board",
+      "protocol": "37-task public 0.3 panel retained by 0.4.1; chance-corrected with fixed area and gold weights"
+    },
+    {
+      "model": "Perplexity-Decider-v1.3",
+      "official_name": "Perplexity Decider v1.3 (27B)",
+      "publisher": "Perplexity",
+      "size": "27B",
+      "public_decision_index": 69.72,
+      "benchmark": "DecisionIndex_Text",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?model=pplx-decider-v1.3",
+      "source_snapshot_utc": "2026-11-19T14:42:56Z",
+      "score_field": "scores.public_skill",
+      "source_data_url": "https://multimodalart-jev-decision-index.static.hf.space/data/index.json",
+      "origin": "official-decision-index-board",
+      "protocol": "37-task public 0.3 panel retained by 0.4.1; chance-corrected with fixed area and gold weights"
+    },
+    {
+      "model": "StartLux-v1.1-4B-Instant",
+      "official_name": "StartLux-Decision v1.1 4B",
+      "publisher": "StartLux",
+      "size": "4B",
+      "public_decision_index": 67.81,
+      "benchmark": "DecisionIndex_Text",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?model=startlux-decision-v1.1-4b-instant",
+      "source_snapshot_utc": "2026-11-19T14:42:56Z",
+      "score_field": "scores.public_skill",
+      "source_data_url": "https://multimodalart-jev-decision-index.static.hf.space/data/index.json",
+      "origin": "official-decision-index-board",
+      "protocol": "37-task public 0.3 panel retained by 0.4.1; chance-corrected with fixed area and gold weights"
+    },
+    {
+      "model": "Perplexity-Decider-Flash-v1.3",
+      "official_name": "Perplexity Decider Flash v1.3 (4B)",
+      "publisher": "Perplexity",
+      "size": "4B",
+      "public_decision_index": 63.35,
+      "benchmark": "DecisionIndex_Text",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?model=pplx-decider-flash-v1.3",
+      "source_snapshot_utc": "2026-11-19T14:42:56Z",
+      "score_field": "scores.public_skill",
+      "source_data_url": "https://multimodalart-jev-decision-index.static.hf.space/data/index.json",
+      "origin": "official-decision-index-board",
+      "protocol": "37-task public 0.3 panel retained by 0.4.1; chance-corrected with fixed area and gold weights"
+    },
+    {
+      "model": "Cloudflare-clef",
+      "official_name": "Cloudflare clef",
+      "publisher": "Cloudflare",
+      "size": "27B",
+      "public_decision_index": 61.71,
+      "benchmark": "DecisionIndex_Text",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?model=clef",
+      "source_snapshot_utc": "2026-11-19T14:42:56Z",
+      "score_field": "scores.public_skill",
+      "source_data_url": "https://multimodalart-jev-decision-index.static.hf.space/data/index.json",
+      "origin": "official-decision-index-board",
+      "protocol": "37-task public 0.3 panel retained by 0.4.1; chance-corrected with fixed area and gold weights"
+    },
+    {
+      "model": "Jev-1.14",
+      "official_name": "Jev 1.14",
+      "publisher": "TypeSafe",
+      "size": "undisclosed",
+      "public_decision_index": 60.7,
+      "benchmark": "DecisionIndex_Text",
+      "source_url": "https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jev",
+      "source_snapshot_utc": "2026-11-19T14:42:56Z",
+      "score_field": "scores.public_skill",
+      "source_data_url": "https://multimodalart-jev-decision-index.static.hf.space/data/index.json",
+      "origin": "official-decision-index-board",
+      "protocol": "37-task public 0.3 panel retained by 0.4.1; chance-corrected with fixed area and gold weights"
+    }
+  ],
+  "featured_comparison": {
+    "models": [
+      "mentat-Spice-4B",
+      "StartLux-v1.1-4B-Instant",
+      "Jev",
+      "Liquid-d1-3B",
+      "Intern-Decision-4B",
+      "Clef-Flash"
+    ],
+    "labels": [
+      "mentat-Spice-4B · 4B",
+      "StartLux v1.1 · 4B",
+      "Jev API · undisclosed",
+      "LiquidAI d1 · 3B",
+      "Intern-Decision · 4B",
+      "Cloudflare Clef-Flash · 9B"
+    ],
+    "benchmark_scope": [
+      "JevBench",
+      "TypedDecisions",
+      "DecisionBench",
+      "ProceduralTypedDecisions",
+      "JevAltBench",
+      "ZhDecisionBench",
+      "VisualDecisionBench_Image"
+    ],
+    "selection_scope": "Selected representative API and open decision models; not an exhaustive or size-matched leaderboard.",
+    "additional_4B_references_retained": [
+      "StartLux-v1.1-4B-Instant",
+      "Intern-Decision-4B",
+      "JevK5"
+    ]
+  },
+  "evaluation_exposure": "Public benchmark test data were used during adaptation. Public scores are not held-out or private Full scores."
+}

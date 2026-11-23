@@ -1,0 +1,2654 @@
+{
+  "benchmark": "API-Bank",
+  "case_id": "AddAgenda-AddAlarm-GetUserToken-level-2-1",
+  "decisions": [
+    {
+      "benchmark": "API-Bank",
+      "case_id": "API-Bank-tool-selection:AddAgenda-AddAlarm-GetUserToken-level-2-1:api-8",
+      "request": {
+        "state": {
+          "dialogue": [
+            {
+              "role": "User",
+              "text": "Can you add a schedule for me at 2pm on September 12th called \"Meeting with John\" at the office?"
+            },
+            {
+              "role": "AI",
+              "text": "Sure, I can add that schedule for you. When would you like the alarm to remind you?"
+            },
+            {
+              "role": "User",
+              "text": "Can you remind me 10 minutes before the schedule?"
+            },
+            {
+              "role": "AI",
+              "text": "Absolutely. To schedule the meeting, I first need to authenticate your account. Please provide your username, email, and password."
+            },
+            {
+              "role": "User",
+              "text": "My username is JaneSmith, my email is janesmith@example.com, and my password is password."
+            },
+            {
+              "role": "AI",
+              "text": "Thank you."
+            },
+            {
+              "role": "API",
+              "api_name": "GetUserToken",
+              "param_dict": {
+                "username": "JaneSmith",
+                "password": "password"
+              },
+              "result": {
+                "api_name": "GetUserToken",
+                "input": {
+                  "username": "JaneSmith",
+                  "password": "password"
+                },
+                "output": {
+                  "token": "o8i7u6y5t4r3e2w1q0"
+                },
+                "exception": null
+              }
+            },
+            {
+              "role": "AI",
+              "text": "I have retrieved your authentication token. Now I will add the schedule and alarm for you."
+            }
+          ],
+          "available_tools": [
+            {
+              "name": "AddAgenda",
+              "description": "The API for adding a agenda item includes content, time and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddAlarm",
+              "description": "The API for setting an alarm includes a parameter for the alarm time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for alarm. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddMeeting",
+              "description": "This API allows users to make a reservation for a meeting and store the meeting information (e.g., topic, time, location, attendees) in the database.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddReminder",
+              "description": "The API for adding a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the conference."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for conference. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddScene",
+              "description": "This API adds a scene of smart home system, given the scene name and a list of smart devices",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                },
+                "devices": {
+                  "type": "list",
+                  "description": "The list of smart devices, containing the name and description. Format be like [{\"name\": \"light\", \"description\": \"Smart light in the kitchen\"}, {\"name\": \"oven\", \"description\": \"Smart oven in the kitchen\"}, {\"name\": \"range hood\", \"description\": \"Smart range hood in the kitchen\"}]"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether succeed."
+                }
+              }
+            },
+            {
+              "name": "AppointmentRegistration",
+              "description": "This API registers an appointment of hospital.",
+              "input_parameters": {
+                "patient_name": {
+                  "type": "str",
+                  "description": "The name of patient."
+                },
+                "date": {
+                  "type": "str",
+                  "description": "The date of appointment. Format be like %Y-%m-%d"
+                },
+                "doctor_name": {
+                  "type": "str",
+                  "description": "The name of appointed doctor."
+                }
+              },
+              "output_parameters": {
+                "appointment_id": {
+                  "type": "str",
+                  "description": "The ID of appointment."
+                }
+              }
+            },
+            {
+              "name": "BookHotel",
+              "description": "This API orders a hotel room. Two rooms are ordered if the number of adults is greater than 2. Only one order can be made at same time.",
+              "input_parameters": {
+                "hotel_name": {
+                  "type": "str",
+                  "description": "The name of the hotel."
+                },
+                "check_in_time": {
+                  "type": "str",
+                  "description": "The time to check in. Format: %Y-%m-%d"
+                },
+                "check_out_time": {
+                  "type": "str",
+                  "description": "The time to check out. Format: %Y-%m-%d"
+                },
+                "room_count": {
+                  "type": "int",
+                  "description": "The number of rooms to order."
+                },
+                "adult_count": {
+                  "type": "int",
+                  "description": "The number of adults."
+                },
+                "child_count": {
+                  "type": "int",
+                  "description": "The number of children."
+                }
+              },
+              "output_parameters": {
+                "order_id": {
+                  "type": "str",
+                  "description": "The ID of the order."
+                }
+              }
+            },
+            {
+              "name": "Calculator",
+              "description": "This API provides basic arithmetic operations: addition, subtraction, multiplication, and division.",
+              "input_parameters": {
+                "formula": {
+                  "type": "str",
+                  "description": "The formula that needs to be calculated. Only integers are supported. Valid operators are +, -, *, /, and (, ). For example, '(1 + 2) * 3'."
+                }
+              },
+              "output_parameters": {
+                "result": {
+                  "type": "float",
+                  "description": "The result of the formula."
+                }
+              }
+            },
+            {
+              "name": "CancelRegistration",
+              "description": "This API cancels the registration of a patient given appointment ID.",
+              "input_parameters": {
+                "appointment_id": {
+                  "type": "str",
+                  "description": "The ID of appointment."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of cancellation."
+                }
+              }
+            },
+            {
+              "name": "CancelTimedSwitch",
+              "description": "Cancels a timed switch for a smart device.",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the smart device."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time to switch the device on or off. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the time switch is successful."
+                }
+              }
+            },
+            {
+              "name": "CheckToken",
+              "description": "Check the user token.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              },
+              "output_parameters": {
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user."
+                }
+              }
+            },
+            {
+              "name": "DeleteAccount",
+              "description": "Delete an account.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteAgenda",
+              "description": "The API for deleting a schedule item includes parameters for token, content, time, and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteAlarm",
+              "description": "The API for removing an alarm includes a parameter for the time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for alarm. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteMeeting",
+              "description": "This API allows users to delete a reservation for a meeting and remove the meeting information in the database.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteReminder",
+              "description": "The API for deleting a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the conference."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for conference. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteScene",
+              "description": "This API deletes a scene by its name.",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the deletion is successful."
+                }
+              }
+            },
+            {
+              "name": "Dictionary",
+              "description": "This API searches the dictionary for a given keyword.",
+              "input_parameters": {
+                "keyword": {
+                  "type": "str",
+                  "description": "The keyword to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results. Format be like [{\"partOfSpeech\": \"xxx\", \"definitions\": [{\"definition\": \"xxx\", \"example\": \"xxx\", \"synonyms\": [\"xxx\", \"xxx\"]}, ...]"
+                }
+              }
+            },
+            {
+              "name": "DocumentQA",
+              "description": "This API answers the question from a given document url.",
+              "input_parameters": {
+                "url": {
+                  "type": "str",
+                  "description": "The url to download the document. It should end with .txt."
+                },
+                "question": {
+                  "type": "str",
+                  "description": "The question to be answered."
+                }
+              },
+              "output_parameters": {
+                "answer": {
+                  "type": "str",
+                  "description": "The answer to the question."
+                }
+              }
+            },
+            {
+              "name": "EmergencyKnowledge",
+              "description": "This API searches for a given symptom for emergency knowledge.",
+              "input_parameters": {
+                "symptom": {
+                  "type": "str",
+                  "description": "The symptom to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results. Format be like [{\"name\":possible disease name, \"aid\": first-aid method},...]"
+                }
+              }
+            },
+            {
+              "name": "ForgotPassword",
+              "description": "Sends an email to the user with a link to reset the password. Need call twice, first with 'Forgot Password' status to get the verification code, then call again with 'Verification Code' status to change the password. Must pass the name of the parameters when calling the API, like ForgotPassword(status='Forgot Password', username='username').",
+              "input_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "'Forgot Password' for first call, after get the verification code, call again with 'Verification Code' to change the password."
+                },
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user. Only needed for the first call."
+                },
+                "email": {
+                  "type": "str",
+                  "description": "The email of the user. Only needed for the first call."
+                },
+                "verification_code": {
+                  "type": "int",
+                  "description": "The verification code sent to the user. Only needed for the second call."
+                },
+                "new_password": {
+                  "type": "str",
+                  "description": "The new password of the user. Only needed for the second call."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "GetToday",
+              "description": "This API gets the current date.",
+              "input_parameters": {},
+              "output_parameters": {
+                "date": {
+                  "type": "str",
+                  "description": "The current date. Format: %Y-%m-%d"
+                }
+              }
+            },
+            {
+              "name": "GetUserToken",
+              "description": "Get the user token by username and password.",
+              "input_parameters": {
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user."
+                },
+                "password": {
+                  "type": "str",
+                  "description": "The password of the user."
+                }
+              },
+              "output_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              }
+            },
+            {
+              "name": "ImageCaption",
+              "description": "This API generates a caption for a given image.",
+              "input_parameters": {
+                "url": {
+                  "type": "str",
+                  "description": "The url to download the image. It should end with .jpg, .jpeg or .png."
+                }
+              },
+              "output_parameters": {
+                "caption": {
+                  "type": "str",
+                  "description": "The generated caption."
+                }
+              }
+            },
+            {
+              "name": "ModifyAgenda",
+              "description": "The API for modifying a schedule item includes parameters for content, time, and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The new time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The new location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyAlarm",
+              "description": "The API for modifying an alarm includes a parameter for the from_time to to_time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "from_time": {
+                  "type": "str",
+                  "description": "The time for alarm which changed from. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "to_time": {
+                  "type": "str",
+                  "description": "The time for alarm which changed to. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyMeeting",
+              "description": "This API allows users to modify a reservation for a meeting",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyPassword",
+              "description": "The API for modifying the password of the account.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                },
+                "old_password": {
+                  "type": "str",
+                  "description": "The old password of the user."
+                },
+                "new_password": {
+                  "type": "str",
+                  "description": "The new password of the user."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyRegistration",
+              "description": "This API modifies the registration of a patient given appointment ID.",
+              "input_parameters": {
+                "appointment_id": {
+                  "type": "str",
+                  "description": "The ID of appointment."
+                },
+                "new_appointment_date": {
+                  "type": "str",
+                  "description": "The new appointment date. Format: %Y-%m-%d."
+                },
+                "new_appointment_doctor": {
+                  "type": "str",
+                  "description": "The new appointment doctor."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of modification."
+                }
+              }
+            },
+            {
+              "name": "ModifyReminder",
+              "description": "The API for deleting a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the conference."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for conference. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyScene",
+              "description": "This API modifies a scene of smart home system, given the scene name and a list of smart devices",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                },
+                "devices": {
+                  "type": "list",
+                  "description": "The list of smart devices, containing the name and description."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the modification is successful."
+                }
+              }
+            },
+            {
+              "name": "OpenBankAccount",
+              "description": "This is an API for opening a bank account for a user, given the account, password and name.",
+              "input_parameters": {
+                "account": {
+                  "type": "str",
+                  "description": "The account for the user."
+                },
+                "password": {
+                  "type": "str",
+                  "description": "The password."
+                },
+                "name": {
+                  "type": "str",
+                  "description": "account holder name."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "PlayMusic",
+              "description": "This API triggers a music player to play music.",
+              "input_parameters": {
+                "music_name": {
+                  "type": "str",
+                  "description": "The name of the music to play."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The corresponding url scheme to trigger the music player."
+                }
+              }
+            },
+            {
+              "name": "QueryAgenda",
+              "description": "The API for getting a schedule item includes parameters for token, content, time, and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "info": {
+                  "type": "json",
+                  "description": "agenda info including username and time"
+                }
+              }
+            },
+            {
+              "name": "QueryAlarm",
+              "description": "The API for querying alarm clock, help user to check the alarm clock they have set.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for alarm. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "info": {
+                  "type": "json",
+                  "description": "alarm info including username, time, content and location"
+                }
+              }
+            },
+            {
+              "name": "QueryBalance",
+              "description": "This API queries the balance of a given user.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              },
+              "output_parameters": {
+                "balance": {
+                  "type": "float",
+                  "description": "The balance of the user."
+                }
+              }
+            },
+            {
+              "name": "QueryHealthData",
+              "description": "This API queries the recorded health data in database of a given user and time span.",
+              "input_parameters": {
+                "user_id": {
+                  "type": "str",
+                  "description": "The user id of the given user. Cases are ignored."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the time span. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the time span. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "health_data": {
+                  "type": "list",
+                  "description": "The health data of the given user and time span."
+                }
+              }
+            },
+            {
+              "name": "QueryHistoryToday",
+              "description": "This API queries the history of the given date.",
+              "input_parameters": {
+                "date": {
+                  "type": "str",
+                  "description": "The date of the history. Format: %m-%d"
+                }
+              },
+              "output_parameters": {
+                "history": {
+                  "type": "list",
+                  "description": "The history of the user today."
+                }
+              }
+            },
+            {
+              "name": "QueryMeeting",
+              "description": "This API allows users to query the information of a meeting.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "meeting_info": {
+                  "type": "json",
+                  "description": "meeting info"
+                }
+              }
+            },
+            {
+              "name": "QueryRegistration",
+              "description": "This API queries the registration of a patient, given patient ID.",
+              "input_parameters": {
+                "patient_name": {
+                  "type": "str",
+                  "description": "The name of patient."
+                },
+                "date": {
+                  "type": "str",
+                  "description": "The date of appointment. Format be like %Y-%m-%d"
+                }
+              },
+              "output_parameters": {
+                "appointments": {
+                  "type": "list",
+                  "description": "The dict where from appointment_id to a list like [\"patient_name\":xxx, \"date\":xxx, \"doctor_name\":xxx]"
+                }
+              }
+            },
+            {
+              "name": "QueryReminder",
+              "description": "The API for querying a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the reminder."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for the reminder. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "reminder_info": {
+                  "type": "json",
+                  "description": "remind info"
+                }
+              }
+            },
+            {
+              "name": "QueryScene",
+              "description": "This API queries a scene of smart home system, given the scene name",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                }
+              },
+              "output_parameters": {
+                "devices": {
+                  "type": "list",
+                  "description": "The list of smart devices, containing the name and description."
+                }
+              }
+            },
+            {
+              "name": "QueryStock",
+              "description": "This API queries the stock price of a given stock code and date.",
+              "input_parameters": {
+                "stock_code": {
+                  "type": "str",
+                  "description": "The stock code of the given stock."
+                },
+                "date": {
+                  "type": "str",
+                  "description": "The date of the stock price. Format: %Y-%m-%d"
+                }
+              },
+              "output_parameters": {
+                "stock_price": {
+                  "type": "float",
+                  "description": "The stock price of the given stock."
+                }
+              }
+            },
+            {
+              "name": "RecordHealthData",
+              "description": "This API records the health data of a user.",
+              "input_parameters": {
+                "user_id": {
+                  "type": "str",
+                  "description": "The ID of user."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time of health data. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "health_data": {
+                  "type": "list",
+                  "description": "The health data, with the format like [{'name': 'blood_pressure', 'value': '120/80'}, {'name': 'heart_rate', 'value': '80'}]"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of recording."
+                }
+              }
+            },
+            {
+              "name": "RegisterUser",
+              "description": "The API for registering a account, given the username, password and email.",
+              "input_parameters": {
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user."
+                },
+                "password": {
+                  "type": "str",
+                  "description": "The password of the user."
+                },
+                "email": {
+                  "type": "str",
+                  "description": "The email of the user."
+                }
+              },
+              "output_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              }
+            },
+            {
+              "name": "SearchEngine",
+              "description": "This API searches for a given keyword for search engine.",
+              "input_parameters": {
+                "keyword": {
+                  "type": "str",
+                  "description": "The keyword to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results."
+                }
+              }
+            },
+            {
+              "name": "SendEmail",
+              "description": "This API for sending email, given the receiver, subject and content.",
+              "input_parameters": {
+                "receiver": {
+                  "type": "str",
+                  "description": "The receiver address of the email."
+                },
+                "subject": {
+                  "type": "str",
+                  "description": "The subject address of the email."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the email."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of the email."
+                }
+              }
+            },
+            {
+              "name": "SpeechRecognition",
+              "description": "This API recognizes the speech from a given audio url.",
+              "input_parameters": {
+                "url": {
+                  "type": "str",
+                  "description": "The url to download the audio. It should end with .wav."
+                }
+              },
+              "output_parameters": {
+                "transcript": {
+                  "type": "str",
+                  "description": "The transcript of the audio."
+                }
+              }
+            },
+            {
+              "name": "SymptomSearch",
+              "description": "This API searches for a given symptom.",
+              "input_parameters": {
+                "symptom": {
+                  "type": "str",
+                  "description": "The symptom to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results. Format be like [{\"name\":possible disease name, \"description\": disease details},...]"
+                }
+              }
+            },
+            {
+              "name": "TimedSwitch",
+              "description": "This API for setting a timed switch for a smart device.",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the smart device."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time to switch the device on or off. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "on": {
+                  "type": "bool",
+                  "description": "Whether to switch the device on or off."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the time switch is successful."
+                }
+              }
+            },
+            {
+              "name": "ToolSearcher",
+              "description": "Searches for relevant tools in library based on the keywords.",
+              "input_parameters": {
+                "keywords": {
+                  "type": "str",
+                  "description": "The keyword to search for."
+                }
+              },
+              "output_parameters": {
+                "best_matchs": {
+                  "type": "Union[List[dict], dict]",
+                  "description": "The best match tool(s)."
+                }
+              }
+            },
+            {
+              "name": "Translate",
+              "description": "Translate the text to the target language.",
+              "input_parameters": {
+                "src": {
+                  "type": "str",
+                  "description": "The text to be translated."
+                },
+                "src_lang": {
+                  "type": "str",
+                  "description": "[Optional] The source language to translate from. Default is auto."
+                },
+                "tgt_lang": {
+                  "type": "str",
+                  "description": "[Optional] The target language to translate to. Default is english/en."
+                }
+              },
+              "output_parameters": {
+                "translated_text": {
+                  "type": "str",
+                  "description": "The translated text."
+                }
+              }
+            },
+            {
+              "name": "Wiki",
+              "description": "This API for searching a keyword in Wikipedia.",
+              "input_parameters": {
+                "keyword": {
+                  "type": "str",
+                  "description": "The keyword to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "dict",
+                  "description": "The list of results. Format be like {\"url\": \"xxx\", \"summary\": \"xxx\", \"content\": \"xxx\"}"
+                }
+              }
+            }
+          ],
+          "task": "API-Bank current API tool selection"
+        },
+        "questions": {
+          "tool": {
+            "type": "choice",
+            "instructions": "Select the single API tool to invoke for the dialogue prefix in state. Use the published catalog in state. Do not infer arguments or use the current/future API result.",
+            "criteria": {
+              "option_0": "AddReminder",
+              "option_1": "AddScene",
+              "option_2": "DeleteAlarm",
+              "option_3": "EmergencyKnowledge",
+              "option_4": "ImageCaption",
+              "option_5": "ModifyRegistration",
+              "option_6": "DeleteAgenda",
+              "option_7": "QueryScene",
+              "option_8": "QueryHistoryToday",
+              "option_9": "DocumentQA",
+              "option_10": "Translate",
+              "option_11": "ToolSearcher",
+              "option_12": "SpeechRecognition",
+              "option_13": "CheckToken",
+              "option_14": "QueryStock",
+              "option_15": "AppointmentRegistration",
+              "option_16": "SendEmail",
+              "option_17": "QueryHealthData",
+              "option_18": "PlayMusic",
+              "option_19": "DeleteReminder",
+              "option_20": "SearchEngine",
+              "option_21": "DeleteAccount",
+              "option_22": "CancelTimedSwitch",
+              "option_23": "ModifyMeeting",
+              "option_24": "DeleteScene",
+              "option_25": "TimedSwitch",
+              "option_26": "QueryAgenda",
+              "option_27": "AddAlarm",
+              "option_28": "ForgotPassword",
+              "option_29": "DeleteMeeting",
+              "option_30": "Calculator",
+              "option_31": "ModifyReminder",
+              "option_32": "QueryReminder",
+              "option_33": "GetUserToken",
+              "option_34": "OpenBankAccount",
+              "option_35": "AddAgenda",
+              "option_36": "GetToday",
+              "option_37": "RegisterUser",
+              "option_38": "CancelRegistration",
+              "option_39": "BookHotel",
+              "option_40": "QueryAlarm",
+              "option_41": "AddMeeting",
+              "option_42": "QueryBalance",
+              "option_43": "Wiki",
+              "option_44": "ModifyPassword",
+              "option_45": "ModifyAlarm",
+              "option_46": "RecordHealthData",
+              "option_47": "ModifyAgenda",
+              "option_48": "SymptomSearch",
+              "option_49": "QueryRegistration",
+              "option_50": "ModifyScene",
+              "option_51": "QueryMeeting",
+              "option_52": "Dictionary"
+            }
+          }
+        }
+      },
+      "response": {
+        "answers": {
+          "tool": {
+            "type": "choice",
+            "choice": "option_35"
+          }
+        }
+      },
+      "displayed_fields": [
+        "tool"
+      ],
+      "expected_displayed_fields": {
+        "tool": "option_35"
+      },
+      "selected_successful_example": true,
+      "archive_calibration_version": "bidir-public-heldout:6186bea0ee9a",
+      "displayed_result": "Archived selected labels only; probabilities and latency are not displayed.",
+      "source_payload_sha256": "0ab00dfa811beec74935d345c41a2cd663a25e664100ddc4b0aef81b3c168c56",
+      "selected_tool": "AddAgenda"
+    },
+    {
+      "benchmark": "API-Bank",
+      "case_id": "API-Bank-tool-selection:AddAgenda-AddAlarm-GetUserToken-level-2-1:api-10",
+      "request": {
+        "state": {
+          "dialogue": [
+            {
+              "role": "User",
+              "text": "Can you add a schedule for me at 2pm on September 12th called \"Meeting with John\" at the office?"
+            },
+            {
+              "role": "AI",
+              "text": "Sure, I can add that schedule for you. When would you like the alarm to remind you?"
+            },
+            {
+              "role": "User",
+              "text": "Can you remind me 10 minutes before the schedule?"
+            },
+            {
+              "role": "AI",
+              "text": "Absolutely. To schedule the meeting, I first need to authenticate your account. Please provide your username, email, and password."
+            },
+            {
+              "role": "User",
+              "text": "My username is JaneSmith, my email is janesmith@example.com, and my password is password."
+            },
+            {
+              "role": "AI",
+              "text": "Thank you."
+            },
+            {
+              "role": "API",
+              "api_name": "GetUserToken",
+              "param_dict": {
+                "username": "JaneSmith",
+                "password": "password"
+              },
+              "result": {
+                "api_name": "GetUserToken",
+                "input": {
+                  "username": "JaneSmith",
+                  "password": "password"
+                },
+                "output": {
+                  "token": "o8i7u6y5t4r3e2w1q0"
+                },
+                "exception": null
+              }
+            },
+            {
+              "role": "AI",
+              "text": "I have retrieved your authentication token. Now I will add the schedule and alarm for you."
+            },
+            {
+              "role": "API",
+              "api_name": "AddAgenda",
+              "param_dict": {
+                "token": "o8i7u6y5t4r3e2w1q0",
+                "content": "Meeting with John at the office",
+                "time": "2023-09-12 14:00:00",
+                "location": "office"
+              },
+              "result": {
+                "api_name": "AddAgenda",
+                "input": {
+                  "token": "o8i7u6y5t4r3e2w1q0",
+                  "content": "Meeting with John at the office",
+                  "time": "2023-09-12 14:00:00",
+                  "location": "office"
+                },
+                "output": "success",
+                "exception": null
+              }
+            },
+            {
+              "role": "AI",
+              "text": "I have added the schedule, and now I will set the alarm for you."
+            }
+          ],
+          "available_tools": [
+            {
+              "name": "AddAgenda",
+              "description": "The API for adding a agenda item includes content, time and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddAlarm",
+              "description": "The API for setting an alarm includes a parameter for the alarm time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for alarm. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddMeeting",
+              "description": "This API allows users to make a reservation for a meeting and store the meeting information (e.g., topic, time, location, attendees) in the database.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddReminder",
+              "description": "The API for adding a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the conference."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for conference. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "AddScene",
+              "description": "This API adds a scene of smart home system, given the scene name and a list of smart devices",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                },
+                "devices": {
+                  "type": "list",
+                  "description": "The list of smart devices, containing the name and description. Format be like [{\"name\": \"light\", \"description\": \"Smart light in the kitchen\"}, {\"name\": \"oven\", \"description\": \"Smart oven in the kitchen\"}, {\"name\": \"range hood\", \"description\": \"Smart range hood in the kitchen\"}]"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether succeed."
+                }
+              }
+            },
+            {
+              "name": "AppointmentRegistration",
+              "description": "This API registers an appointment of hospital.",
+              "input_parameters": {
+                "patient_name": {
+                  "type": "str",
+                  "description": "The name of patient."
+                },
+                "date": {
+                  "type": "str",
+                  "description": "The date of appointment. Format be like %Y-%m-%d"
+                },
+                "doctor_name": {
+                  "type": "str",
+                  "description": "The name of appointed doctor."
+                }
+              },
+              "output_parameters": {
+                "appointment_id": {
+                  "type": "str",
+                  "description": "The ID of appointment."
+                }
+              }
+            },
+            {
+              "name": "BookHotel",
+              "description": "This API orders a hotel room. Two rooms are ordered if the number of adults is greater than 2. Only one order can be made at same time.",
+              "input_parameters": {
+                "hotel_name": {
+                  "type": "str",
+                  "description": "The name of the hotel."
+                },
+                "check_in_time": {
+                  "type": "str",
+                  "description": "The time to check in. Format: %Y-%m-%d"
+                },
+                "check_out_time": {
+                  "type": "str",
+                  "description": "The time to check out. Format: %Y-%m-%d"
+                },
+                "room_count": {
+                  "type": "int",
+                  "description": "The number of rooms to order."
+                },
+                "adult_count": {
+                  "type": "int",
+                  "description": "The number of adults."
+                },
+                "child_count": {
+                  "type": "int",
+                  "description": "The number of children."
+                }
+              },
+              "output_parameters": {
+                "order_id": {
+                  "type": "str",
+                  "description": "The ID of the order."
+                }
+              }
+            },
+            {
+              "name": "Calculator",
+              "description": "This API provides basic arithmetic operations: addition, subtraction, multiplication, and division.",
+              "input_parameters": {
+                "formula": {
+                  "type": "str",
+                  "description": "The formula that needs to be calculated. Only integers are supported. Valid operators are +, -, *, /, and (, ). For example, '(1 + 2) * 3'."
+                }
+              },
+              "output_parameters": {
+                "result": {
+                  "type": "float",
+                  "description": "The result of the formula."
+                }
+              }
+            },
+            {
+              "name": "CancelRegistration",
+              "description": "This API cancels the registration of a patient given appointment ID.",
+              "input_parameters": {
+                "appointment_id": {
+                  "type": "str",
+                  "description": "The ID of appointment."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of cancellation."
+                }
+              }
+            },
+            {
+              "name": "CancelTimedSwitch",
+              "description": "Cancels a timed switch for a smart device.",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the smart device."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time to switch the device on or off. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the time switch is successful."
+                }
+              }
+            },
+            {
+              "name": "CheckToken",
+              "description": "Check the user token.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              },
+              "output_parameters": {
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user."
+                }
+              }
+            },
+            {
+              "name": "DeleteAccount",
+              "description": "Delete an account.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteAgenda",
+              "description": "The API for deleting a schedule item includes parameters for token, content, time, and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteAlarm",
+              "description": "The API for removing an alarm includes a parameter for the time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for alarm. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteMeeting",
+              "description": "This API allows users to delete a reservation for a meeting and remove the meeting information in the database.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteReminder",
+              "description": "The API for deleting a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the conference."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for conference. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "DeleteScene",
+              "description": "This API deletes a scene by its name.",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the deletion is successful."
+                }
+              }
+            },
+            {
+              "name": "Dictionary",
+              "description": "This API searches the dictionary for a given keyword.",
+              "input_parameters": {
+                "keyword": {
+                  "type": "str",
+                  "description": "The keyword to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results. Format be like [{\"partOfSpeech\": \"xxx\", \"definitions\": [{\"definition\": \"xxx\", \"example\": \"xxx\", \"synonyms\": [\"xxx\", \"xxx\"]}, ...]"
+                }
+              }
+            },
+            {
+              "name": "DocumentQA",
+              "description": "This API answers the question from a given document url.",
+              "input_parameters": {
+                "url": {
+                  "type": "str",
+                  "description": "The url to download the document. It should end with .txt."
+                },
+                "question": {
+                  "type": "str",
+                  "description": "The question to be answered."
+                }
+              },
+              "output_parameters": {
+                "answer": {
+                  "type": "str",
+                  "description": "The answer to the question."
+                }
+              }
+            },
+            {
+              "name": "EmergencyKnowledge",
+              "description": "This API searches for a given symptom for emergency knowledge.",
+              "input_parameters": {
+                "symptom": {
+                  "type": "str",
+                  "description": "The symptom to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results. Format be like [{\"name\":possible disease name, \"aid\": first-aid method},...]"
+                }
+              }
+            },
+            {
+              "name": "ForgotPassword",
+              "description": "Sends an email to the user with a link to reset the password. Need call twice, first with 'Forgot Password' status to get the verification code, then call again with 'Verification Code' status to change the password. Must pass the name of the parameters when calling the API, like ForgotPassword(status='Forgot Password', username='username').",
+              "input_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "'Forgot Password' for first call, after get the verification code, call again with 'Verification Code' to change the password."
+                },
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user. Only needed for the first call."
+                },
+                "email": {
+                  "type": "str",
+                  "description": "The email of the user. Only needed for the first call."
+                },
+                "verification_code": {
+                  "type": "int",
+                  "description": "The verification code sent to the user. Only needed for the second call."
+                },
+                "new_password": {
+                  "type": "str",
+                  "description": "The new password of the user. Only needed for the second call."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "GetToday",
+              "description": "This API gets the current date.",
+              "input_parameters": {},
+              "output_parameters": {
+                "date": {
+                  "type": "str",
+                  "description": "The current date. Format: %Y-%m-%d"
+                }
+              }
+            },
+            {
+              "name": "GetUserToken",
+              "description": "Get the user token by username and password.",
+              "input_parameters": {
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user."
+                },
+                "password": {
+                  "type": "str",
+                  "description": "The password of the user."
+                }
+              },
+              "output_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              }
+            },
+            {
+              "name": "ImageCaption",
+              "description": "This API generates a caption for a given image.",
+              "input_parameters": {
+                "url": {
+                  "type": "str",
+                  "description": "The url to download the image. It should end with .jpg, .jpeg or .png."
+                }
+              },
+              "output_parameters": {
+                "caption": {
+                  "type": "str",
+                  "description": "The generated caption."
+                }
+              }
+            },
+            {
+              "name": "ModifyAgenda",
+              "description": "The API for modifying a schedule item includes parameters for content, time, and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The new time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The new location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyAlarm",
+              "description": "The API for modifying an alarm includes a parameter for the from_time to to_time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "from_time": {
+                  "type": "str",
+                  "description": "The time for alarm which changed from. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "to_time": {
+                  "type": "str",
+                  "description": "The time for alarm which changed to. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyMeeting",
+              "description": "This API allows users to modify a reservation for a meeting",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyPassword",
+              "description": "The API for modifying the password of the account.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                },
+                "old_password": {
+                  "type": "str",
+                  "description": "The old password of the user."
+                },
+                "new_password": {
+                  "type": "str",
+                  "description": "The new password of the user."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyRegistration",
+              "description": "This API modifies the registration of a patient given appointment ID.",
+              "input_parameters": {
+                "appointment_id": {
+                  "type": "str",
+                  "description": "The ID of appointment."
+                },
+                "new_appointment_date": {
+                  "type": "str",
+                  "description": "The new appointment date. Format: %Y-%m-%d."
+                },
+                "new_appointment_doctor": {
+                  "type": "str",
+                  "description": "The new appointment doctor."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of modification."
+                }
+              }
+            },
+            {
+              "name": "ModifyReminder",
+              "description": "The API for deleting a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the conference."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for conference. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "ModifyScene",
+              "description": "This API modifies a scene of smart home system, given the scene name and a list of smart devices",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                },
+                "devices": {
+                  "type": "list",
+                  "description": "The list of smart devices, containing the name and description."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the modification is successful."
+                }
+              }
+            },
+            {
+              "name": "OpenBankAccount",
+              "description": "This is an API for opening a bank account for a user, given the account, password and name.",
+              "input_parameters": {
+                "account": {
+                  "type": "str",
+                  "description": "The account for the user."
+                },
+                "password": {
+                  "type": "str",
+                  "description": "The password."
+                },
+                "name": {
+                  "type": "str",
+                  "description": "account holder name."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "success or failed"
+                }
+              }
+            },
+            {
+              "name": "PlayMusic",
+              "description": "This API triggers a music player to play music.",
+              "input_parameters": {
+                "music_name": {
+                  "type": "str",
+                  "description": "The name of the music to play."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The corresponding url scheme to trigger the music player."
+                }
+              }
+            },
+            {
+              "name": "QueryAgenda",
+              "description": "The API for getting a schedule item includes parameters for token, content, time, and location.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the agenda."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for agenda. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location of the agenda."
+                }
+              },
+              "output_parameters": {
+                "info": {
+                  "type": "json",
+                  "description": "agenda info including username and time"
+                }
+              }
+            },
+            {
+              "name": "QueryAlarm",
+              "description": "The API for querying alarm clock, help user to check the alarm clock they have set.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for alarm. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "info": {
+                  "type": "json",
+                  "description": "alarm info including username, time, content and location"
+                }
+              }
+            },
+            {
+              "name": "QueryBalance",
+              "description": "This API queries the balance of a given user.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              },
+              "output_parameters": {
+                "balance": {
+                  "type": "float",
+                  "description": "The balance of the user."
+                }
+              }
+            },
+            {
+              "name": "QueryHealthData",
+              "description": "This API queries the recorded health data in database of a given user and time span.",
+              "input_parameters": {
+                "user_id": {
+                  "type": "str",
+                  "description": "The user id of the given user. Cases are ignored."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the time span. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the time span. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "health_data": {
+                  "type": "list",
+                  "description": "The health data of the given user and time span."
+                }
+              }
+            },
+            {
+              "name": "QueryHistoryToday",
+              "description": "This API queries the history of the given date.",
+              "input_parameters": {
+                "date": {
+                  "type": "str",
+                  "description": "The date of the history. Format: %m-%d"
+                }
+              },
+              "output_parameters": {
+                "history": {
+                  "type": "list",
+                  "description": "The history of the user today."
+                }
+              }
+            },
+            {
+              "name": "QueryMeeting",
+              "description": "This API allows users to query the information of a meeting.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "meeting_topic": {
+                  "type": "str",
+                  "description": "The title of the meeting, no more than 50 characters."
+                },
+                "start_time": {
+                  "type": "str",
+                  "description": "The start time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "end_time": {
+                  "type": "str",
+                  "description": "The end time of the meeting, in the pattern of %Y-%m-%d %H:%M:%S"
+                },
+                "location": {
+                  "type": "str",
+                  "description": "The location where the meeting to be held, no more than 100 characters."
+                },
+                "attendees": {
+                  "type": "list(str)",
+                  "description": "The attendees of the meeting, including names, positions and other information."
+                }
+              },
+              "output_parameters": {
+                "meeting_info": {
+                  "type": "json",
+                  "description": "meeting info"
+                }
+              }
+            },
+            {
+              "name": "QueryRegistration",
+              "description": "This API queries the registration of a patient, given patient ID.",
+              "input_parameters": {
+                "patient_name": {
+                  "type": "str",
+                  "description": "The name of patient."
+                },
+                "date": {
+                  "type": "str",
+                  "description": "The date of appointment. Format be like %Y-%m-%d"
+                }
+              },
+              "output_parameters": {
+                "appointments": {
+                  "type": "list",
+                  "description": "The dict where from appointment_id to a list like [\"patient_name\":xxx, \"date\":xxx, \"doctor_name\":xxx]"
+                }
+              }
+            },
+            {
+              "name": "QueryReminder",
+              "description": "The API for querying a reminder item includes content and time.",
+              "input_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "User's token."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the reminder."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time for the reminder. Format: %Y-%m-%d %H:%M:%S"
+                }
+              },
+              "output_parameters": {
+                "reminder_info": {
+                  "type": "json",
+                  "description": "remind info"
+                }
+              }
+            },
+            {
+              "name": "QueryScene",
+              "description": "This API queries a scene of smart home system, given the scene name",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the scene."
+                }
+              },
+              "output_parameters": {
+                "devices": {
+                  "type": "list",
+                  "description": "The list of smart devices, containing the name and description."
+                }
+              }
+            },
+            {
+              "name": "QueryStock",
+              "description": "This API queries the stock price of a given stock code and date.",
+              "input_parameters": {
+                "stock_code": {
+                  "type": "str",
+                  "description": "The stock code of the given stock."
+                },
+                "date": {
+                  "type": "str",
+                  "description": "The date of the stock price. Format: %Y-%m-%d"
+                }
+              },
+              "output_parameters": {
+                "stock_price": {
+                  "type": "float",
+                  "description": "The stock price of the given stock."
+                }
+              }
+            },
+            {
+              "name": "RecordHealthData",
+              "description": "This API records the health data of a user.",
+              "input_parameters": {
+                "user_id": {
+                  "type": "str",
+                  "description": "The ID of user."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time of health data. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "health_data": {
+                  "type": "list",
+                  "description": "The health data, with the format like [{'name': 'blood_pressure', 'value': '120/80'}, {'name': 'heart_rate', 'value': '80'}]"
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of recording."
+                }
+              }
+            },
+            {
+              "name": "RegisterUser",
+              "description": "The API for registering a account, given the username, password and email.",
+              "input_parameters": {
+                "username": {
+                  "type": "str",
+                  "description": "The username of the user."
+                },
+                "password": {
+                  "type": "str",
+                  "description": "The password of the user."
+                },
+                "email": {
+                  "type": "str",
+                  "description": "The email of the user."
+                }
+              },
+              "output_parameters": {
+                "token": {
+                  "type": "str",
+                  "description": "The token of the user."
+                }
+              }
+            },
+            {
+              "name": "SearchEngine",
+              "description": "This API searches for a given keyword for search engine.",
+              "input_parameters": {
+                "keyword": {
+                  "type": "str",
+                  "description": "The keyword to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results."
+                }
+              }
+            },
+            {
+              "name": "SendEmail",
+              "description": "This API for sending email, given the receiver, subject and content.",
+              "input_parameters": {
+                "receiver": {
+                  "type": "str",
+                  "description": "The receiver address of the email."
+                },
+                "subject": {
+                  "type": "str",
+                  "description": "The subject address of the email."
+                },
+                "content": {
+                  "type": "str",
+                  "description": "The content of the email."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "The status of the email."
+                }
+              }
+            },
+            {
+              "name": "SpeechRecognition",
+              "description": "This API recognizes the speech from a given audio url.",
+              "input_parameters": {
+                "url": {
+                  "type": "str",
+                  "description": "The url to download the audio. It should end with .wav."
+                }
+              },
+              "output_parameters": {
+                "transcript": {
+                  "type": "str",
+                  "description": "The transcript of the audio."
+                }
+              }
+            },
+            {
+              "name": "SymptomSearch",
+              "description": "This API searches for a given symptom.",
+              "input_parameters": {
+                "symptom": {
+                  "type": "str",
+                  "description": "The symptom to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "list",
+                  "description": "The list of results. Format be like [{\"name\":possible disease name, \"description\": disease details},...]"
+                }
+              }
+            },
+            {
+              "name": "TimedSwitch",
+              "description": "This API for setting a timed switch for a smart device.",
+              "input_parameters": {
+                "name": {
+                  "type": "str",
+                  "description": "The name of the smart device."
+                },
+                "time": {
+                  "type": "str",
+                  "description": "The time to switch the device on or off. Format: %Y-%m-%d %H:%M:%S"
+                },
+                "on": {
+                  "type": "bool",
+                  "description": "Whether to switch the device on or off."
+                }
+              },
+              "output_parameters": {
+                "status": {
+                  "type": "str",
+                  "description": "Whether the time switch is successful."
+                }
+              }
+            },
+            {
+              "name": "ToolSearcher",
+              "description": "Searches for relevant tools in library based on the keywords.",
+              "input_parameters": {
+                "keywords": {
+                  "type": "str",
+                  "description": "The keyword to search for."
+                }
+              },
+              "output_parameters": {
+                "best_matchs": {
+                  "type": "Union[List[dict], dict]",
+                  "description": "The best match tool(s)."
+                }
+              }
+            },
+            {
+              "name": "Translate",
+              "description": "Translate the text to the target language.",
+              "input_parameters": {
+                "src": {
+                  "type": "str",
+                  "description": "The text to be translated."
+                },
+                "src_lang": {
+                  "type": "str",
+                  "description": "[Optional] The source language to translate from. Default is auto."
+                },
+                "tgt_lang": {
+                  "type": "str",
+                  "description": "[Optional] The target language to translate to. Default is english/en."
+                }
+              },
+              "output_parameters": {
+                "translated_text": {
+                  "type": "str",
+                  "description": "The translated text."
+                }
+              }
+            },
+            {
+              "name": "Wiki",
+              "description": "This API for searching a keyword in Wikipedia.",
+              "input_parameters": {
+                "keyword": {
+                  "type": "str",
+                  "description": "The keyword to search."
+                }
+              },
+              "output_parameters": {
+                "results": {
+                  "type": "dict",
+                  "description": "The list of results. Format be like {\"url\": \"xxx\", \"summary\": \"xxx\", \"content\": \"xxx\"}"
+                }
+              }
+            }
+          ],
+          "task": "API-Bank current API tool selection"
+        },
+        "questions": {
+          "tool": {
+            "type": "choice",
+            "instructions": "Select the single API tool to invoke for the dialogue prefix in state. Use the published catalog in state. Do not infer arguments or use the current/future API result.",
+            "criteria": {
+              "option_0": "ModifyPassword",
+              "option_1": "Wiki",
+              "option_2": "QueryHealthData",
+              "option_3": "AddMeeting",
+              "option_4": "GetUserToken",
+              "option_5": "SendEmail",
+              "option_6": "AddScene",
+              "option_7": "QueryAlarm",
+              "option_8": "ModifyMeeting",
+              "option_9": "RegisterUser",
+              "option_10": "AddAlarm",
+              "option_11": "GetToday",
+              "option_12": "DeleteMeeting",
+              "option_13": "ForgotPassword",
+              "option_14": "DeleteAccount",
+              "option_15": "Dictionary",
+              "option_16": "ModifyScene",
+              "option_17": "AddAgenda",
+              "option_18": "ToolSearcher",
+              "option_19": "QueryHistoryToday",
+              "option_20": "CheckToken",
+              "option_21": "ModifyAlarm",
+              "option_22": "EmergencyKnowledge",
+              "option_23": "QueryReminder",
+              "option_24": "QueryAgenda",
+              "option_25": "QueryRegistration",
+              "option_26": "RecordHealthData",
+              "option_27": "BookHotel",
+              "option_28": "QueryStock",
+              "option_29": "DeleteAlarm",
+              "option_30": "CancelRegistration",
+              "option_31": "TimedSwitch",
+              "option_32": "DeleteReminder",
+              "option_33": "PlayMusic",
+              "option_34": "ImageCaption",
+              "option_35": "DocumentQA",
+              "option_36": "DeleteAgenda",
+              "option_37": "Calculator",
+              "option_38": "SpeechRecognition",
+              "option_39": "AppointmentRegistration",
+              "option_40": "OpenBankAccount",
+              "option_41": "ModifyAgenda",
+              "option_42": "QueryScene",
+              "option_43": "QueryBalance",
+              "option_44": "AddReminder",
+              "option_45": "SymptomSearch",
+              "option_46": "ModifyReminder",
+              "option_47": "QueryMeeting",
+              "option_48": "Translate",
+              "option_49": "CancelTimedSwitch",
+              "option_50": "ModifyRegistration",
+              "option_51": "SearchEngine",
+              "option_52": "DeleteScene"
+            }
+          }
+        }
+      },
+      "response": {
+        "answers": {
+          "tool": {
+            "type": "choice",
+            "choice": "option_10"
+          }
+        }
+      },
+      "displayed_fields": [
+        "tool"
+      ],
+      "expected_displayed_fields": {
+        "tool": "option_10"
+      },
+      "selected_successful_example": true,
+      "archive_calibration_version": "bidir-public-heldout:6186bea0ee9a",
+      "displayed_result": "Archived selected labels only; probabilities and latency are not displayed.",
+      "source_payload_sha256": "9fccd0e5ce73c43fa06a5175c91fb24ed12cfd227a3f71d37a0c7926ad683fe0",
+      "selected_tool": "AddAlarm"
+    }
+  ],
+  "selected_successful_example": true,
+  "user_excerpts": [
+    "Can you add a schedule for me at 2pm on September 12th called \"Meeting with John\" at the office?",
+    "Can you remind me 10 minutes before the schedule?"
+  ],
+  "reference_states_replayed": true,
+  "live_API_execution_performed": false,
+  "presentation": "Two independently evaluated tool selections after authentication is already present in each reference history. Public fixture credentials are synthetic; this is not a recommended authentication flow. Arguments and execution are supplied by reference histories, not generated by the model.",
+  "two_correct_tool_choices": true
+}

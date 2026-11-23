@@ -5,8 +5,23 @@ import argparse
 import json
 from pathlib import Path
 
+DEMO_REQUEST = {
+    "state": "A delivery address is missing its street number.",
+    "questions": {"complete": {
+        "type": "noul", "instructions": "The delivery address is complete."
+    }},
+}
+
 
 def load_model(args):
+    if not args.model_package or not args.base_model:
+        from .model import DecisionModel
+        return DecisionModel.from_pretrained(
+            args.model_package or args.model, runtime=args.runtime,
+            device=args.device, base_model=args.base_model,
+            revision=args.revision, cache_dir=args.cache_dir,
+            local_files_only=args.offline,
+        )
     if args.runtime == "turbo":
         from .turbo import TurboDecisionModel as model_class
     elif args.runtime == "accelerated":
@@ -56,20 +71,32 @@ def main(argv=None):
     commands = parser.add_subparsers(dest="command", required=True)
     for command in ("predict", "serve"):
         sub = commands.add_parser(command)
-        sub.add_argument("--base-model", required=True)
-        sub.add_argument("--model-package", required=True)
+        sub.add_argument("--base-model", help="Existing local backbone; otherwise download the pinned base")
+        sub.add_argument("--model-package", help="Existing local adapter package; otherwise download from HF")
+        sub.add_argument("--model", default="yunqu/mentat-Spice-4B")
+        sub.add_argument("--revision", help="Adapter Hub revision (the backbone is always pinned)")
+        sub.add_argument("--cache-dir", help="Hugging Face cache directory")
+        sub.add_argument("--offline", action="store_true", help="Only use existing local/cached model files")
         sub.add_argument("--device", default="cuda:0")
         sub.add_argument("--runtime", choices=("native", "accelerated", "turbo"), default="native")
         if command == "predict":
-            sub.add_argument("--input", type=Path, required=True)
+            source = sub.add_mutually_exclusive_group(required=True)
+            source.add_argument("--input", type=Path)
+            source.add_argument("--demo", action="store_true", help="Run a built-in address-completeness decision")
             sub.add_argument("--image", action="append", default=[])
         else:
             sub.add_argument("--host", default="127.0.0.1")
             sub.add_argument("--port", type=int, default=8765)
     args = parser.parse_args(argv)
+    if args.command == "predict":
+        try:
+            payload = DEMO_REQUEST if args.demo else json.loads(args.input.read_text())
+            if not isinstance(payload, dict):
+                raise ValueError("Request must be an object")
+        except (OSError, ValueError) as error:
+            parser.error(str(error))
     model = load_model(args)
     if args.command == "predict":
-        payload = json.loads(args.input.read_text())
         result = model.predict(payload, **({"images": args.image} if args.image else {}))
         print(json.dumps(result, ensure_ascii=False, allow_nan=False))
     else:

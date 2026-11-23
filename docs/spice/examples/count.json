@@ -1,0 +1,49 @@
+{
+  "benchmark": "CV-Bench",
+  "case_id": "full_cvbench:72",
+  "request": {
+    "state": {},
+    "questions": {
+      "answer": {
+        "type": "choice",
+        "instructions": "How many persons are in the image?",
+        "criteria": {
+          "A": "4",
+          "B": "5",
+          "C": "0",
+          "D": "6",
+          "E": "3",
+          "F": "2"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "mentat-Spice-4B",
+    "answers": {
+      "answer": {
+        "type": "choice",
+        "choice": "A",
+        "probabilities": {
+          "A": 0.9576823019655712,
+          "B": 0.006224967969945974,
+          "C": 0.00047077086097664585,
+          "D": 0.0022708214327588462,
+          "E": 0.02991266261203483,
+          "F": 0.003438475158712448
+        },
+        "confidence": 0.949080157940134,
+        "unknown_probability": 0.0001460194678484652,
+        "abstained": false
+      }
+    }
+  },
+  "expected": {
+    "answer": "A"
+  },
+  "input_image_sha256": [
+    "cfce6e3f43e24ca2459e474a043d1f5a54d2ba8d3e10d7588f3dce2493c7925a"
+  ],
+  "selected_successful_example": true,
+  "source": "Decision Index public vision"
+}

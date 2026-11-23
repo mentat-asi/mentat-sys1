@@ -1,0 +1,48 @@
+{
+  "Typed_Decider_reference": "https://huggingface.co/roudone/Decider-4B/blob/main/evaluation/report.json",
+  "Typed_probability_comparison": [
+    {
+      "metric": "Official soft-mode accuracy (%) ↑",
+      "mentat": 80.75,
+      "Decider4B_selfreport": 82.6
+    },
+    {
+      "metric": "KL divergence ↓",
+      "mentat": 0.07304600380540888,
+      "Decider4B_selfreport": 0.0803057449071361
+    },
+    {
+      "metric": "Brier score ↓",
+      "mentat": 0.040299341188580265,
+      "Decider4B_selfreport": 0.04295575756754636
+    }
+  ],
+  "same_input_development_checks": [
+    {
+      "metric": "BabyAI success (%) ↑",
+      "mentat": 74.69135802469135,
+      "continuation_start": 67.28395061728395
+    },
+    {
+      "metric": "PubMedQA accuracy (%) ↑",
+      "mentat": 78.6,
+      "continuation_start": 78.0
+    },
+    {
+      "metric": "Non-English MMLU macro (%) ↑",
+      "mentat": 63.125,
+      "continuation_start": 63.25
+    },
+    {
+      "metric": "DecisionPivot complete groups (%) ↑",
+      "mentat": 24.769230769230766,
+      "continuation_start": 24.564485265977805
+    },
+    {
+      "metric": "Market Brier score ↓",
+      "mentat": 0.26010322436839156,
+      "continuation_start": 0.2591260205093555
+    }
+  ],
+  "not_private_heldout_results": true
+}

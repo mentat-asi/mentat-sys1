@@ -1,0 +1,259 @@
+{
+  "workflow": "customer",
+  "events": [
+    {
+      "seq": 1,
+      "workflow": "customer",
+      "step": "context_loaded",
+      "elapsed_ms": 271.697,
+      "case_id": "customer_service_000017",
+      "state": {
+        "account": {
+          "lifetime_value_usd": 3662,
+          "prior_tickets_90d": 2,
+          "seats": 1,
+          "tenure_months": 41,
+          "tier": "enterprise"
+        },
+        "thread": [
+          {
+            "role": "customer",
+            "text": "This is the third time I’m contacting support about the data export tool failing. I was told in my last two tickets that this was being handled, but I’m still seeing the same 'export failed' message every single time I try to pull our logs."
+          },
+          {
+            "role": "agent",
+            "text": "I can see the history of your previous requests regarding the Enterprise data export. Could you tell me if you are attempting to export the full historical range or a specific date bracket when the failure occurs?"
+          },
+          {
+            "role": "customer",
+            "text": "It doesn't matter what range I pick; it fails regardless, and quite honestly, if we can't get our own data out of your system, we are going to have to look at moving our entire contract to a competitor who actually delivers on their promises."
+          }
+        ]
+      },
+      "source": "SQLite source_records",
+      "queue_count_before": 0
+    },
+    {
+      "seq": 2,
+      "workflow": "customer",
+      "step": "model_decision",
+      "elapsed_ms": 998.045,
+      "request": {
+        "state": {
+          "account": {
+            "lifetime_value_usd": 3662,
+            "prior_tickets_90d": 2,
+            "seats": 1,
+            "tenure_months": 41,
+            "tier": "enterprise"
+          },
+          "thread": [
+            {
+              "role": "customer",
+              "text": "This is the third time I’m contacting support about the data export tool failing. I was told in my last two tickets that this was being handled, but I’m still seeing the same 'export failed' message every single time I try to pull our logs."
+            },
+            {
+              "role": "agent",
+              "text": "I can see the history of your previous requests regarding the Enterprise data export. Could you tell me if you are attempting to export the full historical range or a specific date bracket when the failure occurs?"
+            },
+            {
+              "role": "customer",
+              "text": "It doesn't matter what range I pick; it fails regardless, and quite honestly, if we can't get our own data out of your system, we are going to have to look at moving our entire contract to a competitor who actually delivers on their promises."
+            }
+          ]
+        },
+        "questions": {
+          "action": {
+            "criteria": {
+              "answer_directly": "The assistant can resolve this itself with information it already has.",
+              "close_no_action": "No further action is warranted; the matter is settled.",
+              "escalate_to_human": "Hand off to a human agent with the appropriate authority.",
+              "execute_refund": "Issue the refund or credit the customer is owed.",
+              "request_information": "More detail is needed from the customer before anything can be done."
+            },
+            "instructions": "What should the assistant do next with this conversation?",
+            "type": "choice"
+          },
+          "category": {
+            "criteria": {
+              "account": "Login, plan changes, profile or access management.",
+              "billing": "A charge, invoice, subscription or payment problem.",
+              "delivery": "Shipping, fulfilment or delivery of a physical item.",
+              "refund": "The customer is explicitly asking for money back.",
+              "technical": "The product or service is not working as expected."
+            },
+            "instructions": "What is this customer conversation primarily about?",
+            "type": "choice"
+          },
+          "churn_risk": {
+            "criteria": [
+              "No sign of dissatisfaction.",
+              "Mild frustration, but the relationship is intact.",
+              "Clearly unhappy; repeat problems or explicit complaints.",
+              "Imminent: threatening to cancel, dispute or leave."
+            ],
+            "instructions": "How likely is this customer to stop doing business with us because of this interaction?",
+            "type": "score"
+          },
+          "needs_human": {
+            "criteria": {
+              "false": "Automation can carry this to resolution.",
+              "true": "A human must take over: judgement, authority or empathy is required."
+            },
+            "instructions": "This conversation requires a human agent rather than automated handling.",
+            "type": "noul"
+          },
+          "urgency": {
+            "criteria": [
+              "No time pressure; can wait indefinitely.",
+              "Routine; handle within the normal queue.",
+              "Elevated; should be handled within the same week.",
+              "Critical; requires action within the same day."
+            ],
+            "instructions": "How time-sensitive is this conversation?",
+            "type": "score"
+          }
+        }
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "escalate_to_human",
+            "probabilities": {
+              "answer_directly": 0.04794873987708783,
+              "close_no_action": 0.003892526586490132,
+              "escalate_to_human": 0.802627789219001,
+              "execute_refund": 0.008907991997140612,
+              "request_information": 0.13662295232028038
+            },
+            "confidence": 0.7530795025507213,
+            "unknown_probability": 0.0002724520530934212,
+            "abstained": false
+          },
+          "category": {
+            "type": "choice",
+            "choice": "technical",
+            "probabilities": {
+              "account": 0.024973683576999296,
+              "billing": 0.009898589929812773,
+              "delivery": 0.002108255099747993,
+              "refund": 0.011359985818347918,
+              "technical": 0.9516594855750921
+            },
+            "confidence": 0.9394683986684704,
+            "unknown_probability": 0.00011277266094879382,
+            "abstained": false
+          },
+          "churn_risk": {
+            "type": "score",
+            "score": 2.805205513539178,
+            "legend": {
+              "0": "No sign of dissatisfaction.",
+              "1": "Mild frustration, but the relationship is intact.",
+              "2": "Clearly unhappy; repeat problems or explicit complaints.",
+              "3": "Imminent: threatening to cancel, dispute or leave."
+            },
+            "probabilities": {
+              "0": 0.0034444470835099357,
+              "1": 0.019774750772599672,
+              "2": 0.14491164366509304,
+              "3": 0.8318691584787974
+            },
+            "confidence": 0.7757504120332802,
+            "unknown_probability": 9.684213884871882e-05,
+            "abstained": false
+          },
+          "needs_human": {
+            "type": "noul",
+            "noul": 0.8354786918912962,
+            "unknown_probability": 5.038671273578671e-05,
+            "abstained": false
+          },
+          "urgency": {
+            "type": "score",
+            "score": 2.592132321439936,
+            "legend": {
+              "0": "No time pressure; can wait indefinitely.",
+              "1": "Routine; handle within the normal queue.",
+              "2": "Elevated; should be handled within the same week.",
+              "3": "Critical; requires action within the same day."
+            },
+            "probabilities": {
+              "0": 0.0032355173397648025,
+              "1": 0.02853076237806339,
+              "2": 0.3410996017846431,
+              "3": 0.6271341184975288
+            },
+            "confidence": 0.5028158602913567,
+            "unknown_probability": 5.892672638507203e-05,
+            "abstained": false
+          }
+        },
+        "usage": {
+          "preprocess_ms": 46.695,
+          "questions_ms": 610.66,
+          "input_tokens": 409,
+          "rotations": 1,
+          "language_model_passes": 5,
+          "images": 0,
+          "generated_answer_tokens": 0
+        },
+        "timing": {
+          "total_ms": 666.1977979820222
+        }
+      }
+    },
+    {
+      "seq": 3,
+      "workflow": "customer",
+      "step": "ticket_created",
+      "elapsed_ms": 1089.895,
+      "database_row": {
+        "id": "customer_service_000017",
+        "queue": "technical_support",
+        "status": "awaiting_human",
+        "priority": "critical"
+      },
+      "review_queue_count": 1,
+      "executor": "Python controller: SQLite transaction"
+    },
+    {
+      "seq": 4,
+      "workflow": "customer",
+      "step": "postcondition_checked",
+      "elapsed_ms": 1107.794,
+      "result": {
+        "workflow": "customer",
+        "outcome": {
+          "id": "customer_service_000017",
+          "queue": "technical_support",
+          "status": "awaiting_human",
+          "priority": "critical"
+        },
+        "review_queue_count": 1,
+        "verified": true,
+        "resolved_customer_issue": false,
+        "input_source": "customer_service_000017"
+      }
+    }
+  ],
+  "result": {
+    "workflow": "customer",
+    "outcome": {
+      "id": "customer_service_000017",
+      "queue": "technical_support",
+      "status": "awaiting_human",
+      "priority": "critical"
+    },
+    "review_queue_count": 1,
+    "verified": true,
+    "resolved_customer_issue": false,
+    "input_source": "customer_service_000017"
+  },
+  "fresh_inference": true,
+  "local_SQLite_execution": true,
+  "environment": "Local sandbox; public benchmark fixtures, not production business data.",
+  "model": "mentat-Spice-4B"
+}

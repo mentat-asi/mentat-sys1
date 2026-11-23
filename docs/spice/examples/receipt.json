@@ -1,0 +1,74 @@
+{
+  "benchmark": "KIE (CORD+FUNSD)",
+  "case_id": "full_cord:test-10:value:total_price",
+  "request": {
+    "state": {},
+    "questions": {
+      "answer": {
+        "type": "choice",
+        "instructions": "What is the total amount on this receipt?",
+        "criteria": {
+          "A": "3,000",
+          "B": "20,000",
+          "C": "17,000"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "mentat-Spice-4B",
+    "answers": {
+      "answer": {
+        "type": "choice",
+        "choice": "C",
+        "probabilities": {
+          "A": 0.0019721178696775017,
+          "B": 0.008535208044114641,
+          "C": 0.9894926740862079
+        },
+        "confidence": 0.9841806754999981,
+        "unknown_probability": 5.9269779651104274e-05,
+        "abstained": false
+      }
+    }
+  },
+  "expected": {
+    "answer": "C"
+  },
+  "input_image_sha256": [
+    "2a5d18c199bdbb75010a54430429cf694b35bdca8bf560d1d0db1fbb090dedb8"
+  ],
+  "selected_successful_example": true,
+  "source": "Decision Index public vision",
+  "second_recorded_question": {
+    "case_id": "full_cord:test-10:value:changeprice",
+    "request": {
+      "answer": {
+        "type": "choice",
+        "instructions": "How much change was given back?",
+        "criteria": {
+          "A": "20,000",
+          "B": "3,000",
+          "C": "17,000"
+        }
+      }
+    },
+    "response": {
+      "model": "mentat-Spice-4B",
+      "answers": {
+        "answer": {
+          "type": "choice",
+          "choice": "B",
+          "probabilities": {
+            "A": 0.0007237702162327915,
+            "B": 0.9990034965488098,
+            "C": 0.00027273323495733114
+          },
+          "confidence": 0.9984540882085123,
+          "unknown_probability": 5.123319578701079e-05,
+          "abstained": false
+        }
+      }
+    }
+  }
+}

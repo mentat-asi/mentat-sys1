@@ -1,0 +1,58 @@
+benchmark,model,display_name,score,unit,reference_source
+DecisionIndex_Text,mentat-Spice-4B,mentat-Spice-4B,72.83495710772297,public_index,See JSON and model card
+DecisionIndex_Text,vLLM-SR-d3-turbo-v1.1,vLLM-SR d3-turbo v1.1 · 27B,71.62,public_index,See JSON and model card
+DecisionIndex_Text,Perplexity-Decider-v1.3,pplx-decider-v1.3 · 27B,69.72,public_index,See JSON and model card
+DecisionIndex_Text,StartLux-v1.1-4B-Instant,StartLux-Decision-v1.1-4B-Instant,67.81,public_index,See JSON and model card
+DecisionIndex_Text,Perplexity-Decider-Flash-v1.3,pplx-decider-flash-v1.3 · 4B,63.35,public_index,See JSON and model card
+DecisionIndex_Text,Cloudflare-clef,Cloudflare/clef · 27B,61.71,public_index,See JSON and model card
+DecisionIndex_Text,Jev-1.14,Jev 1.14,60.7,public_index,See JSON and model card
+DecisionIndex_Vision,mentat-Spice-4B,mentat-Spice-4B,73.08524791959098,public_index,See JSON and model card
+DecisionIndex_Vision,Qwen3.5-397B-A17B,Qwen3.5-397B-A17B,68.52,public_index,See JSON and model card
+DecisionIndex_Vision,Cloudflare-clef-omni,Cloudflare/clef-omni · 30B-A3B,63.68,public_index,See JSON and model card
+DecisionIndex_Vision,MetaEncoder-v1,MetaEncoder v1 · 28.4B,61.36,public_index,See JSON and model card
+DecisionIndex_Vision,Perplexity-Decider-Flash-v1.3,pplx-decider-flash-v1.3 · 4B,71.5,public_index,See JSON and model card
+DecisionIndex_Vision,vLLM-SR-d3-mini,vLLM-SR d3-mini · 4B,67.67,public_index,See JSON and model card
+DecisionIndex_Vision,Intern-Decision-4B,Intern-Decision-4B,61.69,public_index,See JSON and model card
+JevBench,Google-Gemini-Decision-1,Google Gemini Decision 1,92.2,accuracy_percent,https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/
+JevBench,OpenAI-GPT-6-Luna-Decisions,OpenAI GPT-6 Luna Decisions,90.9,accuracy_percent,https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/
+JevBench,mentat-Spice-4B,mentat-Spice-4B,90.04329004329004,accuracy_percent,See JSON and model card
+JevBench,StartLux-v1.1-4B-Instant,StartLux-Decision-v1.1-4B-Instant,88.74458874458875,accuracy_percent,See JSON and model card
+JevBench,Jev,Jev 1.14.0,87.44588744588745,accuracy_percent,See JSON and model card
+JevBench,Intern-Decision-4B,Intern-Decision-4B,86.58008658008657,accuracy_percent,See JSON and model card
+TypedDecisions,mentat-Spice-4B,mentat-Spice-4B,80.95,accuracy_percent,See JSON and model card
+TypedDecisions,Microsoft-Decision-1-S1,Microsoft-Decision-1,79.0,accuracy_percent,https://systemonebench.dev/benchmarks/typed-decisions/
+TypedDecisions,Perplexity-Decider-V1.2-S1,Perplexity Decider V1.2,75.14999999999999,accuracy_percent,https://systemonebench.dev/benchmarks/typed-decisions/
+TypedDecisions,Jev-1.14-S1,Jev 1.14,74.15,accuracy_percent,https://systemonebench.dev/benchmarks/typed-decisions/
+TypedDecisions,Google-Gemini-Decision-1,Google Gemini Decision 1,74.0,accuracy_percent,https://systemonebench.dev/benchmarks/typed-decisions/
+TypedDecisions,OpenAI-GPT-6-Luna-Decisions,OpenAI GPT-6 Luna Decisions,71.05,accuracy_percent,https://systemonebench.dev/benchmarks/typed-decisions/
+TypedDecisions,Clef-Flash-S1,Cloudflare/clef-flash · 9B,70.55,accuracy_percent,https://systemonebench.dev/benchmarks/typed-decisions/
+DecisionBench,mentat-Spice-4B,mentat-Spice-4B,82.02092050209205,accuracy_percent,See JSON and model card
+DecisionBench,StartLux-v1.1-4B-Instant,StartLux-Decision-v1.1-4B-Instant,81.1213389121339,accuracy_percent,See JSON and model card
+DecisionBench,Jev,Jev 1.14.0,73.65690376569037,accuracy_percent,See JSON and model card
+DecisionBench,Liquid-d1-3B,LiquidAI/d1-3B,72.9163179916318,accuracy_percent,See JSON and model card
+DecisionBench,Intern-Decision-4B,Intern-Decision-4B,60.52719665271966,accuracy_percent,See JSON and model card
+DecisionBench,Clef-Flash,Cloudflare/clef-flash · 9B,78.47280334728033,accuracy_percent,See JSON and model card
+ProceduralTypedDecisions,mentat-Spice-4B,mentat-Spice-4B,93.05069292487235,accuracy_percent,See JSON and model card
+ProceduralTypedDecisions,StartLux-v1.1-4B-Instant,StartLux-Decision-v1.1-4B-Instant,87.4690007293946,accuracy_percent,See JSON and model card
+ProceduralTypedDecisions,Jev,Jev 1.14.0,82.93946024799416,accuracy_percent,See JSON and model card
+ProceduralTypedDecisions,Liquid-d1-3B,LiquidAI/d1-3B,65.082056892779,accuracy_percent,See JSON and model card
+ProceduralTypedDecisions,Intern-Decision-4B,Intern-Decision-4B,60.97556528081692,accuracy_percent,See JSON and model card
+ProceduralTypedDecisions,Clef-Flash,Cloudflare/clef-flash · 9B,67.93581327498175,accuracy_percent,See JSON and model card
+JevAltBench,mentat-Spice-4B,mentat-Spice-4B,91.99668010433957,accuracy_percent,See JSON and model card
+JevAltBench,StartLux-v1.1-4B-Instant,StartLux-Decision-v1.1-4B-Instant,92.80294047901351,accuracy_percent,See JSON and model card
+JevAltBench,Jev,Jev 1.14.0,90.47901351671804,accuracy_percent,See JSON and model card
+JevAltBench,Liquid-d1-3B,LiquidAI/d1-3B,84.88261797486365,accuracy_percent,See JSON and model card
+JevAltBench,Intern-Decision-4B,Intern-Decision-4B,88.97320369931231,accuracy_percent,See JSON and model card
+JevAltBench,Clef-Flash,Cloudflare/clef-flash · 9B,90.11145364002846,accuracy_percent,See JSON and model card
+ZhDecisionBench,mentat-Spice-4B,mentat-Spice-4B,92.71948608137045,accuracy_percent,See JSON and model card
+ZhDecisionBench,StartLux-v1.1-4B-Instant,StartLux-Decision-v1.1-4B-Instant,89.07922912205566,accuracy_percent,See JSON and model card
+ZhDecisionBench,Jev,Jev 1.14.0,88.43683083511777,accuracy_percent,See JSON and model card
+ZhDecisionBench,Liquid-d1-3B,LiquidAI/d1-3B,82.01284796573876,accuracy_percent,See JSON and model card
+ZhDecisionBench,Intern-Decision-4B,Intern-Decision-4B,91.64882226980728,accuracy_percent,See JSON and model card
+ZhDecisionBench,Clef-Flash,Cloudflare/clef-flash · 9B,90.79229122055675,accuracy_percent,See JSON and model card
+VisualDecisionBench_Image,mentat-Spice-4B,mentat-Spice-4B,87.94117647058823,accuracy_percent,See JSON and model card
+VisualDecisionBench_Image,StartLux-v1.1-4B-Instant,StartLux-Decision-v1.1-4B-Instant,83.05882352941177,accuracy_percent,See JSON and model card
+VisualDecisionBench_Image,Jev,Jev 1.14.0,85.05882352941177,accuracy_percent,See JSON and model card
+VisualDecisionBench_Image,Liquid-d1-3B,LiquidAI/d1-3B,81.82352941176471,accuracy_percent,See JSON and model card
+VisualDecisionBench_Image,Intern-Decision-4B,Intern-Decision-4B,77.94117647058823,accuracy_percent,See JSON and model card
+VisualDecisionBench_Image,Clef-Flash,Cloudflare/clef-flash · 9B,82.23529411764706,accuracy_percent,See JSON and model card

@@ -1,125 +1,139 @@
-<h1 align="center">mentat-sys1</h1>
-<p align="center"><strong>Text and images in. Decision probabilities out.</strong></p>
-<p align="center"><a href="https://www.thuidm.com">THU-IDM</a> · <a href="https://huggingface.co/yunqu/mentat-Spice-4B">mentat-Spice-4B model</a> · <a href="docs/inference-spice.md">Spice inference guide</a></p>
 
-## mentat-Spice-4B
+<h1 align="center">mentat-Spice-4B</h1>
+<p align="center"><b>Text and images in. Decision probabilities out.</b></p>
+<p align="center"><a href="https://www.thuidm.com">Team</a> · <a href="https://huggingface.co/yunqu/mentat-Spice-4B">Model weights · Hugging Face</a> · <a href="https://www.mentat-asi.com/demo">Web demo</a></p>
 
-The new runtime accepts a state and named questions, returning choice, Boolean and ordinal probabilities without generating explanations. It supports text and images, the original LM projection and eight bidirectional full-attention layers. Model weights are currently private.
+**mentat-Spice-4B** turns text and images into decisions your software can use: route a customer request, review an invoice, verify an answer against evidence, or select the next tool. Supply the context and your candidate answers; the model returns a choice, a yes/no probability, or a score with its probability distribution.
 
-Install with `pip install -e ".[accelerate]"`, download the adapter and pinned backbone, then select native, accelerated or Turbo inference. The [complete guide](docs/inference-spice.md) includes download commands, Python, image input, an HTTP service, workflow reruns and latency measurement.
+**Text + images · Three output types · Local inference · Apache-2.0**
 
-```bash
-mentat-spice predict --runtime turbo --base-model ./qwen-base \
-  --model-package ./model-spice --input configs/spice-example.json
-```
+<p><a href="#examples">Examples</a> · <a href="#evaluation">Benchmarks</a> · <a href="#using-the-model">Quick start</a> · <a href="#model-information">Specifications</a></p>
 
-Turbo provides fused operators and guarded CUDA Graphs with native fallback. A warm A800 short-text probe measured **21.9 ms median** per question (Python calls, 100 samples); see the [measurement scope](docs/inference-spice.md#runtime-selection). This runtime does not replace the older model interfaces.
+## Examples
 
----
+Twelve recorded examples. The first row contains **three executed local workflows**: each runs the model, performs database operations and checks the resulting state. Click to enlarge; open an execution trace for the actual requests, outputs and writes.
 
-## v0.3 release archive
-
-The results, demos and commands below refer to **mentat-sys1-v0.3**.
-
-<h1 align="center">mentat-sys1-v0.3</h1>
-<p align="center"><strong>Decisions with probabilities.</strong><br>THU-IDM · Tsinghua University</p>
-
-A 4B model for choosing actions, using tools and making structured decisions. Give it a state and typed questions; it returns answer probabilities in one forward pass per question, without generating answer text.
-
-Qwen3.5-4B · Text / JSON · 16K context · LoRA adapter + decision readout
-
-[Hugging Face · Model weights](https://huggingface.co/yunqu/mentat-sys1-v0.3) · [Team · THU-IDM](https://www.thuidm.com) · [Demos](#see-it-in-action) · [Quick start](#quick-start) · [Results](#results) · [Inference guide](docs/inference-v0.3.md)
-
-## See it in action
-
-Recorded games and completed workflows. Click a demo to watch the enlarged replay.
-
-<table class="demo-grid">
+<table>
 <tr>
-<td width="33%" valign="top"><strong>Mario</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/mario.gif"><img src="docs/demos/mario.gif" alt="Mario: actual recorded environment frames" width="100%"></a><br>Jump over obstacles and reach the goal.</td>
-<td width="33%" valign="top"><strong>Football</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/football.gif"><img src="docs/demos/football.gif" alt="Football: actual recorded environment frames" width="100%"></a><br>Play against JevBall’s built-in AI team.</td>
-<td width="33%" valign="top"><strong>Doom</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/doom.gif"><img src="docs/demos/doom.gif" alt="Doom: actual recorded environment frames" width="100%"></a><br>Battle seven built-in Doom bots.</td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-customer.gif"><img src="docs/spice/assets/example-customer.gif" alt="Support ticket workflow: Load context → route → create ticket." width="100%"></a><br><b>Support ticket workflow</b><br><sub>Load context → route → create ticket.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/workflows/recordings/customer.json">Execution trace</a> · <a href="#run-the-workflows">Run workflow</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-invoice.gif"><img src="docs/spice/assets/example-invoice.gif" alt="Invoice review workflow: Mismatch held · matching invoice approved." width="100%"></a><br><b>Invoice review workflow</b><br><sub>Mismatch held · matching invoice approved.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/workflows/recordings/invoice.json">Execution trace</a> · <a href="#run-the-workflows">Run workflow</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-rag.gif"><img src="docs/spice/assets/example-rag.gif" alt="Grounded publishing workflow: Retrieve → verify → extract → recheck → save." width="100%"></a><br><b>Grounded publishing workflow</b><br><sub>Retrieve → verify → extract → recheck → save.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/workflows/recordings/rag.json">Execution trace</a> · <a href="#run-the-workflows">Run workflow</a></sub></td>
 </tr>
 <tr>
-<td width="33%" valign="top"><strong>Shopping</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/store.gif"><img src="docs/demos/store.gif" alt="Shopping: actual recorded environment frames" width="100%"></a><br>Compare prices and delivery options, then place an order.</td>
-<td width="33%" valign="top"><strong>Workspace</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/workspace.gif"><img src="docs/demos/workspace.gif" alt="Workspace: actual recorded environment frames" width="100%"></a><br>Invite a teammate with the requested permissions.</td>
-<td width="33%" valign="top"><strong>Chess</strong><br><a href="https://huggingface.co/yunqu/mentat-sys1-v0.3/resolve/v0.3/demos/recorded-games/tiles/chess.gif"><img src="docs/demos/chess.gif" alt="Chess: actual recorded environment frames" width="100%"></a><br>Play against a greedy chess bot.</td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-security.gif"><img src="docs/spice/assets/example-security.gif" alt="Security alert triage: Unscheduled logging change → investigate." width="100%"></a><br><b>Security alert triage</b><br><sub>Unscheduled logging change → investigate.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/security.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-contract.gif"><img src="docs/spice/assets/example-contract.gif" alt="Contract clause review: NDA → supported, contradicted or unstated." width="100%"></a><br><b>Contract clause review</b><br><sub>NDA → supported, contradicted or unstated.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/contract.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-shopping.gif"><img src="docs/spice/assets/example-shopping.gif" alt="Search relevance: Wine query + corkscrew → accessory, not exact match." width="100%"></a><br><b>Search relevance</b><br><sub>Wine query + corkscrew → accessory, not exact match.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/shopping.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+</tr>
+<tr>
+<td align="center" width="33%"><a href="docs/spice/assets/example-agent.gif"><img src="docs/spice/assets/example-agent.gif" alt="Agent trace-summary triage: Supplied trace summary → human review." width="100%"></a><br><b>Agent trace-summary triage</b><br><sub>Supplied trace summary → human review.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/agent.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-tool.gif"><img src="docs/spice/assets/example-tool.gif" alt="Event and reminder tool selection: Reference histories → AddAgenda / AddAlarm." width="100%"></a><br><b>Event and reminder tool selection</b><br><sub>Reference histories → AddAgenda / AddAlarm.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/tool.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-web.gif"><img src="docs/spice/assets/example-web.gif" alt="Browser action selection: Six reference screenshots → correct target elements." width="100%"></a><br><b>Browser action selection</b><br><sub>Six reference screenshots → correct target elements.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/web.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+</tr>
+<tr>
+<td align="center" width="33%"><a href="docs/spice/assets/example-receipt.gif"><img src="docs/spice/assets/example-receipt.gif" alt="Receipt information extraction: Receipt photo → IDR 17,000 total, 3,000 change." width="100%"></a><br><b>Receipt information extraction</b><br><sub>Receipt photo → IDR 17,000 total, 3,000 change.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/receipt.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-chart.gif"><img src="docs/spice/assets/example-chart.gif" alt="Scientific figure analysis: Compare six plots → 0 consistently increasing." width="100%"></a><br><b>Scientific figure analysis</b><br><sub>Compare six plots → 0 consistently increasing.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/chart.json">Input / output</a> · <a href="#try-the-examples">Run locally</a></sub></td>
+<td align="center" width="33%"><a href="docs/spice/assets/example-babyai.gif"><img src="docs/spice/assets/example-babyai.gif" alt="Sequential task planning: 62 actions → two doors opened, ball collected." width="100%"></a><br><b>Sequential task planning</b><br><sub>62 actions → two doors opened, ball collected.</sub><br><sub><a href="https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/babyai.json">Input / output</a></sub></td>
 </tr>
 </table>
 
-The model receives structured **text/JSON** states and selects actions.
+A shared `state` + `questions` interface powers all these decisions. [Try the examples](#try-the-examples) · [Example sources and scope](#example-sources-and-scope).
 
-<sub>Controllers provide Mario lookahead, Doom aiming/navigation, football physics/off-ball AI, and chess legal/tactical facts. Shopping and Workspace use local mock sites. Game clips show selected highlights.</sub>
+<details markdown="1" id="example-sources-and-scope">
+<summary><b>Example sources and scope</b></summary>
 
-## Results
+The first three cards were freshly executed with this checkpoint in local SQLite workflows. Customer and invoice inputs are synthetic business scenarios from Typed Decisions. The publishing workflow uses RAGTruth source news and a draft summary. These workflows persist actual tickets, review states and summary records in a local test database; they do not connect to production services. The controller performs retrieval, queue mapping, accounting guards and deterministic source extraction; mentat supplies the recorded decisions and verification probabilities.
 
-| Measurement | mentat-sys1-v0.3 | Jev, reported |
-|---|---:|---:|
-| Intern-Decision — average accuracy (%) ↑ | **89.59%** | 88.74% |
-| JevBench — correct answers (public set) ↑ | **204/231** | 199/231 |
-| Typed Decisions — Brier score ↓ | **0.05403** | 0.148 |
-| Decision Index 0.2.1 ↑ | 52.07* | **57.91** |
-| Latency (ms) ↓ | **21.47 ms** | 150 ms† |
+The remaining cards show selected capability examples from public datasets and environments. These examples are not aggregate application success rates.
 
-<sub>Jev benchmark results: [StartLux results](https://github.com/StartLuxLabs/StartLux-Decision/blob/a9101e918e097b26fea5ead9ed893b823e875e46/docs/results.md).</sub>
+The BabyAI game is a completed episode in a public simulation. Browser screenshots and API histories are reference states supplied at each step; those sequences are offline decision replays. Browser action types and arguments are supplied; the model selects the target element. The tool example selects APIs after authentication; it does not request credentials, generate arguments or execute tools. Agent triage uses supplied summary statistics, including violation counts. The model returns judgments and recommendations. Business-system actions are performed by the integrating application.
 
-<sub>\* DI: 149,816 requests, 37 tasks; HLE unmeasured (zero contribution, original weights); abstentions count as wrong.</sub>
+[Source credits and media licenses](docs/spice/assets/ATTRIBUTION.md) · [Example index](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/examples/index.json)
 
-<sub>† mentat: one question, accelerated runtime, warm A800, 600 localhost HTTP requests. Jev: [TypeSafe’s official 150 ms reference](https://docs.typesafe.ai/concepts/use-case-map#real-time-applications), question count unspecified.</sub>
+</details>
 
-## Quick start
+## Evaluation
 
-Python 3.12 · Linux · NVIDIA CUDA GPU. Download the adapter package and Qwen base separately:
+<table>
+<tbody>
+<tr>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-decisionindex-text.svg"><img src="docs/spice/assets/bench-decisionindex-text.svg" alt="Decision Index · Text: full model names and frozen scores" width="100%"></a></td>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-decisionindex-vision.svg"><img src="docs/spice/assets/bench-decisionindex-vision.svg" alt="Decision Index · Vision: full model names and frozen scores" width="100%"></a></td>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-jevbench.svg"><img src="docs/spice/assets/bench-jevbench.svg" alt="JevBench ‡: full model names and frozen scores" width="100%"></a></td>
+</tr>
+<tr>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-typeddecisions.svg"><img src="docs/spice/assets/bench-typeddecisions.svg" alt="Typed Decisions †: full model names and frozen scores" width="100%"></a></td>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-decisionbench.svg"><img src="docs/spice/assets/bench-decisionbench.svg" alt="DecisionBench: full model names and frozen scores" width="100%"></a></td>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-proceduraltypeddecisions.svg"><img src="docs/spice/assets/bench-proceduraltypeddecisions.svg" alt="Procedural Typed Decisions: full model names and frozen scores" width="100%"></a></td>
+</tr>
+<tr>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-jevaltbench.svg"><img src="docs/spice/assets/bench-jevaltbench.svg" alt="JevAlt-Bench: full model names and frozen scores" width="100%"></a></td>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-zhdecisionbench.svg"><img src="docs/spice/assets/bench-zhdecisionbench.svg" alt="zh-decision-bench: full model names and frozen scores" width="100%"></a></td>
+<td width="33.33%" valign="top"><a href="docs/spice/assets/bench-visualdecisionbench-image.svg"><img src="docs/spice/assets/bench-visualdecisionbench-image.svg" alt="VisualDecisionBench · Image: full model names and frozen scores" width="100%"></a></td>
+</tr>
+</tbody>
+</table>
+
+Public benchmark test data were used during adaptation; these public results are not held-out or official private Full scores.
+
+One checkpoint across all nine panels. DI reports **Public** index points; other panels show accuracy. Axes are truncated and marked; click a panel for its vector original. † Typed uses soft-target modal accuracy. ‡ JevBench comparison values are provider-reported.
+
+
+Text DI uses the frozen public 0.3 protocol: 139,677 requests / 311,819 fields; unmeasured HLE contributes zero with its original weight retained. Vision covers 12,210 questions / 11 tasks. Typed is a local rescore of 400 cases / 2,000 fields using the [System One Bench](https://systemonebench.dev/benchmarks/typed-decisions/) modal-label rule, not an official board entry.
+
+Comparison values are published references, not matched reruns; Qwen Vision uses a stock VLM answer-letter readout. Sources: [DI board · Nov 19](https://multimodalart-jev-decision-index.static.hf.space/index.html) · [JevalKit · Nov 10](https://huggingface.co/spaces/Valen-Team/JevalKit-Leaderboard) · [Google's JevBench report](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/). [Model names and values](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/representative-comparison.json) · [Provider definitions](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/spice/provider-reference-results.json).
+
+## Inference
+
+**21.9 ms median** on one A800 for a warm short-text decision with the Turbo runtime (251 input tokens, four choices, 100 sequential Python calls). Loading, compilation and HTTP transport are excluded. [Runtime and acceleration guide](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/inference-spice.md).
+
+## Using the model
+
+Python 3.12 · Linux · CUDA GPU. Install the GitHub runtime, then sign in to an HF account with access to this private model:
 
 ```bash
-git clone https://github.com/mentat-asi/mentat-sys1.git
-cd mentat-sys1
-pip install -e ".[accelerate]"
-
-hf download yunqu/mentat-sys1-v0.3 --revision v0.3 --local-dir model-v0.3
-hf download Qwen/Qwen3.5-4B \
-  --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a \
-  --local-dir qwen-base
-
-mentat-sys1-v03 predict --model-package model-v0.3 --base-model qwen-base \
-  --input model-v0.3/example.json
+pip install "mentat-sys1[serve] @ git+https://github.com/mentat-asi/mentat-sys1.git"
+hf auth login
 ```
 
-The accelerated runtime is enabled by default. For the original probability computation, select `--runtime native` and install with `pip install -e ".[serve]"`. Run the two modes in separate processes. [Inference guide](docs/inference-v0.3.md).
+```python
+from mentat_spice import DecisionModel
 
-## Serve the model
-
-```bash
-mentat-sys1-v03 serve --model-package model-v0.3 --base-model qwen-base \
-  --warmup-request model-v0.3/example.json --host 127.0.0.1 --port 8765
-
-curl --fail --request POST http://127.0.0.1:8765/v1/systemone \
-  --header 'Content-Type: application/json' \
-  --data-binary @model-v0.3/example.json
+model = DecisionModel.from_pretrained("yunqu/mentat-Spice-4B")
+result = model.predict({
+    "state": "A delivery address is missing its street number.",
+    "questions": {"complete": {
+        "type": "noul", "instructions": "The delivery address is complete."
+    }},
+})
+print(result["answers"])
 ```
 
-Supports named choices (`choice`), yes/no (`noul`) and ordered scales (`score`). The API returns probabilities, confidence and abstention diagnostics, with zero generated answer tokens.
+The first call downloads the four adapter files and the pinned Qwen3.5-4B backbone; later calls reuse the HF cache. Weights stay on your machine and inference runs locally. Supports `choice`, `noul` and `score`; add `images=["./image.png"]` to `predict` for pictures.
 
-## Acceleration included
+<a id="run-the-workflows"></a><a id="try-the-examples"></a>
+[Examples and workflows](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/inference-spice.md#run-the-workflows) · [HTTP API](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/inference-spice.md#http-service) · [Turbo acceleration](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/inference-spice.md#runtime-selection) · [Offline loading](https://github.com/mentat-asi/mentat-sys1/blob/main/docs/inference-spice.md#offline-and-local-loading)
 
-All six optimizations are available through the CLI and Python API: in-memory LoRA merging, batched questions, request-local shared prefixes, FLA Triton kernels, pointwise fusion and CUDA Graphs.
+## Model information
 
-| Runtime | One question · HTTP mean | Three questions · HTTP mean | Intern-Decision |
-|---|---:|---:|---:|
-| Native v0.3 | 83.60 ms | 249.86 ms | 89.59% |
-| Accelerated v0.3 | **21.47 ms** | **40.66 ms** | 89.52% |
+| Property | Specification |
+| --- | --- |
+| Model | mentat-Spice-4B |
+| Backbone | Qwen3.5-4B |
+| Input | Text and images |
+| Outputs | Candidate probabilities, Boolean probabilities, ordinal scores |
+| Readout | Original language-model projection; no separate decision head |
+| Attention | Eight full-attention layers use bidirectional attention |
+| Native runtime context | 32,768 tokens by default |
+| Images | Up to four per request, within the runtime's pixel and visual-token budgets |
+| Questions | Up to eight per request; each question is evaluated separately |
+| Candidates | 2–255 choice options; 2–10 ordered score levels |
 
-Warm A800 measurements, 600 requests per scenario; loading, compilation and graph capture excluded. Accelerated JevBench is also **204/231**; accelerated DI is unmeasured. Shapes are captured on first use within configurable memory limits; other shapes run eagerly. [Runtime options](docs/inference-v0.3.md#runtime-options).
+The model scores candidates without generating an answer explanation. Native video, audio, and bounding-box grounding are not supported. Long-context limits describe accepted input sizes, not guaranteed accuracy at every length.
 
-## Earlier releases
+## License and credits
 
-The original `mentat-sys1` CLI continues to support v0.1 and v0.2. Their frozen configurations and documentation remain available.
+Adapter and inference code: [Apache-2.0](LICENSE). The separately downloaded Qwen backbone retains its upstream license. Demo sources and individual media terms are listed in [Attribution](docs/spice/assets/ATTRIBUTION.md).
 
-| Model | Weights | Code |
-|---|---|---|
-| v0.2 | [mentat-sys1-v0.2](https://huggingface.co/yunqu/mentat-sys1-v0.2/tree/v0.2.0) | [v0.2.0](https://github.com/mentat-asi/mentat-sys1/tree/v0.2.0) |
-| v0.1 | [mentat-sys1-v0.1](https://huggingface.co/yunqu/mentat-sys1-v0.1/tree/v0.1.0) | [v0.1.1](https://github.com/mentat-asi/mentat-sys1/tree/v0.1.1) |
+## Earlier release
 
-## License
-
-Adapter and bundled code: Apache-2.0. The separately downloaded Qwen base retains its upstream license. [NOTICE](NOTICE).
+[v0.3 model, demos, results and commands](docs/v0.3.md) remain available.

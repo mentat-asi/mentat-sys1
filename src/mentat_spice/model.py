@@ -17,6 +17,33 @@ class DecisionModel:
     max_images = 4
     max_image_pixels = 1_638_400
 
+    @classmethod
+    def from_pretrained(
+        cls, model_id="yunqu/mentat-Spice-4B", *, runtime="native",
+        device="cuda:0", base_model=None, revision=None, cache_dir=None,
+        local_files_only=False, token=None,
+    ):
+        """Load a Hub adapter or local package with its pinned backbone.
+
+        Native is the reference default. Hub authentication uses the saved HF
+        login unless a token is supplied. No remote Python code is downloaded.
+        """
+        if runtime == "native":
+            model_class = cls
+        elif runtime == "accelerated":
+            from .accelerated import AcceleratedDecisionModel as model_class
+        elif runtime == "turbo":
+            from .turbo import TurboDecisionModel as model_class
+        else:
+            raise ValueError("runtime must be native, accelerated or turbo")
+        from .hub import resolve_pretrained
+
+        base, adapter = resolve_pretrained(
+            model_id, base_model=base_model, revision=revision,
+            cache_dir=cache_dir, local_files_only=local_files_only, token=token,
+        )
+        return model_class(base, adapter, device=device)
+
     def __init__(self, base_model, adapter_directory, *, device="cuda:0"):
         from .engine import NativeEngine
 

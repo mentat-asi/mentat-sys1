@@ -1,0 +1,100 @@
+{
+  "benchmark": "PhishNChips phishing decisions",
+  "case_id": "56:phish_0856",
+  "request": {
+    "state": {
+      "sender": "Nico Carter",
+      "from": "carter.nico60@gmail.com",
+      "subject": "Notes and action items from yesterday's meeting",
+      "body": "Hi team,\n\nI've put together the notes and action items from our meeting yesterday. You can review everything here: http://generalverifyupdate.shortcm.li/lpir4fb8\n\nLet me know if I missed anything or if you have any questions.\n\nBest,\nNico",
+      "link_display_text": "View",
+      "link_url": "http://generalverifyupdate.shortcm.li/lpir4fb8"
+    },
+    "questions": {
+      "verdict": {
+        "type": "choice",
+        "instructions": "This email arrived in the user's inbox and contains a link (`link_url`). Is it a phishing attempt, or a legitimate message whose link is safe to click?",
+        "criteria": {
+          "phishing": "The email or its link is a phishing attempt or otherwise malicious. The user should not click the link.",
+          "legitimate": "A normal, legitimate message. The link is safe to click."
+        }
+      },
+      "is_phishing": {
+        "type": "noul",
+        "instructions": "This email is a phishing attempt and the user should not click the link in `link_url`.",
+        "criteria": {
+          "true": "The email or its link is a phishing attempt or otherwise malicious.",
+          "false": "The email is a normal, legitimate message and the link is safe to click."
+        }
+      },
+      "sig_domain_mismatch": {
+        "type": "noul",
+        "instructions": "The domain of the sender address in `from` is different from the organization or domain that the link in `link_url` points to.",
+        "criteria": {}
+      },
+      "sig_free_hosting": {
+        "type": "noul",
+        "instructions": "The link in `link_url` points to a URL shortener or to a free hosting or file-sharing platform (for example bit.ly, an IPFS gateway, Firebase, GitHub Pages, Google Docs) rather than to the organization's own website.",
+        "criteria": {}
+      },
+      "sig_lure": {
+        "type": "noul",
+        "instructions": "The email asks the user to sign in, verify an account, or open a document or file through the link.",
+        "criteria": {}
+      },
+      "sig_urgency": {
+        "type": "noul",
+        "instructions": "The email pressures the user to act quickly, mentions a deadline, or threatens a consequence.",
+        "criteria": {}
+      },
+      "sig_generic_sender": {
+        "type": "noul",
+        "instructions": "The sender uses a generic webmail address (such as gmail, outlook, yahoo, hotmail) in `from` while presenting themselves as a company, team, department or organization.",
+        "criteria": {}
+      },
+      "verdict_alt_click": {
+        "type": "choice",
+        "instructions": "Should the user click the link in this email?",
+        "criteria": {
+          "do_not_click": "No. The link may be phishing or malicious.",
+          "click": "Yes. The email and its link look legitimate."
+        }
+      },
+      "verdict_alt_minimal": {
+        "type": "choice",
+        "instructions": "Classify this email.",
+        "criteria": {
+          "phishing": null,
+          "legitimate": null
+        }
+      }
+    }
+  },
+  "response": {
+    "answers": {
+      "verdict": {
+        "type": "choice",
+        "choice": "phishing"
+      },
+      "verdict_alt_click": {
+        "type": "choice",
+        "choice": "do_not_click"
+      }
+    }
+  },
+  "expected": {
+    "verdict": "phishing",
+    "is_phishing": true,
+    "sig_domain_mismatch": null,
+    "sig_free_hosting": null,
+    "sig_lure": null,
+    "sig_urgency": null,
+    "sig_generic_sender": null,
+    "verdict_alt_click": "do_not_click",
+    "verdict_alt_minimal": "phishing"
+  },
+  "selected_successful_example": true,
+  "archive_calibration_version": "bidir-public-heldout:6186bea0ee9a",
+  "displayed_result": "Archived selected labels only; no probability or latency comparison.",
+  "tool_execution_or_URL_scan_performed": false
+}

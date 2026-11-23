@@ -1,98 +1,113 @@
 # mentat-Spice-4B inference
 
-Python 3.12, Linux and an NVIDIA CUDA GPU. The model repository is currently private; request access from its owner before downloading. This runtime is separate from the v0.3 runtime; use `mentat-spice` for Spice adapters.
+Python 3.12 · Linux · NVIDIA CUDA GPU. Weights are currently private: sign in with an HF account that has access to [yunqu/mentat-Spice-4B](https://huggingface.co/yunqu/mentat-Spice-4B).
 
-## Install and download
+## Install and run
 
 ```bash
-git clone https://github.com/mentat-asi/mentat-sys1.git
-cd mentat-sys1
-pip install -e ".[accelerate]"
-# Authenticate with an account that can read the private model.
+pip install "mentat-sys1[serve] @ git+https://github.com/mentat-asi/mentat-sys1.git"
 hf auth login
-hf download yunqu/mentat-Spice-4B --local-dir model-spice
-hf download Qwen/Qwen3.5-4B \
-  --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a \
-  --local-dir qwen-base
-mentat-spice predict --base-model qwen-base --model-package model-spice \
-  --input configs/spice-example.json
+mentat-spice predict --demo
 ```
 
-The backbone must be downloaded locally, including its processor and tokenizer. The adapter package's `model/` directory supplies the adapter, attention configuration and original LM readout bindings. A generic text-generation pipeline does not reproduce this decision interface.
+The first run downloads only four adapter files and the Qwen3.5-4B backbone at revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`. Subsequent runs reuse the HF cache. The demo checks whether an address missing its street number is complete and prints a System One JSON response. Inference runs locally; the Hub is used to download files.
 
-## Runtime selection
-
-Use `--runtime native` (default), `accelerated`, or `turbo` with either CLI command. Native installation only requires `pip install -e ".[serve]"`.
-
-| Runtime | Behavior |
-| --- | --- |
-| native | Reference text/image scoring with the original LM projection |
-| accelerated | Faster text preparation and first-use-qualified CUDA Graphs; unmerged adapter |
-| turbo | Two independent resident cores: merged/fused text path with a native probability guard and fallback |
-
-Turbo uses FLA Triton convolution, compiled pointwise operations and CUDA Graphs for eligible text inputs up to 2,048 tokens. Graphs are limited to eight shapes; other shapes run through fallback. Images use native eager inference. First use includes compilation and graph capture. Ambiguous probabilities can trigger extra native work, so acceleration is workload-dependent. Turbo requires about 18 GiB allocated GPU memory in the measured setup, plus allocator and driver headroom. Do not disable Triton's default floating-point fusion.
-
-Turbo probabilities can differ from native probabilities. First-shape checks and confidence guards are not an accuracy guarantee; validate your deployment workload. Full accelerated ID/DI scores have not been measured. Native Transformers may already use installed FLA kernels.
-
-A warm A800 text probe (251 input tokens, one four-choice question, 100 sequential Python calls) measured **21.9 ms median / 22.3 ms P95** with Turbo. This excludes loading, compilation and HTTP transport. It is not a latency promise for images, long contexts or queued requests. No fresh matched Jev API result is available yet.
-
-```bash
-mentat-spice predict --runtime turbo --base-model qwen-base \
-  --model-package model-spice --input configs/spice-example.json
-```
+For your own request, replace `--demo` with `--input request.json`. See [example request](../configs/spice-example.json).
 
 ## Python and images
 
 ```python
 from mentat_spice import DecisionModel
-# For acceleration, import AcceleratedDecisionModel from mentat_spice.accelerated
-# or TurboDecisionModel from mentat_spice.turbo instead.
-model = DecisionModel("./qwen-base", "./model-spice/model")
-result = model.predict({
+
+model = DecisionModel.from_pretrained("yunqu/mentat-Spice-4B")
+response = model.predict({
     "state": "A delivery address is missing its street number.",
     "questions": {"complete": {
         "type": "noul", "instructions": "The delivery address is complete."
     }},
 })
-print(result["answers"])
+print(response["answers"])
 ```
 
-For image decisions pass `images=["./image.png"]` to `predict`. Local image paths, PIL images and encoded bytes are accepted. The native context limit is 32,768 processed tokens; up to four images, each at most 1,638,400 pixels and 2,048 visual tokens. These limits are input guards, not measured accuracy guarantees at every length.
+For image decisions, add `images=["./image.png"]` to `predict`. Inputs can be local image paths, PIL images or encoded bytes. Up to four images are accepted, each at most 1,638,400 pixels and 2,048 visual tokens. Native context is 32,768 processed tokens; input limits do not guarantee accuracy at every length.
+
+`choice`, `noul` and `score` return candidate distributions, Boolean probabilities and ordered scores. Choice/score probabilities are conditional on the supplied candidates; `unknown_probability` and `abstained` are separate. Set action thresholds on your own validation data. Each question is evaluated separately without generating an answer explanation. Generic text-generation pipelines do not reproduce the decision attention mask and LM readout.
+
+## Runtime selection
+
+Native is the reference default. For acceleration, install the optional kernels and select a runtime:
+
+```bash
+pip install "mentat-sys1[accelerate] @ git+https://github.com/mentat-asi/mentat-sys1.git"
+mentat-spice predict --runtime turbo --demo
+```
+
+Python: `DecisionModel.from_pretrained("yunqu/mentat-Spice-4B", runtime="turbo")`.
+
+| Runtime | Behavior |
+| --- | --- |
+| native | Reference text/image scoring with the original LM projection |
+| accelerated | Faster text preparation and qualified CUDA Graphs; unmerged adapter |
+| turbo | Two resident cores: merged/fused text path with an independent native guard and fallback |
+
+Turbo combines FLA Triton convolution, compiled pointwise operations and CUDA Graphs for eligible text inputs up to 2,048 tokens. Graph capture is limited to eight shapes; other shapes fall back. Images use native eager inference. First use includes compilation and capture; ambiguous probabilities may trigger additional native work. About 18 GiB was allocated in the measured setup, plus allocator/driver headroom. Keep Triton's default floating-point fusion enabled.
+
+A warm A800 probe (251 input tokens, one four-choice question, 100 sequential Python calls) measured **21.9 ms median / 22.3 ms P95** with Turbo. Loading, compilation and HTTP transport are excluded. See [raw timing evidence](spice/latency-results.json). This is workload-specific; fresh matched Jev API timing is unavailable. Turbo can change probabilities: first-shape checks and confidence guards do not guarantee accuracy for future inputs. Full accelerated ID/DI scores have not been measured. Native Transformers may already dispatch installed FLA kernels.
 
 ## HTTP service
 
 ```bash
-mentat-spice serve --runtime turbo --base-model qwen-base \
-  --model-package model-spice --host 127.0.0.1 --port 8765
+mentat-spice serve --host 127.0.0.1 --port 8765
 curl --fail http://127.0.0.1:8765/v1/systemone \
-  -H 'Content-Type: application/json' --data-binary @configs/spice-example.json
+  -H 'Content-Type: application/json' \
+  -d '{"state":"Street number missing.","questions":{"complete":{"type":"noul","instructions":"The delivery address is complete."}}}'
 ```
 
-Use one worker per GPU; prediction calls are serialized within a model instance. The server accepts text/JSON states and named questions, and rejects image paths in HTTP requests. Use the Python interface for images. There is no built-in authentication; keep the default loopback binding or put an authenticated gateway in front of it. The request body limit is 1 MiB.
+Add `--runtime turbo` for acceleration. Use one worker per GPU; calls are serialized within an instance. The server accepts text/JSON states and questions and rejects local image paths; use Python for images. It has no built-in authentication: keep loopback binding or place it behind an authenticated gateway. Request bodies are limited to 1 MiB; `/health` reports readiness.
 
-`choice`, `noul` and `score` produce candidate distributions, Boolean probabilities and ordered scores. Choice/score probabilities are conditional on provided candidates; `unknown_probability` and `abstained` are separate. Set application thresholds on your own validation data. Each question is scored separately, with no generated answer tokens.
+## Offline and local loading
+
+The downloader honors the normal HF cache. Set `HF_HOME` before starting, or pass `--cache-dir /path/to/cache` / Python `cache_dir=...`. Use `--offline` or `local_files_only=True` after all files have been cached.
+
+Existing local downloads continue to work:
+
+```bash
+mentat-spice predict --base-model ./qwen-base --model-package ./model-spice --demo
+```
+
+Python: `DecisionModel("./qwen-base", "./model-spice/model")`. The model package root contains `model/` with all four files. To reuse a local backbone while downloading the adapter, use `DecisionModel.from_pretrained(base_model="./qwen-base")`. To pin a specific adapter version, pass Python `revision="<commit>"` or CLI `--revision <commit>`; the backbone revision remains fixed.
+
+If downloading fails with 401/403, verify that the account shown by `hf auth whoami` has model access. An offline cache miss needs one online download before offline use. No API key should be inserted into example source files.
 
 ## Run the workflows
 
-The downloaded model package contains local executable workflows and recorded evidence:
+Clone this repository for executable examples and archived records:
 
 ```bash
-python model-spice/workflows/run.py --base-model ./qwen-base --output ./workflow-run-001
-python model-spice/examples/run.py --case invoice --base-model ./qwen-base
-python model-spice/examples/run.py --case receipt --base-model ./qwen-base
-python model-spice/examples/run.py --case babyai --recorded
+git clone https://github.com/mentat-asi/mentat-sys1.git
+cd mentat-sys1
+python docs/spice/examples/run.py --case invoice
+python docs/spice/examples/run.py --case receipt
+python docs/spice/workflows/run.py --output ./workflow-run-001
 ```
 
-The three workflows create a support ticket, check an invoice and verify a retrieved-source draft using local SQLite transactions. Controllers execute the transactions and check postconditions. No funds move and no external website is operated. Publishing repair extracts source sentences; the decision model does not generate the replacement text. Example scripts score saved decision states; `--recorded` only reads archived responses.
+The runners download/reuse the same model automatically. `--base-model` optionally reuses a local backbone; `--adapter-directory` with `--base-model` loads entirely local files. Use a new workflow output directory. For saved evidence without inference: `python docs/spice/examples/run.py --case babyai --recorded`.
+
+The three workflows create a support ticket, check an invoice and verify a retrieved-source draft through local SQLite transactions. Controllers execute writes and validate postconditions; no money moves and no external site is operated. Publishing repair extracts source sentences, which the model verifies. The example runner scores saved states; `--recorded` only reads archived responses. [Example sources and media terms](spice/assets/ATTRIBUTION.md).
 
 ## Measure your workload
 
-The model package includes a latency harness with text and image scenarios:
-
 ```bash
-python model-spice/benchmark_latency.py --base-model ./qwen-base \
-  --adapter-directory ./model-spice/model --turbo \
+python docs/spice/benchmark_latency.py --turbo \
   --warmup 10 --samples 100 --output ./latency-run-001
 ```
 
-Use a new output directory each time. The report retains raw timings and environment information. Compare the same request, runtime, device, warmup and concurrency; Python latency, localhost HTTP latency and a remote API's end-to-end latency are different measurements.
+The harness downloads/reuses model files and retains raw samples, environment and scope. Omit `--turbo` for native; use `--accelerated` for the unmerged fast runtime. Existing local paths can be supplied with `--base-model` and `--adapter-directory`. Compare identical requests, runtime, device, warmup and concurrency: Python latency, localhost HTTP latency and a remote API's latency measure different scopes.
+
+## Repository layout
+
+- **HF:** four model files, model card, licenses and displayed media.
+- **GitHub:** runtime, installation, HTTP API, examples, workflow code and evaluation records.
+- **Qwen Hub:** separately licensed pinned backbone, downloaded automatically.
+
+The earlier v0.3 model still uses `mentat-sys1-v03`; [its guide](inference-v0.3.md) remains available.

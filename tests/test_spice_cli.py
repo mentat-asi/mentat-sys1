@@ -73,3 +73,30 @@ def test_runtime_dispatch_does_not_load_another_mode(mode, module, class_name, m
     args = SimpleNamespace(runtime=mode, base_model="base", model_package="package", device="cuda:2")
     assert cli.load_model(args) == "loaded"
     assert observed == [(("base", "package/model"), {"device": "cuda:2"})]
+
+
+def test_demo_automatically_resolves_hf_model(monkeypatch, capsys):
+    from mentat_spice.model import DecisionModel
+    model = RecordingModel()
+    loads = []
+    def load(*args, **kwargs):
+        loads.append((args, kwargs))
+        return model
+    monkeypatch.setattr(DecisionModel, "from_pretrained", load)
+    cli.main(["predict", "--demo", "--offline", "--cache-dir", "cache"])
+    assert model.calls == [(cli.DEMO_REQUEST, {})]
+    assert loads[0][0] == ("yunqu/mentat-Spice-4B",)
+    assert loads[0][1]["runtime"] == "native"
+    assert loads[0][1]["local_files_only"] is True
+    assert loads[0][1]["cache_dir"] == "cache"
+    assert json.loads(capsys.readouterr().out)["answers"] == {"ok": True}
+
+
+def test_invalid_input_fails_before_loading_weights(tmp_path, monkeypatch):
+    path = tmp_path / "invalid.json"
+    path.write_text("[]")
+    def unexpected(args):
+        pytest.fail("Invalid request loaded model weights")
+    monkeypatch.setattr(cli, "load_model", unexpected)
+    with pytest.raises(SystemExit):
+        cli.main(["predict", "--input", str(path)])
