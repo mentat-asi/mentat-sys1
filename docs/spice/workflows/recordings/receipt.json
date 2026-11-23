@@ -1,0 +1,372 @@
+{
+  "model": "mentat-Spice-4B",
+  "mode": "fresh_native_inference_and_local_SQLite_execution",
+  "environment": "Local sandbox; public benchmark fixtures, not production business data.",
+  "results": [
+    {
+      "workflow": "customer",
+      "outcome": {
+        "id": "customer_service_000017",
+        "queue": "technical_support",
+        "status": "awaiting_human",
+        "priority": "critical"
+      },
+      "review_queue_count": 1,
+      "verified": true,
+      "resolved_customer_issue": false,
+      "input_source": "customer_service_000017"
+    },
+    {
+      "workflow": "invoice",
+      "cases": [
+        {
+          "case": "invoice_mismatch",
+          "source_case_id": "invoice_processing_000004",
+          "state": {
+            "delivery": {
+              "condition": "accepted",
+              "date": "2026-03-13",
+              "received_qty": 25
+            },
+            "invoice": {
+              "currency": "USD",
+              "id": "INV-2026-1916",
+              "lines": [
+                {
+                  "qty": 45,
+                  "sku": "SKU-941",
+                  "total_usd": 3365.55,
+                  "unit_usd": 74.79
+                }
+              ],
+              "total_usd": 3365.55,
+              "vendor": "Acme Fabrication"
+            },
+            "payment": {
+              "days_until_due": 27,
+              "discount_expires_in_days": 6,
+              "early_payment_discount_pct": 2.0,
+              "status": "scheduled",
+              "terms": "net 30"
+            },
+            "purchase_order": {
+              "freight_terms": "freight prepaid by vendor, not separately billable",
+              "id": "PO-1525",
+              "lines": [
+                {
+                  "qty": 25,
+                  "unit_usd": 74.79
+                }
+              ],
+              "total_usd": 1869.75
+            },
+            "vendor_history": {
+              "disputes_12m": 0,
+              "invoices_12m": 5,
+              "prior_invoice_ids": [
+                "INV-2026-6155",
+                "INV-2026-4483"
+              ]
+            }
+          },
+          "response": {
+            "model": "mentat-Spice-4B",
+            "answers": {
+              "discrepancy_severity": {
+                "type": "score",
+                "score": 2.782484060427189,
+                "legend": {
+                  "0": "None: everything reconciles.",
+                  "1": "Trivial: rounding or a cosmetic difference.",
+                  "2": "Moderate: a real difference worth confirming.",
+                  "3": "Material: a large or unexplained difference."
+                },
+                "probabilities": {
+                  "0": 0.006025741192476793,
+                  "1": 0.009275636201701664,
+                  "2": 0.18088744359197692,
+                  "3": 0.8038111790138446
+                },
+                "confidence": 0.7383826757403732,
+                "unknown_probability": 4.364702172992923e-05,
+                "abstained": false
+              },
+              "disposition": {
+                "type": "choice",
+                "choice": "manual_review",
+                "probabilities": {
+                  "approve": 0.01595769264786913,
+                  "hold": 0.1839205595162311,
+                  "manual_review": 0.6677740045129266,
+                  "reject": 0.1323477433229732
+                },
+                "confidence": 0.556990492193525,
+                "unknown_probability": 7.452681939630636e-05,
+                "abstained": false
+              },
+              "duplicate": {
+                "type": "noul",
+                "noul": 0.014540943280303514,
+                "unknown_probability": 0.0001197690415459632,
+                "abstained": false
+              },
+              "matches_order": {
+                "type": "noul",
+                "noul": 0.011048784111199136,
+                "unknown_probability": 9.962040491126216e-05,
+                "abstained": false
+              },
+              "urgency": {
+                "type": "score",
+                "score": 1.5088130575426322,
+                "legend": {
+                  "0": "No time pressure; can wait indefinitely.",
+                  "1": "Routine; handle within the normal queue.",
+                  "2": "Elevated; should be handled within the same week.",
+                  "3": "Critical; requires action within the same day."
+                },
+                "probabilities": {
+                  "0": 0.032646433063910366,
+                  "1": 0.47601520879720693,
+                  "2": 0.4412172256712227,
+                  "3": 0.05012113246765995
+                },
+                "confidence": 0.3012835047319399,
+                "unknown_probability": 0.00023264031005634645,
+                "abstained": false
+              }
+            },
+            "usage": {
+              "preprocess_ms": 39.485,
+              "questions_ms": 612.635,
+              "input_tokens": 453,
+              "rotations": 1,
+              "language_model_passes": 5,
+              "images": 0,
+              "generated_answer_tokens": 0
+            },
+            "timing": {
+              "total_ms": 658.0170830711722
+            }
+          },
+          "outcome": {
+            "id": "INV-2026-1916",
+            "disposition": "manual_review",
+            "status": "held_for_review"
+          }
+        },
+        {
+          "case": "invoice_matching",
+          "source_case_id": "invoice_processing_000002",
+          "state": {
+            "delivery": {
+              "condition": "accepted",
+              "date": "2026-03-18",
+              "received_qty": 10
+            },
+            "invoice": {
+              "currency": "USD",
+              "id": "INV-2026-9785",
+              "lines": [
+                {
+                  "qty": 10,
+                  "sku": "SKU-487",
+                  "total_usd": 1625.0,
+                  "unit_usd": 162.5
+                }
+              ],
+              "total_usd": 1625.0,
+              "vendor": "Northwind Components"
+            },
+            "payment": {
+              "days_until_due": 2,
+              "discount_expires_in_days": null,
+              "early_payment_discount_pct": null,
+              "status": "scheduled",
+              "terms": "net 30"
+            },
+            "purchase_order": {
+              "freight_terms": "freight prepaid by vendor, not separately billable",
+              "id": "PO-2291",
+              "lines": [
+                {
+                  "qty": 10,
+                  "unit_usd": 162.5
+                }
+              ],
+              "total_usd": 1625.0
+            },
+            "vendor_history": {
+              "disputes_12m": 1,
+              "invoices_12m": 54,
+              "prior_invoice_ids": [
+                "INV-2026-4150",
+                "INV-2026-2139",
+                "INV-2026-1750"
+              ]
+            }
+          },
+          "response": {
+            "model": "mentat-Spice-4B",
+            "answers": {
+              "discrepancy_severity": {
+                "type": "score",
+                "score": 0.05167021883172461,
+                "legend": {
+                  "0": "None: everything reconciles.",
+                  "1": "Trivial: rounding or a cosmetic difference.",
+                  "2": "Moderate: a real difference worth confirming.",
+                  "3": "Material: a large or unexplained difference."
+                },
+                "probabilities": {
+                  "0": 0.9752484694064341,
+                  "1": 0.0079772163817229,
+                  "2": 0.006629940185527616,
+                  "3": 0.010144374026315494
+                },
+                "confidence": 0.9669770526379664,
+                "unknown_probability": 2.162007728489825e-05,
+                "abstained": false
+              },
+              "disposition": {
+                "type": "choice",
+                "choice": "approve",
+                "probabilities": {
+                  "approve": 0.9168719830902999,
+                  "hold": 0.035058680125156845,
+                  "manual_review": 0.032213652683645164,
+                  "reject": 0.015855684100898104
+                },
+                "confidence": 0.8890825387210235,
+                "unknown_probability": 9.009082860836527e-05,
+                "abstained": false
+              },
+              "duplicate": {
+                "type": "noul",
+                "noul": 0.019261935198072767,
+                "unknown_probability": 0.0001301631017793979,
+                "abstained": false
+              },
+              "matches_order": {
+                "type": "noul",
+                "noul": 0.9860116290746959,
+                "unknown_probability": 9.229398023868409e-05,
+                "abstained": false
+              },
+              "urgency": {
+                "type": "score",
+                "score": 1.8871597614972906,
+                "legend": {
+                  "0": "No time pressure; can wait indefinitely.",
+                  "1": "Routine; handle within the normal queue.",
+                  "2": "Elevated; should be handled within the same week.",
+                  "3": "Critical; requires action within the same day."
+                },
+                "probabilities": {
+                  "0": 0.010931343363831753,
+                  "1": 0.27436471486202063,
+                  "2": 0.531316778687173,
+                  "3": 0.18338716308697464
+                },
+                "confidence": 0.37505913248650474,
+                "unknown_probability": 7.972977082663705e-05,
+                "abstained": false
+              }
+            },
+            "usage": {
+              "preprocess_ms": 39.972,
+              "questions_ms": 622.519,
+              "input_tokens": 458,
+              "rotations": 1,
+              "language_model_passes": 5,
+              "images": 0,
+              "generated_answer_tokens": 0
+            },
+            "timing": {
+              "total_ms": 668.4868440497667
+            }
+          },
+          "outcome": {
+            "id": "INV-2026-9785",
+            "disposition": "approve",
+            "status": "approved_for_payment"
+          }
+        }
+      ],
+      "verified": true,
+      "external_payments_executed": 0
+    },
+    {
+      "workflow": "rag",
+      "source_case_id": "59:359",
+      "retrieved_source_id": "59:359",
+      "original_source_retrieved": true,
+      "first_response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "q": {
+            "type": "noul",
+            "noul": 0.6060817753898865,
+            "unknown_probability": 0.00012532516655641254,
+            "abstained": false
+          }
+        },
+        "usage": {
+          "preprocess_ms": 17.4,
+          "questions_ms": 163.935,
+          "input_tokens": 407,
+          "rotations": 1,
+          "language_model_passes": 1,
+          "images": 0,
+          "generated_answer_tokens": 0
+        },
+        "timing": {
+          "total_ms": 183.2662110682577
+        }
+      },
+      "second_response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "q": {
+            "type": "noul",
+            "noul": 0.026375150816502154,
+            "unknown_probability": 9.973490107514105e-05,
+            "abstained": false
+          }
+        },
+        "usage": {
+          "preprocess_ms": 17.116,
+          "questions_ms": 155.843,
+          "input_tokens": 406,
+          "rotations": 1,
+          "language_model_passes": 1,
+          "images": 0,
+          "generated_answer_tokens": 0
+        },
+        "timing": {
+          "total_ms": 175.16680085100234
+        }
+      },
+      "outcomes": [
+        {
+          "id": "draft",
+          "text": "National Park Service offers free admission to 128 parks, including Yellowstone and Yosemite, on April 18-19 and 25-26, as part of National Park Week.",
+          "status": "blocked"
+        },
+        {
+          "id": "replacement",
+          "text": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free.",
+          "status": "published"
+        }
+      ],
+      "verified": true,
+      "rewrite_method": "Deterministic source extraction; mentat verifies both drafts.",
+      "publication_target": "Local SQLite summaries table only"
+    }
+  ],
+  "passed": true,
+  "database_integrity": "ok",
+  "events": 18,
+  "external_service_calls_or_money_movements": 0,
+  "fixtures_sha256": "540d196fe03373658099c24c7ef8d42962730a9b352845af093bd4e12e374c30"
+}

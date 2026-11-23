@@ -21,7 +21,7 @@ def _subcommands(parser: argparse.ArgumentParser) -> dict[str, argparse.Argument
 
 
 def test_public_identity_registers_current_and_legacy_releases() -> None:
-    assert mentat_sys1.__version__ == "0.3.0"
+    assert mentat_sys1.__version__ == "0.4.0"
     assert mentat_sys1.MODEL_ID == "mentat-sys1-v0.1"
     assert {
         "mentat-sys1-v0.1",
@@ -71,7 +71,7 @@ def test_public_package_and_command_use_version_neutral_identity() -> None:
     payload = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
 
     assert payload["project"]["name"] == "mentat-sys1"
-    assert payload["project"]["version"] == "0.3.0"
+    assert payload["project"]["version"] == "0.4.0"
     assert "torchvision==0.23.0" in payload["project"]["optional-dependencies"]["serve"]
     assert payload["project"]["scripts"] == {
         "mentat-sys1": "mentat_sys1.cli:main",
@@ -82,10 +82,14 @@ def test_public_package_and_command_use_version_neutral_identity() -> None:
 
 def test_readme_documents_current_and_legacy_releases() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    archive = (ROOT / "docs/v0.3.md").read_text(encoding="utf-8")
+    assert "https://huggingface.co/yunqu/mentat-Spice-4B" in readme
+    assert "DecisionModel.from_pretrained" in readme
+    assert "docs/v0.3.md" in readme
     for release in ("v0.1", "v0.2", "v0.3"):
-        assert f"https://huggingface.co/yunqu/mentat-sys1-{release}" in readme
-    assert "mentat-sys1-v03 predict" in readme
-    assert "mentat-sys1-v03 serve" in readme
+        assert f"https://huggingface.co/yunqu/mentat-sys1-{release}" in archive
+    assert "mentat-sys1-v03 predict" in archive
+    assert "mentat-sys1-v03 serve" in archive
 
 
 def test_public_documents_do_not_advertise_v1_identity() -> None:
@@ -137,8 +141,8 @@ def test_public_documents_pin_code_patch_separately_from_model() -> None:
     )
 
 
-def test_readme_exposes_current_release_and_reproducibility() -> None:
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+def test_archived_readme_preserves_v03_results_and_reproducibility() -> None:
+    readme = (ROOT / "docs/v0.3.md").read_text(encoding="utf-8")
     for marker in (
         "204/231",
         "89.59%",
@@ -196,7 +200,7 @@ def test_model_card_links_code_and_explains_the_two_downloads() -> None:
 
 
 def test_public_docs_show_a_runnable_jev_compatible_request() -> None:
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme = (ROOT / "docs/v0.3.md").read_text(encoding="utf-8")
     for marker in (
         "curl --fail --request POST",
         "--data-binary @model-v0.3/example.json",

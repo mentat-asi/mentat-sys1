@@ -1,0 +1,240 @@
+{
+  "benchmark": "Typed Decisions",
+  "case_id": "invoice_processing_000004",
+  "request": {
+    "state": {
+      "delivery": {
+        "condition": "accepted",
+        "date": "2026-03-13",
+        "received_qty": 25
+      },
+      "invoice": {
+        "currency": "USD",
+        "id": "INV-2026-1916",
+        "lines": [
+          {
+            "qty": 45,
+            "sku": "SKU-941",
+            "total_usd": 3365.55,
+            "unit_usd": 74.79
+          }
+        ],
+        "total_usd": 3365.55,
+        "vendor": "Acme Fabrication"
+      },
+      "payment": {
+        "days_until_due": 27,
+        "discount_expires_in_days": 6,
+        "early_payment_discount_pct": 2.0,
+        "status": "scheduled",
+        "terms": "net 30"
+      },
+      "purchase_order": {
+        "freight_terms": "freight prepaid by vendor, not separately billable",
+        "id": "PO-1525",
+        "lines": [
+          {
+            "qty": 25,
+            "unit_usd": 74.79
+          }
+        ],
+        "total_usd": 1869.75
+      },
+      "vendor_history": {
+        "disputes_12m": 0,
+        "invoices_12m": 5,
+        "prior_invoice_ids": [
+          "INV-2026-6155",
+          "INV-2026-4483"
+        ]
+      }
+    },
+    "questions": {
+      "discrepancy_severity": {
+        "criteria": [
+          "None: everything reconciles.",
+          "Trivial: rounding or a cosmetic difference.",
+          "Moderate: a real difference worth confirming.",
+          "Material: a large or unexplained difference."
+        ],
+        "instructions": "How material is any discrepancy between the invoice, the order and the delivery?",
+        "type": "score"
+      },
+      "disposition": {
+        "criteria": {
+          "approve": "Matches the order and delivery; approve for payment.",
+          "hold": "Something needs confirming before payment; hold pending clarification.",
+          "manual_review": "A human in finance must review the discrepancy.",
+          "reject": "Should not be paid: duplicate, unauthorised or materially wrong."
+        },
+        "instructions": "How should this vendor invoice be dispositioned?",
+        "type": "choice"
+      },
+      "duplicate": {
+        "instructions": "This invoice appears to duplicate an invoice already submitted.",
+        "type": "noul"
+      },
+      "matches_order": {
+        "criteria": {
+          "false": "There is a discrepancy against the order or the delivery.",
+          "true": "Line items, quantities and amounts reconcile."
+        },
+        "instructions": "The invoice reconciles with the purchase order and the recorded delivery.",
+        "type": "noul"
+      },
+      "urgency": {
+        "criteria": [
+          "No time pressure; can wait indefinitely.",
+          "Routine; handle within the normal queue.",
+          "Elevated; should be handled within the same week.",
+          "Critical; requires action within the same day."
+        ],
+        "instructions": "How time-sensitive is processing this invoice?",
+        "type": "score"
+      }
+    }
+  },
+  "response": {
+    "model": "mentat-Spice-4B",
+    "answers": {
+      "discrepancy_severity": {
+        "type": "score",
+        "score": 2.782484060427189,
+        "legend": {
+          "0": "None: everything reconciles.",
+          "1": "Trivial: rounding or a cosmetic difference.",
+          "2": "Moderate: a real difference worth confirming.",
+          "3": "Material: a large or unexplained difference."
+        },
+        "probabilities": {
+          "0": 0.006025741192476793,
+          "1": 0.009275636201701664,
+          "2": 0.18088744359197692,
+          "3": 0.8038111790138446
+        },
+        "confidence": 0.7383826757403732,
+        "unknown_probability": 4.364702172992923e-05,
+        "abstained": false
+      },
+      "disposition": {
+        "type": "choice",
+        "choice": "manual_review",
+        "probabilities": {
+          "approve": 0.01595769264786913,
+          "hold": 0.1839205595162311,
+          "manual_review": 0.6677740045129266,
+          "reject": 0.1323477433229732
+        },
+        "confidence": 0.556990492193525,
+        "unknown_probability": 7.452681939630636e-05,
+        "abstained": false
+      },
+      "duplicate": {
+        "type": "noul",
+        "noul": 0.014540943280303514,
+        "unknown_probability": 0.0001197690415459632,
+        "abstained": false
+      },
+      "matches_order": {
+        "type": "noul",
+        "noul": 0.011048784111199136,
+        "unknown_probability": 9.962040491126216e-05,
+        "abstained": false
+      },
+      "urgency": {
+        "type": "score",
+        "score": 1.5088130575426322,
+        "legend": {
+          "0": "No time pressure; can wait indefinitely.",
+          "1": "Routine; handle within the normal queue.",
+          "2": "Elevated; should be handled within the same week.",
+          "3": "Critical; requires action within the same day."
+        },
+        "probabilities": {
+          "0": 0.032646433063910366,
+          "1": 0.47601520879720693,
+          "2": 0.4412172256712227,
+          "3": 0.05012113246765995
+        },
+        "confidence": 0.3012835047319399,
+        "unknown_probability": 0.00023264031005634645,
+        "abstained": false
+      }
+    },
+    "native_answers": {
+      "discrepancy_severity": {
+        "type": "score",
+        "score": 2.782484060427189,
+        "legend": {
+          "0": "None: everything reconciles.",
+          "1": "Trivial: rounding or a cosmetic difference.",
+          "2": "Moderate: a real difference worth confirming.",
+          "3": "Material: a large or unexplained difference."
+        },
+        "probabilities": {
+          "0": 0.006025741192476793,
+          "1": 0.009275636201701664,
+          "2": 0.18088744359197692,
+          "3": 0.8038111790138446
+        },
+        "confidence": 0.7383826757403732,
+        "unknown_probability": 4.364702172992923e-05,
+        "abstained": false
+      },
+      "disposition": {
+        "type": "choice",
+        "choice": "manual_review",
+        "probabilities": {
+          "approve": 0.01595769264786913,
+          "hold": 0.1839205595162311,
+          "manual_review": 0.6677740045129266,
+          "reject": 0.1323477433229732
+        },
+        "confidence": 0.556990492193525,
+        "unknown_probability": 7.452681939630636e-05,
+        "abstained": false
+      },
+      "duplicate": {
+        "type": "noul",
+        "noul": 0.014540943280303514,
+        "unknown_probability": 0.0001197690415459632,
+        "abstained": false
+      },
+      "matches_order": {
+        "type": "noul",
+        "noul": 0.011048784111199136,
+        "unknown_probability": 9.962040491126216e-05,
+        "abstained": false
+      },
+      "urgency": {
+        "type": "score",
+        "score": 1.5088130575426322,
+        "legend": {
+          "0": "No time pressure; can wait indefinitely.",
+          "1": "Routine; handle within the normal queue.",
+          "2": "Elevated; should be handled within the same week.",
+          "3": "Critical; requires action within the same day."
+        },
+        "probabilities": {
+          "0": 0.032646433063910366,
+          "1": 0.47601520879720693,
+          "2": 0.4412172256712227,
+          "3": 0.05012113246765995
+        },
+        "confidence": 0.3012835047319399,
+        "unknown_probability": 0.00023264031005634645,
+        "abstained": false
+      }
+    },
+    "usage": {
+      "preprocess_ms": 24.168,
+      "questions_ms": 566.49,
+      "input_tokens": 453,
+      "rotations": 1,
+      "language_model_passes": 5,
+      "images": 0,
+      "generated_answer_tokens": 0
+    }
+  },
+  "selected_successful_example": true
+}

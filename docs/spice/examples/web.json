@@ -1,0 +1,300 @@
+{
+  "benchmark": "Mind2Web",
+  "task": "Find electric cars with a maximum price of $50,000 within 50 miles of 10001.",
+  "decisions": [
+    {
+      "case_id": "full_mind2web:15a09fa7-5de7-4167-94b1-e1e8b9dedb34",
+      "history": [],
+      "request": {
+        "state": {},
+        "questions": {
+          "answer": {
+            "type": "choice",
+            "instructions": "Task: Find electric cars with a maximum price of $50,000 within 50 miles of 10001.\nPrevious actions:\n- (none)\nWhich marked element should the next action (CLICK) be performed on?",
+            "criteria": {
+              "A": "box A",
+              "B": "box B",
+              "C": "box C",
+              "D": "box D"
+            }
+          }
+        }
+      },
+      "input_image_sha256": [
+        "f6febc89f609cf8f991fbdae67a20297cbd00cf88efde5718671435b5a09cad3"
+      ],
+      "expected": {
+        "answer": "A"
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "answer": {
+            "type": "choice",
+            "choice": "A",
+            "probabilities": {
+              "A": 0.8928836407443497,
+              "B": 0.07337095881086682,
+              "C": 0.010882305870878897,
+              "D": 0.02286309457390461
+            },
+            "confidence": 0.8570847996770685,
+            "unknown_probability": 0.00010894815501488222,
+            "abstained": false
+          }
+        }
+      },
+      "display_action": "[tab]  Electric -> CLICK",
+      "display_action_source": "Reference action history; model output is the selected element, not generated action arguments"
+    },
+    {
+      "case_id": "full_mind2web:1265b5e2-696c-4bb2-9acb-b4ef1bddd2ee",
+      "history": [
+        "[tab]  Electric -> CLICK"
+      ],
+      "request": {
+        "state": {},
+        "questions": {
+          "answer": {
+            "type": "choice",
+            "instructions": "Task: Find electric cars with a maximum price of $50,000 within 50 miles of 10001.\nPrevious actions:\n- [tab]  Electric -> CLICK\nWhich marked element should the next action (CLICK) be performed on?",
+            "criteria": {
+              "A": "box A",
+              "B": "box B",
+              "C": "box C",
+              "D": "box D"
+            }
+          }
+        }
+      },
+      "input_image_sha256": [
+        "9881efc9a1d3578d2fbd2ea9cd24da097eef7adc6cff507769b9cbc373bc3e4d"
+      ],
+      "expected": {
+        "answer": "D"
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "answer": {
+            "type": "choice",
+            "choice": "D",
+            "probabilities": {
+              "A": 0.05914552204127186,
+              "B": 0.0034392890660490784,
+              "C": 0.06990612616248043,
+              "D": 0.8675090627301987
+            },
+            "confidence": 0.8232601534629144,
+            "unknown_probability": 0.00010355740000009473,
+            "abstained": false
+          }
+        }
+      },
+      "display_action": "[label]  Electric -> CLICK",
+      "display_action_source": "Reference action history; model output is the selected element, not generated action arguments"
+    },
+    {
+      "case_id": "full_mind2web:b29aa10e-b50e-4e46-aaa3-bebdc82d893a",
+      "history": [
+        "[tab]  Electric -> CLICK",
+        "[label]  Electric -> CLICK"
+      ],
+      "request": {
+        "state": {},
+        "questions": {
+          "answer": {
+            "type": "choice",
+            "instructions": "Task: Find electric cars with a maximum price of $50,000 within 50 miles of 10001.\nPrevious actions:\n- [tab]  Electric -> CLICK\n- [label]  Electric -> CLICK\nWhich marked element should the next action (SELECT) be performed on?",
+            "criteria": {
+              "A": "box A",
+              "B": "box B",
+              "C": "box C",
+              "D": "box D"
+            }
+          }
+        }
+      },
+      "input_image_sha256": [
+        "272f2f0b7fa89f12d0ce9104651a2ac2b31baba4e73e55b50f02be48efb88bf0"
+      ],
+      "expected": {
+        "answer": "D"
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "answer": {
+            "type": "choice",
+            "choice": "D",
+            "probabilities": {
+              "A": 0.0022585886924938576,
+              "B": 0.008988420353937038,
+              "C": 0.1808733000625537,
+              "D": 0.8078796908910154
+            },
+            "confidence": 0.7437820056639404,
+            "unknown_probability": 7.741210831880867e-05,
+            "abstained": false
+          }
+        }
+      },
+      "display_action": "[combobox]  Price -> SELECT: $50,000",
+      "display_action_source": "Reference action history; model output is the selected element, not generated action arguments"
+    },
+    {
+      "case_id": "full_mind2web:068c4eda-d3b8-467a-99b2-53e4488f046a",
+      "history": [
+        "[tab]  Electric -> CLICK",
+        "[label]  Electric -> CLICK",
+        "[combobox]  Price -> SELECT: $50,000"
+      ],
+      "request": {
+        "state": {},
+        "questions": {
+          "answer": {
+            "type": "choice",
+            "instructions": "Task: Find electric cars with a maximum price of $50,000 within 50 miles of 10001.\nPrevious actions:\n- [tab]  Electric -> CLICK\n- [label]  Electric -> CLICK\n- [combobox]  Price -> SELECT: $50,000\nWhich marked element should the next action (SELECT) be performed on?",
+            "criteria": {
+              "A": "box A",
+              "B": "box B",
+              "C": "box C",
+              "D": "box D"
+            }
+          }
+        }
+      },
+      "input_image_sha256": [
+        "7441a400f259f49193457606a0947926f09d2478fd09257ae2e52b107711bbf1"
+      ],
+      "expected": {
+        "answer": "A"
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "answer": {
+            "type": "choice",
+            "choice": "A",
+            "probabilities": {
+              "A": 0.9912622670667092,
+              "B": 0.0019764438030770437,
+              "C": 0.0014619430768481256,
+              "D": 0.005299346053365725
+            },
+            "confidence": 0.9883339923384662,
+            "unknown_probability": 1.58821153895998e-05,
+            "abstained": false
+          }
+        }
+      },
+      "display_action": "[combobox]  Distance -> SELECT: 50 miles",
+      "display_action_source": "Reference action history; model output is the selected element, not generated action arguments"
+    },
+    {
+      "case_id": "full_mind2web:e3a0f960-e9c3-404b-adb9-c9dec6a455a6",
+      "history": [
+        "[tab]  Electric -> CLICK",
+        "[label]  Electric -> CLICK",
+        "[combobox]  Price -> SELECT: $50,000",
+        "[combobox]  Distance -> SELECT: 50 miles"
+      ],
+      "request": {
+        "state": {},
+        "questions": {
+          "answer": {
+            "type": "choice",
+            "instructions": "Task: Find electric cars with a maximum price of $50,000 within 50 miles of 10001.\nPrevious actions:\n- [tab]  Electric -> CLICK\n- [label]  Electric -> CLICK\n- [combobox]  Price -> SELECT: $50,000\n- [combobox]  Distance -> SELECT: 50 miles\nWhich marked element should the next action (TYPE) be performed on?",
+            "criteria": {
+              "A": "box A",
+              "B": "box B",
+              "C": "box C",
+              "D": "box D"
+            }
+          }
+        }
+      },
+      "input_image_sha256": [
+        "ca1afe529654cb73090a4783d90f6c895654780d2eea3e4596c396ce650f5971"
+      ],
+      "expected": {
+        "answer": "C"
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "answer": {
+            "type": "choice",
+            "choice": "C",
+            "probabilities": {
+              "A": 0.0038490148500461164,
+              "B": 0.00932174796418897,
+              "C": 0.9515644107268838,
+              "D": 0.03526482645888111
+            },
+            "confidence": 0.9354006141637375,
+            "unknown_probability": 1.9884281282455073e-05,
+            "abstained": false
+          }
+        }
+      },
+      "display_action": "[label]  ZIP -> TYPE: 10001",
+      "display_action_source": "Reference action history; model output is the selected element, not generated action arguments"
+    },
+    {
+      "case_id": "full_mind2web:59c51f3c-0fb4-4424-ac73-dd3335e8bfc7",
+      "history": [
+        "[tab]  Electric -> CLICK",
+        "[label]  Electric -> CLICK",
+        "[combobox]  Price -> SELECT: $50,000",
+        "[combobox]  Distance -> SELECT: 50 miles",
+        "[label]  ZIP -> TYPE: 10001"
+      ],
+      "request": {
+        "state": {},
+        "questions": {
+          "answer": {
+            "type": "choice",
+            "instructions": "Task: Find electric cars with a maximum price of $50,000 within 50 miles of 10001.\nPrevious actions:\n- [tab]  Electric -> CLICK\n- [label]  Electric -> CLICK\n- [combobox]  Price -> SELECT: $50,000\n- [combobox]  Distance -> SELECT: 50 miles\n- [label]  ZIP -> TYPE: 10001\nWhich marked element should the next action (CLICK) be performed on?",
+            "criteria": {
+              "A": "box A",
+              "B": "box B",
+              "C": "box C",
+              "D": "box D"
+            }
+          }
+        }
+      },
+      "input_image_sha256": [
+        "c7370603fdd19da87d14c460feb7b99cdded60049398858ba39d32399fa03f5f"
+      ],
+      "expected": {
+        "answer": "C"
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "answer": {
+            "type": "choice",
+            "choice": "C",
+            "probabilities": {
+              "A": 0.0005753769775555577,
+              "B": 0.0015644753691081723,
+              "C": 0.989898885185847,
+              "D": 0.007961262467489155
+            },
+            "confidence": 0.986511432949067,
+            "unknown_probability": 2.0692657271670576e-05,
+            "abstained": false
+          }
+        }
+      },
+      "display_action": "Select box C",
+      "display_action_source": "Reference action history; model output is the selected element, not generated action arguments"
+    }
+  ],
+  "all_six_choices_correct": true,
+  "mode": "Offline reference-screenshot trajectory replay",
+  "not_a_new_closed_loop_browser_execution": true,
+  "task_completion_not_measured": true
+}

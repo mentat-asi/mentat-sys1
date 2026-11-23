@@ -1,0 +1,45 @@
+{
+  "benchmark": "Amazon ESCI",
+  "case_id": "Amazon-ESCI:test:392938",
+  "request": {
+    "state": {
+      "search_query": "bottle wine",
+      "product": {
+        "title": "Secura Electric Wine Opener, Automatic Electric Wine Bottle Corkscrew Opener with Foil Cutter, Rechargeable (Champagne Gold)",
+        "bullet_point": "Rechargeable Electric Wine Bottle Opener - Easily remove corks in seconds. Compatible with most wine bottle sizes. Open up to 30 bottles on a single charge.\nEasy to Use - Simply place on top of your wine bottle, press a button, and tada, your wine is open and ready to serve.\nSmall Footprint Saves Space - Our electric wine bottle opener is small enough to store discreetly away when not in use. Keep the charging base next to your wine fridge, storage rack, credenza, etc.\nMakes an Amazing Present - An elegant color makes our electric wine bottle opener an attractive present, or use it at home, when catering, at banquets, in restaurants or behind the bar.\nReliable product and service - 100-240V wide input voltage range covers The known voltages of most places in the world. We offer 12 months and lifetime friendly customer service. NOTE: Please charge your wine opener every three months when not in regular use, so as to extend the lifespan of the battery.",
+        "brand": "Secura",
+        "color": "Champagne Gold"
+      }
+    },
+    "questions": {
+      "answer": {
+        "type": "choice",
+        "instructions": "Classify the relevance of this product to the search query using the ESCI categories.",
+        "criteria": {
+          "E": "Exact: the product satisfies the search query.",
+          "S": "Substitute: a product that could substitute for the requested product.",
+          "C": "Complement: a product that complements the requested product.",
+          "I": "Irrelevant: the product does not address the requested product need."
+        }
+      }
+    }
+  },
+  "response": {
+    "answers": {
+      "answer": {
+        "type": "choice",
+        "choice": "C"
+      }
+    }
+  },
+  "displayed_fields": [
+    "answer"
+  ],
+  "expected_displayed_fields": {
+    "answer": "C"
+  },
+  "selected_successful_example": true,
+  "archive_calibration_version": "bidir-public-heldout:6186bea0ee9a",
+  "displayed_result": "Archived selected labels only; probabilities and latency are not displayed.",
+  "source_payload_sha256": "e8dd423b886f214a3cf13cf45fc306f87590126320fc3a175e1104dbc030f503"
+}

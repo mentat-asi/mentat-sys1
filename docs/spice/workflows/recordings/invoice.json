@@ -1,0 +1,1079 @@
+{
+  "workflow": "invoice",
+  "events": [
+    {
+      "seq": 5,
+      "workflow": "invoice",
+      "step": "records_loaded",
+      "elapsed_ms": 1180.046,
+      "case": "invoice_mismatch",
+      "case_id": "invoice_processing_000004",
+      "state": {
+        "delivery": {
+          "condition": "accepted",
+          "date": "2026-03-13",
+          "received_qty": 25
+        },
+        "invoice": {
+          "currency": "USD",
+          "id": "INV-2026-1916",
+          "lines": [
+            {
+              "qty": 45,
+              "sku": "SKU-941",
+              "total_usd": 3365.55,
+              "unit_usd": 74.79
+            }
+          ],
+          "total_usd": 3365.55,
+          "vendor": "Acme Fabrication"
+        },
+        "payment": {
+          "days_until_due": 27,
+          "discount_expires_in_days": 6,
+          "early_payment_discount_pct": 2.0,
+          "status": "scheduled",
+          "terms": "net 30"
+        },
+        "purchase_order": {
+          "freight_terms": "freight prepaid by vendor, not separately billable",
+          "id": "PO-1525",
+          "lines": [
+            {
+              "qty": 25,
+              "unit_usd": 74.79
+            }
+          ],
+          "total_usd": 1869.75
+        },
+        "vendor_history": {
+          "disputes_12m": 0,
+          "invoices_12m": 5,
+          "prior_invoice_ids": [
+            "INV-2026-6155",
+            "INV-2026-4483"
+          ]
+        }
+      },
+      "source": "SQLite source_records"
+    },
+    {
+      "seq": 6,
+      "workflow": "invoice",
+      "step": "model_decision",
+      "elapsed_ms": 1850.589,
+      "request": {
+        "state": {
+          "delivery": {
+            "condition": "accepted",
+            "date": "2026-03-13",
+            "received_qty": 25
+          },
+          "invoice": {
+            "currency": "USD",
+            "id": "INV-2026-1916",
+            "lines": [
+              {
+                "qty": 45,
+                "sku": "SKU-941",
+                "total_usd": 3365.55,
+                "unit_usd": 74.79
+              }
+            ],
+            "total_usd": 3365.55,
+            "vendor": "Acme Fabrication"
+          },
+          "payment": {
+            "days_until_due": 27,
+            "discount_expires_in_days": 6,
+            "early_payment_discount_pct": 2.0,
+            "status": "scheduled",
+            "terms": "net 30"
+          },
+          "purchase_order": {
+            "freight_terms": "freight prepaid by vendor, not separately billable",
+            "id": "PO-1525",
+            "lines": [
+              {
+                "qty": 25,
+                "unit_usd": 74.79
+              }
+            ],
+            "total_usd": 1869.75
+          },
+          "vendor_history": {
+            "disputes_12m": 0,
+            "invoices_12m": 5,
+            "prior_invoice_ids": [
+              "INV-2026-6155",
+              "INV-2026-4483"
+            ]
+          }
+        },
+        "questions": {
+          "discrepancy_severity": {
+            "criteria": [
+              "None: everything reconciles.",
+              "Trivial: rounding or a cosmetic difference.",
+              "Moderate: a real difference worth confirming.",
+              "Material: a large or unexplained difference."
+            ],
+            "instructions": "How material is any discrepancy between the invoice, the order and the delivery?",
+            "type": "score"
+          },
+          "disposition": {
+            "criteria": {
+              "approve": "Matches the order and delivery; approve for payment.",
+              "hold": "Something needs confirming before payment; hold pending clarification.",
+              "manual_review": "A human in finance must review the discrepancy.",
+              "reject": "Should not be paid: duplicate, unauthorised or materially wrong."
+            },
+            "instructions": "How should this vendor invoice be dispositioned?",
+            "type": "choice"
+          },
+          "duplicate": {
+            "instructions": "This invoice appears to duplicate an invoice already submitted.",
+            "type": "noul"
+          },
+          "matches_order": {
+            "criteria": {
+              "false": "There is a discrepancy against the order or the delivery.",
+              "true": "Line items, quantities and amounts reconcile."
+            },
+            "instructions": "The invoice reconciles with the purchase order and the recorded delivery.",
+            "type": "noul"
+          },
+          "urgency": {
+            "criteria": [
+              "No time pressure; can wait indefinitely.",
+              "Routine; handle within the normal queue.",
+              "Elevated; should be handled within the same week.",
+              "Critical; requires action within the same day."
+            ],
+            "instructions": "How time-sensitive is processing this invoice?",
+            "type": "score"
+          }
+        }
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "discrepancy_severity": {
+            "type": "score",
+            "score": 2.782484060427189,
+            "legend": {
+              "0": "None: everything reconciles.",
+              "1": "Trivial: rounding or a cosmetic difference.",
+              "2": "Moderate: a real difference worth confirming.",
+              "3": "Material: a large or unexplained difference."
+            },
+            "probabilities": {
+              "0": 0.006025741192476793,
+              "1": 0.009275636201701664,
+              "2": 0.18088744359197692,
+              "3": 0.8038111790138446
+            },
+            "confidence": 0.7383826757403732,
+            "unknown_probability": 4.364702172992923e-05,
+            "abstained": false
+          },
+          "disposition": {
+            "type": "choice",
+            "choice": "manual_review",
+            "probabilities": {
+              "approve": 0.01595769264786913,
+              "hold": 0.1839205595162311,
+              "manual_review": 0.6677740045129266,
+              "reject": 0.1323477433229732
+            },
+            "confidence": 0.556990492193525,
+            "unknown_probability": 7.452681939630636e-05,
+            "abstained": false
+          },
+          "duplicate": {
+            "type": "noul",
+            "noul": 0.014540943280303514,
+            "unknown_probability": 0.0001197690415459632,
+            "abstained": false
+          },
+          "matches_order": {
+            "type": "noul",
+            "noul": 0.011048784111199136,
+            "unknown_probability": 9.962040491126216e-05,
+            "abstained": false
+          },
+          "urgency": {
+            "type": "score",
+            "score": 1.5088130575426322,
+            "legend": {
+              "0": "No time pressure; can wait indefinitely.",
+              "1": "Routine; handle within the normal queue.",
+              "2": "Elevated; should be handled within the same week.",
+              "3": "Critical; requires action within the same day."
+            },
+            "probabilities": {
+              "0": 0.032646433063910366,
+              "1": 0.47601520879720693,
+              "2": 0.4412172256712227,
+              "3": 0.05012113246765995
+            },
+            "confidence": 0.3012835047319399,
+            "unknown_probability": 0.00023264031005634645,
+            "abstained": false
+          }
+        },
+        "usage": {
+          "preprocess_ms": 39.485,
+          "questions_ms": 612.635,
+          "input_tokens": 453,
+          "rotations": 1,
+          "language_model_passes": 5,
+          "images": 0,
+          "generated_answer_tokens": 0
+        },
+        "timing": {
+          "total_ms": 658.0170830711722
+        }
+      },
+      "case": "invoice_mismatch"
+    },
+    {
+      "seq": 7,
+      "workflow": "invoice",
+      "step": "review_status_written",
+      "elapsed_ms": 1980.632,
+      "case": "invoice_mismatch",
+      "database_row": {
+        "id": "INV-2026-1916",
+        "disposition": "manual_review",
+        "status": "held_for_review"
+      },
+      "quantities_match": false,
+      "totals_match": false,
+      "executor": "Python controller: model disposition + reconciliation guard"
+    },
+    {
+      "seq": 8,
+      "workflow": "invoice",
+      "step": "records_loaded",
+      "elapsed_ms": 2097.306,
+      "case": "invoice_matching",
+      "case_id": "invoice_processing_000002",
+      "state": {
+        "delivery": {
+          "condition": "accepted",
+          "date": "2026-03-18",
+          "received_qty": 10
+        },
+        "invoice": {
+          "currency": "USD",
+          "id": "INV-2026-9785",
+          "lines": [
+            {
+              "qty": 10,
+              "sku": "SKU-487",
+              "total_usd": 1625.0,
+              "unit_usd": 162.5
+            }
+          ],
+          "total_usd": 1625.0,
+          "vendor": "Northwind Components"
+        },
+        "payment": {
+          "days_until_due": 2,
+          "discount_expires_in_days": null,
+          "early_payment_discount_pct": null,
+          "status": "scheduled",
+          "terms": "net 30"
+        },
+        "purchase_order": {
+          "freight_terms": "freight prepaid by vendor, not separately billable",
+          "id": "PO-2291",
+          "lines": [
+            {
+              "qty": 10,
+              "unit_usd": 162.5
+            }
+          ],
+          "total_usd": 1625.0
+        },
+        "vendor_history": {
+          "disputes_12m": 1,
+          "invoices_12m": 54,
+          "prior_invoice_ids": [
+            "INV-2026-4150",
+            "INV-2026-2139",
+            "INV-2026-1750"
+          ]
+        }
+      },
+      "source": "SQLite source_records"
+    },
+    {
+      "seq": 9,
+      "workflow": "invoice",
+      "step": "model_decision",
+      "elapsed_ms": 2792.204,
+      "request": {
+        "state": {
+          "delivery": {
+            "condition": "accepted",
+            "date": "2026-03-18",
+            "received_qty": 10
+          },
+          "invoice": {
+            "currency": "USD",
+            "id": "INV-2026-9785",
+            "lines": [
+              {
+                "qty": 10,
+                "sku": "SKU-487",
+                "total_usd": 1625.0,
+                "unit_usd": 162.5
+              }
+            ],
+            "total_usd": 1625.0,
+            "vendor": "Northwind Components"
+          },
+          "payment": {
+            "days_until_due": 2,
+            "discount_expires_in_days": null,
+            "early_payment_discount_pct": null,
+            "status": "scheduled",
+            "terms": "net 30"
+          },
+          "purchase_order": {
+            "freight_terms": "freight prepaid by vendor, not separately billable",
+            "id": "PO-2291",
+            "lines": [
+              {
+                "qty": 10,
+                "unit_usd": 162.5
+              }
+            ],
+            "total_usd": 1625.0
+          },
+          "vendor_history": {
+            "disputes_12m": 1,
+            "invoices_12m": 54,
+            "prior_invoice_ids": [
+              "INV-2026-4150",
+              "INV-2026-2139",
+              "INV-2026-1750"
+            ]
+          }
+        },
+        "questions": {
+          "discrepancy_severity": {
+            "criteria": [
+              "None: everything reconciles.",
+              "Trivial: rounding or a cosmetic difference.",
+              "Moderate: a real difference worth confirming.",
+              "Material: a large or unexplained difference."
+            ],
+            "instructions": "How material is any discrepancy between the invoice, the order and the delivery?",
+            "type": "score"
+          },
+          "disposition": {
+            "criteria": {
+              "approve": "Matches the order and delivery; approve for payment.",
+              "hold": "Something needs confirming before payment; hold pending clarification.",
+              "manual_review": "A human in finance must review the discrepancy.",
+              "reject": "Should not be paid: duplicate, unauthorised or materially wrong."
+            },
+            "instructions": "How should this vendor invoice be dispositioned?",
+            "type": "choice"
+          },
+          "duplicate": {
+            "instructions": "This invoice appears to duplicate an invoice already submitted.",
+            "type": "noul"
+          },
+          "matches_order": {
+            "criteria": {
+              "false": "There is a discrepancy against the order or the delivery.",
+              "true": "Line items, quantities and amounts reconcile."
+            },
+            "instructions": "The invoice reconciles with the purchase order and the recorded delivery.",
+            "type": "noul"
+          },
+          "urgency": {
+            "criteria": [
+              "No time pressure; can wait indefinitely.",
+              "Routine; handle within the normal queue.",
+              "Elevated; should be handled within the same week.",
+              "Critical; requires action within the same day."
+            ],
+            "instructions": "How time-sensitive is processing this invoice?",
+            "type": "score"
+          }
+        }
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "discrepancy_severity": {
+            "type": "score",
+            "score": 0.05167021883172461,
+            "legend": {
+              "0": "None: everything reconciles.",
+              "1": "Trivial: rounding or a cosmetic difference.",
+              "2": "Moderate: a real difference worth confirming.",
+              "3": "Material: a large or unexplained difference."
+            },
+            "probabilities": {
+              "0": 0.9752484694064341,
+              "1": 0.0079772163817229,
+              "2": 0.006629940185527616,
+              "3": 0.010144374026315494
+            },
+            "confidence": 0.9669770526379664,
+            "unknown_probability": 2.162007728489825e-05,
+            "abstained": false
+          },
+          "disposition": {
+            "type": "choice",
+            "choice": "approve",
+            "probabilities": {
+              "approve": 0.9168719830902999,
+              "hold": 0.035058680125156845,
+              "manual_review": 0.032213652683645164,
+              "reject": 0.015855684100898104
+            },
+            "confidence": 0.8890825387210235,
+            "unknown_probability": 9.009082860836527e-05,
+            "abstained": false
+          },
+          "duplicate": {
+            "type": "noul",
+            "noul": 0.019261935198072767,
+            "unknown_probability": 0.0001301631017793979,
+            "abstained": false
+          },
+          "matches_order": {
+            "type": "noul",
+            "noul": 0.9860116290746959,
+            "unknown_probability": 9.229398023868409e-05,
+            "abstained": false
+          },
+          "urgency": {
+            "type": "score",
+            "score": 1.8871597614972906,
+            "legend": {
+              "0": "No time pressure; can wait indefinitely.",
+              "1": "Routine; handle within the normal queue.",
+              "2": "Elevated; should be handled within the same week.",
+              "3": "Critical; requires action within the same day."
+            },
+            "probabilities": {
+              "0": 0.010931343363831753,
+              "1": 0.27436471486202063,
+              "2": 0.531316778687173,
+              "3": 0.18338716308697464
+            },
+            "confidence": 0.37505913248650474,
+            "unknown_probability": 7.972977082663705e-05,
+            "abstained": false
+          }
+        },
+        "usage": {
+          "preprocess_ms": 39.972,
+          "questions_ms": 622.519,
+          "input_tokens": 458,
+          "rotations": 1,
+          "language_model_passes": 5,
+          "images": 0,
+          "generated_answer_tokens": 0
+        },
+        "timing": {
+          "total_ms": 668.4868440497667
+        }
+      },
+      "case": "invoice_matching"
+    },
+    {
+      "seq": 10,
+      "workflow": "invoice",
+      "step": "review_status_written",
+      "elapsed_ms": 2841.373,
+      "case": "invoice_matching",
+      "database_row": {
+        "id": "INV-2026-9785",
+        "disposition": "approve",
+        "status": "approved_for_payment"
+      },
+      "quantities_match": true,
+      "totals_match": true,
+      "executor": "Python controller: model disposition + reconciliation guard"
+    },
+    {
+      "seq": 11,
+      "workflow": "invoice",
+      "step": "postcondition_checked",
+      "elapsed_ms": 2911.889,
+      "result": {
+        "workflow": "invoice",
+        "cases": [
+          {
+            "case": "invoice_mismatch",
+            "source_case_id": "invoice_processing_000004",
+            "state": {
+              "delivery": {
+                "condition": "accepted",
+                "date": "2026-03-13",
+                "received_qty": 25
+              },
+              "invoice": {
+                "currency": "USD",
+                "id": "INV-2026-1916",
+                "lines": [
+                  {
+                    "qty": 45,
+                    "sku": "SKU-941",
+                    "total_usd": 3365.55,
+                    "unit_usd": 74.79
+                  }
+                ],
+                "total_usd": 3365.55,
+                "vendor": "Acme Fabrication"
+              },
+              "payment": {
+                "days_until_due": 27,
+                "discount_expires_in_days": 6,
+                "early_payment_discount_pct": 2.0,
+                "status": "scheduled",
+                "terms": "net 30"
+              },
+              "purchase_order": {
+                "freight_terms": "freight prepaid by vendor, not separately billable",
+                "id": "PO-1525",
+                "lines": [
+                  {
+                    "qty": 25,
+                    "unit_usd": 74.79
+                  }
+                ],
+                "total_usd": 1869.75
+              },
+              "vendor_history": {
+                "disputes_12m": 0,
+                "invoices_12m": 5,
+                "prior_invoice_ids": [
+                  "INV-2026-6155",
+                  "INV-2026-4483"
+                ]
+              }
+            },
+            "response": {
+              "model": "mentat-Spice-4B",
+              "answers": {
+                "discrepancy_severity": {
+                  "type": "score",
+                  "score": 2.782484060427189,
+                  "legend": {
+                    "0": "None: everything reconciles.",
+                    "1": "Trivial: rounding or a cosmetic difference.",
+                    "2": "Moderate: a real difference worth confirming.",
+                    "3": "Material: a large or unexplained difference."
+                  },
+                  "probabilities": {
+                    "0": 0.006025741192476793,
+                    "1": 0.009275636201701664,
+                    "2": 0.18088744359197692,
+                    "3": 0.8038111790138446
+                  },
+                  "confidence": 0.7383826757403732,
+                  "unknown_probability": 4.364702172992923e-05,
+                  "abstained": false
+                },
+                "disposition": {
+                  "type": "choice",
+                  "choice": "manual_review",
+                  "probabilities": {
+                    "approve": 0.01595769264786913,
+                    "hold": 0.1839205595162311,
+                    "manual_review": 0.6677740045129266,
+                    "reject": 0.1323477433229732
+                  },
+                  "confidence": 0.556990492193525,
+                  "unknown_probability": 7.452681939630636e-05,
+                  "abstained": false
+                },
+                "duplicate": {
+                  "type": "noul",
+                  "noul": 0.014540943280303514,
+                  "unknown_probability": 0.0001197690415459632,
+                  "abstained": false
+                },
+                "matches_order": {
+                  "type": "noul",
+                  "noul": 0.011048784111199136,
+                  "unknown_probability": 9.962040491126216e-05,
+                  "abstained": false
+                },
+                "urgency": {
+                  "type": "score",
+                  "score": 1.5088130575426322,
+                  "legend": {
+                    "0": "No time pressure; can wait indefinitely.",
+                    "1": "Routine; handle within the normal queue.",
+                    "2": "Elevated; should be handled within the same week.",
+                    "3": "Critical; requires action within the same day."
+                  },
+                  "probabilities": {
+                    "0": 0.032646433063910366,
+                    "1": 0.47601520879720693,
+                    "2": 0.4412172256712227,
+                    "3": 0.05012113246765995
+                  },
+                  "confidence": 0.3012835047319399,
+                  "unknown_probability": 0.00023264031005634645,
+                  "abstained": false
+                }
+              },
+              "usage": {
+                "preprocess_ms": 39.485,
+                "questions_ms": 612.635,
+                "input_tokens": 453,
+                "rotations": 1,
+                "language_model_passes": 5,
+                "images": 0,
+                "generated_answer_tokens": 0
+              },
+              "timing": {
+                "total_ms": 658.0170830711722
+              }
+            },
+            "outcome": {
+              "id": "INV-2026-1916",
+              "disposition": "manual_review",
+              "status": "held_for_review"
+            }
+          },
+          {
+            "case": "invoice_matching",
+            "source_case_id": "invoice_processing_000002",
+            "state": {
+              "delivery": {
+                "condition": "accepted",
+                "date": "2026-03-18",
+                "received_qty": 10
+              },
+              "invoice": {
+                "currency": "USD",
+                "id": "INV-2026-9785",
+                "lines": [
+                  {
+                    "qty": 10,
+                    "sku": "SKU-487",
+                    "total_usd": 1625.0,
+                    "unit_usd": 162.5
+                  }
+                ],
+                "total_usd": 1625.0,
+                "vendor": "Northwind Components"
+              },
+              "payment": {
+                "days_until_due": 2,
+                "discount_expires_in_days": null,
+                "early_payment_discount_pct": null,
+                "status": "scheduled",
+                "terms": "net 30"
+              },
+              "purchase_order": {
+                "freight_terms": "freight prepaid by vendor, not separately billable",
+                "id": "PO-2291",
+                "lines": [
+                  {
+                    "qty": 10,
+                    "unit_usd": 162.5
+                  }
+                ],
+                "total_usd": 1625.0
+              },
+              "vendor_history": {
+                "disputes_12m": 1,
+                "invoices_12m": 54,
+                "prior_invoice_ids": [
+                  "INV-2026-4150",
+                  "INV-2026-2139",
+                  "INV-2026-1750"
+                ]
+              }
+            },
+            "response": {
+              "model": "mentat-Spice-4B",
+              "answers": {
+                "discrepancy_severity": {
+                  "type": "score",
+                  "score": 0.05167021883172461,
+                  "legend": {
+                    "0": "None: everything reconciles.",
+                    "1": "Trivial: rounding or a cosmetic difference.",
+                    "2": "Moderate: a real difference worth confirming.",
+                    "3": "Material: a large or unexplained difference."
+                  },
+                  "probabilities": {
+                    "0": 0.9752484694064341,
+                    "1": 0.0079772163817229,
+                    "2": 0.006629940185527616,
+                    "3": 0.010144374026315494
+                  },
+                  "confidence": 0.9669770526379664,
+                  "unknown_probability": 2.162007728489825e-05,
+                  "abstained": false
+                },
+                "disposition": {
+                  "type": "choice",
+                  "choice": "approve",
+                  "probabilities": {
+                    "approve": 0.9168719830902999,
+                    "hold": 0.035058680125156845,
+                    "manual_review": 0.032213652683645164,
+                    "reject": 0.015855684100898104
+                  },
+                  "confidence": 0.8890825387210235,
+                  "unknown_probability": 9.009082860836527e-05,
+                  "abstained": false
+                },
+                "duplicate": {
+                  "type": "noul",
+                  "noul": 0.019261935198072767,
+                  "unknown_probability": 0.0001301631017793979,
+                  "abstained": false
+                },
+                "matches_order": {
+                  "type": "noul",
+                  "noul": 0.9860116290746959,
+                  "unknown_probability": 9.229398023868409e-05,
+                  "abstained": false
+                },
+                "urgency": {
+                  "type": "score",
+                  "score": 1.8871597614972906,
+                  "legend": {
+                    "0": "No time pressure; can wait indefinitely.",
+                    "1": "Routine; handle within the normal queue.",
+                    "2": "Elevated; should be handled within the same week.",
+                    "3": "Critical; requires action within the same day."
+                  },
+                  "probabilities": {
+                    "0": 0.010931343363831753,
+                    "1": 0.27436471486202063,
+                    "2": 0.531316778687173,
+                    "3": 0.18338716308697464
+                  },
+                  "confidence": 0.37505913248650474,
+                  "unknown_probability": 7.972977082663705e-05,
+                  "abstained": false
+                }
+              },
+              "usage": {
+                "preprocess_ms": 39.972,
+                "questions_ms": 622.519,
+                "input_tokens": 458,
+                "rotations": 1,
+                "language_model_passes": 5,
+                "images": 0,
+                "generated_answer_tokens": 0
+              },
+              "timing": {
+                "total_ms": 668.4868440497667
+              }
+            },
+            "outcome": {
+              "id": "INV-2026-9785",
+              "disposition": "approve",
+              "status": "approved_for_payment"
+            }
+          }
+        ],
+        "verified": true,
+        "external_payments_executed": 0
+      }
+    }
+  ],
+  "result": {
+    "workflow": "invoice",
+    "cases": [
+      {
+        "case": "invoice_mismatch",
+        "source_case_id": "invoice_processing_000004",
+        "state": {
+          "delivery": {
+            "condition": "accepted",
+            "date": "2026-03-13",
+            "received_qty": 25
+          },
+          "invoice": {
+            "currency": "USD",
+            "id": "INV-2026-1916",
+            "lines": [
+              {
+                "qty": 45,
+                "sku": "SKU-941",
+                "total_usd": 3365.55,
+                "unit_usd": 74.79
+              }
+            ],
+            "total_usd": 3365.55,
+            "vendor": "Acme Fabrication"
+          },
+          "payment": {
+            "days_until_due": 27,
+            "discount_expires_in_days": 6,
+            "early_payment_discount_pct": 2.0,
+            "status": "scheduled",
+            "terms": "net 30"
+          },
+          "purchase_order": {
+            "freight_terms": "freight prepaid by vendor, not separately billable",
+            "id": "PO-1525",
+            "lines": [
+              {
+                "qty": 25,
+                "unit_usd": 74.79
+              }
+            ],
+            "total_usd": 1869.75
+          },
+          "vendor_history": {
+            "disputes_12m": 0,
+            "invoices_12m": 5,
+            "prior_invoice_ids": [
+              "INV-2026-6155",
+              "INV-2026-4483"
+            ]
+          }
+        },
+        "response": {
+          "model": "mentat-Spice-4B",
+          "answers": {
+            "discrepancy_severity": {
+              "type": "score",
+              "score": 2.782484060427189,
+              "legend": {
+                "0": "None: everything reconciles.",
+                "1": "Trivial: rounding or a cosmetic difference.",
+                "2": "Moderate: a real difference worth confirming.",
+                "3": "Material: a large or unexplained difference."
+              },
+              "probabilities": {
+                "0": 0.006025741192476793,
+                "1": 0.009275636201701664,
+                "2": 0.18088744359197692,
+                "3": 0.8038111790138446
+              },
+              "confidence": 0.7383826757403732,
+              "unknown_probability": 4.364702172992923e-05,
+              "abstained": false
+            },
+            "disposition": {
+              "type": "choice",
+              "choice": "manual_review",
+              "probabilities": {
+                "approve": 0.01595769264786913,
+                "hold": 0.1839205595162311,
+                "manual_review": 0.6677740045129266,
+                "reject": 0.1323477433229732
+              },
+              "confidence": 0.556990492193525,
+              "unknown_probability": 7.452681939630636e-05,
+              "abstained": false
+            },
+            "duplicate": {
+              "type": "noul",
+              "noul": 0.014540943280303514,
+              "unknown_probability": 0.0001197690415459632,
+              "abstained": false
+            },
+            "matches_order": {
+              "type": "noul",
+              "noul": 0.011048784111199136,
+              "unknown_probability": 9.962040491126216e-05,
+              "abstained": false
+            },
+            "urgency": {
+              "type": "score",
+              "score": 1.5088130575426322,
+              "legend": {
+                "0": "No time pressure; can wait indefinitely.",
+                "1": "Routine; handle within the normal queue.",
+                "2": "Elevated; should be handled within the same week.",
+                "3": "Critical; requires action within the same day."
+              },
+              "probabilities": {
+                "0": 0.032646433063910366,
+                "1": 0.47601520879720693,
+                "2": 0.4412172256712227,
+                "3": 0.05012113246765995
+              },
+              "confidence": 0.3012835047319399,
+              "unknown_probability": 0.00023264031005634645,
+              "abstained": false
+            }
+          },
+          "usage": {
+            "preprocess_ms": 39.485,
+            "questions_ms": 612.635,
+            "input_tokens": 453,
+            "rotations": 1,
+            "language_model_passes": 5,
+            "images": 0,
+            "generated_answer_tokens": 0
+          },
+          "timing": {
+            "total_ms": 658.0170830711722
+          }
+        },
+        "outcome": {
+          "id": "INV-2026-1916",
+          "disposition": "manual_review",
+          "status": "held_for_review"
+        }
+      },
+      {
+        "case": "invoice_matching",
+        "source_case_id": "invoice_processing_000002",
+        "state": {
+          "delivery": {
+            "condition": "accepted",
+            "date": "2026-03-18",
+            "received_qty": 10
+          },
+          "invoice": {
+            "currency": "USD",
+            "id": "INV-2026-9785",
+            "lines": [
+              {
+                "qty": 10,
+                "sku": "SKU-487",
+                "total_usd": 1625.0,
+                "unit_usd": 162.5
+              }
+            ],
+            "total_usd": 1625.0,
+            "vendor": "Northwind Components"
+          },
+          "payment": {
+            "days_until_due": 2,
+            "discount_expires_in_days": null,
+            "early_payment_discount_pct": null,
+            "status": "scheduled",
+            "terms": "net 30"
+          },
+          "purchase_order": {
+            "freight_terms": "freight prepaid by vendor, not separately billable",
+            "id": "PO-2291",
+            "lines": [
+              {
+                "qty": 10,
+                "unit_usd": 162.5
+              }
+            ],
+            "total_usd": 1625.0
+          },
+          "vendor_history": {
+            "disputes_12m": 1,
+            "invoices_12m": 54,
+            "prior_invoice_ids": [
+              "INV-2026-4150",
+              "INV-2026-2139",
+              "INV-2026-1750"
+            ]
+          }
+        },
+        "response": {
+          "model": "mentat-Spice-4B",
+          "answers": {
+            "discrepancy_severity": {
+              "type": "score",
+              "score": 0.05167021883172461,
+              "legend": {
+                "0": "None: everything reconciles.",
+                "1": "Trivial: rounding or a cosmetic difference.",
+                "2": "Moderate: a real difference worth confirming.",
+                "3": "Material: a large or unexplained difference."
+              },
+              "probabilities": {
+                "0": 0.9752484694064341,
+                "1": 0.0079772163817229,
+                "2": 0.006629940185527616,
+                "3": 0.010144374026315494
+              },
+              "confidence": 0.9669770526379664,
+              "unknown_probability": 2.162007728489825e-05,
+              "abstained": false
+            },
+            "disposition": {
+              "type": "choice",
+              "choice": "approve",
+              "probabilities": {
+                "approve": 0.9168719830902999,
+                "hold": 0.035058680125156845,
+                "manual_review": 0.032213652683645164,
+                "reject": 0.015855684100898104
+              },
+              "confidence": 0.8890825387210235,
+              "unknown_probability": 9.009082860836527e-05,
+              "abstained": false
+            },
+            "duplicate": {
+              "type": "noul",
+              "noul": 0.019261935198072767,
+              "unknown_probability": 0.0001301631017793979,
+              "abstained": false
+            },
+            "matches_order": {
+              "type": "noul",
+              "noul": 0.9860116290746959,
+              "unknown_probability": 9.229398023868409e-05,
+              "abstained": false
+            },
+            "urgency": {
+              "type": "score",
+              "score": 1.8871597614972906,
+              "legend": {
+                "0": "No time pressure; can wait indefinitely.",
+                "1": "Routine; handle within the normal queue.",
+                "2": "Elevated; should be handled within the same week.",
+                "3": "Critical; requires action within the same day."
+              },
+              "probabilities": {
+                "0": 0.010931343363831753,
+                "1": 0.27436471486202063,
+                "2": 0.531316778687173,
+                "3": 0.18338716308697464
+              },
+              "confidence": 0.37505913248650474,
+              "unknown_probability": 7.972977082663705e-05,
+              "abstained": false
+            }
+          },
+          "usage": {
+            "preprocess_ms": 39.972,
+            "questions_ms": 622.519,
+            "input_tokens": 458,
+            "rotations": 1,
+            "language_model_passes": 5,
+            "images": 0,
+            "generated_answer_tokens": 0
+          },
+          "timing": {
+            "total_ms": 668.4868440497667
+          }
+        },
+        "outcome": {
+          "id": "INV-2026-9785",
+          "disposition": "approve",
+          "status": "approved_for_payment"
+        }
+      }
+    ],
+    "verified": true,
+    "external_payments_executed": 0
+  },
+  "fresh_inference": true,
+  "local_SQLite_execution": true,
+  "environment": "Local sandbox; public benchmark fixtures, not production business data.",
+  "model": "mentat-Spice-4B"
+}

@@ -1,0 +1,46 @@
+{
+  "benchmark": "BLINK",
+  "case_id": "full_blink:val_Semantic_Correspondence_3",
+  "request": {
+    "state": {},
+    "questions": {
+      "answer": {
+        "type": "choice",
+        "instructions": "Humans can find corresponding points for different objects in the same category. For instance, if there are images of two different cats, then the left ear tip of one cat corresponds to the left ear tip of the other cat, and the right front paw of one cat corresponds to the right front paw of the other cat.\nGiven the following two images, a reference point is annotated on the first image, labeled with REF. You are given multiple red-circled points on the second image, choices of \"A, B, C, D\" are drawn beside each circle. Select between the choices on the second image and find the corresponding point for the reference point. Which point is corresponding to the reference point?",
+        "criteria": {
+          "A": "Point A",
+          "B": "Point B",
+          "C": "Point C",
+          "D": "Point D"
+        }
+      }
+    }
+  },
+  "input_image_sha256": [
+    "07bbd3f27c547ef8c3870d7f33c9e6ebf4acf8dbe8b3ab4b99ece903e814c3b3",
+    "8953a84d490125a3e685196a9f48799b69ed41c7029d968c56c4ad01f1852e7b"
+  ],
+  "expected": {
+    "answer": "B"
+  },
+  "response": {
+    "model": "mentat-Spice-4B",
+    "answers": {
+      "answer": {
+        "type": "choice",
+        "choice": "B",
+        "probabilities": {
+          "A": 0.03978518690828099,
+          "B": 0.9392389992920467,
+          "C": 0.006241655859442586,
+          "D": 0.014734157940229795
+        },
+        "confidence": 0.9189530482034919,
+        "unknown_probability": 3.5130251556623904e-05,
+        "abstained": false
+      }
+    }
+  },
+  "source": "Decision Index public vision",
+  "selected_successful_example": true
+}

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mentat-sys1"
-version = "0.3.0"
+version = "0.4.0"
 description = "Independent Qwen3.5-4B decision model runtime and release tooling"
 readme = "README.md"
 license = "Apache-2.0"
@@ -22,6 +22,7 @@ accelerate = [
   "triton==3.4.0; sys_platform == 'linux'",
 ]
 serve = [
+  "huggingface-hub>=1.0,<2",
   "fastapi==0.124.0",
   "peft==0.21.0",
   "pillow==12.0.0",

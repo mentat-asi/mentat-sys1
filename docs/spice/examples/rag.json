@@ -1,0 +1,42 @@
+{
+  "benchmark": "RAGTruth response-level hallucination",
+  "case_id": "59:359",
+  "request": {
+    "state": {
+      "prompt": "Summarize the following news within 38 words:\nFrom the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free. Though most of the National Park Service's 407 sites are free year-round, the 128 parks that charge a fee -- like Yellowstone and Yosemite -- will be free those two days. It's all part of National Park Week, happening April 18 through April 26, and it's hosted by the National Park Service and the National Park Foundation. Check out night-time astronomy parties, daytime Revolutionary War programs, Earth Day parties and family-friendly Junior Ranger activities at national park sites across the country. Not sure how to start? Go to FindYourPark.com to learn more about park sites near you. Go to www.nationalparkweek.org for more ideas on how to explore. Then the park service wants people to share their stories using the hashtag #FindYourPark and at FindYourPark.com.\n\noutput:",
+      "response": "National Park Service offers free admission to 128 parks, including Yellowstone and Yosemite, on April 18-19 and 25-26, as part of National Park Week."
+    },
+    "questions": {
+      "q": {
+        "type": "noul",
+        "instructions": "The response contains content that is not supported by the context in the prompt.",
+        "criteria": {
+          "true": "The response contains content that is not supported by the context in the prompt.",
+          "false": "All content of the response is supported by the context in the prompt."
+        }
+      }
+    }
+  },
+  "response": {
+    "answers": {
+      "q": {
+        "type": "noul",
+        "thresholded_value": true,
+        "threshold": 0.5
+      }
+    }
+  },
+  "displayed_fields": [
+    "q"
+  ],
+  "expected_displayed_fields": {
+    "q": true
+  },
+  "selected_successful_example": true,
+  "archive_calibration_version": "bidir-public-heldout:6186bea0ee9a",
+  "displayed_result": "Archived selected labels only; probabilities and latency are not displayed.",
+  "source_payload_sha256": "fd74d6883d9383b0e2ee9ce0be9b8b49c80b2619e536eb65e564509883c92e9b",
+  "source_excerpt": "And for Saturday and Sunday, they're also free.",
+  "week_excerpt": "National Park Week, happening April 18 through April 26",
+  "presentation": "The response-level label is the model output. The displayed date comparison is an editorial evidence annotation, not a model-generated span or explanation."
+}

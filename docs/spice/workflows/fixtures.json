@@ -1,0 +1,675 @@
+{
+  "customer": {
+    "benchmark": "Typed Decisions",
+    "case_id": "customer_service_000017",
+    "request": {
+      "state": {
+        "account": {
+          "lifetime_value_usd": 3662,
+          "prior_tickets_90d": 2,
+          "seats": 1,
+          "tenure_months": 41,
+          "tier": "enterprise"
+        },
+        "thread": [
+          {
+            "role": "customer",
+            "text": "This is the third time I’m contacting support about the data export tool failing. I was told in my last two tickets that this was being handled, but I’m still seeing the same 'export failed' message every single time I try to pull our logs."
+          },
+          {
+            "role": "agent",
+            "text": "I can see the history of your previous requests regarding the Enterprise data export. Could you tell me if you are attempting to export the full historical range or a specific date bracket when the failure occurs?"
+          },
+          {
+            "role": "customer",
+            "text": "It doesn't matter what range I pick; it fails regardless, and quite honestly, if we can't get our own data out of your system, we are going to have to look at moving our entire contract to a competitor who actually delivers on their promises."
+          }
+        ]
+      },
+      "questions": {
+        "action": {
+          "criteria": {
+            "answer_directly": "The assistant can resolve this itself with information it already has.",
+            "close_no_action": "No further action is warranted; the matter is settled.",
+            "escalate_to_human": "Hand off to a human agent with the appropriate authority.",
+            "execute_refund": "Issue the refund or credit the customer is owed.",
+            "request_information": "More detail is needed from the customer before anything can be done."
+          },
+          "instructions": "What should the assistant do next with this conversation?",
+          "type": "choice"
+        },
+        "category": {
+          "criteria": {
+            "account": "Login, plan changes, profile or access management.",
+            "billing": "A charge, invoice, subscription or payment problem.",
+            "delivery": "Shipping, fulfilment or delivery of a physical item.",
+            "refund": "The customer is explicitly asking for money back.",
+            "technical": "The product or service is not working as expected."
+          },
+          "instructions": "What is this customer conversation primarily about?",
+          "type": "choice"
+        },
+        "churn_risk": {
+          "criteria": [
+            "No sign of dissatisfaction.",
+            "Mild frustration, but the relationship is intact.",
+            "Clearly unhappy; repeat problems or explicit complaints.",
+            "Imminent: threatening to cancel, dispute or leave."
+          ],
+          "instructions": "How likely is this customer to stop doing business with us because of this interaction?",
+          "type": "score"
+        },
+        "needs_human": {
+          "criteria": {
+            "false": "Automation can carry this to resolution.",
+            "true": "A human must take over: judgement, authority or empathy is required."
+          },
+          "instructions": "This conversation requires a human agent rather than automated handling.",
+          "type": "noul"
+        },
+        "urgency": {
+          "criteria": [
+            "No time pressure; can wait indefinitely.",
+            "Routine; handle within the normal queue.",
+            "Elevated; should be handled within the same week.",
+            "Critical; requires action within the same day."
+          ],
+          "instructions": "How time-sensitive is this conversation?",
+          "type": "score"
+        }
+      }
+    },
+    "response": {
+      "model": "mentat-Spice-4B",
+      "answers": {
+        "action": {
+          "type": "choice",
+          "choice": "escalate_to_human",
+          "probabilities": {
+            "answer_directly": 0.04794873987708783,
+            "close_no_action": 0.003892526586490132,
+            "escalate_to_human": 0.802627789219001,
+            "execute_refund": 0.008907991997140612,
+            "request_information": 0.13662295232028038
+          },
+          "confidence": 0.7530795025507213,
+          "unknown_probability": 0.0002724520530934212,
+          "abstained": false
+        },
+        "category": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "account": 0.024973683576999296,
+            "billing": 0.009898589929812773,
+            "delivery": 0.002108255099747993,
+            "refund": 0.011359985818347918,
+            "technical": 0.9516594855750921
+          },
+          "confidence": 0.9394683986684704,
+          "unknown_probability": 0.00011277266094879382,
+          "abstained": false
+        },
+        "churn_risk": {
+          "type": "score",
+          "score": 2.805205513539178,
+          "legend": {
+            "0": "No sign of dissatisfaction.",
+            "1": "Mild frustration, but the relationship is intact.",
+            "2": "Clearly unhappy; repeat problems or explicit complaints.",
+            "3": "Imminent: threatening to cancel, dispute or leave."
+          },
+          "probabilities": {
+            "0": 0.0034444470835099357,
+            "1": 0.019774750772599672,
+            "2": 0.14491164366509304,
+            "3": 0.8318691584787974
+          },
+          "confidence": 0.7757504120332802,
+          "unknown_probability": 9.684213884871882e-05,
+          "abstained": false
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.8354786918912962,
+          "unknown_probability": 5.038671273578671e-05,
+          "abstained": false
+        },
+        "urgency": {
+          "type": "score",
+          "score": 2.592132321439936,
+          "legend": {
+            "0": "No time pressure; can wait indefinitely.",
+            "1": "Routine; handle within the normal queue.",
+            "2": "Elevated; should be handled within the same week.",
+            "3": "Critical; requires action within the same day."
+          },
+          "probabilities": {
+            "0": 0.0032355173397648025,
+            "1": 0.02853076237806339,
+            "2": 0.3410996017846431,
+            "3": 0.6271341184975288
+          },
+          "confidence": 0.5028158602913567,
+          "unknown_probability": 5.892672638507203e-05,
+          "abstained": false
+        }
+      },
+      "native_answers": {
+        "action": {
+          "type": "choice",
+          "choice": "escalate_to_human",
+          "probabilities": {
+            "answer_directly": 0.04794873987708783,
+            "close_no_action": 0.003892526586490132,
+            "escalate_to_human": 0.802627789219001,
+            "execute_refund": 0.008907991997140612,
+            "request_information": 0.13662295232028038
+          },
+          "confidence": 0.7530795025507213,
+          "unknown_probability": 0.0002724520530934212,
+          "abstained": false
+        },
+        "category": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "account": 0.024973683576999296,
+            "billing": 0.009898589929812773,
+            "delivery": 0.002108255099747993,
+            "refund": 0.011359985818347918,
+            "technical": 0.9516594855750921
+          },
+          "confidence": 0.9394683986684704,
+          "unknown_probability": 0.00011277266094879382,
+          "abstained": false
+        },
+        "churn_risk": {
+          "type": "score",
+          "score": 2.805205513539178,
+          "legend": {
+            "0": "No sign of dissatisfaction.",
+            "1": "Mild frustration, but the relationship is intact.",
+            "2": "Clearly unhappy; repeat problems or explicit complaints.",
+            "3": "Imminent: threatening to cancel, dispute or leave."
+          },
+          "probabilities": {
+            "0": 0.0034444470835099357,
+            "1": 0.019774750772599672,
+            "2": 0.14491164366509304,
+            "3": 0.8318691584787974
+          },
+          "confidence": 0.7757504120332802,
+          "unknown_probability": 9.684213884871882e-05,
+          "abstained": false
+        },
+        "needs_human": {
+          "type": "noul",
+          "noul": 0.8354786918912962,
+          "unknown_probability": 5.038671273578671e-05,
+          "abstained": false
+        },
+        "urgency": {
+          "type": "score",
+          "score": 2.592132321439936,
+          "legend": {
+            "0": "No time pressure; can wait indefinitely.",
+            "1": "Routine; handle within the normal queue.",
+            "2": "Elevated; should be handled within the same week.",
+            "3": "Critical; requires action within the same day."
+          },
+          "probabilities": {
+            "0": 0.0032355173397648025,
+            "1": 0.02853076237806339,
+            "2": 0.3410996017846431,
+            "3": 0.6271341184975288
+          },
+          "confidence": 0.5028158602913567,
+          "unknown_probability": 5.892672638507203e-05,
+          "abstained": false
+        }
+      },
+      "usage": {
+        "preprocess_ms": 28.515,
+        "questions_ms": 573.584,
+        "input_tokens": 409,
+        "rotations": 1,
+        "language_model_passes": 5,
+        "images": 0,
+        "generated_answer_tokens": 0
+      }
+    },
+    "selected_successful_example": true
+  },
+  "rag": {
+    "benchmark": "RAGTruth response-level hallucination",
+    "case_id": "59:359",
+    "request": {
+      "state": {
+        "prompt": "Summarize the following news within 38 words:\nFrom the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free. Though most of the National Park Service's 407 sites are free year-round, the 128 parks that charge a fee -- like Yellowstone and Yosemite -- will be free those two days. It's all part of National Park Week, happening April 18 through April 26, and it's hosted by the National Park Service and the National Park Foundation. Check out night-time astronomy parties, daytime Revolutionary War programs, Earth Day parties and family-friendly Junior Ranger activities at national park sites across the country. Not sure how to start? Go to FindYourPark.com to learn more about park sites near you. Go to www.nationalparkweek.org for more ideas on how to explore. Then the park service wants people to share their stories using the hashtag #FindYourPark and at FindYourPark.com.\n\noutput:",
+        "response": "National Park Service offers free admission to 128 parks, including Yellowstone and Yosemite, on April 18-19 and 25-26, as part of National Park Week."
+      },
+      "questions": {
+        "q": {
+          "type": "noul",
+          "instructions": "The response contains content that is not supported by the context in the prompt.",
+          "criteria": {
+            "true": "The response contains content that is not supported by the context in the prompt.",
+            "false": "All content of the response is supported by the context in the prompt."
+          }
+        }
+      }
+    },
+    "response": {
+      "answers": {
+        "q": {
+          "type": "noul",
+          "thresholded_value": true,
+          "threshold": 0.5
+        }
+      }
+    },
+    "displayed_fields": [
+      "q"
+    ],
+    "expected_displayed_fields": {
+      "q": true
+    },
+    "selected_successful_example": true,
+    "archive_calibration_version": "bidir-public-heldout:6186bea0ee9a",
+    "displayed_result": "Archived selected labels only; probabilities and latency are not displayed.",
+    "source_payload_sha256": "fd74d6883d9383b0e2ee9ce0be9b8b49c80b2619e536eb65e564509883c92e9b",
+    "source_excerpt": "And for Saturday and Sunday, they're also free.",
+    "week_excerpt": "National Park Week, happening April 18 through April 26",
+    "presentation": "The response-level label is the model output. The displayed date comparison is an editorial evidence annotation, not a model-generated span or explanation."
+  },
+  "invoice_mismatch": {
+    "benchmark": "Typed Decisions",
+    "case_id": "invoice_processing_000004",
+    "request": {
+      "state": {
+        "delivery": {
+          "condition": "accepted",
+          "date": "2026-03-13",
+          "received_qty": 25
+        },
+        "invoice": {
+          "currency": "USD",
+          "id": "INV-2026-1916",
+          "lines": [
+            {
+              "qty": 45,
+              "sku": "SKU-941",
+              "total_usd": 3365.55,
+              "unit_usd": 74.79
+            }
+          ],
+          "total_usd": 3365.55,
+          "vendor": "Acme Fabrication"
+        },
+        "payment": {
+          "days_until_due": 27,
+          "discount_expires_in_days": 6,
+          "early_payment_discount_pct": 2.0,
+          "status": "scheduled",
+          "terms": "net 30"
+        },
+        "purchase_order": {
+          "freight_terms": "freight prepaid by vendor, not separately billable",
+          "id": "PO-1525",
+          "lines": [
+            {
+              "qty": 25,
+              "unit_usd": 74.79
+            }
+          ],
+          "total_usd": 1869.75
+        },
+        "vendor_history": {
+          "disputes_12m": 0,
+          "invoices_12m": 5,
+          "prior_invoice_ids": [
+            "INV-2026-6155",
+            "INV-2026-4483"
+          ]
+        }
+      },
+      "questions": {
+        "discrepancy_severity": {
+          "criteria": [
+            "None: everything reconciles.",
+            "Trivial: rounding or a cosmetic difference.",
+            "Moderate: a real difference worth confirming.",
+            "Material: a large or unexplained difference."
+          ],
+          "instructions": "How material is any discrepancy between the invoice, the order and the delivery?",
+          "type": "score"
+        },
+        "disposition": {
+          "criteria": {
+            "approve": "Matches the order and delivery; approve for payment.",
+            "hold": "Something needs confirming before payment; hold pending clarification.",
+            "manual_review": "A human in finance must review the discrepancy.",
+            "reject": "Should not be paid: duplicate, unauthorised or materially wrong."
+          },
+          "instructions": "How should this vendor invoice be dispositioned?",
+          "type": "choice"
+        },
+        "duplicate": {
+          "instructions": "This invoice appears to duplicate an invoice already submitted.",
+          "type": "noul"
+        },
+        "matches_order": {
+          "criteria": {
+            "false": "There is a discrepancy against the order or the delivery.",
+            "true": "Line items, quantities and amounts reconcile."
+          },
+          "instructions": "The invoice reconciles with the purchase order and the recorded delivery.",
+          "type": "noul"
+        },
+        "urgency": {
+          "criteria": [
+            "No time pressure; can wait indefinitely.",
+            "Routine; handle within the normal queue.",
+            "Elevated; should be handled within the same week.",
+            "Critical; requires action within the same day."
+          ],
+          "instructions": "How time-sensitive is processing this invoice?",
+          "type": "score"
+        }
+      }
+    },
+    "response": {
+      "model": "mentat-Spice-4B",
+      "answers": {
+        "discrepancy_severity": {
+          "type": "score",
+          "score": 2.782484060427189,
+          "legend": {
+            "0": "None: everything reconciles.",
+            "1": "Trivial: rounding or a cosmetic difference.",
+            "2": "Moderate: a real difference worth confirming.",
+            "3": "Material: a large or unexplained difference."
+          },
+          "probabilities": {
+            "0": 0.006025741192476793,
+            "1": 0.009275636201701664,
+            "2": 0.18088744359197692,
+            "3": 0.8038111790138446
+          },
+          "confidence": 0.7383826757403732,
+          "unknown_probability": 4.364702172992923e-05,
+          "abstained": false
+        },
+        "disposition": {
+          "type": "choice",
+          "choice": "manual_review",
+          "probabilities": {
+            "approve": 0.01595769264786913,
+            "hold": 0.1839205595162311,
+            "manual_review": 0.6677740045129266,
+            "reject": 0.1323477433229732
+          },
+          "confidence": 0.556990492193525,
+          "unknown_probability": 7.452681939630636e-05,
+          "abstained": false
+        },
+        "duplicate": {
+          "type": "noul",
+          "noul": 0.014540943280303514,
+          "unknown_probability": 0.0001197690415459632,
+          "abstained": false
+        },
+        "matches_order": {
+          "type": "noul",
+          "noul": 0.011048784111199136,
+          "unknown_probability": 9.962040491126216e-05,
+          "abstained": false
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.5088130575426322,
+          "legend": {
+            "0": "No time pressure; can wait indefinitely.",
+            "1": "Routine; handle within the normal queue.",
+            "2": "Elevated; should be handled within the same week.",
+            "3": "Critical; requires action within the same day."
+          },
+          "probabilities": {
+            "0": 0.032646433063910366,
+            "1": 0.47601520879720693,
+            "2": 0.4412172256712227,
+            "3": 0.05012113246765995
+          },
+          "confidence": 0.3012835047319399,
+          "unknown_probability": 0.00023264031005634645,
+          "abstained": false
+        }
+      },
+      "native_answers": {
+        "discrepancy_severity": {
+          "type": "score",
+          "score": 2.782484060427189,
+          "legend": {
+            "0": "None: everything reconciles.",
+            "1": "Trivial: rounding or a cosmetic difference.",
+            "2": "Moderate: a real difference worth confirming.",
+            "3": "Material: a large or unexplained difference."
+          },
+          "probabilities": {
+            "0": 0.006025741192476793,
+            "1": 0.009275636201701664,
+            "2": 0.18088744359197692,
+            "3": 0.8038111790138446
+          },
+          "confidence": 0.7383826757403732,
+          "unknown_probability": 4.364702172992923e-05,
+          "abstained": false
+        },
+        "disposition": {
+          "type": "choice",
+          "choice": "manual_review",
+          "probabilities": {
+            "approve": 0.01595769264786913,
+            "hold": 0.1839205595162311,
+            "manual_review": 0.6677740045129266,
+            "reject": 0.1323477433229732
+          },
+          "confidence": 0.556990492193525,
+          "unknown_probability": 7.452681939630636e-05,
+          "abstained": false
+        },
+        "duplicate": {
+          "type": "noul",
+          "noul": 0.014540943280303514,
+          "unknown_probability": 0.0001197690415459632,
+          "abstained": false
+        },
+        "matches_order": {
+          "type": "noul",
+          "noul": 0.011048784111199136,
+          "unknown_probability": 9.962040491126216e-05,
+          "abstained": false
+        },
+        "urgency": {
+          "type": "score",
+          "score": 1.5088130575426322,
+          "legend": {
+            "0": "No time pressure; can wait indefinitely.",
+            "1": "Routine; handle within the normal queue.",
+            "2": "Elevated; should be handled within the same week.",
+            "3": "Critical; requires action within the same day."
+          },
+          "probabilities": {
+            "0": 0.032646433063910366,
+            "1": 0.47601520879720693,
+            "2": 0.4412172256712227,
+            "3": 0.05012113246765995
+          },
+          "confidence": 0.3012835047319399,
+          "unknown_probability": 0.00023264031005634645,
+          "abstained": false
+        }
+      },
+      "usage": {
+        "preprocess_ms": 24.168,
+        "questions_ms": 566.49,
+        "input_tokens": 453,
+        "rotations": 1,
+        "language_model_passes": 5,
+        "images": 0,
+        "generated_answer_tokens": 0
+      }
+    },
+    "selected_successful_example": true
+  },
+  "invoice_matching": {
+    "case_id": "invoice_processing_000002",
+    "request": {
+      "state": {
+        "delivery": {
+          "condition": "accepted",
+          "date": "2026-03-18",
+          "received_qty": 10
+        },
+        "invoice": {
+          "currency": "USD",
+          "id": "INV-2026-9785",
+          "lines": [
+            {
+              "qty": 10,
+              "sku": "SKU-487",
+              "total_usd": 1625.0,
+              "unit_usd": 162.5
+            }
+          ],
+          "total_usd": 1625.0,
+          "vendor": "Northwind Components"
+        },
+        "payment": {
+          "days_until_due": 2,
+          "discount_expires_in_days": null,
+          "early_payment_discount_pct": null,
+          "status": "scheduled",
+          "terms": "net 30"
+        },
+        "purchase_order": {
+          "freight_terms": "freight prepaid by vendor, not separately billable",
+          "id": "PO-2291",
+          "lines": [
+            {
+              "qty": 10,
+              "unit_usd": 162.5
+            }
+          ],
+          "total_usd": 1625.0
+        },
+        "vendor_history": {
+          "disputes_12m": 1,
+          "invoices_12m": 54,
+          "prior_invoice_ids": [
+            "INV-2026-4150",
+            "INV-2026-2139",
+            "INV-2026-1750"
+          ]
+        }
+      },
+      "questions": {
+        "discrepancy_severity": {
+          "criteria": [
+            "None: everything reconciles.",
+            "Trivial: rounding or a cosmetic difference.",
+            "Moderate: a real difference worth confirming.",
+            "Material: a large or unexplained difference."
+          ],
+          "instructions": "How material is any discrepancy between the invoice, the order and the delivery?",
+          "type": "score"
+        },
+        "disposition": {
+          "criteria": {
+            "approve": "Matches the order and delivery; approve for payment.",
+            "hold": "Something needs confirming before payment; hold pending clarification.",
+            "manual_review": "A human in finance must review the discrepancy.",
+            "reject": "Should not be paid: duplicate, unauthorised or materially wrong."
+          },
+          "instructions": "How should this vendor invoice be dispositioned?",
+          "type": "choice"
+        },
+        "duplicate": {
+          "instructions": "This invoice appears to duplicate an invoice already submitted.",
+          "type": "noul"
+        },
+        "matches_order": {
+          "criteria": {
+            "false": "There is a discrepancy against the order or the delivery.",
+            "true": "Line items, quantities and amounts reconcile."
+          },
+          "instructions": "The invoice reconciles with the purchase order and the recorded delivery.",
+          "type": "noul"
+        },
+        "urgency": {
+          "criteria": [
+            "No time pressure; can wait indefinitely.",
+            "Routine; handle within the normal queue.",
+            "Elevated; should be handled within the same week.",
+            "Critical; requires action within the same day."
+          ],
+          "instructions": "How time-sensitive is processing this invoice?",
+          "type": "score"
+        }
+      }
+    },
+    "source": "Typed Decisions public fixture; not a production invoice."
+  },
+  "news_corpus": [
+    {
+      "source_id": "59:359",
+      "body": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free. Though most of the National Park Service's 407 sites are free year-round, the 128 parks that charge a fee -- like Yellowstone and Yosemite -- will be free those two days. It's all part of National Park Week, happening April 18 through April 26, and it's hosted by the National Park Service and the National Park Foundation. Check out night-time astronomy parties, daytime Revolutionary War programs, Earth Day parties and family-friendly Junior Ranger activities at national park sites across the country. Not sure how to start? Go to FindYourPark.com to learn more about park sites near you. Go to www.nationalparkweek.org for more ideas on how to explore. Then the park service wants people to share their stories using the hashtag #FindYourPark and at FindYourPark.com."
+    },
+    {
+      "source_id": "59:24",
+      "body": "The FBI charged a Philadelphia woman on Thursday with trying to travel overseas to fight for ISIS. She's one of three women arrested this week on terror charges. Two New York women were also taken into custody. An FBI complaint cites numerous social media messages dating back to August 2013 that were sent by Keonna Thomas, 30, also known as \"Young Lioness\" and \"Fatayat Al Khilafah.\" One Twitter message said, \"If we truly knew the realities ... we all would be rushing to join our brothers in the front lines pray ALLAH accept us as shuhada [martyrs].\" Another said, \"When you're a mujahid [violent jihadi fighter] your death becomes a wedding.\" The FBI said Thomas purchased an electronic visa to Turkey on March 23. Turkey is known as the easiest place from which to enter Syria and join ISIS. An ISIS manual advises recruits to buy round-trip tickets to vacation spots such as Spain and then purchase tickets for their real destination once they arrive overseas, the FBI said. On March 26, Thomas purchased a ticket to Barcelona, with a March 29 departure and an April 15 return to the United States, the complaint said. It's not clear when or where she was arrested. She was charged with knowingly attempting to provide material support and resources to a designated foreign terrorist organization. She could be sentenced to 15 years in prison. On Thursday, Noelle Velentzas, 28, and her former roommate, Asia Siddiqui, 31, were arrested in New York and accused of planning to build an explosive device for attacks in the United States, federal prosecutors said. In the past 18 months, the Justice Department's National Security Division has prosecuted or is prosecuting more than 30 cases of people attempting to travel abroad to join or provide support to terrorist groups. Of those cases, 18 allegedly involve support to ISIS. \"The terrorist threat is more decentralized, more diffuse, more complicated,\" Homeland Security Secretary Jeh Johnson told reporters Thursday. \"It involves the potential lone wolf actor, it involves the effective use of social media, the Internet.\""
+    },
+    {
+      "source_id": "59:42",
+      "body": "Blue Bell ice cream has temporarily shut down one of its manufacturing plants over the discovery of listeria contamination in a serving of ice cream originating from that plant. Public health officials warned consumers Friday not to eat any Blue Bell-branded products made at the company's Broken Arrow, Oklahoma, plant. That includes 3-ounce servings of Blue Bell ice cream from this plant that went to institutions in containers marked with the letters O, P, Q, R, S or T behind the coding date. The warning by the Centers for Disease Control and Prevention does not affect other Blue Bell ice cream, including other 3-ounce servings, not made at the plant. But Blue Bell has recalled other products. The company is shutting down the Broken Arrow facility \"out of an abundance of caution\" to search for a possible cause of contamination. It is the third time Blue Bell has taken action in light of a listeria outbreak at a Kansas hospital that served the company's ice cream. Listeria monocytogenes was recently found in a cup of ice cream recovered from the hospital. The cup contaminated with the bacteria was produced at the Broken Arrow plant in April 2014, Blue Bell said. And, according to the CDC, listeria bacteria was found in additional samples of the same product that were recovered from the plant. The bacteria in the hospital sample and the factory sample appeared to match each other genetically, the CDC said. But they did not appear identical to listeria samples taken from patients infected in the Kansas outbreak. In a separate outbreak in Texas, the CDC did find that listeria samples taken from patients who came down with listeriosis between 2010 and 2014 in a hospital that served 3-ounce Blue Bell cups matched the listeria in recovered samples. None of this means the ice cream is the source of either spate of the infections. \"Investigation to determine whether these illnesses are related to exposure to Blue Bell products is ongoing,\" the CDC said. In early March, in light of the Kansas listeria outbreak, Blue Bell recalled a group of products made at a plant in Texas. It later added 3-ounce cup servings to the recall. Five people were infected and three died in the past year in Kansas from listeria that might be linked to Blue Bell Creameries products, according to the CDC. All five of them were hospitalized at the same hospital before developing listeriosis, the CDC said. At least four of them had consumed milkshakes made with Blue Bell ice cream before developing the infection. \"We are devastated and know that Blue Bell has to be and can be better than this,\" Paul Kruse, Blue Bell CEO and president, said in a statement. \"Quality and safety have always been our top priorities. We are deeply saddened and concerned for all those who have been affected.\" The CDC advises that individuals and institutions should check their freezers for the recalled products and throw them away. In a statement on its website, Blue Bell said \"this recall in no way includes Blue Bell ice cream half gallons, pints, quarts, 3 gallons or other 3 oz. cups.\" This has been the first product recall in the 108-year history of Blue Bell Creameries, the company said. Listeriosis is a serious infection caused by eating food contaminated with listeria, and primarily affects the elderly, pregnant women, newborns and people with weakened immune systems, according to the CDC. Symptoms of a listeria infection are fever and muscle aches, sometimes associated with diarrhea or other gastrointestinal symptoms. In the United States, an estimated 1,600 people become seriously ill each year, and approximately 16% of these illnesses result in death. Cervical infections caused by listeriosis in pregnant women may result in stillbirth or spontaneous abortion during the second or third trimesters. CNN's Debra Goldschmidt, Amanda Watts and Jacque Wilson contributed to this report."
+    },
+    {
+      "source_id": "59:54",
+      "body": "According to an outside review by Columbia Journalism School professors, \"(a)n institutional failure at Rolling Stone resulted in a deeply flawed article about a purported gang rape at the University of Virginia.\" The Columbia team concluded that \"The failure encompassed reporting, editing, editorial supervision and fact-checking.\" Hardly a ringing endorsement of the editorial process at the publication. The magazine's managing editor, Will Dana, wrote, \"We would like to apologize to our readers and to all of those who were damaged by our story and the ensuing fallout, including members of the Phi Kappa Psi fraternity and UVA administrators and students.\" Brian Stelter: Fraternity to 'pursue all available legal action' The next question is:. Can UVA, Phi Kappa Psi or any of the other fraternities on campus sue for defamation? The Virginia Supreme Court said in Jordan v. Kollman that \"the elements of libel are (1) publication of (2) an actionable statement with (3) the requisite intent.\" \"Actionable\" means the statement must be both false and defamatory. Of course, the law of defamation must be balanced against the freedom of speech protected under not only the First Amendment to the United States Constitution, but also the Virginia Constitution. True statements cannot be defamatory. Neither can pure statements of opinion, because they theoretically cannot be either true or false. But the Rolling Stone article certainly purported to be fact, and it apparently is not exactly what the law considers \"true.\" The individual members of the fraternity will likely be considered private individuals, and not public figures; the latter have a harder time proving defamation. A private person suing for defamation must establish that the defendant has published a false factual statement that is about the person and that it also harms the person's reputation. The private plaintiff also must show that the defendant knew that the statement was false, or believed it was true but lacked a reasonable basis, or acted negligently in checking the facts. At first blush, that sounds like it fits perfectly, right? The Columbia report may go a long way toward establishing at least a modicum of the required intent. But that's only half the battle. There are strict rules about who can be a plaintiff in a defamation action like this. The identity of the aspiring plaintiff matters. First, let's eliminate UVA. The university is a public university, and therefore it is a governmental entity. The Supreme Court has been clear on the issue of libelous statements about the government: The government cannot sue for defamation. There is no such cause of action in American jurisprudence. Now the fraternities, starting with Phi Kappa Psi. A fraternity is not an individual, but a group. A plaintiff in a defamation case must show that the statements were \"of or concerning\" the plaintiff. It sounds obvious, but if you're going to say a statement hurt you, you have to prove the statement actually was about you to begin with. When the statements are about a group without naming an individual, it's hard to say the statement is \"concerning\" the individual -- and groups generally cannot sue.  For example, you can be sued if you call a specific lawyer a thief, but that same person cannot sue you if you simply call all lawyers thieves. Defamatory statements about a group are therefore not actionable by the group's individual members, for the most part. Like all rules, however, there are exceptions. If the defamatory language is about \"a comparatively small group of persons and the defamatory part is easily imputed against all members of the small group, an individual member may sue.\" If I said, \"The 1980 Philadelphia Phillies infielders were a bunch of criminals\" (they weren't),  the individual players could sue, because that mean statement is clearly about certain persons -- if I said that -- which I didn't. Phi Kappa Psi would likely argue that the \"small group\" exception fits it perfectly: Even if the individual members were not identified by name, the defamatory story has been imputed directly to individual members, who have suffered by their association with the group. On the other hand, Rolling Stone's lawyers would likely argue that the group is so large and fluid (after all, the membership changes somewhat every year), that even though the fraternity's reputation is tarnished, the members have suffered no individualized injury. As for the other fraternities on campus but not implicated in the story, that's likely a group that moves from the small category to large, and the members of Greek life generally will have a harder time bringing a lawsuit. Lawyers will tell you that a libel suit is one of those things that citizens often threaten each other with on Facebook, but that such cases are rarely actually filed. That's because a plaintiff usually has to show some kind of financial harm. So if your Aunt Edna calls you a loser on Twitter, you're going to have to spend money on an expert to explain to a jury how that actually damaged you financially. And since most of the people who waste time threatening each other with defamation suits  on Facebook live in their moms' basements and are \"between jobs,\" these are not the kind of people who have money or reputation to damage in the first place. The UVA situation is not your run-of-the-mill defamation case. The university won't be able to sue, but if the members of the fraternity can get past some of the preliminary hurdles of a defamation claim, and they can make a tangible case for damages, then this could be one of those rare successful defamation cases."
+    },
+    {
+      "source_id": "59:66",
+      "body": "When I was elected to the Kentucky State Senate in 1967, I became the first woman and the first person of color to serve in the body.  Five decades later, I find it almost unfathomable that a politician from my own state is attempting to launch his presidential campaign on a record that includes questioning landmark voting rights and civil rights legislation. But that is what Rand Paul, who today declared he's running for president of the United States, is doing. His campaign team told reporters last week that his campaign announcement message would be about \"expanding the Republican Party\" -- a message of inclusion. But those of us listening today who he is hoping to include, heard nothing more than hype. I'm not buying it. Since coming to the U.S. Senate, Paul has tried to sell himself as a different type of Republican.  He's tried to brand himself as the GOP's minority outreach candidate.  The problem for Paul, and the GOP at large, is that they don't back up their words with their policies. Yes, it's about time that Republicans started seriously considering the fact that black voters are an important piece of the electoral puzzle.  But they can't actually appeal to the community unless they have a real commitment to the issues facing minority communities.  A quick survey of Sen. Paul's positions makes clear that he does not. Paul kicked off his announcement speech in Louisville by declaring \"I have a message that is loud and clear:  We have come to take our country back.\"  I have no doubt that under Paul's leadership, he would indeed take our country back -- in the wrong direction -- way back to a time when we were debating the Civil Rights Act --  which Paul has done since landing on the national stage; when there was no Department of Education -- a department he thinks \"should be done away with;\" when women didn't have choices -- choices Paul seeks to limit in Washington; when DREAMers weren't protected from deportation -- protections Paul currently opposes. In his inept speaking engagements at historically black colleges and universities, he has come across as condescending and lacking basic cultural competency. But Paul has also questioned the Civil Rights Act, and even claimed that private business owners have a right to discriminate. When asked about the need for a more robust Voting Rights Act following the Supreme Court's dismantling of the law, Paul dismissively remarked, \"We have an African-American President.\" When President Obama stood with John Lewis and other veterans of the civil rights movement in front of the Edmund Pettus Bridge last month to mark the 50th anniversary of Bloody Sunday, he inspired us all by saying: \"With effort, we can roll back poverty and the roadblocks to opportunity. ... With effort, we can protect the foundation stone of our democracy for which so many marched across this bridge -- and that is the right to vote.\" America is better -- and we solve more problems -- with more democracy, not less.  Unfortunately Rand Paul has demonstrated that he disagree with that basic principle.  Paul tried once again from that stage in Louisville to fashion himself as the one member of his party courageous enough to try to broaden Republican appeal to constituencies they ignore year after year. But his record makes it very clear that his views are outdated, outside of the mainstream, and disqualifying for a man who wants to lead our country. The American people deserve a leader who won't disrespect their intelligence, who won't pander to them when it's convenient, and who won't work to dismantle the progress we have made over the last five decades. What I heard today, didn't change the facts about Rand Paul's record.  The American people deserve better than Rand Paul."
+    },
+    {
+      "source_id": "59:120",
+      "body": "Their relationship led to jail time for her, but Mary Kay Letourneau Fualaau wants the world to know that she and her husband, Vili Fualaau, are still happily together. She was a married 34-year-old teacher and mother of four in Seattle in 1996 when she began an affair with Fualaau, her 13-year-old student. Letourneau gave birth to her young lover's child and went on to serve more than seven years in prison on charges related to their sexual relationship. On Friday, ABC's \"20/20\" will air an exclusive interview with the couple, who will celebrate their 10th wedding anniversary on May 20. The pair wed soon after she was released from prison in 2005 and are now the parents of two teen girls. According to ABC, during the interview with Barbara Walters, \"Mary Kay tells Walters what makes their marriage work in spite of their huge difference in their age.\" \"She also discusses her surprising plans to teach again, as well as her intentions to have her status as a registered sex offender lifted,\" a posting on the network's site says. \"Vili Fualaau, meanwhile, discusses his bouts with alcoholism, depression and why he believes the system failed him while he was still a minor.\" Letourneau Fualaau is now 53, and her husband is 31."
+    },
+    {
+      "source_id": "59:138",
+      "body": "Kanye West has settled a lawsuit with a paparazzi photographer he assaulted -- and the two have shaken on it. The photographer, Daniel Ramos, had filed the civil suit against West  after the hip-hop star attacked him and tried to wrestle his camera from him in July 2013 at Los Angeles International Airport. West pleaded no contest last year to a misdemeanor count of battery over the scuffle. A judge sentenced him to two years' probation, as well as anger management sessions and community service. Ramos and his lawyer, Gloria Allred, sought general and punitive damages in the civil suit, saying that West had interfered with the photographer's rights to pursue a lawful occupation. The case had been set for trial next week, but Allred issued a statement Tuesday night saying Ramos' side had filed a dismissal \"because the case was settled to the satisfaction of the parties.\" She didn't disclose the details of the settlement other than saying that \"one important aspect of it was an apology by Kanye West to our client, Daniel Ramos.\" Her statement included a picture of West and Ramos shaking hands, which she said happened after the apology. The original incident was caught on video, including the following exchange. \"Kanye! Kanye! Talk to me, Kanye!\" Ramos shouts outside a terminal at the Los Angeles airport on the night of July 19, 2013. \"What's' going on? Why can't we talk to you?  I mean, why?\" he asks as West moves through a group of paparazzi. \"Now come on, Kanye, I don't want to fight with you,\" he says as West advances toward him. \"I told you, don't talk to me, right,\" West says. \"You're trying to get me in trouble so I step off and have to pay you like $250,000.\" West is then seen rushing the photographer and attempting to wrestle his camera from his hands. West retreats after about 15 seconds of scuffling with the photographer. \"We believe that this case sent an important message,\" Allred said. \"Celebrities are not above the law, and they have no right to physically attack someone simply because they were asked a question.\" Beverly Hills Police investigated an incident in January 2014 in which West was accused of assaulting a man at a Beverly Hills chiropractor's office. West avoided criminal charges by reaching a civil settlement with the man. Kanye West apologizes to Beck, Bruno Mars. CNN's Sonya Hamasaki contributed to this report."
+    },
+    {
+      "source_id": "59:144",
+      "body": "Blues legend B.B. King was hospitalized for dehydration, though the ailment didn't keep him out for long. King's dehydration was caused by his Type II diabetes, but he \"is much better,\" his daughter, Claudette King, told the Los Angeles Times. The legendary guitarist and vocalist released a statement thanking those who have expressed their concerns. \"I'm feeling much better and am leaving the hospital today,\" King said in a message Tuesday. Angela Moore, a publicist for Claudette King, said later in the day that he was back home resting and enjoying time with his grandchildren. \"He was struggling before, and he is a trouper,\" Moore said. \"He wasn't going to let his fans down.\" No more information on King's condition or where he was hospitalized was immediately available. B.B. is short for Blues Boy, part of the name he used as a Memphis disc jockey, the Beale Street Blues Boy. He was inducted into the Rock and Roll Hall of Fame in 1987, and has 30 Grammy nominations. King, 89, has used various models of Gibson guitars over the years, and named each one of them Lucille. In the 1980s, Gibson officially dropped the model number on the guitar he used last and most. It became a custom-made signature model named Lucille, manufactured exclusively for the \"King of the Blues.\" Some of his hits include \"The Thrill Is Gone,\" which won him his first Grammy in 1970, \"There Must be a Better World Somewhere\" and \"When Love Comes to Town,\" a collaboration with U2. Last year, the bluesman suffered from dehydration and exhaustion after a show in Chicago, forcing him to cancel the remainder of his tour. CNN's Greg Botelho and Sonya Hamasaki contributed to this report."
+    },
+    {
+      "source_id": "59:180",
+      "body": "Chris Copeland of the Indiana Pacers was stabbed after leaving a trendy New York nightclub early Wednesday, and two Atlanta Hawks -- who had just finished a home game hours before the incident -- were among those arrested, according to police and CNN affiliates. The Hawks were not involved in the stabbing incident, police said, but were arrested on obstruction and other charges later. Though New York Police Department Det. Kelly Ort initially told CNN the incident occurred just before 4 a.m. at 1OAK, a club in New York's Chelsea neighborhood known to draw celebrities among its clientele, the club later told CNN that the stabbing occurred in front of the Fulton Houses project down the street. \"1OAK staff was unaware of the incident when it happened, as it occurred beyond their view in a different location. However, 1OAK's team assisted Mr. Copeland to their fullest capabilities, and called for help as soon as he was seen walking back towards the venue,\" the statement said. The statement continued, \"A review of the video footage seems to reveal the incident did not originate from the venue or its immediate surroundings that are under 1OAK supervision.\" Copeland and a female companion, Katrine Saltara, were in the club for about 10 minutes before leaving and walking down the street toward Fulton Houses, where their car was parked, said a 1OAK spokesperson. The spokesperson gave CNN additional details on condition of anonymity because 1OAK's legal team had approved only the club's official statement. The suspect, who the spokesperson said never entered 1OAK, stabbed Copeland and Saltara in front of Fulton Houses, and according to the club's statement, \"Mr. Copeland's driver sprang to accost and detain the apparent perpetrator and that individual is now in police custody.\" Charges against the suspect are pending, and his name will be released once charges are filed, Ort said. Copeland and Saltara tried to make their way back to the club to seek help from the 20 or so security personnel on hand, leaving a \"bloody trail of handprints\" between the site of the stabbing and the club, the spokesperson said. Copeland \"almost landed right next to the club,\" the spokesperson said, adding that surveillance footage will not show the actual stabbing because it occurred too far away from the club. The club shut down immediately after the incident, the spokesperson said. A male and two females were taken to area hospitals, Ort said. A knife was recovered, a suspect was arrested and two individuals not involved in the dispute -- the Hawks' Pero Antic, 32, and Thabo Sefolosha, 30 -- were arrested on charges of obstructing governmental administration and disorderly conduct, she said. Sefolosha faces an additional charge of resisting arrest, Ort said. Word of the stabbing quickly spread through the club, reaching Antic and Sefolosha, who went outside to check on their friend, Copeland, the 1OAK spokesperson said. At one point, the two began pushing their way through a crowd that had gathered around the scene, leading to their arrests, the spokesperson said. \"We will contest these charges and look forward to communicating the facts of the situation at the appropriate time,\" the players said in a joint statement released by the team. \"We apologize to our respective families, teammates, and the Hawks' organization for any negative attention this incident has brought upon them.\" The Hawks are in New York for a Wednesday night game against the Brooklyn Nets. Neither player will be in uniform, the team said. Police released little information Wednesday, but local media identified the injured man as Copeland, 31, who is from Orange, New Jersey. The Pacers released a statement saying Copeland suffered a knife wound to his left elbow and abdomen, and he's in stable condition at a New York hospital. \"We are aware that Chris Copeland was injured early this morning in New York City. We are still gathering information and will update when we know more. Our thoughts are with Chris and those injured,\" Larry Bird, the Pacers' president of basketball operations, said in a statement. Copeland's agent, John Spencer, issued a statement saying, \"We're concerned about the safety of Chris and Katrine. We don't have any details at this particular time. All we can do is pray and wait.\" The NBA and the Hawks front office said they were looking into the incident. \"We are aware of the situation involving Pero Antic and Thabo Sefolosha this morning. We are in the process of gathering more information and will have further comment at the appropriate time,\" Hawks spokesman Garin Narain said in an email. Copeland's Pacers are slated to play the New York Knicks on Wednesday night. The pair apparently had only recently arrived in New York prior to their arrests, as both were on the court for the Hawks' 96-69 win over the Phoenix Suns in Atlanta on Tuesday night. Antic played 12 minutes, and Sefolosha played 20. The game ended around 10 p.m. Copeland, a former Knick, was near the nightclub with Saltara when a 22-year-old Brooklyn man approached them, police told CNN affiliate WABC. There was some sort of dispute before the suspect stabbed the 6-foot-8-inch Copeland in the abdomen, slashed Saltara and then slashed another woman, the station reported. Saltara suffered cuts to her arm, breast and buttock, and the other woman suffered a slash to her stomach, CNN affiliate WCBS reported. While WCBS reported that the second woman was 53 years old, WABC reported she was 23. Images published in the New York Daily News showed a considerable amount of blood on the sidewalk and a white sports coupe, roped off with police tape, with several streaks of blood on its driver's side. Antic and Sefolosha interfered with officers trying to establish a crime scene, and one of the Hawks pushed a police officer, WABC reported. The Hawks are preparing for a historic playoff run after clinching the No. 1 seed in the NBA's Eastern Conference. Tuesday's win over the Suns marked a franchise-best 58 wins in a season for the club. The Pacers sit in the conference's 10th spot but are only one game out of playoff contention. CNN's Laura Ly, Jason Durand and Jill Martin contributed to this report."
+    },
+    {
+      "source_id": "59:204",
+      "body": "Tejano star Selena, who died 20 years ago, is coming back in a big way: with a hologram-like figure. Billboard reports that the singer's family is creating a version of the singer that will be \"walking, talking, singing and dancing digital embodiment\" of her persona. \"By no means is this something that's creepy or weird,\" her sister, Suzette Quintanilla, told Billboard. \"We think it's something amazing. A lot of the new fans that did not get to experience what Selena was about hopefully will be able to get a sense of her with this new technology that's going to be coming out.\" Selena: 20 years after her death. The technology is being handled by Acrovirt LLC, a Nevada-based tech company. \"Using detailed individual personalized functions spanning the mind, brain and body, the individual's Digitized Human Essence will autonomously learn and react on behalf of its human counterpart's,\" the company explained. The project is being called \"Selena the One.\" Twenty years after she was killed by her fan club president, Selena remains incredibly popular, with her Facebook page recording 2 million likes and fans continuing to post videos and tributes. Selena will be the first figure to use the Acrovirt technology, Quintanilla said. \"I'm excited at the fact that she will be the first ever, and the fact that she's a Latina makes it even more awesome,\" she said. \"It's not about replacing Selena in any shape, way or form; it's just something to help her legacy continue growing.\" The family intends to expand her legacy in another way: with some new music. Selena the One \"will release new songs and videos, will collaborate with current hit artists, and aims to go on tour in 2018,\" said a statement on Selena's Facebook page. Selena isn't the first performer to try the virtual route. A Michael Jackson hologram appeared at the Billboard Music Awards in 2014, and a hologram of Tupac Shakur performed at Coachella in 2012. But the new technology is a step forward, Quintanilla said. \"People don't realize how fast technology is moving,\" she told Billboard. \"This is something that we're building for another two to three years, so when 2018 comes around they'll be like, 'Oh, OK, we get it.' \" Fans can join an Indiegogo campaign, www.selenatheone.com, to support the launch. The campaign, which hopes to raise $500,000, begins April 16. The commemorative Fiesta de la Flor in Corpus Christi, Texas -- which celebrates her life -- is scheduled for April 17 and 18. CNN's Katia Hetter contributed to this story."
+    },
+    {
+      "source_id": "59:210",
+      "body": "Getting caught napping on the job is never good.  Getting caught napping on the job in the cargo hold of a plane takes it to a whole different level. Alaska Airlines Flight 448 was just barely on its way to Los Angeles from Seattle-Tacoma International Airport on Monday afternoon when the pilot reported hearing unusual banging from the cargo hold. \"There could be a person in there so we're going to come back around,\" he told air traffic control. The banging in the cargo hold did come from a person and he turned out to be a ramp agent from Menzies Aviation, a contractor for Alaska Airlines that handles loading the luggage, the airline said.  The man told authorities he had fallen asleep. It appears he was never in any danger. The cargo hold is pressurized and temperature controlled, the airline said. The plane was also only in the air for 14 minutes. The passengers knew something wasn't right, almost as soon as the plane took off. \"All of a sudden we heard all this pounding underneath the plane and we thought there was something wrong with the landing gear,\" Robert Higgins told CNN affiliate KABC. The pounding grew louder. \"At that point, we started hearing yelling, screams for help, very, very faint,\" Jamie Davis said.  \"That's when we notified the flight attendant that there was somebody underneath us.\" As the banging continued, a federal air marshal sprang into action. \"At some point, the marshal kind of made himself known,\" said Troi Ge.  \"He started banging back, and he yelled really loud and said, 'We're getting ready to land, hold on to something.'\" The emergency landing spooked the folks aboard Flight 448. Affiliate KOMO spoke to Marty Collins, another one of the passengers. \"We just took off for L.A. regular and then ... about five minutes into the flight the captain came on and said we were going back and we'd land within five to seven minutes, and we did,\" Collins said. \"When we landed was when all the trucks and the police and the fire trucks surrounded the plane.\" \"I think it's scary and really unsafe, too,\" Chelsie Nieto told affiliate KCPQ. \"Because what if it's someone who could have been a terrorist?\" The ramp agent appeared to be in OK after the ordeal. He was taken to an area hospital as a precaution, the airline said. He passed a drug test and was discharged. The employee started work at 5 a.m. and his shift was scheduled to end at 2:30 p.m., just before the flight departed. \"During a pre-departure huddle, the team lead noticed the employee was missing. The team lead called into the cargo hold for the employee and called and texted the employee's cell phone, but did not receive an answer. His co-workers believed he finished his shift and went home,\" the airline's blog said. Alaska Airlines said it's investigating.  The man had been on a four-person team loading baggage onto the flight. All ramp employees have security badges, and undergo full criminal background checks before being hired, according to the airline. After the delay, the flight with 170 passengers and six crew members on board made it to Los Angeles early Monday evening. CNN's Greg Morrison contributed to this report."
+    },
+    {
+      "source_id": "59:246",
+      "body": "Emy Afalava is a loyal American and decorated veteran.  He was born in American Samoa, a U.S. territory since 1900. He has been subject to American law his whole life and thinks he should be a citizen. The Constitution would agree.  The Fourteenth Amendment declares that \"All persons born ... in the United States, and subject to the jurisdiction thereof, are citizens of the United States.\" Yet, Afalava has been denied the right to vote because the federal government insists that he is no citizen.  How can it be, in the 21st century, that Americans born on U.S. soil are denied the rights of citizenship? That injustice clouds the recent celebration of the 115th anniversary of the decision of American Samoa to join the United States.  It is a wrong that Afalava and other American Samoans are now seeking to right in a federal lawsuit before the D.C. Circuit. A decision could come any day. Since the United States was established, it adhered to the rule that those born on U.S. lands were U.S. citizens.  The rule is colorblind, yet the only exception that the Supreme Court has ever declared was not. The infamous Dred Scott case legitimized slavery as it declared that free African-Americans had \"no rights that the white man was bound to respect.\"  Though they were Americans, they were not citizens under the Constitution. A Civil War later, the 14th Amendment reversed the ruling in the Dred Scott case. Today, the Dred Scott case has come to be regarded as one of the worst decisions in the history of the Supreme Court. But racial discrimination didn't end there. In 1904, a Puerto Rican woman named Isabel Gonzalez sailed for New York.  Because Puerto Rico was U.S. territory, she believed herself to be a U.S. citizen.  But officials at Ellis Island labeled her an undesirable alien and prevented her from entering the mainland.  She sued, with some reason to hope for a favorable ruling. Yet the Supreme Court that eventually heard Gonzalez's case was still racist.  In preceding years, for example, it had permitted a flat ban on naturalizing anyone of the Chinese race. And, in a case addressing the status of recently acquired island territories such as Puerto Rico, the justices had cited the alleged racial inferiority of tropical peoples as reason to treat these lands as second-class U.S. territories.  Justice Edward Douglas White's opinion stated that U.S. sovereignty extended over them, but that their residents did not hold the same constitutional rights as other Americans.  He did so, he privately revealed, because \"he was much preoccupied by the danger of racial and social questions.\" In the Gonzalez case, the justices agreed unanimously that Puerto Ricans were not aliens and thus not subject to immigration laws.  But they declined to decide whether or not Gonzalez was a citizen.  Though preoccupied by fears that islanders were \"savages\" and racially unfit for citizenship, they were unwilling to violate the Constitution. As a result of the court ruling, federal officials were able to deny Gonzalez and others the full panoply of rights conferred on citizens for years. As Isabel Gonzalez's lawyer told the Court, declaring that residents of America's island territories are not U.S. citizens would mean adding to \"precedents in our history of which we are least proud.\" Those precedents, he warned the Court, had been \"repudiated by the American people in the Civil War, by three amendments to the Constitution of the United States, by this court, and by ... advancing civilization.\" Surely, 147 years after the Dred Scott case was overturned, the time has come to put an end to this farce. In the past century, the inhabitants of every other U.S. island territory have become citizens. Today, Emy Afalava and his fellow American Samoans are the last Americans still waiting to become citizens."
+    }
+  ],
+  "news_query": "national OR park OR admission"
+}

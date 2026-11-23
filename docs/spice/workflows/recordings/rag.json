@@ -1,0 +1,296 @@
+{
+  "workflow": "rag",
+  "events": [
+    {
+      "seq": 12,
+      "workflow": "rag",
+      "step": "source_retrieved",
+      "elapsed_ms": 3052.876,
+      "query": "national OR park OR admission",
+      "corpus_documents": 12,
+      "results": [
+        {
+          "source_id": "59:359",
+          "body": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free. Though most of the National Park Service's 407 sites are free year-round, the 128 parks that charge a fee -- like Yellowstone and Yosemite -- will be free those two days. It's all part of National Park Week, happening April 18 through April 26, and it's hosted by the National Park Service and the National Park Foundation. Check out night-time astronomy parties, daytime Revolutionary War programs, Earth Day parties and family-friendly Junior Ranger activities at national park sites across the country. Not sure how to start? Go to FindYourPark.com to learn more about park sites near you. Go to www.nationalparkweek.org for more ideas on how to explore. Then the park service wants people to share their stories using the hashtag #FindYourPark and at FindYourPark.com.",
+          "rank": -6.146023878802851
+        },
+        {
+          "source_id": "59:24",
+          "body": "The FBI charged a Philadelphia woman on Thursday with trying to travel overseas to fight for ISIS. She's one of three women arrested this week on terror charges. Two New York women were also taken into custody. An FBI complaint cites numerous social media messages dating back to August 2013 that were sent by Keonna Thomas, 30, also known as \"Young Lioness\" and \"Fatayat Al Khilafah.\" One Twitter message said, \"If we truly knew the realities ... we all would be rushing to join our brothers in the front lines pray ALLAH accept us as shuhada [martyrs].\" Another said, \"When you're a mujahid [violent jihadi fighter] your death becomes a wedding.\" The FBI said Thomas purchased an electronic visa to Turkey on March 23. Turkey is known as the easiest place from which to enter Syria and join ISIS. An ISIS manual advises recruits to buy round-trip tickets to vacation spots such as Spain and then purchase tickets for their real destination once they arrive overseas, the FBI said. On March 26, Thomas purchased a ticket to Barcelona, with a March 29 departure and an April 15 return to the United States, the complaint said. It's not clear when or where she was arrested. She was charged with knowingly attempting to provide material support and resources to a designated foreign terrorist organization. She could be sentenced to 15 years in prison. On Thursday, Noelle Velentzas, 28, and her former roommate, Asia Siddiqui, 31, were arrested in New York and accused of planning to build an explosive device for attacks in the United States, federal prosecutors said. In the past 18 months, the Justice Department's National Security Division has prosecuted or is prosecuting more than 30 cases of people attempting to travel abroad to join or provide support to terrorist groups. Of those cases, 18 allegedly involve support to ISIS. \"The terrorist threat is more decentralized, more diffuse, more complicated,\" Homeland Security Secretary Jeh Johnson told reporters Thursday. \"It involves the potential lone wolf actor, it involves the effective use of social media, the Internet.\"",
+          "rank": -1.1646805927798585
+        },
+        {
+          "source_id": "59:66",
+          "body": "When I was elected to the Kentucky State Senate in 1967, I became the first woman and the first person of color to serve in the body.  Five decades later, I find it almost unfathomable that a politician from my own state is attempting to launch his presidential campaign on a record that includes questioning landmark voting rights and civil rights legislation. But that is what Rand Paul, who today declared he's running for president of the United States, is doing. His campaign team told reporters last week that his campaign announcement message would be about \"expanding the Republican Party\" -- a message of inclusion. But those of us listening today who he is hoping to include, heard nothing more than hype. I'm not buying it. Since coming to the U.S. Senate, Paul has tried to sell himself as a different type of Republican.  He's tried to brand himself as the GOP's minority outreach candidate.  The problem for Paul, and the GOP at large, is that they don't back up their words with their policies. Yes, it's about time that Republicans started seriously considering the fact that black voters are an important piece of the electoral puzzle.  But they can't actually appeal to the community unless they have a real commitment to the issues facing minority communities.  A quick survey of Sen. Paul's positions makes clear that he does not. Paul kicked off his announcement speech in Louisville by declaring \"I have a message that is loud and clear:  We have come to take our country back.\"  I have no doubt that under Paul's leadership, he would indeed take our country back -- in the wrong direction -- way back to a time when we were debating the Civil Rights Act --  which Paul has done since landing on the national stage; when there was no Department of Education -- a department he thinks \"should be done away with;\" when women didn't have choices -- choices Paul seeks to limit in Washington; when DREAMers weren't protected from deportation -- protections Paul currently opposes. In his inept speaking engagements at historically black colleges and universities, he has come across as condescending and lacking basic cultural competency. But Paul has also questioned the Civil Rights Act, and even claimed that private business owners have a right to discriminate. When asked about the need for a more robust Voting Rights Act following the Supreme Court's dismantling of the law, Paul dismissively remarked, \"We have an African-American President.\" When President Obama stood with John Lewis and other veterans of the civil rights movement in front of the Edmund Pettus Bridge last month to mark the 50th anniversary of Bloody Sunday, he inspired us all by saying: \"With effort, we can roll back poverty and the roadblocks to opportunity. ... With effort, we can protect the foundation stone of our democracy for which so many marched across this bridge -- and that is the right to vote.\" America is better -- and we solve more problems -- with more democracy, not less.  Unfortunately Rand Paul has demonstrated that he disagree with that basic principle.  Paul tried once again from that stage in Louisville to fashion himself as the one member of his party courageous enough to try to broaden Republican appeal to constituencies they ignore year after year. But his record makes it very clear that his views are outdated, outside of the mainstream, and disqualifying for a man who wants to lead our country. The American people deserve a leader who won't disrespect their intelligence, who won't pander to them when it's convenient, and who won't work to dismantle the progress we have made over the last five decades. What I heard today, didn't change the facts about Rand Paul's record.  The American people deserve better than Rand Paul.",
+          "rank": -0.921184443526801
+        }
+      ],
+      "executor": "SQLite FTS5 / BM25"
+    },
+    {
+      "seq": 13,
+      "workflow": "rag",
+      "step": "model_decision",
+      "elapsed_ms": 3329.602,
+      "request": {
+        "state": {
+          "prompt": "Summarize the following news within 38 words:\nFrom the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free. Though most of the National Park Service's 407 sites are free year-round, the 128 parks that charge a fee -- like Yellowstone and Yosemite -- will be free those two days. It's all part of National Park Week, happening April 18 through April 26, and it's hosted by the National Park Service and the National Park Foundation. Check out night-time astronomy parties, daytime Revolutionary War programs, Earth Day parties and family-friendly Junior Ranger activities at national park sites across the country. Not sure how to start? Go to FindYourPark.com to learn more about park sites near you. Go to www.nationalparkweek.org for more ideas on how to explore. Then the park service wants people to share their stories using the hashtag #FindYourPark and at FindYourPark.com.\n\noutput:",
+          "response": "National Park Service offers free admission to 128 parks, including Yellowstone and Yosemite, on April 18-19 and 25-26, as part of National Park Week."
+        },
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "The response contains content that is not supported by the context in the prompt.",
+            "criteria": {
+              "true": "The response contains content that is not supported by the context in the prompt.",
+              "false": "All content of the response is supported by the context in the prompt."
+            }
+          }
+        }
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "q": {
+            "type": "noul",
+            "noul": 0.6060817753898865,
+            "unknown_probability": 0.00012532516655641254,
+            "abstained": false
+          }
+        },
+        "usage": {
+          "preprocess_ms": 17.4,
+          "questions_ms": 163.935,
+          "input_tokens": 407,
+          "rotations": 1,
+          "language_model_passes": 1,
+          "images": 0,
+          "generated_answer_tokens": 0
+        },
+        "timing": {
+          "total_ms": 183.2662110682577
+        }
+      },
+      "revision": "original_draft"
+    },
+    {
+      "seq": 14,
+      "workflow": "rag",
+      "step": "draft_gate_written",
+      "elapsed_ms": 3395.878,
+      "status": "blocked",
+      "unsupported_probability": 0.6060817753898865,
+      "database_row_id": "draft"
+    },
+    {
+      "seq": 15,
+      "workflow": "rag",
+      "step": "extractive_fallback_created",
+      "elapsed_ms": 3445.843,
+      "text": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free.",
+      "words": 30,
+      "executor": "Python controller: leading complete source sentences, at most 38 words",
+      "generated_by_model": false
+    },
+    {
+      "seq": 16,
+      "workflow": "rag",
+      "step": "model_decision",
+      "elapsed_ms": 3644.076,
+      "request": {
+        "state": {
+          "prompt": "Summarize the following news within 38 words:\nFrom the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free. Though most of the National Park Service's 407 sites are free year-round, the 128 parks that charge a fee -- like Yellowstone and Yosemite -- will be free those two days. It's all part of National Park Week, happening April 18 through April 26, and it's hosted by the National Park Service and the National Park Foundation. Check out night-time astronomy parties, daytime Revolutionary War programs, Earth Day parties and family-friendly Junior Ranger activities at national park sites across the country. Not sure how to start? Go to FindYourPark.com to learn more about park sites near you. Go to www.nationalparkweek.org for more ideas on how to explore. Then the park service wants people to share their stories using the hashtag #FindYourPark and at FindYourPark.com.\n\noutput:",
+          "response": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free."
+        },
+        "questions": {
+          "q": {
+            "type": "noul",
+            "instructions": "The response contains content that is not supported by the context in the prompt.",
+            "criteria": {
+              "true": "The response contains content that is not supported by the context in the prompt.",
+              "false": "All content of the response is supported by the context in the prompt."
+            }
+          }
+        }
+      },
+      "response": {
+        "model": "mentat-Spice-4B",
+        "answers": {
+          "q": {
+            "type": "noul",
+            "noul": 0.026375150816502154,
+            "unknown_probability": 9.973490107514105e-05,
+            "abstained": false
+          }
+        },
+        "usage": {
+          "preprocess_ms": 17.116,
+          "questions_ms": 155.843,
+          "input_tokens": 406,
+          "rotations": 1,
+          "language_model_passes": 1,
+          "images": 0,
+          "generated_answer_tokens": 0
+        },
+        "timing": {
+          "total_ms": 175.16680085100234
+        }
+      },
+      "revision": "extractive_fallback"
+    },
+    {
+      "seq": 17,
+      "workflow": "rag",
+      "step": "replacement_status_written",
+      "elapsed_ms": 3710.41,
+      "database_row_id": "replacement",
+      "status": "published",
+      "text": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free.",
+      "unsupported_probability": 0.026375150816502154
+    },
+    {
+      "seq": 18,
+      "workflow": "rag",
+      "step": "postcondition_checked",
+      "elapsed_ms": 3729.293,
+      "result": {
+        "workflow": "rag",
+        "source_case_id": "59:359",
+        "retrieved_source_id": "59:359",
+        "original_source_retrieved": true,
+        "first_response": {
+          "model": "mentat-Spice-4B",
+          "answers": {
+            "q": {
+              "type": "noul",
+              "noul": 0.6060817753898865,
+              "unknown_probability": 0.00012532516655641254,
+              "abstained": false
+            }
+          },
+          "usage": {
+            "preprocess_ms": 17.4,
+            "questions_ms": 163.935,
+            "input_tokens": 407,
+            "rotations": 1,
+            "language_model_passes": 1,
+            "images": 0,
+            "generated_answer_tokens": 0
+          },
+          "timing": {
+            "total_ms": 183.2662110682577
+          }
+        },
+        "second_response": {
+          "model": "mentat-Spice-4B",
+          "answers": {
+            "q": {
+              "type": "noul",
+              "noul": 0.026375150816502154,
+              "unknown_probability": 9.973490107514105e-05,
+              "abstained": false
+            }
+          },
+          "usage": {
+            "preprocess_ms": 17.116,
+            "questions_ms": 155.843,
+            "input_tokens": 406,
+            "rotations": 1,
+            "language_model_passes": 1,
+            "images": 0,
+            "generated_answer_tokens": 0
+          },
+          "timing": {
+            "total_ms": 175.16680085100234
+          }
+        },
+        "outcomes": [
+          {
+            "id": "draft",
+            "text": "National Park Service offers free admission to 128 parks, including Yellowstone and Yosemite, on April 18-19 and 25-26, as part of National Park Week.",
+            "status": "blocked"
+          },
+          {
+            "id": "replacement",
+            "text": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free.",
+            "status": "published"
+          }
+        ],
+        "verified": true,
+        "rewrite_method": "Deterministic source extraction; mentat verifies both drafts.",
+        "publication_target": "Local SQLite summaries table only"
+      }
+    }
+  ],
+  "result": {
+    "workflow": "rag",
+    "source_case_id": "59:359",
+    "retrieved_source_id": "59:359",
+    "original_source_retrieved": true,
+    "first_response": {
+      "model": "mentat-Spice-4B",
+      "answers": {
+        "q": {
+          "type": "noul",
+          "noul": 0.6060817753898865,
+          "unknown_probability": 0.00012532516655641254,
+          "abstained": false
+        }
+      },
+      "usage": {
+        "preprocess_ms": 17.4,
+        "questions_ms": 163.935,
+        "input_tokens": 407,
+        "rotations": 1,
+        "language_model_passes": 1,
+        "images": 0,
+        "generated_answer_tokens": 0
+      },
+      "timing": {
+        "total_ms": 183.2662110682577
+      }
+    },
+    "second_response": {
+      "model": "mentat-Spice-4B",
+      "answers": {
+        "q": {
+          "type": "noul",
+          "noul": 0.026375150816502154,
+          "unknown_probability": 9.973490107514105e-05,
+          "abstained": false
+        }
+      },
+      "usage": {
+        "preprocess_ms": 17.116,
+        "questions_ms": 155.843,
+        "input_tokens": 406,
+        "rotations": 1,
+        "language_model_passes": 1,
+        "images": 0,
+        "generated_answer_tokens": 0
+      },
+      "timing": {
+        "total_ms": 175.16680085100234
+      }
+    },
+    "outcomes": [
+      {
+        "id": "draft",
+        "text": "National Park Service offers free admission to 128 parks, including Yellowstone and Yosemite, on April 18-19 and 25-26, as part of National Park Week.",
+        "status": "blocked"
+      },
+      {
+        "id": "replacement",
+        "text": "From the giant sequoias of Yosemite to the geysers of Yellowstone, the United States' national parks were made for you and me. And for Saturday and Sunday, they're also free.",
+        "status": "published"
+      }
+    ],
+    "verified": true,
+    "rewrite_method": "Deterministic source extraction; mentat verifies both drafts.",
+    "publication_target": "Local SQLite summaries table only"
+  },
+  "fresh_inference": true,
+  "local_SQLite_execution": true,
+  "environment": "Local sandbox; public benchmark fixtures, not production business data.",
+  "model": "mentat-Spice-4B"
+}

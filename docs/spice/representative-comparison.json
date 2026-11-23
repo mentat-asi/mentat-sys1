@@ -1,0 +1,610 @@
+{
+  "models": [
+    "mentat-Spice-4B",
+    "vLLM-SR-d3-turbo-v1.1",
+    "Perplexity-Decider-v1.3",
+    "StartLux-v1.1-4B-Instant",
+    "Perplexity-Decider-Flash-v1.3",
+    "Cloudflare-clef",
+    "Jev-1.14",
+    "Qwen3.5-397B-A17B",
+    "Cloudflare-clef-omni",
+    "MetaEncoder-v1",
+    "vLLM-SR-d3-mini",
+    "Intern-Decision-4B",
+    "Google-Gemini-Decision-1",
+    "OpenAI-GPT-6-Luna-Decisions",
+    "Jev",
+    "Microsoft-Decision-1-S1",
+    "Perplexity-Decider-V1.2-S1",
+    "Jev-1.14-S1",
+    "Clef-Flash-S1",
+    "Liquid-d1-3B",
+    "Clef-Flash"
+  ],
+  "labels": [
+    "mentat-Spice-4B",
+    "vLLM-SR d3-turbo v1.1 · 27B",
+    "pplx-decider-v1.3 · 27B",
+    "StartLux-Decision-v1.1-4B-Instant",
+    "pplx-decider-flash-v1.3 · 4B",
+    "Cloudflare/clef · 27B",
+    "Jev 1.14",
+    "Qwen3.5-397B-A17B",
+    "Cloudflare/clef-omni · 30B-A3B",
+    "MetaEncoder v1 · 28.4B",
+    "vLLM-SR d3-mini · 4B",
+    "Intern-Decision-4B",
+    "Google Gemini Decision 1",
+    "OpenAI GPT-6 Luna Decisions",
+    "Jev 1.14.0",
+    "Microsoft-Decision-1",
+    "Perplexity Decider V1.2",
+    "Jev 1.14",
+    "Cloudflare/clef-flash · 9B",
+    "LiquidAI/d1-3B",
+    "Cloudflare/clef-flash · 9B"
+  ],
+  "rows": [
+    {
+      "benchmark": "DecisionIndex_Text",
+      "score": 72.83495710772297,
+      "unit": "public_index",
+      "scoring": null,
+      "best_shown_baseline": 71.62,
+      "difference_points": 1.2149571077229666,
+      "reference_scores": {
+        "vLLM-SR-d3-turbo-v1.1": 71.62,
+        "Perplexity-Decider-v1.3": 69.72,
+        "StartLux-v1.1-4B-Instant": 67.81,
+        "Perplexity-Decider-Flash-v1.3": 63.35,
+        "Cloudflare-clef": 61.71,
+        "Jev-1.14": 60.7
+      }
+    },
+    {
+      "benchmark": "DecisionIndex_Vision",
+      "score": 73.08524791959098,
+      "unit": "public_index",
+      "scoring": null,
+      "best_shown_baseline": 71.5,
+      "difference_points": 1.5852479195909837,
+      "reference_scores": {
+        "Qwen3.5-397B-A17B": 68.52,
+        "Cloudflare-clef-omni": 63.68,
+        "MetaEncoder-v1": 61.36,
+        "Perplexity-Decider-Flash-v1.3": 71.5,
+        "vLLM-SR-d3-mini": 67.67,
+        "Intern-Decision-4B": 61.69
+      }
+    },
+    {
+      "benchmark": "JevBench",
+      "score": 90.04329004329004,
+      "unit": "accuracy_percent",
+      "scoring": null,
+      "best_shown_baseline": 92.2,
+      "difference_points": -2.1567099567099604,
+      "reference_scores": {
+        "Google-Gemini-Decision-1": 92.2,
+        "OpenAI-GPT-6-Luna-Decisions": 90.9,
+        "StartLux-v1.1-4B-Instant": 88.74458874458875,
+        "Jev": 87.44588744588745,
+        "Intern-Decision-4B": 86.58008658008657
+      }
+    },
+    {
+      "benchmark": "TypedDecisions",
+      "score": 80.95,
+      "unit": "accuracy_percent",
+      "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+      "best_shown_baseline": 79.0,
+      "difference_points": 1.9500000000000028,
+      "reference_scores": {
+        "Microsoft-Decision-1-S1": 79.0,
+        "Perplexity-Decider-V1.2-S1": 75.14999999999999,
+        "Jev-1.14-S1": 74.15,
+        "Google-Gemini-Decision-1": 74.0,
+        "OpenAI-GPT-6-Luna-Decisions": 71.05,
+        "Clef-Flash-S1": 70.55
+      }
+    },
+    {
+      "benchmark": "DecisionBench",
+      "score": 82.02092050209205,
+      "unit": "accuracy_percent",
+      "scoring": null,
+      "best_shown_baseline": 81.1213389121339,
+      "difference_points": 0.8995815899581601,
+      "reference_scores": {
+        "StartLux-v1.1-4B-Instant": 81.1213389121339,
+        "Jev": 73.65690376569037,
+        "Liquid-d1-3B": 72.9163179916318,
+        "Intern-Decision-4B": 60.52719665271966,
+        "Clef-Flash": 78.47280334728033
+      }
+    },
+    {
+      "benchmark": "ProceduralTypedDecisions",
+      "score": 93.05069292487235,
+      "unit": "accuracy_percent",
+      "scoring": null,
+      "best_shown_baseline": 87.4690007293946,
+      "difference_points": 5.581692195477757,
+      "reference_scores": {
+        "StartLux-v1.1-4B-Instant": 87.4690007293946,
+        "Jev": 82.93946024799416,
+        "Liquid-d1-3B": 65.082056892779,
+        "Intern-Decision-4B": 60.97556528081692,
+        "Clef-Flash": 67.93581327498175
+      }
+    },
+    {
+      "benchmark": "JevAltBench",
+      "score": 91.99668010433957,
+      "unit": "accuracy_percent",
+      "scoring": null,
+      "best_shown_baseline": 92.80294047901351,
+      "difference_points": -0.8062603746739399,
+      "reference_scores": {
+        "StartLux-v1.1-4B-Instant": 92.80294047901351,
+        "Jev": 90.47901351671804,
+        "Liquid-d1-3B": 84.88261797486365,
+        "Intern-Decision-4B": 88.97320369931231,
+        "Clef-Flash": 90.11145364002846
+      }
+    },
+    {
+      "benchmark": "ZhDecisionBench",
+      "score": 92.71948608137045,
+      "unit": "accuracy_percent",
+      "scoring": null,
+      "best_shown_baseline": 91.64882226980728,
+      "difference_points": 1.0706638115631648,
+      "reference_scores": {
+        "StartLux-v1.1-4B-Instant": 89.07922912205566,
+        "Jev": 88.43683083511777,
+        "Liquid-d1-3B": 82.01284796573876,
+        "Intern-Decision-4B": 91.64882226980728,
+        "Clef-Flash": 90.79229122055675
+      }
+    },
+    {
+      "benchmark": "VisualDecisionBench_Image",
+      "score": 87.94117647058823,
+      "unit": "accuracy_percent",
+      "scoring": null,
+      "best_shown_baseline": 85.05882352941177,
+      "difference_points": 2.882352941176464,
+      "reference_scores": {
+        "StartLux-v1.1-4B-Instant": 83.05882352941177,
+        "Jev": 85.05882352941177,
+        "Liquid-d1-3B": 81.82352941176471,
+        "Intern-Decision-4B": 77.94117647058823,
+        "Clef-Flash": 82.23529411764706
+      }
+    }
+  ],
+  "selection": "Selected representative models; not an exhaustive leaderboard.",
+  "main_chart_style": "3x3_vector_horizontal_bar_grid",
+  "chart_panels": [
+    {
+      "benchmark": "DecisionIndex_Text",
+      "models": [
+        "mentat-Spice-4B",
+        "vLLM-SR-d3-turbo-v1.1",
+        "Perplexity-Decider-v1.3",
+        "StartLux-v1.1-4B-Instant",
+        "Perplexity-Decider-Flash-v1.3",
+        "Cloudflare-clef",
+        "Jev-1.14"
+      ],
+      "values": [
+        72.83495710772297,
+        71.62,
+        69.72,
+        67.81,
+        63.35,
+        61.71,
+        60.7
+      ],
+      "unit": "public_index",
+      "missing_scores_omitted": true,
+      "axis_min": 55,
+      "axis_max": 80,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "vLLM-SR d3-turbo v1.1 · 27B",
+        "pplx-decider-v1.3 · 27B",
+        "StartLux-Decision-v1.1-4B-Instant",
+        "pplx-decider-flash-v1.3 · 4B",
+        "Cloudflare/clef · 27B",
+        "Jev 1.14"
+      ]
+    },
+    {
+      "benchmark": "DecisionIndex_Vision",
+      "models": [
+        "mentat-Spice-4B",
+        "Qwen3.5-397B-A17B",
+        "Cloudflare-clef-omni",
+        "MetaEncoder-v1",
+        "Perplexity-Decider-Flash-v1.3",
+        "vLLM-SR-d3-mini",
+        "Intern-Decision-4B"
+      ],
+      "values": [
+        73.08524791959098,
+        68.52,
+        63.68,
+        61.36,
+        71.5,
+        67.67,
+        61.69
+      ],
+      "unit": "public_index",
+      "missing_scores_omitted": true,
+      "axis_min": 55,
+      "axis_max": 80,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "Qwen3.5-397B-A17B",
+        "Cloudflare/clef-omni · 30B-A3B",
+        "MetaEncoder v1 · 28.4B",
+        "pplx-decider-flash-v1.3 · 4B",
+        "vLLM-SR d3-mini · 4B",
+        "Intern-Decision-4B"
+      ]
+    },
+    {
+      "benchmark": "JevBench",
+      "models": [
+        "Google-Gemini-Decision-1",
+        "OpenAI-GPT-6-Luna-Decisions",
+        "mentat-Spice-4B",
+        "StartLux-v1.1-4B-Instant",
+        "Jev",
+        "Intern-Decision-4B"
+      ],
+      "values": [
+        92.2,
+        90.9,
+        90.04329004329004,
+        88.74458874458875,
+        87.44588744588745,
+        86.58008658008657
+      ],
+      "unit": "accuracy_percent",
+      "missing_scores_omitted": true,
+      "axis_min": 80,
+      "axis_max": 95,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "Google Gemini Decision 1",
+        "OpenAI GPT-6 Luna Decisions",
+        "mentat-Spice-4B",
+        "StartLux-Decision-v1.1-4B-Instant",
+        "Jev 1.14.0",
+        "Intern-Decision-4B"
+      ],
+      "provider_reference_source": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+      "provider_reference_note": "Google-reported public-split results; exact run protocol not matched to local run.",
+      "published_one_decimal_models": [
+        "Google-Gemini-Decision-1",
+        "OpenAI-GPT-6-Luna-Decisions"
+      ]
+    },
+    {
+      "benchmark": "TypedDecisions",
+      "models": [
+        "mentat-Spice-4B",
+        "Microsoft-Decision-1-S1",
+        "Perplexity-Decider-V1.2-S1",
+        "Jev-1.14-S1",
+        "Google-Gemini-Decision-1",
+        "OpenAI-GPT-6-Luna-Decisions",
+        "Clef-Flash-S1"
+      ],
+      "values": [
+        80.95,
+        79.0,
+        75.14999999999999,
+        74.15,
+        74.0,
+        71.05,
+        70.55
+      ],
+      "unit": "accuracy_percent",
+      "missing_scores_omitted": true,
+      "axis_min": 65,
+      "axis_max": 85,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "Microsoft-Decision-1",
+        "Perplexity Decider V1.2",
+        "Jev 1.14",
+        "Google Gemini Decision 1",
+        "OpenAI GPT-6 Luna Decisions",
+        "Cloudflare/clef-flash · 9B"
+      ],
+      "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+      "questions": 2000,
+      "cases": 400,
+      "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+      "local_run_not_an_official_SystemOneBench_entry": true
+    },
+    {
+      "benchmark": "DecisionBench",
+      "models": [
+        "mentat-Spice-4B",
+        "StartLux-v1.1-4B-Instant",
+        "Jev",
+        "Liquid-d1-3B",
+        "Intern-Decision-4B",
+        "Clef-Flash"
+      ],
+      "values": [
+        82.02092050209205,
+        81.1213389121339,
+        73.65690376569037,
+        72.9163179916318,
+        60.52719665271966,
+        78.47280334728033
+      ],
+      "unit": "accuracy_percent",
+      "missing_scores_omitted": true,
+      "axis_min": 55,
+      "axis_max": 90,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "StartLux-Decision-v1.1-4B-Instant",
+        "Jev 1.14.0",
+        "LiquidAI/d1-3B",
+        "Intern-Decision-4B",
+        "Cloudflare/clef-flash · 9B"
+      ]
+    },
+    {
+      "benchmark": "ProceduralTypedDecisions",
+      "models": [
+        "mentat-Spice-4B",
+        "StartLux-v1.1-4B-Instant",
+        "Jev",
+        "Liquid-d1-3B",
+        "Intern-Decision-4B",
+        "Clef-Flash"
+      ],
+      "values": [
+        93.05069292487235,
+        87.4690007293946,
+        82.93946024799416,
+        65.082056892779,
+        60.97556528081692,
+        67.93581327498175
+      ],
+      "unit": "accuracy_percent",
+      "missing_scores_omitted": true,
+      "axis_min": 55,
+      "axis_max": 98,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "StartLux-Decision-v1.1-4B-Instant",
+        "Jev 1.14.0",
+        "LiquidAI/d1-3B",
+        "Intern-Decision-4B",
+        "Cloudflare/clef-flash · 9B"
+      ]
+    },
+    {
+      "benchmark": "JevAltBench",
+      "models": [
+        "mentat-Spice-4B",
+        "StartLux-v1.1-4B-Instant",
+        "Jev",
+        "Liquid-d1-3B",
+        "Intern-Decision-4B",
+        "Clef-Flash"
+      ],
+      "values": [
+        91.99668010433957,
+        92.80294047901351,
+        90.47901351671804,
+        84.88261797486365,
+        88.97320369931231,
+        90.11145364002846
+      ],
+      "unit": "accuracy_percent",
+      "missing_scores_omitted": true,
+      "axis_min": 80,
+      "axis_max": 98,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "StartLux-Decision-v1.1-4B-Instant",
+        "Jev 1.14.0",
+        "LiquidAI/d1-3B",
+        "Intern-Decision-4B",
+        "Cloudflare/clef-flash · 9B"
+      ]
+    },
+    {
+      "benchmark": "ZhDecisionBench",
+      "models": [
+        "mentat-Spice-4B",
+        "StartLux-v1.1-4B-Instant",
+        "Jev",
+        "Liquid-d1-3B",
+        "Intern-Decision-4B",
+        "Clef-Flash"
+      ],
+      "values": [
+        92.71948608137045,
+        89.07922912205566,
+        88.43683083511777,
+        82.01284796573876,
+        91.64882226980728,
+        90.79229122055675
+      ],
+      "unit": "accuracy_percent",
+      "missing_scores_omitted": true,
+      "axis_min": 75,
+      "axis_max": 98,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "StartLux-Decision-v1.1-4B-Instant",
+        "Jev 1.14.0",
+        "LiquidAI/d1-3B",
+        "Intern-Decision-4B",
+        "Cloudflare/clef-flash · 9B"
+      ]
+    },
+    {
+      "benchmark": "VisualDecisionBench_Image",
+      "models": [
+        "mentat-Spice-4B",
+        "StartLux-v1.1-4B-Instant",
+        "Jev",
+        "Liquid-d1-3B",
+        "Intern-Decision-4B",
+        "Clef-Flash"
+      ],
+      "values": [
+        87.94117647058823,
+        83.05882352941177,
+        85.05882352941177,
+        81.82352941176471,
+        77.94117647058823,
+        82.23529411764706
+      ],
+      "unit": "accuracy_percent",
+      "missing_scores_omitted": true,
+      "axis_min": 70,
+      "axis_max": 95,
+      "nonzero_axis_explicitly_marked": true,
+      "display_labels": [
+        "mentat-Spice-4B",
+        "StartLux-Decision-v1.1-4B-Instant",
+        "Jev 1.14.0",
+        "LiquidAI/d1-3B",
+        "Intern-Decision-4B",
+        "Cloudflare/clef-flash · 9B"
+      ]
+    }
+  ],
+  "reference_snapshot": {
+    "exported_at": "2026-11-10T05:40:45.024567+00:00",
+    "last_run_at": "2026-11-09T08:28:14.740208+00:00",
+    "source_commit": "c61a32ee7aedfe0404edc5c09e658dc879c92838",
+    "source_url": "https://github.com/Valen-Team/JevalKit/tree/c61a32ee7aedfe0404edc5c09e658dc879c92838",
+    "counts": {
+      "model_families": 24,
+      "evaluated_families": 23,
+      "model_configurations": 38,
+      "benchmark_families": 8,
+      "eligible_scores": 301,
+      "retained_runs": 369,
+      "fully_unsupported": 17
+    }
+  },
+  "adapter_sha256": "2d7eb50280a28bb3462a7090317edde6d4724fef3da5d8de39b4cb3b747379d2",
+  "panel_score_sources": {
+    "TypedDecisions": {
+      "mentat-Spice-4B": {
+        "score_percent": 80.95,
+        "source_url": null,
+        "evidence_kind": "local existing predictions rescored",
+        "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+        "cases": 400,
+        "questions": 2000,
+        "reported_accuracy_precision": 4
+      },
+      "Microsoft-Decision-1-S1": {
+        "score_percent": 79.0,
+        "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+        "evidence_kind": "benchmark-author published raw result",
+        "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+        "cases": 400,
+        "questions": 2000,
+        "reported_accuracy_precision": 4
+      },
+      "Perplexity-Decider-V1.2-S1": {
+        "score_percent": 75.14999999999999,
+        "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+        "evidence_kind": "benchmark-author published raw result",
+        "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+        "cases": 400,
+        "questions": 2000,
+        "reported_accuracy_precision": 4
+      },
+      "Jev-1.14-S1": {
+        "score_percent": 74.15,
+        "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+        "evidence_kind": "benchmark-author published raw result",
+        "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+        "cases": 400,
+        "questions": 2000,
+        "reported_accuracy_precision": 4
+      },
+      "Google-Gemini-Decision-1": {
+        "score_percent": 74.0,
+        "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+        "evidence_kind": "benchmark-author published raw result",
+        "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+        "cases": 400,
+        "questions": 2000,
+        "reported_accuracy_precision": 4
+      },
+      "OpenAI-GPT-6-Luna-Decisions": {
+        "score_percent": 71.05,
+        "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+        "evidence_kind": "benchmark-author published raw result",
+        "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+        "cases": 400,
+        "questions": 2000,
+        "reported_accuracy_precision": 4
+      },
+      "Clef-Flash-S1": {
+        "score_percent": 70.55,
+        "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+        "evidence_kind": "benchmark-author published raw result",
+        "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+        "cases": 400,
+        "questions": 2000,
+        "reported_accuracy_precision": 4
+      }
+    },
+    "JevBench": {
+      "Google-Gemini-Decision-1": {
+        "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+        "evidence_kind": "vendor-reported public split; not a matched rerun"
+      },
+      "OpenAI-GPT-6-Luna-Decisions": {
+        "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+        "evidence_kind": "vendor-reported public split; not a matched rerun"
+      },
+      "mentat-Spice-4B": {
+        "source_url": null,
+        "evidence_kind": "unchanged local or pinned JevalKit result"
+      },
+      "StartLux-v1.1-4B-Instant": {
+        "source_url": null,
+        "evidence_kind": "unchanged local or pinned JevalKit result"
+      },
+      "Jev": {
+        "source_url": null,
+        "evidence_kind": "unchanged local or pinned JevalKit result"
+      },
+      "Intern-Decision-4B": {
+        "source_url": null,
+        "evidence_kind": "unchanged local or pinned JevalKit result"
+      }
+    }
+  },
+  "provider_reference_update_date": "2026-11-22"
+}

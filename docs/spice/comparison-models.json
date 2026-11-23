@@ -1,0 +1,212 @@
+{
+  "source_snapshots_retained": true,
+  "model_cards_checked_on": "2026-11-22",
+  "scores_not_refreshed_or_reassigned": false,
+  "models": [
+    {
+      "score_key": "mentat-Spice-4B",
+      "display_name": "mentat-Spice-4B",
+      "chart_label": "mentat-Spice-4B",
+      "size_as_reported_in_score_source": "4B",
+      "model_repository": "yunqu/mentat-Spice-4B",
+      "source_url": "https://huggingface.co/yunqu/mentat-Spice-4B",
+      "identity_basis": "Exact checkpoint identifier in pinned JevalKit model registry",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "StartLux-v1.1-4B-Instant",
+      "display_name": "StartLux-Decision-v1.1-4B-Instant",
+      "chart_label": "StartLux-Decision-v1.1-4B-Instant",
+      "size_as_reported_in_score_source": "4B",
+      "model_repository": "startlux-models/StartLux-Decision-v1.1-4B-Instant",
+      "source_url": "https://huggingface.co/startlux-models/StartLux-Decision-v1.1-4B-Instant",
+      "identity_basis": "Exact checkpoint identifier in pinned JevalKit model registry",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Jev",
+      "display_name": "Jev 1.14.0",
+      "chart_label": "Jev 1.14.0",
+      "size_as_reported_in_score_source": "undisclosed",
+      "model_repository": null,
+      "source_url": "https://typesafe.ai",
+      "identity_basis": "Exact checkpoint identifier in pinned JevalKit model registry",
+      "Jev_version_note": "JevalKit names checkpoint jev-1.14.0; DI board labels Jev 1.14. These source identifiers are preserved separately."
+    },
+    {
+      "score_key": "Liquid-d1-3B",
+      "display_name": "LiquidAI/d1-3B",
+      "chart_label": "LiquidAI/d1-3B",
+      "size_as_reported_in_score_source": "3B",
+      "model_repository": "LiquidAI/d1-3B",
+      "source_url": "https://huggingface.co/LiquidAI/d1-3B",
+      "identity_basis": "Exact checkpoint identifier in pinned JevalKit model registry",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Intern-Decision-4B",
+      "display_name": "Intern-Decision-4B",
+      "chart_label": "Intern-Decision-4B",
+      "size_as_reported_in_score_source": "4B",
+      "model_repository": "internlm/Intern-Decision-4B",
+      "source_url": "https://huggingface.co/internlm/Intern-Decision-4B",
+      "identity_basis": "Exact checkpoint identifier in pinned JevalKit model registry",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Clef-Flash",
+      "display_name": "Cloudflare/clef-flash",
+      "chart_label": "Cloudflare/clef-flash · 9B",
+      "size_as_reported_in_score_source": "9B",
+      "model_repository": "Cloudflare/clef-flash",
+      "source_url": "https://huggingface.co/Cloudflare/clef-flash",
+      "identity_basis": "Exact checkpoint identifier in pinned JevalKit model registry",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "vLLM-SR-d3-turbo-v1.1",
+      "display_name": "vLLM-SR d3-turbo v1.1",
+      "chart_label": "vLLM-SR d3-turbo v1.1 · 27B",
+      "size_as_reported_in_score_source": "27B",
+      "model_repository": "vllm-sr/d3-turbo",
+      "source_url": "https://huggingface.co/vllm-sr/d3-turbo",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Perplexity-Decider-v1.3",
+      "display_name": "pplx-decider-v1.3",
+      "chart_label": "pplx-decider-v1.3 · 27B",
+      "size_as_reported_in_score_source": "27B",
+      "model_repository": "perplexity-ai/pplx-decider-v1.3",
+      "source_url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Perplexity-Decider-Flash-v1.3",
+      "display_name": "pplx-decider-flash-v1.3",
+      "chart_label": "pplx-decider-flash-v1.3 · 4B",
+      "size_as_reported_in_score_source": "4B",
+      "model_repository": "perplexity-ai/pplx-decider-flash-v1.3",
+      "source_url": "https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.3",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Cloudflare-clef",
+      "display_name": "Cloudflare/clef",
+      "chart_label": "Cloudflare/clef · 27B",
+      "size_as_reported_in_score_source": "27B",
+      "model_repository": "Cloudflare/clef",
+      "source_url": "https://huggingface.co/Cloudflare/clef",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Jev-1.14",
+      "display_name": "Jev 1.14",
+      "chart_label": "Jev 1.14",
+      "size_as_reported_in_score_source": "undisclosed",
+      "model_repository": null,
+      "source_url": "https://typesafe.ai",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": "JevalKit names checkpoint jev-1.14.0; DI board labels Jev 1.14. These source identifiers are preserved separately."
+    },
+    {
+      "score_key": "Qwen3.5-397B-A17B",
+      "display_name": "Qwen3.5-397B-A17B",
+      "chart_label": "Qwen3.5-397B-A17B",
+      "size_as_reported_in_score_source": "397B-A17B",
+      "model_repository": "Qwen/Qwen3.5-397B-A17B",
+      "source_url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Cloudflare-clef-omni",
+      "display_name": "Cloudflare/clef-omni",
+      "chart_label": "Cloudflare/clef-omni · 30B-A3B",
+      "size_as_reported_in_score_source": "30B-A3B",
+      "model_repository": "Cloudflare/clef-omni",
+      "source_url": "https://huggingface.co/Cloudflare/clef-omni",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "MetaEncoder-v1",
+      "display_name": "MetaEncoder v1",
+      "chart_label": "MetaEncoder v1 · 28.4B",
+      "size_as_reported_in_score_source": "28.4B",
+      "model_repository": "facebook/meta-encoder-v1",
+      "source_url": "https://huggingface.co/facebook/meta-encoder-v1",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "vLLM-SR-d3-mini",
+      "display_name": "vLLM-SR d3-mini",
+      "chart_label": "vLLM-SR d3-mini · 4B",
+      "size_as_reported_in_score_source": "4B",
+      "model_repository": "vllm-sr/d3-mini",
+      "source_url": "https://huggingface.co/vllm-sr/d3-mini",
+      "identity_basis": "Exact model/variant identity in pinned official DI public score source",
+      "Jev_version_note": null
+    },
+    {
+      "score_key": "Google-Gemini-Decision-1",
+      "display_name": "Google Gemini Decision 1",
+      "chart_label": "Google Gemini Decision 1",
+      "model_repository": null,
+      "size_as_reported_in_score_source": "undisclosed",
+      "source_url": "https://aistudio.google.com/docs/models/gemini-decision-1",
+      "identity_basis": "Provider identity and exact version in referenced score source; no parameter count inferred"
+    },
+    {
+      "score_key": "OpenAI-GPT-6-Luna-Decisions",
+      "display_name": "OpenAI GPT-6 Luna Decisions",
+      "chart_label": "OpenAI GPT-6 Luna Decisions",
+      "model_repository": null,
+      "size_as_reported_in_score_source": "undisclosed",
+      "source_url": "https://developers.openai.com/api/docs/guides/decisions",
+      "identity_basis": "Provider identity and exact version in referenced score source; no parameter count inferred"
+    },
+    {
+      "score_key": "Microsoft-Decision-1-S1",
+      "display_name": "Microsoft-Decision-1",
+      "chart_label": "Microsoft-Decision-1",
+      "model_repository": null,
+      "size_as_reported_in_score_source": "undisclosed",
+      "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+      "identity_basis": "Provider identity and exact version in referenced score source; no parameter count inferred"
+    },
+    {
+      "score_key": "Perplexity-Decider-V1.2-S1",
+      "display_name": "Perplexity Decider V1.2",
+      "chart_label": "Perplexity Decider V1.2",
+      "model_repository": null,
+      "size_as_reported_in_score_source": "undisclosed",
+      "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+      "identity_basis": "Provider identity and exact version in referenced score source; no parameter count inferred"
+    },
+    {
+      "score_key": "Jev-1.14-S1",
+      "display_name": "Jev 1.14",
+      "chart_label": "Jev 1.14",
+      "model_repository": null,
+      "size_as_reported_in_score_source": "undisclosed",
+      "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+      "identity_basis": "Provider identity and exact version in referenced score source; no parameter count inferred"
+    },
+    {
+      "score_key": "Clef-Flash-S1",
+      "display_name": "Cloudflare/clef-flash",
+      "chart_label": "Cloudflare/clef-flash · 9B",
+      "model_repository": "Cloudflare/clef-flash",
+      "size_as_reported_in_score_source": "9B",
+      "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+      "identity_basis": "Provider identity and exact version in referenced score source; no parameter count inferred"
+    }
+  ],
+  "update_note": "Seven panels unchanged. Typed panel normalized to System One Bench soft modal rule; JevBench adds explicitly marked vendor reports."
+}

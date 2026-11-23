@@ -1,0 +1,41 @@
+{
+  "benchmark": "RealWorldQA",
+  "case_id": "full_realworldqa:14",
+  "request": {
+    "state": {},
+    "questions": {
+      "answer": {
+        "type": "choice",
+        "instructions": "Is the traffic light green for us?",
+        "criteria": {
+          "A": "Yes",
+          "B": "No"
+        }
+      }
+    }
+  },
+  "response": {
+    "model": "mentat-Spice-4B",
+    "answers": {
+      "answer": {
+        "type": "choice",
+        "choice": "A",
+        "probabilities": {
+          "A": 0.9151055142720754,
+          "B": 0.0848944857279246
+        },
+        "confidence": 0.83013284666473,
+        "unknown_probability": 9.417109232810968e-05,
+        "abstained": false
+      }
+    }
+  },
+  "expected": {
+    "answer": "A"
+  },
+  "input_image_sha256": [
+    "7190bee40cbf7e441d7da64a165f236ac5267aa39098bae876ffc016e0baa66a"
+  ],
+  "selected_successful_example": true,
+  "source": "Decision Index public vision"
+}

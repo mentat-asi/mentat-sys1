@@ -1,0 +1,38 @@
+{
+  "checked_on": "2026-11-22",
+  "typed": {
+    "source_url": "https://systemonebench.dev/benchmarks/typed-decisions/",
+    "raw_results_url": "https://systemonebench.dev/results.json",
+    "raw_results_sha256": "085234edfdc54eea53c790c4c9d69324e480049d34c94fc77ab0b3d4c080757a",
+    "source_data_revision": "7189f46b02248bd2569df7325c9df8e3b24e90a7",
+    "cases": 400,
+    "questions": 2000,
+    "scoring": "System One Bench gold modal label; noul p>=0.5 is true",
+    "mentat_correct": 1619,
+    "mentat_accuracy_percent": 80.95,
+    "prior_companion_accuracy_percent": 80.75,
+    "gold_0_5_tie_count": 10,
+    "states_questions_and_non_tie_gold_checked": true,
+    "scores": {
+      "mentat-Spice-4B": 80.95,
+      "Microsoft-Decision-1-S1": 79.0,
+      "Perplexity-Decider-V1.2-S1": 75.14999999999999,
+      "Jev-1.14-S1": 74.15,
+      "Google-Gemini-Decision-1": 74.0,
+      "OpenAI-GPT-6-Luna-Decisions": 71.05,
+      "Clef-Flash-S1": 70.55
+    },
+    "not_a_SystemOneBench_official_board_entry": true
+  },
+  "jevbench_provider_report": {
+    "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+    "source_image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini-decision__benchmarks__tab.width-1200.format-webp_3LrengT.webp",
+    "Gemini Decision 1": 92.2,
+    "GPT-6 Luna Decisions": 90.9,
+    "unit": "accuracy_percent",
+    "precision_decimals": 1,
+    "split": "public",
+    "exact_protocol_matched_to_local_run": false
+  },
+  "not_added_to_DI": "OpenAI 47.32 is a third-party report with differing coverage, not aligned to the current DI panel."
+}

@@ -1,0 +1,45 @@
+{
+  "benchmark": "CharXiv",
+  "case_id": "full_charxiv:444",
+  "request": {
+    "state": {},
+    "questions": {
+      "answer": {
+        "type": "choice",
+        "instructions": "How many of the bar plots in the right two columns, last three rows demonstrate a consistently increasing trend in the likelihood of switching from the lowest to highest parameter a in either contaminated or uncontaminated conditions?",
+        "criteria": {
+          "A": "1",
+          "B": "0",
+          "C": "5",
+          "D": "2"
+        }
+      }
+    }
+  },
+  "input_image_sha256": [
+    "217cc9ae8a478c9e3ad5ca9c2fbae9048a9c243a0bbbefb838e78aea2ed9e45c"
+  ],
+  "expected": {
+    "answer": "B"
+  },
+  "response": {
+    "model": "mentat-Spice-4B",
+    "answers": {
+      "answer": {
+        "type": "choice",
+        "choice": "B",
+        "probabilities": {
+          "A": 0.12108684678972492,
+          "B": 0.8581615841386612,
+          "C": 0.0021829372111449494,
+          "D": 0.018568631860468938
+        },
+        "confidence": 0.8108651085303523,
+        "unknown_probability": 2.096932991090338e-05,
+        "abstained": false
+      }
+    }
+  },
+  "source": "Decision Index public vision",
+  "selected_successful_example": true
+}
