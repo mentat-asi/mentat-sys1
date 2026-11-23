@@ -91,7 +91,7 @@ Comparison values are published references, not matched reruns; Qwen Vision uses
 Python 3.12 · Linux · CUDA GPU. Install the GitHub runtime, then sign in to an HF account with access to this private model:
 
 ```bash
-pip install "mentat-sys1[serve] @ git+https://github.com/mentat-asi/mentat-sys1.git"
+pip install "mentat-sys1[serve] @ https://github.com/mentat-asi/mentat-sys1/releases/download/v0.4.0/mentat_sys1-0.4.0-py3-none-any.whl"
 hf auth login
 ```
 

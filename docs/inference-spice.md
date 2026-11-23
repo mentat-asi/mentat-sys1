@@ -5,12 +5,12 @@ Python 3.12 · Linux · NVIDIA CUDA GPU. Weights are currently private: sign in 
 ## Install and run
 
 ```bash
-pip install "mentat-sys1[serve] @ git+https://github.com/mentat-asi/mentat-sys1.git"
+pip install "mentat-sys1[serve] @ https://github.com/mentat-asi/mentat-sys1/releases/download/v0.4.0/mentat_sys1-0.4.0-py3-none-any.whl"
 hf auth login
 mentat-spice predict --demo
 ```
 
-The first run downloads only four adapter files and the Qwen3.5-4B backbone at revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`. Subsequent runs reuse the HF cache. The demo checks whether an address missing its street number is complete and prints a System One JSON response. Inference runs locally; the Hub is used to download files.
+The installer downloads an approximately 80 KB code-only wheel; demos and evaluation records stay in GitHub. The first run downloads only four adapter files and the Qwen3.5-4B backbone at revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`. Subsequent runs reuse the HF cache. The demo checks whether an address missing its street number is complete and prints a System One JSON response. Inference runs locally; the Hub is used to download files.
 
 For your own request, replace `--demo` with `--input request.json`. See [example request](../configs/spice-example.json).
 
@@ -38,7 +38,7 @@ For image decisions, add `images=["./image.png"]` to `predict`. Inputs can be lo
 Native is the reference default. For acceleration, install the optional kernels and select a runtime:
 
 ```bash
-pip install "mentat-sys1[accelerate] @ git+https://github.com/mentat-asi/mentat-sys1.git"
+pip install "mentat-sys1[accelerate] @ https://github.com/mentat-asi/mentat-sys1/releases/download/v0.4.0/mentat_sys1-0.4.0-py3-none-any.whl"
 mentat-spice predict --runtime turbo --demo
 ```
 
