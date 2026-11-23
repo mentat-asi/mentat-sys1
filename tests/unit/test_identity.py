@@ -76,6 +76,7 @@ def test_public_package_and_command_use_version_neutral_identity() -> None:
     assert payload["project"]["scripts"] == {
         "mentat-sys1": "mentat_sys1.cli:main",
         "mentat-sys1-v03": "mentat_sys1.v03.cli:main",
+        "mentat-spice": "mentat_spice.cli:main",
     }
 
 

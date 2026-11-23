@@ -1,0 +1,18 @@
+{
+  "state": "A delivery failed because the address is incomplete.",
+  "questions": {
+    "route": {
+      "type": "choice",
+      "instructions": "Which team should handle this request?",
+      "criteria": {
+        "delivery": "Delivery support",
+        "billing": "Billing support",
+        "review": "Manual review"
+      }
+    },
+    "address_complete": {
+      "type": "noul",
+      "instructions": "The complete delivery address is available."
+    }
+  }
+}
