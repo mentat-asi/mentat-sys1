@@ -1,0 +1,92 @@
+{
+  "smoke_only": true,
+  "full_public_run_complete": false,
+  "device": "A800 80GB PCIe",
+  "official_kit_commit": "25c6ec7b6b5f44a216c63c3a700de3a9c6d6699d",
+  "model": "yunqu/mentat-Spice-4B",
+  "revision": "90d4f76971ebd07c11054ada274767458b615ad5",
+  "adapter_source_sha256": "5213ba85f0fcf46945fb1ddfd79be78705567f1c3c26c742785a88984d3b0dfa",
+  "scopes": {
+    "text": {
+      "requests": 42,
+      "fields": 217,
+      "status_counts": {
+        "ok": 42
+      },
+      "changed_choice_or_boolean": [],
+      "max_absolute_probability_delta": 0.0018753083173361773,
+      "mean_absolute_probability_delta": 4.74554963255205e-06,
+      "acceleration_deltas": {
+        "fast_outputs": 8,
+        "graph_replays": 9,
+        "captured_shapes": 7,
+        "rejected_shapes": 0,
+        "graph_failures": 0,
+        "confidence_fallbacks": 1,
+        "native_graph_replays": 9,
+        "native_graph_shapes": 8,
+        "ambiguous_eager_fallbacks": 0
+      },
+      "native_request_timing": {
+        "requests": 42,
+        "mean_ms": 798.1985210873453,
+        "median_ms": 123.53591748978943,
+        "p80_ms": 525.9694890119135,
+        "total_seconds": 33.5243378856685
+      },
+      "turbo_first_seen_request_timing": {
+        "requests": 42,
+        "mean_ms": 907.3616579241518,
+        "median_ms": 107.54598292987794,
+        "p80_ms": 594.873437890783,
+        "total_seconds": 38.10918963281438
+      },
+      "turbo_repeated_corpus_request_timing": {
+        "requests": 42,
+        "mean_ms": 613.3669911872685,
+        "median_ms": 104.22296694014221,
+        "p80_ms": 318.12114198692143,
+        "total_seconds": 25.761413629865274
+      },
+      "repeated_corpus_choices_identical": true
+    },
+    "vision": {
+      "requests": 12,
+      "fields": 12,
+      "status_counts": {
+        "ok": 12
+      },
+      "changed_choice_or_boolean": [],
+      "max_absolute_probability_delta": 0.0,
+      "mean_absolute_probability_delta": 0.0,
+      "acceleration_deltas": {
+        "fast_outputs": 0,
+        "graph_replays": 0,
+        "captured_shapes": 0,
+        "rejected_shapes": 0,
+        "graph_failures": 0,
+        "confidence_fallbacks": 0,
+        "native_graph_replays": 0,
+        "native_graph_shapes": 0,
+        "ambiguous_eager_fallbacks": 0
+      },
+      "native_request_timing": {
+        "requests": 12,
+        "mean_ms": 242.86321680604792,
+        "median_ms": 185.26793993078172,
+        "p80_ms": 269.09263990819454,
+        "total_seconds": 2.914358601672575
+      },
+      "turbo_first_seen_request_timing": {
+        "requests": 12,
+        "mean_ms": 225.10951243263358,
+        "median_ms": 169.56244711764157,
+        "p80_ms": 254.61212499067187,
+        "total_seconds": 2.701314149191603
+      }
+    }
+  },
+  "passed": true,
+  "test_count": 9,
+  "environment_note": "Public wheel freshly extracted and input compatibility patch applied; existing pinned dependency environment reused. Not a clean full dependency installation or an RTX PRO 6000 qualification."
+}

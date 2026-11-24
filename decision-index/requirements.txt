@@ -1,0 +1,3 @@
+mentat-sys1[accelerate] @ https://github.com/mentat-asi/mentat-sys1/releases/download/v0.4.0/mentat_sys1-0.4.0-py3-none-any.whl#sha256=6459c1c56567cd04964902d138308c34d580455cc812bf7b381a308861b61b10
+decision-index[vision,rebuild] @ git+https://github.com/apolinario/decision-index@25c6ec7b6b5f44a216c63c3a700de3a9c6d6699d
+huggingface-hub==1.32.0

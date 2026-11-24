@@ -104,6 +104,19 @@ python docs/spice/benchmark_latency.py --turbo \
 
 The harness downloads/reuses model files and retains raw samples, environment and scope. Omit `--turbo` for native; use `--accelerated` for the unmerged fast runtime. Existing local paths can be supplied with `--base-model` and `--adapter-directory`. Compare identical requests, runtime, device, warmup and concurrency: Python latency, localhost HTTP latency and a remote API's latency measure different scopes.
 
+## Decision Index author engine
+
+The [DI inference handoff](../decision-index/README.md) provides a pinned installer,
+Turbo-enabled `spice_di:SpiceEngine`, native/accelerated comparison modes and a
+portable smoke check for the official text and vision runners. It handles opaque
+question IDs, long instructions, all supplied options and multi-question inputs
+without truncation. It does not require the author's server or training code.
+
+Turbo's short-text latency does not establish full DI latency or score equivalence.
+Use the same pinned engine and runtime for public and private runs; retain complete
+official public run artifacts before submitting. The handoff does not submit to
+the leaderboard or upload results automatically.
+
 ## Repository layout
 
 - **HF:** four model files, model card, licenses and displayed media.
