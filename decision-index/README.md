@@ -26,7 +26,8 @@ If the exact dependency stack cannot be installed, report the error instead of
 silently changing versions or falling back to another runtime.
 
 The compatibility fix accepts opaque question IDs, long instructions and long
-option descriptions. Nothing is truncated. Context and image token capacity
+option descriptions, and supports nested tool schemas up to 64 JSON levels
+(the original HTTP contract capped nesting at eight). Nothing is truncated. Context and image token capacity
 checks still apply. The original adapter weights, prompts, candidate mapping,
 calibration and scoring code are retained.
 
@@ -119,10 +120,11 @@ for timing scopes, source hashes and the limits of the installation check.
 
 No leaderboard PR or result upload is made by these scripts. A formal submission
 still requires complete, untouched public runs (`complete: true`) produced using
-this exact inference configuration. The author's existing local text corpus
-lacks 501 gated HLE requests; obtain access and strictly rebuild/verify that
-corpus before a formal text submission. No such source access issue was found
-in the verified 12,210-row public vision corpus.
+this exact inference configuration. The local public corpus now passes official
+strict verification: 140,178 scoreable text requests including 501 HLE questions,
+and 12,210 vision requests. Every request also passes the author input parser:
+the text corpus reaches 10 levels of JSON nesting, requiring the compatibility
+fix above. Full Turbo scores are pending; input verification is not model scoring.
 
 Official interfaces and submission process:
 [engines](https://github.com/apolinario/decision-index/blob/main/docs/engines.md) ·

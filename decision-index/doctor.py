@@ -12,7 +12,7 @@ versions = {name:metadata.version(name) for name in expected}
 assert {name:version.split('+')[0] for name,version in versions.items()} == expected, (versions, expected)
 import mentat_spice.contracts as contracts
 digest = hashlib.sha256(Path(contracts.__file__).read_bytes()).hexdigest()
-assert digest == 'acdf3925bebb472cb5b908f318d994ce8dd8fc73052e9d5322bc14c63e23cc71', 'Run apply_compatibility.py first'
+assert digest == 'a13d1f877c6c7c1913df2f07fd241e3183d12c39732fec80e1c29932ca16bdc8', 'Run apply_compatibility.py first'
 import torch
 assert torch.cuda.is_available(), 'CUDA GPU required for Turbo'
 import fla

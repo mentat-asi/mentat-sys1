@@ -22,7 +22,7 @@ class SpiceEngine(Engine):
         if int(max_pixels)!=1638400:raise ValueError('DI submission image budget must be 1,638,400 pixels')
         self.model=_model(str(model),revision,str(base_model) if base_model else None,device,runtime)
         self.image_root=image_root;self.max_pixels=1638400
-        self.provenance={'model':str(model),'revision':revision,'runtime':'mentat-sys1 0.4.0 '+runtime,'base_model':'Qwen/Qwen3.5-4B','base_revision':'851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a','device':device,'max_pixels':1638400,'max_images':4,'max_options':255,'max_context':self.model.engine.max_length,'image_resize':'Official decision_index.vision.images.pil, aspect-ratio preserving cap at 1,638,400 pixels','question_batch_size':8,'question_policy':'All questions retained in order and evaluated with identical state and unmodified criteria. Fixed groups of at most eight, independent of benchmark.','abstention_policy':'Preserved as official NativeAbstention; no forced fallback answer.'}
+        self.provenance={'model':str(model),'revision':revision,'runtime':'mentat-sys1 0.4.0 '+runtime,'base_model':'Qwen/Qwen3.5-4B','base_revision':'851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a','device':device,'max_pixels':1638400,'max_images':4,'max_options':255,'max_context':self.model.engine.max_length,'max_state_nesting':64,'max_state_utf8_bytes':8388608,'image_resize':'Official decision_index.vision.images.pil, aspect-ratio preserving cap at 1,638,400 pixels','question_batch_size':8,'question_policy':'All questions retained in order and evaluated with identical state and unmodified criteria. Fixed groups of at most eight, independent of benchmark.','abstention_policy':'Preserved as official NativeAbstention; no forced fallback answer.'}
     def acceleration_state(self):
         graph=getattr(self.model,'graph_network',None)
         safe=getattr(graph,'safe_graphs',None)
@@ -51,7 +51,7 @@ class SpiceEngine(Engine):
             try:response=self.model.predict(payload,images=decoded)
             except ValueError as exc:
                 message=str(exc)
-                if any(k in message for k in ['processed request exceeds context limit','image exceeds released 2048-token guard']):raise Unsupported(message) from exc
+                if any(k in message for k in ['processed request exceeds context limit','image exceeds released 2048-token guard','state nesting exceeds 64','state exceeds 8388608 bytes']):raise Unsupported(message) from exc
                 raise
             answers.update(response['answers']);parts.append(len(batch))
             for key,value in response.get('usage',{}).items():

@@ -66,3 +66,14 @@ def test_acceleration_receipt_does_not_modify_answers():
  validate(q,response)
  assert raw['acceleration']['mode']=='native'
  assert raw['acceleration_delta']['fast_outputs']==0
+
+def test_deep_tool_schema_is_preserved():
+ from mentat_spice.scoring import to_decision_request
+ state={'type':'string'}
+ for _ in range(20):state={'properties':{'argument':state}}
+ request=to_decision_request({'model':'mentat-jev-v1','state':state,'questions':questions(1)},expected_model='mentat-jev-v1')
+ assert request.state==state
+
+def test_state_capacity_is_declared_and_other_errors_propagate():
+ e=engine();e.model.error='state nesting exceeds 64'
+ with pytest.raises(Unsupported):e('',questions(1))

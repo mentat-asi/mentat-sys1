@@ -5,7 +5,7 @@
   "official_kit_commit": "25c6ec7b6b5f44a216c63c3a700de3a9c6d6699d",
   "model": "yunqu/mentat-Spice-4B",
   "revision": "90d4f76971ebd07c11054ada274767458b615ad5",
-  "adapter_source_sha256": "5213ba85f0fcf46945fb1ddfd79be78705567f1c3c26c742785a88984d3b0dfa",
+  "adapter_source_sha256": "63d0a1e467f3c12894667b74ac36a9f561143609f65b847c99e87b7c254bb121",
   "scopes": {
     "text": {
       "requests": 42,
@@ -87,7 +87,7 @@
     }
   },
   "passed": true,
-  "test_count": 9,
+  "test_count": 11,
   "environment_note": "Public wheel freshly extracted and input compatibility patch applied; existing pinned dependency environment reused. Not a clean full dependency installation or an RTX PRO 6000 qualification.",
   "portable_smoke": {
     "first_request_ms": 46318.02065903321,
@@ -120,7 +120,25 @@
     },
     "cuda": "12.8",
     "gpu": "NVIDIA A800 80GB PCIe",
-    "contracts_sha256": "acdf3925bebb472cb5b908f318d994ce8dd8fc73052e9d5322bc14c63e23cc71",
+    "contracts_sha256": "a13d1f877c6c7c1913df2f07fd241e3183d12c39732fec80e1c29932ca16bdc8",
     "ready_for_model_smoke": true
+  },
+  "numerical_probe_adapter_source_sha256": "5213ba85f0fcf46945fb1ddfd79be78705567f1c3c26c742785a88984d3b0dfa",
+  "input_compatibility_update": "BFCL native JSON state nesting accepted up to 64 levels. Weights, prompts, probability readout and acceleration kernels unchanged.",
+  "full_text_input_audit": {
+    "passed": true,
+    "checked_requests": 140178,
+    "valid_requests": 140178,
+    "error_counts": {},
+    "error_samples": {},
+    "max_state_depth": 10,
+    "max_choice_options": 151,
+    "max_option_key_chars": 22,
+    "weights_and_prompts_unchanged": true
+  },
+  "full_vision_input_audit": {
+    "passed": true,
+    "valid_requests": 12210,
+    "error_counts": {}
   }
 }
