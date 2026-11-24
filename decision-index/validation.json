@@ -88,5 +88,39 @@
   },
   "passed": true,
   "test_count": 9,
-  "environment_note": "Public wheel freshly extracted and input compatibility patch applied; existing pinned dependency environment reused. Not a clean full dependency installation or an RTX PRO 6000 qualification."
+  "environment_note": "Public wheel freshly extracted and input compatibility patch applied; existing pinned dependency environment reused. Not a clean full dependency installation or an RTX PRO 6000 qualification.",
+  "portable_smoke": {
+    "first_request_ms": 46318.02065903321,
+    "warm_median_ms": 14.50393593404442,
+    "warm_mean_ms": 14.586040808353573,
+    "acceleration": {
+      "mode": "turbo",
+      "fast_outputs": 21,
+      "graph_replays": 21,
+      "captured_shapes": 1,
+      "rejected_shapes": 0,
+      "graph_failures": 0,
+      "confidence_fallbacks": 0,
+      "native_graph_replays": 0,
+      "native_graph_shapes": 0,
+      "ambiguous_eager_fallbacks": 0
+    },
+    "scope": "One text request with one four-choice question; 20 repeated warm calls; model loading excluded; first request includes compilation/capture.",
+    "input_tokens": 115,
+    "question_count": 1
+  },
+  "doctor": {
+    "versions": {
+      "mentat-sys1": "0.4.0",
+      "torch": "2.8.0",
+      "transformers": "5.17.0",
+      "peft": "0.21.0",
+      "triton": "3.4.0",
+      "flash-linear-attention": "0.5.2"
+    },
+    "cuda": "12.8",
+    "gpu": "NVIDIA A800 80GB PCIe",
+    "contracts_sha256": "acdf3925bebb472cb5b908f318d994ce8dd8fc73052e9d5322bc14c63e23cc71",
+    "ready_for_model_smoke": true
+  }
 }
